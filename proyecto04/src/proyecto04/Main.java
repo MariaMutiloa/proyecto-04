@@ -6,6 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		System.out.println("Prueba a ver si funciona commit");
+		System.out.println("Mas pruebas");
 	}
 
 }
