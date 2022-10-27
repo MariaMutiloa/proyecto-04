@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -25,6 +27,7 @@ public class LogInVentana extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField jpassClave; 
 	private JButton btnAceptar;
+	private JButton btnCrearUsuario;
 
 	/**
 	 * Launch the application.
@@ -49,10 +52,10 @@ public class LogInVentana extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 497, 439);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setForeground(Color.BLACK);
@@ -81,11 +84,7 @@ public class LogInVentana extends JFrame {
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(btnAceptar);
 		
-		JLabel lblNewLabel = new JLabel("BINGO!");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 31));
-		lblNewLabel.setBounds(116, 52, 207, 51);
-		contentPane.add(lblNewLabel);
+
 		
 		/*
 		 * //BOTON ACEPTAR
@@ -152,6 +151,18 @@ public class LogInVentana extends JFrame {
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(btnAceptar);
 		 */
+		
+		
+		btnCrearUsuario = new JButton("Crear usuario");
+		btnCrearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnCrearUsuario.setBounds(305, 334, 157, 29);
+		contentPane.add(btnCrearUsuario);
+		
+		JLabel lblBingo = new JLabel("");
+		lblBingo.setIcon(new ImageIcon(LogInVentana.class.getResource("/login/images/bingo.jpg")));
+		lblBingo.setBounds(10, 11, 463, 107);
+		contentPane.add(lblBingo);
+		
 		
 	}
 }
