@@ -13,7 +13,7 @@ public class ConexionBD {
 			System.out.println("No se ha podido cargar el driver de la base de datos");
 		}
 		
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:ficheros/ejemplo.db")) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
