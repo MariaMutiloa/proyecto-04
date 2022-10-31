@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import gestionBD.ConexionBD;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -38,6 +39,7 @@ public class LogInVentana extends JFrame {
 				try {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
+					ConexionBD.realizarConexion();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
