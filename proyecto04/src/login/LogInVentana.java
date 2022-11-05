@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
+import zonaUsuario.UsuarioVentana;
 
 import java.awt.Color;
 import javax.swing.SwingConstants;
@@ -96,19 +97,27 @@ public class LogInVentana extends JFrame {
 					//campos vacios
 					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
-					//sino comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
+					//comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
-					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)==null) {	//si no hay ninguna coincidencia
+					
+					//NO HACE BIEN EL BUCLE
+					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
+						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
+						//ABRO UsuarioVentana
+					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
 						System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
+						//ABRO AdministradorVentana
 					}else {
-						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
+						JOptionPane.showMessageDialog(null, "No existe el usuario introducido", "ERROR", JOptionPane.ERROR_MESSAGE);
+					}
+						
+
 					}
 				}
 				
-				
-				
-			}
+			
+			
 		});
 		btnAceptar.setBounds(155, 242, 132, 29);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
