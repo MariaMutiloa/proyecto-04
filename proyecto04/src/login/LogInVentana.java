@@ -40,8 +40,8 @@ public class LogInVentana extends JFrame {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
 					
-					ConexionBD.getUsuario();
-					ConexionBD.getAdministrador();
+					//ConexionBD.getUsuario();
+					//ConexionBD.getAdministrador();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -85,6 +85,26 @@ public class LogInVentana extends JFrame {
 		contentPane.add(jpassClave);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//contraseña
+				char[] clave = jpassClave.getPassword();
+				String claveFinal = new String(clave);
+				
+				if(txtUsuario.getText().length()==0 || claveFinal.length()==0) {
+					//campos vacios
+					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+				}else {
+					//sino comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
+					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
+					System.out.println("HE ACCEDIDO" + txtUsuario.getText());
+				}
+				
+				
+				
+			}
+		});
 		btnAceptar.setBounds(155, 242, 132, 29);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(btnAceptar);
