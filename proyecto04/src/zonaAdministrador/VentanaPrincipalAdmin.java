@@ -8,6 +8,9 @@ import javax.swing.border.EmptyBorder;
 
 import personas.Administrador;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
@@ -32,8 +35,19 @@ public class VentanaPrincipalAdmin extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
+		btnNuevaPartida.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPartida nuevaPartida = new VentanaPartida(VentanaPrincipalAdmin.this, admin);
+				nuevaPartida.setVisible(true);
+				VentanaPrincipalAdmin.this.setVisible(false);
+				
+			}
+			
+		});
 		
-		panel.add(btnNuevaPartida);
+				panel.add(btnNuevaPartida);
 		
 		JButton btnEstadisticas = new JButton("Estad\u00EDsticas");
 		panel.add(btnEstadisticas);
