@@ -29,5 +29,10 @@ public class GestionPartidas {
 		return 0;
 		
 	}
+
+	public static int numeroParticipantes() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }	
 

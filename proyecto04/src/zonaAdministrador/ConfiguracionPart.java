@@ -27,7 +27,7 @@ public class ConfiguracionPart extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JLabel participantes = new JLabel(numeroParticipantes()+ " participantes conectados");
+		JLabel participantes = new JLabel(Integer.toString(GestionPartidas.numeroParticipantes())+ " participantes conectados");
 		contentPane.add(participantes);
 		
 		JTextField TFBoteL = new JTextField();
@@ -39,6 +39,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes()));
 				float bote = calculoBoteL();
 				TFBoteL.setText(Float.toString(bote));
 				
@@ -55,6 +56,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes()));
 				float bote = calculoBoteB();
 				TFBoteB.setText(Float.toString(bote));
 				
@@ -94,13 +96,7 @@ public class ConfiguracionPart extends JFrame {
 	}
 
 
-	private String numeroParticipantes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	private float calculoBoteB() {
+	private float calculoBoteB() { //Igual con un documento properties???
 		// TODO Auto-generated method stub
 		return 0;
 	}
