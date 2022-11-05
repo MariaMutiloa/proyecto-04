@@ -22,17 +22,26 @@ public class GestionPartidas {
 			insertPartidaNueva.setFloat(5, IDLiga);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return 0;
+		return 0; //ESTO FALTA POR MIRAR (NO AUTOMATIZADO)
 		
 	}
 
 	public static int numeroParticipantes() {
-		// TODO Auto-generated method stub
-		return 0;
+try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			
+		int total = 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return total;
 	}
 }	
 
