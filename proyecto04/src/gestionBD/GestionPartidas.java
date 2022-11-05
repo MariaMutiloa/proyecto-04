@@ -16,7 +16,7 @@ public class GestionPartidas {
 			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (IDPartida, Activa, PremioB, PremioL, IDLiga"
 					+ ", IDCartonB, IDCartonL VALUES (?, ?, ?)");
 			insertPartidaNueva.setInt(1, IDPartida);
-			insertPartidaNueva.setBoolean(2, true);
+			insertPartidaNueva.setInt(2, 1);
 			insertPartidaNueva.setFloat(3, PremioB);
 			insertPartidaNueva.setFloat(4, PremioL);
 			insertPartidaNueva.setFloat(5, IDLiga);

@@ -39,7 +39,7 @@ public class VentanaPrincipalAdmin extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPartida nuevaPartida = new VentanaPartida(VentanaPrincipalAdmin.this, admin);
+				ConfiguracionPart nuevaPartida = new ConfiguracionPart(VentanaPrincipalAdmin.this, admin);
 				nuevaPartida.setVisible(true);
 				VentanaPrincipalAdmin.this.setVisible(false);
 				
