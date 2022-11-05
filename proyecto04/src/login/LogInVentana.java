@@ -88,24 +88,17 @@ public class LogInVentana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				//contraseña
+				//Extraemos la contraseña
 				char[] clave = jpassClave.getPassword();
 				String claveFinal = new String(clave);
 				
-				if(txtUsuario.getText().length()==0 || claveFinal.length()==0) {
-					//campos vacios
+				if(txtUsuario.getText().length()==0 || claveFinal.length()==0) { 	//Comprobamos que los campos no estan vacios
 					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
 					
-					/*
-					 * LO QUE HAY DENTRO DE ESTE ELSE NO HACE BIEN
-					 * no encuentra ni usuario ni administrador
-					 */
-					
-					//comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
+					//Comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
-					//NO HACE BIEN EL BUCLE
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
 						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
 						//ABRO UsuarioVentana
