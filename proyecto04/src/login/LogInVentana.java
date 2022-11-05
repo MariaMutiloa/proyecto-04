@@ -40,9 +40,7 @@ public class LogInVentana extends JFrame {
 				try {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
-					
-					//ConexionBD.getUsuario();
-					//ConexionBD.getAdministrador();
+					ConexionBD.realizarConexion();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -89,6 +87,7 @@ public class LogInVentana extends JFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				//contraseña
 				char[] clave = jpassClave.getPassword();
 				String claveFinal = new String(clave);
@@ -121,82 +120,13 @@ public class LogInVentana extends JFrame {
 
 					}
 				}
-				
-			
+	
 			
 		});
 		btnAceptar.setBounds(155, 242, 132, 29);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		contentPane.add(btnAceptar);
-		
 
-		
-		/*
-		 * //BOTON ACEPTAR
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(155, 242, 132, 29);
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//en las contraseñas hemos puesto passwordfield
-				char[] clave = jpassClave.getPassword();
-				String claveFinal = new String(clave);
-				
-				//boolean existe=false;
-				boolean existe=miPlantilla.probarPass(plantilla, LogeoVentana.this);
-				int posicion=-1;
-				if (existe) {
-					posicion=miPlantilla.cogerPosicion(plantilla);
-				}
-				
-				if(existe) {
-					//dispose(); //ventana actual se va a cerrar
-					LogeoVentana.this.setVisible(false);
-					
-					String elUsuario=getTxtUsuario();
-					String miUsuario="";
-					for (int i = 0; i < getPlantilla().size(); i++) {
-						if (elUsuario.equals(plantilla.get(i).getUsuario())) {
-							miUsuario=plantilla.get(i).getNombre()+" "+plantilla.get(i).getApellidos();
-						}
-					}
-					
-					JOptionPane.showMessageDialog(null, "Bienvenido al Sistema "+miUsuario,"INGRESASTE",JOptionPane.PLAIN_MESSAGE);
-					
-					//Ahora depende del puesto de trabajo vamos a abrir una ventana u otra
-					if(plantilla.get(posicion).getPuesto().equals("DJ")) {						
-						//ABRIR VENTANA DJ
-						DjVentana djVentana = new DjVentana(LogeoVentana.this);
-						djVentana.setVisible(true);
-						
-					}else if (plantilla.get(posicion).getPuesto().equals("Camarero")) { 		
-						//ABRIR VENTANA CAMARERO
-						CamareroVentana camareroVentana = new CamareroVentana(LogeoVentana.this);
-						camareroVentana.setVisible(true);
-						
-					}else if (plantilla.get(posicion).getPuesto().equals("Taquillero")) {
-						//ABRIR VENTANA TAQUILLERO
-						TaquillaVentana taquillaVentana = new TaquillaVentana(LogeoVentana.this);
-						taquillaVentana.setVisible(true);
-						
-					}else if (plantilla.get(posicion).getPuesto().equals("Guardarropas")) {		
-						//ABRIR VENTANA GUARDARROPAS
-						GuardarropasVentana guardarropasVentana = new GuardarropasVentana(LogeoVentana.this);
-						guardarropasVentana.setVisible(true);
-					}
-					
-				}else {
-					JOptionPane.showMessageDialog(null, "Usuario o Contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
-					//despues del error queremos que los campos otra vez esten vacios
-					txtUsuario.setText("");
-					jpassClave.setText("");
-					txtUsuario.requestFocus(); //al momento que sale contraseña incorrecta ese va a aparecer de frente en el txtUsuario para escribir
-				}
-			}
-		});
-		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		contentPane.add(btnAceptar);
-		 */
-		
 		
 		btnCrearUsuario = new JButton("Crear usuario");
 		btnCrearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
