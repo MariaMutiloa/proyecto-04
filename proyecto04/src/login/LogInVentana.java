@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
+import personas.Administrador;
+import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaUsuario.UsuarioVentana;
 
 import java.awt.Color;
@@ -105,9 +107,11 @@ public class LogInVentana extends JFrame {
 						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
 						//ABRO UsuarioVentana
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
-						ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
-						System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
-						//ABRO AdministradorVentana
+						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
+						//System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
+						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);
+						ventanaNueva.setVisible(true);
+						LogInVentana.this.dispose();
 					}else {
 						JOptionPane.showMessageDialog(null, "No existe el usuario introducido", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
