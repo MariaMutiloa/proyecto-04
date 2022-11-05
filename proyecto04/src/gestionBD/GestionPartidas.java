@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import personas.Usuario;
+
 public class GestionPartidas {
 	
 	public static int nueva(int IDPartida, float PremioB, float PremioL, int IDLiga) {
@@ -29,13 +31,22 @@ public class GestionPartidas {
 		
 	}
 
-	public static int numeroParticipantes() {
+	public static int numeroParticipantes(int IDPartida) {
 try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM carton");
 			
 		int total = 0;
+		
+		while (rs.next()) {
+			if(IDPartida == rs.getInt(4)) {
+				total = total + 1;
+			}
+		}
+		
+		rs.close();
+		stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
