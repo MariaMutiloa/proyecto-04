@@ -78,7 +78,9 @@ public class ConfiguracionPart extends JFrame {
 				int liga = Integer.parseInt(TFLiga.getText()); //Despues se usará mismo componente que se use en la visialización de ligas
 				
 				int numeroPartida = GestionPartidas.nueva(num, boteB, boteL, liga);
-				PartidaNueva nuevaPar = new PartidaNueva(); 
+				PartidaNueva nuevaPar = new PartidaNueva(num, boteB, boteL, liga); 
+				nuevaPar.setVisible(true);
+				ConfiguracionPart.this.dispose();
 				
 			}
 			
