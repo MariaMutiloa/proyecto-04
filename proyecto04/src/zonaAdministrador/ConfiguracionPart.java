@@ -26,8 +26,12 @@ public class ConfiguracionPart extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		int IDPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
+		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
+		contentPane.add(numPartida);
 
-		JLabel participantes = new JLabel(Integer.toString(GestionPartidas.numeroParticipantes())+ " participantes conectados");
+		JLabel participantes = new JLabel(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida))+ " participantes conectados");
 		contentPane.add(participantes);
 		
 		JTextField TFBoteL = new JTextField();
@@ -39,7 +43,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes()));
+				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida)));
 				float bote = calculoBoteL();
 				TFBoteL.setText(Float.toString(bote));
 				
@@ -50,9 +54,7 @@ public class ConfiguracionPart extends JFrame {
 		JTextField TFBoteB = new JTextField();
 		contentPane.add(TFBoteB);
 		
-		int numeroPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
-		JLabel numPartida = new JLabel(Integer.toString(numeroPartida));
-		contentPane.add(numPartida);
+	
 		
 		JButton boteBButton = new JButton("Calcular Bote Bingo");
 		contentPane.add(boteBButton);
@@ -60,7 +62,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(numeroPartida)));
+				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida)));
 				float bote = calculoBoteB();
 				TFBoteB.setText(Float.toString(bote));
 				
@@ -82,8 +84,8 @@ public class ConfiguracionPart extends JFrame {
 				float boteB = Integer.parseInt(TFBoteB.getText());
 				int liga = Integer.parseInt(TFLiga.getText()); //Despues se usará mismo componente que se use en la visialización de ligas
 				
-				int numeroPartida = GestionPartidas.nueva(numeroPartida, boteB, boteL, liga);
-				PartidaNueva nuevaPar = new PartidaNueva(numeroPartida, boteB, boteL, liga); 
+				int numeroPartida = GestionPartidas.nueva(IDPartida, boteB, boteL, liga);
+				PartidaNueva nuevaPar = new PartidaNueva(IDPartida, boteB, boteL, liga); 
 				nuevaPar.setVisible(true);
 				ConfiguracionPart.this.dispose();
 				
