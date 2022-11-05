@@ -52,7 +52,7 @@ public class ConfiguracionPart extends JFrame {
 		
 		int numeroPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
 		JLabel numPartida = new JLabel(Integer.toString(numeroPartida));
-		contentPane.add(numeroPartida);
+		contentPane.add(numPartida);
 		
 		JButton boteBButton = new JButton("Calcular Bote Bingo");
 		contentPane.add(boteBButton);
