@@ -2,6 +2,7 @@ package personas;
 
 public abstract class Persona {
 	
+
 	private int dni;
 	private String nombre;
 	private String apellido;
@@ -58,7 +59,10 @@ public abstract class Persona {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return dni + ": " + nombre + " " + apellido + " Usuario:" + usuario + " Contra: " + contrasena;
+	}
 	
 	
 	

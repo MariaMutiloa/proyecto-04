@@ -40,7 +40,8 @@ public class LogInVentana extends JFrame {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
 					
-					ConexionBD.sacarDatosBD();
+					ConexionBD.getUsuario();
+					ConexionBD.getAdministrador();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

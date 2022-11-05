@@ -27,6 +27,13 @@ public class Usuario extends Persona{
 	public void setBote(int bote) {
 		this.bote = bote;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+" IdLigaActual: " + idLigaActual + " Bote:" + bote;
+	}
+
+	
 	
 	
 	
