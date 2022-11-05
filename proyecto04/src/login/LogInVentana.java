@@ -98,7 +98,12 @@ public class LogInVentana extends JFrame {
 				}else {
 					//sino comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
-					System.out.println("HE ACCEDIDO" + txtUsuario.getText());
+					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)==null) {	//si no hay ninguna coincidencia
+						ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
+						System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
+					}else {
+						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
+					}
 				}
 				
 				

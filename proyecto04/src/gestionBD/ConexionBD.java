@@ -114,8 +114,11 @@ public class ConexionBD {
 	}
 	
 	
-	public static void getAdministrador(){
+	public static Administrador getAdministrador(String miUsuario, String miContrasena){
 		realizarConexion();
+		
+		Administrador a = null;
+		
 		/*
 		 * Con el driver cargado ya se pueden establecer conexiones a la BD
 		 */
@@ -124,17 +127,18 @@ public class ConexionBD {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM administrador");
 			
-			System.out.println("ADMINISTRADORES:");
 			while (rs.next()) {
-				//obtenemos columnas
-				int dni = rs.getInt(1);
-				String nombre = rs.getString(2);
-				String apellido = rs.getString(3);
-				String usuario = rs.getString(4);
-				String contrasena = rs.getString(5);
 				
-				Administrador a = new Administrador(dni, nombre, apellido, usuario, contrasena);
-				System.out.println(a);
+				if(miUsuario==rs.getString(4) && miContrasena==rs.getString(5)) {
+					//obtenemos columnas
+					int dni = rs.getInt(1);
+					String nombre = rs.getString(2);
+					String apellido = rs.getString(3);
+					String usuario = rs.getString(4);
+					String contrasena = rs.getString(5);
+					
+					a = new Administrador(dni, nombre, apellido, usuario, contrasena);
+				}
 			}
 			rs.close();
 			stmt.close();
@@ -143,7 +147,10 @@ public class ConexionBD {
 			// No se ha podido obtener la conexión a la base de datos
 			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
 		}
+		return a;
 	}
+	
+	
 	
 	
 	
