@@ -44,7 +44,7 @@ public class ConexionBD {
 			
 			//recorremos fila a fila
 			while (rs.next()) {
-				if(miUsuario==rs.getString(4) && miContrasena==rs.getString(5)) {
+				if(miUsuario.equals(rs.getString(4)) && miContrasena.equals(rs.getString(5))) {
 					//obtenemos columnas
 					int dni = rs.getInt(1);
 					String nombre = rs.getString(2);
@@ -71,20 +71,18 @@ public class ConexionBD {
 	
 	public static Administrador getAdministrador(String miUsuario, String miContrasena){ //Busca el usuario que queremos
 
+		Administrador a = null; 
 		
-		Administrador a = null;
-		
-		/*
-		 * Con el driver cargado ya se pueden establecer conexiones a la BD
-		 */
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-
+			
+			boolean encontrado = false;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM administrador");
 			
-			while (rs.next()) {
+			while (rs.next() && encontrado == false) {
 				
-				if(miUsuario==rs.getString(4) && miContrasena==rs.getString(5)) {
+				//
+				if(miUsuario.equals(rs.getString(4)) && miContrasena.equals(rs.getString(5))) {
 					//obtenemos columnas
 					int dni = rs.getInt(1);
 					String nombre = rs.getString(2);
@@ -95,6 +93,8 @@ public class ConexionBD {
 					a = new Administrador(dni, nombre, apellido, usuario, contrasena);
 				}
 			}
+			
+		
 			rs.close();
 			stmt.close();
 			
@@ -103,6 +103,7 @@ public class ConexionBD {
 			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
 		}
 		return a;
+		
 	}
 	
 	
