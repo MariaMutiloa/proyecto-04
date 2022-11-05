@@ -91,6 +91,8 @@ public class LogInVentana extends JFrame {
 				//Extraemos la contraseña
 				char[] clave = jpassClave.getPassword();
 				String claveFinal = new String(clave);
+		
+				
 				
 				if(txtUsuario.getText().length()==0 || claveFinal.length()==0) { 	//Comprobamos que los campos no estan vacios
 					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);

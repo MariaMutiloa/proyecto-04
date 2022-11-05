@@ -44,7 +44,6 @@ public class ConexionBD {
 			
 			//recorremos fila a fila
 			while (rs.next()) {
-				
 				if(miUsuario==rs.getString(4) && miContrasena==rs.getString(5)) {
 					//obtenemos columnas
 					int dni = rs.getInt(1);
@@ -71,7 +70,7 @@ public class ConexionBD {
 	
 	
 	public static Administrador getAdministrador(String miUsuario, String miContrasena){ //Busca el usuario que queremos
-		realizarConexion();
+
 		
 		Administrador a = null;
 		
