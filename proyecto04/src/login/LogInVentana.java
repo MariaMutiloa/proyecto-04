@@ -97,6 +97,12 @@ public class LogInVentana extends JFrame {
 					//campos vacios
 					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
 				}else {
+					
+					/*
+					 * LO QUE HAY DENTRO DE ESTE ELSE NO HACE BIEN
+					 * no encuentra ni usuario ni administrador
+					 */
+					
 					//comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
