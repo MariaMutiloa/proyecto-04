@@ -50,13 +50,17 @@ public class ConfiguracionPart extends JFrame {
 		JTextField TFBoteB = new JTextField();
 		contentPane.add(TFBoteB);
 		
+		int numeroPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
+		JLabel numPartida = new JLabel(Integer.toString(numeroPartida));
+		contentPane.add(numeroPartida);
+		
 		JButton boteBButton = new JButton("Calcular Bote Bingo");
 		contentPane.add(boteBButton);
 		boteBButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes()));
+				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(numPartida)));
 				float bote = calculoBoteB();
 				TFBoteB.setText(Float.toString(bote));
 				
@@ -74,13 +78,12 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int num = 1; //Va a tener que ser automatico, en teoria ocn SQLite
 				float boteL = Integer.parseInt(TFBoteL.getText()); //Dependera de la gente conectada
 				float boteB = Integer.parseInt(TFBoteB.getText());
 				int liga = Integer.parseInt(TFLiga.getText()); //Despues se usará mismo componente que se use en la visialización de ligas
 				
-				int numeroPartida = GestionPartidas.nueva(num, boteB, boteL, liga);
-				PartidaNueva nuevaPar = new PartidaNueva(num, boteB, boteL, liga); 
+				int numeroPartida = GestionPartidas.nueva(numPartida, boteB, boteL, liga);
+				PartidaNueva nuevaPar = new PartidaNueva(numPartida, boteB, boteL, liga); 
 				nuevaPar.setVisible(true);
 				ConfiguracionPart.this.dispose();
 				
