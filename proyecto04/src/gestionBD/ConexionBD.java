@@ -14,9 +14,7 @@ public class ConexionBD {
 
 	public static void realizarConexion() {
 		
-		/*
-		 * Carga del drive JDBC para SQLite
-		 */
+		//Carga del drive JDBC para SQLite
 		try {
 			Class.forName("org.sqlite.JDBC");
 
@@ -25,9 +23,7 @@ public class ConexionBD {
 		}
 		
 		
-		/*
-		 * Con el driver cargado ya se pueden establecer conexiones a la BD
-		 */
+		//Con el driver cargado ya se pueden establecer conexiones a la BD
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 		} catch (SQLException e) {
@@ -37,50 +33,10 @@ public class ConexionBD {
 
 	}
 	
-	
-//	public static void getUsuario(){
-//		realizarConexion();
-//		/*
-//		 * Con el driver cargado ya se pueden establecer conexiones a la BD
-//		 */
-//		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-//
-//			Statement stmt = con.createStatement();
-//			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
-//			
-//			//recorremos fila a fila
-//			System.out.println("USUARIOS:");
-//			while (rs.next()) {
-//				//obtenemos columnas
-//				int dni = rs.getInt(1);
-//				String nombre = rs.getString(2);
-//				String apellido = rs.getString(3);
-//				String usuario = rs.getString(4);
-//				String contrasena = rs.getString(5);
-//				int idLigaActual = rs.getInt(6);
-//				int bote = rs.getInt(7);
-//				
-//				Usuario u = new Usuario(dni, nombre, apellido, usuario, contrasena, idLigaActual, bote);
-//				System.out.println(u);
-//				//System.out.println(dni +" "+nombre+" "+apellido+" "+usuario+" "+contrasena);
-//			}
-//			
-//			rs.close();
-//			stmt.close();
-//			
-//		} catch (SQLException e) {
-//			// No se ha podido obtener la conexión a la base de datos
-//			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
-//		}
-//	}
-	
-	public static Usuario getUsuario(String miUsuario, String miContrasena){ //le paso usuario y contraseña
-		realizarConexion();
+	public static Usuario getUsuario(String miUsuario, String miContrasena){ //Encuentra el usuario que necesitamos
 		
 		Usuario u = null;
-		/*
-		 * Con el driver cargado ya se pueden establecer conexiones a la BD
-		 */
+		
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			Statement stmt = con.createStatement();
@@ -114,7 +70,7 @@ public class ConexionBD {
 	}
 	
 	
-	public static Administrador getAdministrador(String miUsuario, String miContrasena){
+	public static Administrador getAdministrador(String miUsuario, String miContrasena){ //Busca el usuario que queremos
 		realizarConexion();
 		
 		Administrador a = null;
