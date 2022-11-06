@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import personas.Usuario;
 
@@ -31,8 +32,8 @@ public class GestionPartidas {
 		
 	}
 
-	public static int numeroParticipantes(int IDPartida) {
-		int total = 0;
+	public static ArrayList<Usuario> numeroParticipantes(int IDPartida) {
+		ArrayList<Usuario> list = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			Statement stmt = con.createStatement();
@@ -40,7 +41,8 @@ public class GestionPartidas {
 
 			while (rs.next()) {
 				if (IDPartida == rs.getInt(4)) {
-					total = total + 1;
+					Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+					list.add(persona);
 				}
 			}
 
@@ -50,7 +52,7 @@ public class GestionPartidas {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return total;
+		return list;
 
 	}
 }

@@ -31,7 +31,7 @@ public class ConfiguracionPart extends JFrame {
 		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
 		contentPane.add(numPartida);
 
-		JLabel participantes = new JLabel(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida))+ " participantes conectados");
+		JLabel participantes = new JLabel(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size())+ " participantes conectados");
 		contentPane.add(participantes);
 		
 		JTextField TFBoteL = new JTextField();
@@ -43,7 +43,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida)));
+				participantes.setText(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size()));
 				float bote = calculoBoteL();
 				TFBoteL.setText(Float.toString(bote));
 				
@@ -62,7 +62,7 @@ public class ConfiguracionPart extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString(GestionPartidas.numeroParticipantes(IDPartida)));
+				participantes.setText(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size()));
 				float bote = calculoBoteB();
 				TFBoteB.setText(Float.toString(bote));
 				
@@ -94,9 +94,6 @@ public class ConfiguracionPart extends JFrame {
 		});
 		
 		setContentPane(contentPane);
-		
-		
-		
 		
 	}
 
