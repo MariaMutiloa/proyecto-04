@@ -1,10 +1,10 @@
-package ITests.gestionBD.conexionBD;
+package testsgestionBD;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class IGestionPartidas {
+public class GestionPartidasTest {
 
 	@Test
 	public void test() {
