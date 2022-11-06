@@ -46,10 +46,12 @@ public class VentanaVerUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaVerUsuario() {
-		this.list = list;
+		this.list = new JList();
 		this.model = new DefaultListModel();
-		this.listaUsuarios = anyadirUsuarios();
-
+		this.listaUsuarios= new ArrayList<String>();
+		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,11 +81,10 @@ public class VentanaVerUsuario extends JFrame {
 
 	}
 
-	public static ArrayList<String> anyadirUsuarios() {
+	public static ArrayList<String> anyadirUsuarios(ArrayList<String> listaUsuarios) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-			ArrayList<String> listaUsuarios = new ArrayList<String>();
-			String nombre = new String();
+			String nombre;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			while (rs.next()) {
