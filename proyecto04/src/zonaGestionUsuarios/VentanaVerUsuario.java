@@ -26,29 +26,9 @@ public class VentanaVerUsuario extends JFrame {
 	private ArrayList<String> listaUsuarios;
 	private DefaultListModel<String> model;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaVerUsuario frame = new VentanaVerUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaVerUsuario() {
 		this.list = new JList();
 		this.model = new DefaultListModel();
-		this.listaUsuarios= new ArrayList<String>();
 		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
 		
 		
