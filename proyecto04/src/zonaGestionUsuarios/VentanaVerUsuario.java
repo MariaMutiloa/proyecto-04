@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import personas.Usuario;
+
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.DefaultListSelectionModel;
@@ -23,12 +26,13 @@ public class VentanaVerUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private JList list;
-	private ArrayList<String> listaUsuarios;
-	private DefaultListModel<String> model;
+	private ArrayList<Usuario> listaUsuarios;
+	private DefaultListModel<Usuario> model;
 
 	public VentanaVerUsuario() {
 		this.list = new JList();
 		this.model = new DefaultListModel();
+		this.listaUsuarios= new ArrayList<Usuario>();
 		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
 		
 		
@@ -41,7 +45,7 @@ public class VentanaVerUsuario extends JFrame {
 
 		JList list = new JList();
 		list.setBounds(30, 28, 154, 224);
-		cargarJList();
+		cargarJList(listaUsuarios);
 		contentPane.add(list);
 
 		JButton btnNewButton = new JButton("Ver usuario");
@@ -61,15 +65,14 @@ public class VentanaVerUsuario extends JFrame {
 
 	}
 
-	public static ArrayList<String> anyadirUsuarios(ArrayList<String> listaUsuarios) {
+	public static ArrayList<Usuario> anyadirUsuarios(ArrayList<Usuario> listaUsuarios) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-			String nombre;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			while (rs.next()) {
-				nombre = rs.getString(2);
-				listaUsuarios.add(nombre);
+				Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+				listaUsuarios.add(persona);
 			}
 			rs.close();
 			stmt.close();
@@ -81,9 +84,9 @@ public class VentanaVerUsuario extends JFrame {
 
 	}
 
-	public void cargarJList() {
-		for (String nombreUsuario : listaUsuarios) {
-			model.addElement(nombreUsuario);
+	public void cargarJList(ArrayList<Usuario> listaUsuarios) {
+		for (Usuario persona : listaUsuarios) {
+			model.addElement(persona);
 		}
 		list.setModel(model);
 	}
