@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import personas.Usuario;
-import zonaGestionUsuarios.VentanaVerUsuario;
+import zonaAdministrador.GestionUsuarios.VentanaVerUsuario;
 
 public class VentanaVerUsuarioTest {
 

@@ -1,4 +1,4 @@
-package zonaAdministrador;
+package zonaAdministrador.partidaNueva;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

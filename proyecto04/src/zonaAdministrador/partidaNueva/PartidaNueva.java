@@ -1,4 +1,4 @@
-package zonaAdministrador;
+package zonaAdministrador.partidaNueva;
 
 import javax.swing.JFrame;
 
