@@ -1,6 +1,5 @@
 package login;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,12 +18,14 @@ import javax.swing.border.EmptyBorder;
 import gestionBD.ConexionBD;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
-import zonaUsuario.UsuarioVentana;
-
 import java.awt.Color;
-import javax.swing.SwingConstants;
 
 public class LogInVentana extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	
