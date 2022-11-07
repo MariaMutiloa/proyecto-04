@@ -1,7 +1,5 @@
 package zonaGestionUsuarios;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,11 +17,14 @@ import personas.Usuario;
 
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 
 public class VentanaVerUsuario extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JList list;
 	private ArrayList<Usuario> listaUsuarios;
