@@ -12,6 +12,8 @@ import javax.swing.border.EmptyBorder;
 
 import gestionBD.GestionPartidas;
 import personas.Administrador;
+import zonaAdministrador.VentanaPrincipalAdmin;
+
 import java.awt.FlowLayout;
 
 public class ConfiguracionPart extends JFrame {
