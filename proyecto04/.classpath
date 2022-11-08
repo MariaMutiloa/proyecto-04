@@ -7,7 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="testCase"/>
-	<classpathentry kind="src" path="imagenes"/>
 	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.39.3.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
