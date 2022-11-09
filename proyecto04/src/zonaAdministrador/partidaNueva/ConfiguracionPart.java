@@ -34,12 +34,15 @@ public class ConfiguracionPart extends JFrame {
 		contentPane.setLayout(new GridLayout(2,2,5,5));
 		
 	
-		int IDPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
+		int IDPartida = 1; //Va a tener que ser automatico, en teoria con SQLite
 		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
 		contentPane.add(numPartida);
 
 		JLabel participantes = new JLabel(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size())+ " participantes conectados");
 		contentPane.add(participantes);
+		
+		JLabel boteL = new JLabel("Bote de linea");
+		contentPane.add(boteL);
 		
 		JTextField TFBoteL = new JTextField();
 		contentPane.add(TFBoteL);
@@ -58,11 +61,13 @@ public class ConfiguracionPart extends JFrame {
 			
 		});
 		
+		JLabel boteB = new JLabel("Bote de bingo");
+		contentPane.add(boteL);
+		
 		JTextField TFBoteB = new JTextField();
 		contentPane.add(TFBoteB);
 		
 	
-		
 		JButton boteBButton = new JButton("Calcular Bote Bingo");
 		contentPane.add(boteBButton);
 		boteBButton.addActionListener(new ActionListener() {
