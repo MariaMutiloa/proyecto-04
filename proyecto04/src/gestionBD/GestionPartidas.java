@@ -12,7 +12,7 @@ import personas.Usuario;
 
 public class GestionPartidas {
 	
-	public static int nueva(int IDPartida, float PremioB, float PremioL, int IDLiga) {
+	public static void nueva(int IDPartida, float PremioB, float PremioL, int IDLiga) {
 		
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
@@ -27,9 +27,13 @@ public class GestionPartidas {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		 //ESTO FALTA POR MIRAR (NO AUTOMATIZADO)
 		
-		return 0; //ESTO FALTA POR MIRAR (NO AUTOMATIZADO)
-		
+	}
+
+	public static int numNuevo() {
+		//calcular nuevo ID PARTIDA
+		return 1;
 	}
 
 	public static ArrayList<Usuario> numeroParticipantes(int IDPartida) {

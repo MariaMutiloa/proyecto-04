@@ -32,9 +32,8 @@ public class ConfiguracionPart extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new GridLayout(2,2,5,5));
-		
 	
-		int IDPartida = 1; //Va a tener que ser automatico, en teoria con SQLite
+		int IDPartida = GestionPartidas.numNuevo(); //Va a tener que ser automatico, en teoria con SQLite
 		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
 		contentPane.add(numPartida);
 
@@ -96,7 +95,7 @@ public class ConfiguracionPart extends JFrame {
 				float boteB = Integer.parseInt(TFBoteB.getText());
 				int liga = Integer.parseInt(TFLiga.getText()); //Despues se usará mismo componente que se use en la visialización de ligas
 				
-				int numeroPartida = GestionPartidas.nueva(IDPartida, boteB, boteL, liga);
+				GestionPartidas.nueva(IDPartida, boteB, boteL, liga);
 				PartidaNueva nuevaPar = new PartidaNueva(IDPartida, boteB, boteL, liga); 
 				nuevaPar.setVisible(true);
 				ConfiguracionPart.this.dispose();
