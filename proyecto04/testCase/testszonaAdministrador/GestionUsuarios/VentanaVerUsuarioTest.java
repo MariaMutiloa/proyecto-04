@@ -1,4 +1,4 @@
-package testZonaGestionUsuarios;
+package testszonaAdministrador.GestionUsuarios;
 
 import static org.junit.Assert.*;
 
@@ -19,4 +19,5 @@ public class VentanaVerUsuarioTest {
 		assertEquals(listaUsuarios, VentanaVerUsuario.anyadirUsuarios(listaUsuarios));
 
 	}
+
 }
