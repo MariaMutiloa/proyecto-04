@@ -8,6 +8,7 @@ import personas.Administrador;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -29,14 +30,18 @@ public class VentanaPrincipalAdmin extends JFrame {
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel.setLayout(new GridLayout(2,1,5,5));
 		
+		
+		JPanel superior = new JPanel();
+		superior.setLayout( new FlowLayout());
 		JLabel lblBienvenido = new JLabel("Bienvenidx " + admin.getNombre() + "!");
-		panel.add(lblBienvenido);
+		superior.add(lblBienvenido);
+		panel.add(superior);
 		
 
-		setContentPane(panel);
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel inferior = new JPanel();
+		inferior.setLayout( new FlowLayout());
 		
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
@@ -51,13 +56,15 @@ public class VentanaPrincipalAdmin extends JFrame {
 			
 		});
 		
-				panel.add(btnNuevaPartida);
+		inferior.add(btnNuevaPartida);
 		
 		JButton btnEstadisticas = new JButton("Estad\u00EDsticas");
-		panel.add(btnEstadisticas);
+		inferior.add(btnEstadisticas);
 		
 		JButton btnGestiónUsuarios = new JButton("Gesti\u00F3n Usuarios");
-		panel.add(btnGestiónUsuarios);
+		inferior.add(btnGestiónUsuarios);
+		
+		panel.add(inferior);
 	}
 
 }

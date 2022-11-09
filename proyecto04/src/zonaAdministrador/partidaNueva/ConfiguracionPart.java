@@ -15,6 +15,7 @@ import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 public class ConfiguracionPart extends JFrame {
 
@@ -30,8 +31,9 @@ public class ConfiguracionPart extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.setLayout(new GridLayout(2,2,5,5));
 		
+	
 		int IDPartida = 1; //Va a tener que ser automatico, en teoria ocn SQLite
 		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
 		contentPane.add(numPartida);

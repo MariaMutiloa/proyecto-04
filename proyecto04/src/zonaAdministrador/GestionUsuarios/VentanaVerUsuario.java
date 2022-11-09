@@ -25,7 +25,6 @@ public class VentanaVerUsuario extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JList list;
 	private ArrayList<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
@@ -39,7 +38,7 @@ public class VentanaVerUsuario extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
+		JPanel contentPane = new JPanel();;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
