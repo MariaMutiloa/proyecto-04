@@ -105,8 +105,10 @@ public class LogInVentana extends JFrame {
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
+						
 						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
 						//ABRO UsuarioVentana
+						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
 						//System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
