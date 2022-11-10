@@ -18,6 +18,8 @@ import javax.swing.border.EmptyBorder;
 import gestionBD.ConexionBD;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
+import zonaRegistroUsuario.RegistroUsuarioVentana;
+
 import java.awt.Color;
 
 public class LogInVentana extends JFrame {
@@ -106,7 +108,7 @@ public class LogInVentana extends JFrame {
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
 						
-						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
+						System.out.println("HE ACCEDIDO como usuario " + txtUsuario.getText());
 						//ABRO UsuarioVentana
 						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
@@ -131,6 +133,15 @@ public class LogInVentana extends JFrame {
 
 		
 		btnCrearUsuario = new JButton("Crear usuario");
+		btnCrearUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana();
+				ventanaNueva.setVisible(true);
+				LogInVentana.this.dispose();
+				
+			}
+		});
 		btnCrearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCrearUsuario.setBounds(305, 334, 157, 29);
 		contentPane.add(btnCrearUsuario);
