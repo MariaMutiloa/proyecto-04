@@ -19,6 +19,7 @@ import gestionBD.ConexionBD;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaRegistroUsuario.RegistroUsuarioVentana;
+import zonaUsuario.UsuarioVentana;
 
 import java.awt.Color;
 
@@ -107,9 +108,12 @@ public class LogInVentana extends JFrame {
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
-						
-						System.out.println("HE ACCEDIDO como usuario " + txtUsuario.getText());
+												
 						//ABRO UsuarioVentana
+						UsuarioVentana ventanaNueva = new UsuarioVentana();
+						ventanaNueva.setVisible(true);
+						LogInVentana.this.dispose();
+						
 						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
