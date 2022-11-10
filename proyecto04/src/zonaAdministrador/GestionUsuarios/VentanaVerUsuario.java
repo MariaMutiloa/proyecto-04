@@ -79,7 +79,6 @@ public class VentanaVerUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return listaUsuarios;

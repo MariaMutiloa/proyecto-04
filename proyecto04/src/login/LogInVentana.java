@@ -117,7 +117,8 @@ public class LogInVentana extends JFrame {
 						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
-						//System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
+						
+						//ABRO VentanaPrincipalAdmin
 						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
