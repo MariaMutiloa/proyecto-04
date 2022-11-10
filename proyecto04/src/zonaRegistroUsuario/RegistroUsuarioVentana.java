@@ -38,6 +38,17 @@ public class RegistroUsuarioVentana extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
+		
+		
+		
+		
 	}
+	
+	
+	
+	/*
+	 * DNI, Nombre, Apellido, Usuario, Contraseña, IDLigaActual, Bote
+	 */
 
 }
