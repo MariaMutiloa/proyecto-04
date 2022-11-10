@@ -134,7 +134,7 @@ public class LogInVentana extends JFrame {
 		contentPane.add(btnCrearUsuario);
 		
 		JLabel lblBingo = new JLabel("");
-		lblBingo.setIcon(new ImageIcon(LogInVentana.class.getResource("/login/images/bingo.jpg"))); //Aqui tendremos que hacerlo con path
+		lblBingo.setIcon(new ImageIcon(getClass().getResource("/bingo.png")));
 		lblBingo.setBounds(10, 11, 463, 107);
 		contentPane.add(lblBingo);
 		
