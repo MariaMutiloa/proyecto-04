@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import personas.Administrador;
+import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
+import zonaAdministrador.GestionUsuarios.VentanaVerUsuario;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.FlowLayout;
@@ -64,6 +66,19 @@ public class VentanaPrincipalAdmin extends JFrame {
 		inferior.add(btnGestiónUsuarios);
 		
 		panel.add(inferior);
+		btnGestiónUsuarios.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalGestionUsuarios nuevaVentanaPrincipal = new VentanaPrincipalGestionUsuarios();
+				nuevaVentanaPrincipal.setVisible(true);
+				VentanaPrincipalAdmin.this.setVisible(false);
+				
+			}
+			
+		});
+		
+		panel.add(btnGestiónUsuarios);
 	}
 
 }

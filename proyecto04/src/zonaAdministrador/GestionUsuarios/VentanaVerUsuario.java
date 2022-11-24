@@ -23,6 +23,7 @@ public class VentanaVerUsuario extends JFrame {
 
 	/**
 	 * 
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JList list;
@@ -77,7 +78,6 @@ public class VentanaVerUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return listaUsuarios;

@@ -68,7 +68,7 @@ public class ConexionBD {
 	}
 	
 	
-	public static Administrador getAdministrador(String miUsuario, String miContrasena){ //Busca el usuario que queremos
+	public static Administrador getAdministrador(String miUsuario, String miContrasena){ //Busca el administrador que queremos
 
 		Administrador a = null; 
 		

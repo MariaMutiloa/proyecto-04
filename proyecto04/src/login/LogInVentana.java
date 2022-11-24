@@ -18,6 +18,9 @@ import javax.swing.border.EmptyBorder;
 import gestionBD.ConexionBD;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
+import zonaRegistroUsuario.RegistroUsuarioVentana;
+import zonaUsuario.UsuarioVentana;
+
 import java.awt.Color;
 
 public class LogInVentana extends JFrame {
@@ -105,11 +108,17 @@ public class LogInVentana extends JFrame {
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
-						System.out.println("HE ACCEDIDO como usuario" + txtUsuario.getText());
+												
 						//ABRO UsuarioVentana
+						UsuarioVentana ventanaNueva = new UsuarioVentana();
+						ventanaNueva.setVisible(true);
+						LogInVentana.this.dispose();
+						
+						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
-						//System.out.println("HE ACCEDIDO como administrador "+ txtUsuario.getText());
+						
+						//ABRO VentanaPrincipalAdmin
 						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
@@ -129,12 +138,21 @@ public class LogInVentana extends JFrame {
 
 		
 		btnCrearUsuario = new JButton("Crear usuario");
+		btnCrearUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		
+				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana();
+				ventanaNueva.setVisible(true);
+				LogInVentana.this.dispose();
+				
+			}
+		});
 		btnCrearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCrearUsuario.setBounds(305, 334, 157, 29);
 		contentPane.add(btnCrearUsuario);
 		
 		JLabel lblBingo = new JLabel("");
-		lblBingo.setIcon(new ImageIcon(LogInVentana.class.getResource("/login/images/bingo.jpg"))); //Aqui tendremos que hacerlo con path
+		lblBingo.setIcon(new ImageIcon(getClass().getResource("/bingo.png")));
 		lblBingo.setBounds(10, 11, 463, 107);
 		contentPane.add(lblBingo);
 		
