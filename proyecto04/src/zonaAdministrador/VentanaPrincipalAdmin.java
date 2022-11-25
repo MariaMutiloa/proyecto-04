@@ -4,11 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
 import zonaAdministrador.GestionUsuarios.VentanaVerUsuario;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -23,27 +25,22 @@ public class VentanaPrincipalAdmin extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel panel;
 	
 	public VentanaPrincipalAdmin(Administrador admin) {
+		setSize( 150, 200 );
+		setBounds(100, 100, 160, 175);
+		setTitle( "Ventana de administrador" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new JPanel();
-		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(panel);
-		panel.setLayout(new GridLayout(2,1,5,5));
-		
 		
 		JPanel superior = new JPanel();
-		superior.setLayout( new FlowLayout());
+		superior.setSize(150, 50);
 		JLabel lblBienvenido = new JLabel("Bienvenidx " + admin.getNombre() + "!");
-		superior.add(lblBienvenido);
-		panel.add(superior);
+		superior.add(lblBienvenido, BorderLayout.NORTH);
+		getContentPane().add(superior, BorderLayout.NORTH);
 		
 
 		JPanel inferior = new JPanel();
-		inferior.setLayout( new FlowLayout());
-		
+	
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
 
@@ -57,15 +54,13 @@ public class VentanaPrincipalAdmin extends JFrame {
 			
 		});
 		
-		inferior.add(btnNuevaPartida);
+		inferior.add(btnNuevaPartida, BorderLayout.NORTH);
 		
 		JButton btnEstadisticas = new JButton("Estad\u00EDsticas");
-		inferior.add(btnEstadisticas);
+		inferior.add(btnEstadisticas, BorderLayout.CENTER);
 		
 		JButton btnGestiónUsuarios = new JButton("Gesti\u00F3n Usuarios");
-		inferior.add(btnGestiónUsuarios);
-		
-		panel.add(inferior);
+		inferior.add(btnGestiónUsuarios, BorderLayout.SOUTH);
 		btnGestiónUsuarios.addActionListener(new ActionListener() {
 
 			@Override
@@ -78,7 +73,21 @@ public class VentanaPrincipalAdmin extends JFrame {
 			
 		});
 		
-		panel.add(btnGestiónUsuarios);
+		JButton btnvolver = new JButton("Volver");
+		btnvolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LogInVentana parent = new LogInVentana();
+				parent.setVisible(true);
+				VentanaPrincipalAdmin.this.dispose();
+				
+			}
+			
+		});
+		
+		getContentPane().add(inferior, BorderLayout.CENTER);
+		
 	}
 
 }
