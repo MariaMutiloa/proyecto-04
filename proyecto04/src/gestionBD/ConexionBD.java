@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import personas.Administrador;
 import personas.Usuario;
 
@@ -18,7 +20,8 @@ public class ConexionBD {
 			Class.forName("org.sqlite.JDBC");
 
 		} catch (ClassNotFoundException e) {
-			System.out.println("No se ha podido cargar el driver de la base de datos");
+			JOptionPane.showMessageDialog(null,  "No se ha podido cargar el driver de la base de datos", "Error", JOptionPane.ERROR_MESSAGE);
+			//System.out.println("No se ha podido cargar el driver de la base de datos");
 		}
 		
 		
@@ -27,7 +30,9 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}	
 
 	}
@@ -62,7 +67,9 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		return u;
 	}
@@ -99,7 +106,9 @@ public class ConexionBD {
 			
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		return a;
 		
