@@ -49,7 +49,10 @@ public class LogInVentana extends JFrame {
 					ConexionBD.realizarConexion();
 					
 				} catch (Exception e) {
-					e.printStackTrace();
+					//e.printStackTrace();
+				    
+				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					
 				}
 			}
 		});
