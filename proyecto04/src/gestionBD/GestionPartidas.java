@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import personas.Usuario;
 
 public class GestionPartidas {
@@ -25,7 +27,9 @@ public class GestionPartidas {
 			insertPartidaNueva.setFloat(5, IDLiga);
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		 //ESTO FALTA POR MIRAR (NO AUTOMATIZADO)
 		
@@ -54,7 +58,9 @@ public class GestionPartidas {
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		return list;
 

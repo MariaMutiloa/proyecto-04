@@ -16,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
 import personas.Usuario;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
@@ -78,7 +79,9 @@ public class VentanaVerUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
 		}
 		return listaUsuarios;
 
