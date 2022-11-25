@@ -61,7 +61,7 @@ public abstract class Persona {
 	
 	@Override
 	public String toString() {
-		return dni + ": " + nombre + " " + apellido + " Usuario:" + usuario + " Contra: " + contrasena;
+		return dni + ": " + nombre + " " + apellido + " Usuario: " + usuario + " Contra: " + contrasena;
 	}
 	
 	

@@ -50,7 +50,6 @@ public class LogInVentana extends JFrame {
 					
 				} catch (Exception e) {
 					//e.printStackTrace();
-				    
 				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					
 				}
