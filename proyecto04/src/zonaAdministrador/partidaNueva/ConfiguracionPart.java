@@ -10,20 +10,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 public class ConfiguracionPart extends JFrame {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Partida partidaActual = new Partida();
 
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
@@ -31,11 +32,12 @@ public class ConfiguracionPart extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new GridLayout(2,2,5,5));
+		
+		JPanel superior = new JPanel();
+			JLabel lblTitulo = new JLabel ("Configuración de partida ");
+			superior.add(lblTitulo, BorderLayout.WEST);
 	
-		int IDPartida = GestionPartidas.numNuevo(); //Va a tener que ser automatico, en teoria con SQLite
-		JLabel numPartida = new JLabel(Integer.toString(IDPartida));
-		contentPane.add(numPartida);
+	
 
 		JLabel participantes = new JLabel(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size())+ " participantes conectados");
 		contentPane.add(participantes);

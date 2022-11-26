@@ -2,17 +2,13 @@ package zonaAdministrador;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
-import zonaAdministrador.GestionUsuarios.VentanaVerUsuario;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
