@@ -89,7 +89,7 @@ public class LogInVentana extends JFrame {
 		 * panel inferior
 		 * - boton entrar
 		 * 
-		 * 3 lineas 4 columnas
+		 * 3 lineas 2 columnas
 		 */
 		
 		JPanel pPrincipal = new JPanel( new BorderLayout() );
@@ -98,8 +98,6 @@ public class LogInVentana extends JFrame {
 		
 		//en el panel principal creamos un panel central para centrar todos los componentes
 		
-//		JPanel pCentral = new JPanel();
-//		pPrincipal.add(pCentral, BorderLayout.CENTER);
 		
 		//usuario
 		JLabel lblUsuario = new JLabel("Usuario:");
@@ -107,14 +105,12 @@ public class LogInVentana extends JFrame {
 		lblUsuario.setForeground(Color.BLACK);
 //		lblUsuario.setBounds(68, 129, 95, 29);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 18));
-//		pCentral.add(lblUsuario, BorderLayout.WEST);
 		pPrincipal.add(lblUsuario);
 		
 		//txtUsuario
 		txtUsuario = new JTextField();
 //		txtUsuario.setBounds(215, 136, 139, 22);
 		txtUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		pCentral.add(txtUsuario, BorderLayout.EAST);
 		txtUsuario.setColumns(10);
 		pPrincipal.add(txtUsuario);
 		
@@ -123,14 +119,12 @@ public class LogInVentana extends JFrame {
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
 //		lblContrasena.setBounds(68, 180, 113, 29);
 		lblContrasena.setFont(new Font("Tahoma", Font.BOLD, 18));
-//		pCentral.add(lblContrasena, BorderLayout.WEST);
 		pPrincipal.add(lblContrasena);
 	
 		//JpassClave
 		jpassClave = new JPasswordField();
 		jpassClave.setBounds(215, 187, 144, 22);
 		jpassClave.setFont(new Font("Tahoma", Font.PLAIN, 16));
-//		pCentral.add(jpassClave, BorderLayout.EAST);
 		pPrincipal.add(jpassClave);
 		
 		
@@ -181,7 +175,6 @@ public class LogInVentana extends JFrame {
 //		btnAceptar.setBounds(155, 242, 132, 29);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		pInferiorPrincipal.add(btnAceptar, BorderLayout.CENTER);
-//		pPrincipal.add(btnAceptar);
 		
 		
 		/*
