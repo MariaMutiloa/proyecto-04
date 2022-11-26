@@ -79,7 +79,7 @@ public class ConexionBD {
 	}
 	
 	//Devuelve el administrador que tiene el usuario y contraseña que pasan como paramenros, en caso de no encontrarlo se devuelve null
-	public Administrador getAdministrador(String miAdmin, String miContrasena){ //Busca el administrador que queremos
+	public static Administrador getAdministrador(String miAdmin, String miContrasena){ //Busca el administrador que queremos
 
 		logger.info("Buscando "+ miAdmin + " en la base de datos");
 		Administrador a = null; 
