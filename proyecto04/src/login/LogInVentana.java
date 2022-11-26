@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +33,7 @@ public class LogInVentana extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
-	
+	private static Logger logger = Logger.getLogger(LogInVentana.class.getName()); 
 	private JTextField txtUsuario;
 	private JPasswordField jpassClave; 
 	private JButton btnAceptar;
@@ -51,6 +53,7 @@ public class LogInVentana extends JFrame {
 				} catch (Exception e) {
 					//e.printStackTrace();
 				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				   logger.log(Level.SEVERE, "No se ha podido inicializar la applicacion");
 					
 				}
 			}
@@ -104,13 +107,14 @@ public class LogInVentana extends JFrame {
 				
 				if(txtUsuario.getText().length()==0 || claveFinal.length()==0) { 	//Comprobamos que los campos no estan vacios
 					JOptionPane.showMessageDialog(null, "Introduce los datos", "ERROR", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.WARNING, "NO se han rellenado los campos");
 				}else {
 					
 					//Comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
-												
+						logger.info("Se ha encontrado el usuario");						
 						//ABRO UsuarioVentana
 						UsuarioVentana ventanaNueva = new UsuarioVentana();
 						ventanaNueva.setVisible(true);
@@ -118,6 +122,7 @@ public class LogInVentana extends JFrame {
 						
 						
 					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
+						logger.info("Se ha encontrado el administrador");		
 						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
 						
 						//ABRO VentanaPrincipalAdmin
@@ -125,7 +130,8 @@ public class LogInVentana extends JFrame {
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
 					}else {
-						JOptionPane.showMessageDialog(null, "No existe el usuario introducido", "ERROR", JOptionPane.ERROR_MESSAGE);
+						logger.log(Level.WARNING, "El usuario/admin no existe o los datos introducidos no son correctos");
+						JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
 					}
 						
 
