@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
+import zonaRegistroUsuario.RegistroUsuarioVentana;
 
 import javax.swing.JButton;
 
@@ -25,7 +26,7 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnNewButton = new JButton("Ver Usuarios");
 		btnNewButton.addActionListener(new ActionListener() {
 
@@ -34,11 +35,24 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 				VentanaVerUsuario nuevaVentanaVer = new VentanaVerUsuario();
 				nuevaVentanaVer.setVisible(true);
 				VentanaPrincipalGestionUsuarios.this.setVisible(false);
-				
+
 			}
-			
+
 		});
 		btnNewButton.setBounds(31, 76, 136, 34);
 		contentPane.add(btnNewButton);
+
+		JButton botonCrearUsuario = new JButton("Crear usuario");
+		botonCrearUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroUsuarioVentana nuevaUsuarioRegistro = new RegistroUsuarioVentana();
+				nuevaUsuarioRegistro.setVisible(true);
+				VentanaPrincipalGestionUsuarios.this.setVisible(false);
+
+			}
+
+		});
+		botonCrearUsuario.setBounds(31, 157, 136, 34);
+		contentPane.add(botonCrearUsuario);
 	}
 }
