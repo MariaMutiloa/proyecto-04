@@ -20,7 +20,7 @@ public class ConexionBD {
 	
 	 private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 
-	public static void realizarConexion() {
+	public static void realizarConexion(String bd) {
 		
 		
 		//Carga del drive JDBC para SQLite
@@ -36,8 +36,8 @@ public class ConexionBD {
 		
 		
 		//Con el driver cargado ya se pueden establecer conexiones a la BD
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-			logger.info("Conexion con 'DatosBingo.db' realizada correctamente");
+		try (Connection con = DriverManager.getConnection(bd)) {
+			logger.info("Conexion realizada correctamente");
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
 			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
