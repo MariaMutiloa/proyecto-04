@@ -1,5 +1,8 @@
 package elementosOrganizacion;
 
+import java.util.List;
+
+import gestionBD.GestionPartidas;
 import personas.Usuario;
 
 public class Partida {
@@ -9,12 +12,22 @@ public class Partida {
 	private float boteLinea;
 	private Carton ganadorLinea;
 	private Carton ganadorBingo;
+	private List<Usuario> participantes;
 	
 	public Partida() {
 		super();
-		insertarPartida();
+		this.IDPartida = GestionPartidas.nueva();
+		this.participantes = GestionPartidas.numeroParticipantes(IDPartida);
 	}
 	
+	public List<Usuario> getParticipantes() {
+		return participantes;
+	}
+
+	public void setParticipantes(List<Usuario> participantes) {
+		this.participantes = participantes;
+	}
+
 	public int getIDPartida() {
 		return IDPartida;
 	}

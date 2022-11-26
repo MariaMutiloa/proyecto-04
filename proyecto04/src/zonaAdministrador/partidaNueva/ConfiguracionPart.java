@@ -16,6 +16,7 @@ import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 
 public class ConfiguracionPart extends JFrame {
 
@@ -37,89 +38,39 @@ public class ConfiguracionPart extends JFrame {
 			JLabel lblTitulo = new JLabel ("Configuración de partida ");
 			superior.add(lblTitulo, BorderLayout.WEST);
 	
-	
+		JPanel central = new JPanel();
+			JPanel centralArriba = new JPanel();	
+				centralArriba.add(new JLabel("Bote Linea"), BorderLayout.WEST);
+				JTextField txtLinea = new JTextField();
+				centralArriba.add(txtLinea, BorderLayout.EAST);
+			JPanel centralAbajo = new JPanel();	
+				centralAbajo.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
+				JTextField txtBingo = new JTextField();
+				centralAbajo.add(txtBingo, BorderLayout.EAST);
+			central.add(centralArriba, BorderLayout.NORTH);	
+			central.add(centralAbajo, BorderLayout.SOUTH);	
 
-		JLabel participantes = new JLabel(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size())+ " participantes conectados");
-		contentPane.add(participantes);
-		
-		JLabel boteL = new JLabel("Bote de linea");
-		contentPane.add(boteL);
-		
-		JTextField TFBoteL = new JTextField();
-		contentPane.add(TFBoteL);
-		
-		JButton boteLButton = new JButton("Calcular Bote Linea");
-		contentPane.add(boteLButton);
-		boteLButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size()));
-				float bote = calculoBoteL();
-				TFBoteL.setText(Float.toString(bote));
+			JPanel inferior = new JPanel(); 
+				JPanel inferiorDerecha = new JPanel();
+					JButton btnEmpezar = new JButton("Empezar Partida");
+					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
+				JPanel inferiorIzquierda = new JPanel();
+					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
+					inferiorIzquierda.add(imagenNumero((partidaActual.getParticipantes()).size()));
+					JButton  btbVerParticipantes = new JButton("Ver Participantes");
+					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
+				inferior.add(inferiorDerecha, BorderLayout.WEST);	
+				inferior.add(inferiorIzquierda, BorderLayout.EAST);	
 				
-			}
-			
-		});
-		
-		JLabel boteB = new JLabel("Bote de bingo");
-		contentPane.add(boteL);
-		
-		JTextField TFBoteB = new JTextField();
-		contentPane.add(TFBoteB);
-		
-	
-		JButton boteBButton = new JButton("Calcular Bote Bingo");
-		contentPane.add(boteBButton);
-		boteBButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				participantes.setText(Integer.toString((GestionPartidas.numeroParticipantes(IDPartida)).size()));
-				float bote = calculoBoteB();
-				TFBoteB.setText(Float.toString(bote));
-				
-			}
-			
-		});
-		
-		JTextField TFLiga = new JTextField();
-		contentPane.add(TFBoteB);
-		
-		
-		JButton empezar = new JButton("Empezar partida");
-		contentPane.add(empezar);
-		boteBButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				float boteL = Integer.parseInt(TFBoteL.getText()); //Dependera de la gente conectada
-				float boteB = Integer.parseInt(TFBoteB.getText());
-				int liga = Integer.parseInt(TFLiga.getText()); //Despues se usará mismo componente que se use en la visialización de ligas
-				
-				GestionPartidas.nueva(IDPartida, boteB, boteL, liga);
-				PartidaNueva nuevaPar = new PartidaNueva(IDPartida, boteB, boteL, liga); 
-				nuevaPar.setVisible(true);
-				ConfiguracionPart.this.dispose();
-				
-			}
-			
-		});
-		
-		setContentPane(contentPane);
-		
+			contentPane.add(superior,BorderLayout.NORTH);	
+			contentPane.add(central,BorderLayout.CENTER);	
+			contentPane.add(inferior,BorderLayout.SOUTH);	
 	}
 
 
-	private float calculoBoteB() { //Igual con un documento properties???
+	private Component imagenNumero(int numero) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	private float calculoBoteL() {
-		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 }

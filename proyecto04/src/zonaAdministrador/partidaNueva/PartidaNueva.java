@@ -2,6 +2,8 @@ package zonaAdministrador.partidaNueva;
 
 import javax.swing.JFrame;
 
+import elementosOrganizacion.Partida;
+
 public class PartidaNueva extends JFrame {
 
 	/**
@@ -11,7 +13,7 @@ public class PartidaNueva extends JFrame {
 
 
 	
-	public PartidaNueva(int num, float boteB, float boteL, int liga) {
+	public PartidaNueva(Partida partidaActual) {
 		// TODO Auto-generated constructor stub
 	}
 

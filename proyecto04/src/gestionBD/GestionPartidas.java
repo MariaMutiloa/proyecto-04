@@ -24,19 +24,19 @@ public class GestionPartidas {
 	
 	
 	//Crea una partida y la añade a la base de datos
-	public static void nueva(int IDPartida, float PremioB, float PremioL, int IDLiga) {
-		 
+	public static int nueva() {
+		int IDPartida = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
-			logger.info("Conectado a la base de datos apra añadir partida");
+			logger.info("Conectado a la base de datos para añadir partida");
 			
-			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (IDPartida, Activa, PremioB, PremioL, IDLiga"
+			
+			//FALTA AÑADIR ESTOOOOO
+			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida I"
 					+ ", IDCartonB, IDCartonL VALUES (?, ?, ?)");
-			insertPartidaNueva.setInt(1, IDPartida);
-			insertPartidaNueva.setInt(2, 1);
-			insertPartidaNueva.setFloat(3, PremioB);
-			insertPartidaNueva.setFloat(4, PremioL);
-			insertPartidaNueva.setFloat(5, IDLiga);
+			
+			//HASTA AQUI
+			
 			
 		} catch (SQLException e) {
 			//e.printStackTrace();
@@ -44,14 +44,33 @@ public class GestionPartidas {
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
 		}
-		 //ESTO FALTA POR MIRAR (NO AUTOMATIZADO)
+		if (IDPartida != 0) {
+			return IDPartida; 
+		}
+		else {
+			JOptionPane.showMessageDialog(null,"No se ha podido crear una partida nueva", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido crear una partida nueva");
+		}
+		return IDPartida;
+		
+	}
+	
+	
+	public static void actualizarDatosBotes(int IDPartida, float bLinea, float bBingo) {
+	
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			//MIRAR COMO MODIFICAR LAS INSTANTCIAS
+			
+			PreparedStatement actualizacion = con.prepareStatement("INSERT INTO partida I");
+			
+			//Hasta aqui
+			logger.info("Añadidos los botes de linea y de bingo");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 
-	public static int numNuevo() {
-		//calcular nuevo ID PARTIDA
-		return 1;
-	}
 
 	public static List<Usuario> numeroParticipantes(int IDPartida) {
 		List<Usuario> list = new ArrayList<>();
@@ -60,14 +79,12 @@ public class GestionPartidas {
 			logger.info("Conectado a la base de datos para extraer usuarios de la partida");
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM carton");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE IDPartida =" +IDPartida);
 
 			while (rs.next()) {
 				logger.info("Usuario jugador encontrado");
-				if (IDPartida == rs.getInt(4)) {
-					Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
-					list.add(persona);
-				}
+				Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+				list.add(persona);
 			}
 
 			rs.close();
