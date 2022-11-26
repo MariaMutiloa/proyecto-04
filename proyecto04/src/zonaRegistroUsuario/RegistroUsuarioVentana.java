@@ -40,9 +40,6 @@ public class RegistroUsuarioVentana extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		
-		
-		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setBounds(67, 182, 95, 29);
