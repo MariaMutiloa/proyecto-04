@@ -106,7 +106,7 @@ public class ConexionBD {
 			while (rs.next() && encontrado == false) {
 				
 				//
-				if(miUsuario.equals(rs.getString(4)) && miContrasena.equals(rs.getString(5))) {
+				if(miAdmin.equals(rs.getString(4)) && miContrasena.equals(rs.getString(5))) {
 					logger.info("Usuario encontrado");
 					//obtenemos columnas
 					int dni = rs.getInt(1);
