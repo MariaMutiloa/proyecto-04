@@ -155,6 +155,13 @@ public class RegistroUsuarioVentana extends JFrame {
 					//el usuario es valido
 					//METER USUARIO EN LA BASE DE DATOS
 					
+					//extraer contraseña a String
+					char[] clave = passwordField.getPassword();
+					String claveFinal = new String(clave);
+					
+					ConexionBD.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(), txtApellido.getText(), txtUsuario.getText(), claveFinal);
+
+										
 				}
 				
 				

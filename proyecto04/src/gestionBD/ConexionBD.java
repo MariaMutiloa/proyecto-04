@@ -2,9 +2,11 @@ package gestionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -168,6 +170,42 @@ public class ConexionBD {
 		}
 		return usado;
 	}
+	
+	
+	
+	public static void insertarUsuario(int dni, String nombre, String apellido, String usuario, String contrasena) {
+		
+		logger.info("Insertando en la BD el usuario "+ usuario);
+		
+		try {
+		    Connection conn = DriverManager.getConnection("jdbc:sqlite:basededatos.db");
+		    	
+		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO Usuario (DNI, Nombre, Apellido, Usuario, Contraseña) VALUES (?, ?, ?, ?, ?)");
+		    			    
+		    // establecemos los datos en la prepared statement teniendo en cuenta el orden de los ?
+		    stmt.setInt(1, dni);
+		    stmt.setString(2, nombre);
+		    stmt.setString(3, apellido);
+		    stmt.setString(4, usuario);
+		    stmt.setString(5, contrasena);
+		    
+		    //los campos de liga y bote? por defecto 1 y 0 o?
+		    	
+		    // ejecutamos la sentencia preparado como un update, en este caso
+		    stmt.executeUpdate();
+			logger.info(usuario+" guardado en la base de datos.");
+			JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente");
+			    
+			stmt.close();
+		    conn.close(); // es importante desconectar la conexiÃ³n al terminar
+					
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");   
+		}
+	}
+	
+	
 	
 	
 	
