@@ -145,25 +145,30 @@ public class RegistroUsuarioVentana extends JFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
-				if (ConexionBD.comprobarUsuario(txtUsuario.getText())) {
-					//usuario ya esta en bd
-					logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
-					JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR", JOptionPane.ERROR_MESSAGE);
-					txtUsuario.setText("");
+				//SI HAY ALGUN CAMPO VACIO, POR FAVOR, RELLENAR
+				if(txtDni.getText().length()==0 || txtNombre.getText().length()==0 || txtApellido.getText().length()==0 || txtUsuario.getText().length()==0 || passwordField.getPassword().length==0) {
+					JOptionPane.showMessageDialog(null, "Por favor, rellene todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.WARNING, "Todos los campos no están completos.");
+					
 				}else {
-					//el usuario es valido
-					//METER USUARIO EN LA BASE DE DATOS
-					
-					//extraer contraseña a String
-					char[] clave = passwordField.getPassword();
-					String claveFinal = new String(clave);
-					
-					ConexionBD.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(), txtApellido.getText(), txtUsuario.getText(), claveFinal);
-
-										
+					//TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
+					if (ConexionBD.comprobarUsuario(txtUsuario.getText())) {
+						//usuario ya esta en bd
+						logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
+						JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR", JOptionPane.ERROR_MESSAGE);
+						txtUsuario.setText("");
+					}else {
+						//el usuario es valido
+						//METER USUARIO EN LA BASE DE DATOS
+						
+						//extraer contraseña a String
+						char[] clave = passwordField.getPassword();
+						String claveFinal = new String(clave);
+						
+						ConexionBD.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(), txtApellido.getText(), txtUsuario.getText(), claveFinal);
+											
+					}
 				}
-				
 				
 				
 			}
