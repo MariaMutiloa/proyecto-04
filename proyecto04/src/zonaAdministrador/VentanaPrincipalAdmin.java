@@ -27,14 +27,13 @@ public class VentanaPrincipalAdmin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public VentanaPrincipalAdmin(Administrador admin) {
-		setSize( 150, 200 );
-		setBounds(100, 100, 160, 175);
+		setBounds(100, 100, 160, 200);
 		setTitle( "Ventana de administrador" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel superior = new JPanel();
 		superior.setSize(150, 50);
-		JLabel lblBienvenido = new JLabel("Bienvenidx " + admin.getNombre() + "!");
+		JLabel lblBienvenido = new JLabel("¡Bienvenidx " + admin.getNombre() + "!");
 		superior.add(lblBienvenido, BorderLayout.NORTH);
 		getContentPane().add(superior, BorderLayout.NORTH);
 		
@@ -73,8 +72,9 @@ public class VentanaPrincipalAdmin extends JFrame {
 			
 		});
 		
-		JButton btnvolver = new JButton("Volver");
-		btnvolver.addActionListener(new ActionListener() {
+		JButton btnVolver = new JButton("Volver");
+		inferior.add(btnVolver, BorderLayout.SOUTH);
+		btnVolver.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
