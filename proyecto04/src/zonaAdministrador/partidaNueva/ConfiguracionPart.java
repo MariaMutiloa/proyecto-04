@@ -60,7 +60,8 @@ public class ConfiguracionPart extends JFrame {
 				JPanel inferiorIzquierda = new JPanel();
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
 					JLabel lblNumero = new JLabel("");
-					lblNumero.setIcon(imagenNumero((partidaActual.getParticipantes()).size()));
+					//(partidaActual.getParticipantes()).size())
+					lblNumero.setIcon(imagenNumero(62));
 					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
 					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
@@ -78,11 +79,17 @@ public class ConfiguracionPart extends JFrame {
 	private Icon imagenNumero(int numero) {
 		Icon icono = null;
 		if(numero > 9) {
-			icono = new ImageIcon( getClass().getResource("/ImagenesNumeros/otro.jpg") );
+			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
+		}else if (numero == 0){
+			icono = new ImageIcon(getClass().getResource("/0.jpeg"));
 		}else {
-			icono = new ImageIcon( getClass().getResource("/ImagenesNumeros/"+ numero + ".jpeg") );
+			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(numero) + ".jpg") );
 		}
+		icono = ajustarAEspacio(icono);
 		return icono;
 	}
-
+	
+	private Icon ajustarAEspacio(Icon icono) {
+		return null; 
+	}
 }
