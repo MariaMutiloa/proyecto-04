@@ -152,6 +152,9 @@ public class RegistroUsuarioVentana extends JFrame {
 					
 				}else {
 					//TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
+					
+					//no comprueba bien si el usuario está repetido!!!!
+					
 					if (ConexionBD.comprobarUsuario(txtUsuario.getText())) {
 						//usuario ya esta en bd
 						logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
@@ -166,7 +169,12 @@ public class RegistroUsuarioVentana extends JFrame {
 						String claveFinal = new String(clave);
 						
 						ConexionBD.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(), txtApellido.getText(), txtUsuario.getText(), claveFinal);
-											
+						txtDni.setText("");
+						txtNombre.setText("");
+						txtApellido.setText("");
+						txtUsuario.setText("");
+						passwordField.setText("");
+			
 					}
 				}
 				
