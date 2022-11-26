@@ -154,6 +154,8 @@ public class ConexionBD {
 					
 					//el usuario ya está cogido
 					usado=true;
+					logger.info(miUsuario +" encontrado.");
+
 				}
 			}	
 			rs.close();
