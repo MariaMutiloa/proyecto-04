@@ -37,7 +37,7 @@ public class VentanaVerUsuario extends JFrame {
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
 		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
-		Usuario u = new Usuario(0, " "," "," "," ",0,0);
+		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -56,6 +56,8 @@ public class VentanaVerUsuario extends JFrame {
 		btnNewButton.setBounds(262, 122, 116, 23);
 		contentPane.add(btnNewButton);
 		btnNewButton.setEnabled(false);
+		// solo cuando el Administrador tiene un Usuario seleccionado deja pulsar el
+		// botón para ver sus datos
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (list.getSelectedValue() != null) {
@@ -66,17 +68,21 @@ public class VentanaVerUsuario extends JFrame {
 				}
 
 			}
+
+			// para poder ir a la Ventana de los datos cuando hace click en el botón Ver
+			// Usuario
 			public void actionPerformed(ActionEvent e) {
 				VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
 				nuevaVentanaDatos.setVisible(true);
 				VentanaVerUsuario.this.setVisible(false);
-				
+
 			}
 		});
-		
 
 	}
 
+	// crea una lista con todos los usuarios que están registrados en la BD y la
+	// devuleve
 	public static ArrayList<Usuario> anyadirUsuarios(ArrayList<Usuario> listaUsuarios) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -97,6 +103,9 @@ public class VentanaVerUsuario extends JFrame {
 		return listaUsuarios;
 
 	}
+
+	// cargo el Jlist que tiene que aparecer a través de la lista que me devuelve el
+	// método anterior
 
 	public void cargarJList(ArrayList<Usuario> listaUsuarios) {
 		for (Usuario persona : listaUsuarios) {
