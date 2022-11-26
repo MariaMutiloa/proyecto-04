@@ -3,6 +3,8 @@ package zonaAdministrador.partidaNueva;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ public class ConfiguracionPart extends JFrame {
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 200, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -47,6 +49,7 @@ public class ConfiguracionPart extends JFrame {
 				centralAbajo.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
 				JTextField txtBingo = new JTextField();
 				centralAbajo.add(txtBingo, BorderLayout.EAST);
+				centralArriba.setBounds(100, 100, 200, 50);
 			central.add(centralArriba, BorderLayout.NORTH);	
 			central.add(centralAbajo, BorderLayout.SOUTH);	
 
@@ -56,21 +59,30 @@ public class ConfiguracionPart extends JFrame {
 					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
 				JPanel inferiorIzquierda = new JPanel();
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
-					inferiorIzquierda.add(imagenNumero((partidaActual.getParticipantes()).size()));
+					JLabel lblNumero = new JLabel("");
+					lblNumero.setIcon(imagenNumero((partidaActual.getParticipantes()).size()));
+					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
 					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
 				inferior.add(inferiorDerecha, BorderLayout.WEST);	
 				inferior.add(inferiorIzquierda, BorderLayout.EAST);	
+
 				
 			contentPane.add(superior,BorderLayout.NORTH);	
 			contentPane.add(central,BorderLayout.CENTER);	
 			contentPane.add(inferior,BorderLayout.SOUTH);	
+			setContentPane(contentPane);
 	}
 
 
-	private Component imagenNumero(int numero) {
-		// TODO Auto-generated method stub
-		return null;
+	private Icon imagenNumero(int numero) {
+		Icon icono = null;
+		if(numero > 9) {
+			icono = new ImageIcon( getClass().getResource("/ImagenesNumeros/otro.jpg") );
+		}else {
+			icono = new ImageIcon( getClass().getResource("/ImagenesNumeros/"+ numero + ".jpeg") );
+		}
+		return icono;
 	}
 
 }
