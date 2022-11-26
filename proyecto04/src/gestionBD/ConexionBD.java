@@ -18,12 +18,11 @@ import personas.Usuario;
 
 public class ConexionBD {
 		
-	private String connexion;
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
+	private static String connexion;
 
-	public void realizarConexion(String bd) {
-		
-		this.connexion = bd;
+	public static void realizarConexion(String bd) {
+		connexion = bd;
 		//Carga del drive JDBC para SQLite
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -43,7 +42,7 @@ public class ConexionBD {
 		
 		Usuario u = null;
 		
-		try (Connection con = DriverManager.getConnection("connexion")) {
+		try (Connection con = DriverManager.getConnection(connexion)) {
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
@@ -85,7 +84,7 @@ public class ConexionBD {
 		logger.info("Buscando "+ miAdmin + " en la base de datos");
 		Administrador a = null; 
 		
-		try (Connection con = DriverManager.getConnection("connexion")) {
+		try (Connection con = DriverManager.getConnection(connexion)) {
 			
 			
 			
@@ -131,7 +130,7 @@ public class ConexionBD {
 		
 		boolean usado= false;
 				
-		try (Connection con = DriverManager.getConnection("connexion")) {
+		try (Connection con = DriverManager.getConnection(connexion)) {
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT Usuario FROM usuario");
@@ -164,7 +163,7 @@ public class ConexionBD {
 		logger.info("Insertando en la BD el usuario "+ usuario);
 		
 		try {
-		    Connection conn = DriverManager.getConnection("connexion");
+		    Connection conn = DriverManager.getConnection(connexion);
 		    	
 		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO usuario (DNI, Nombre, Apellido, Usuario, Contraseña, IdLigaActual, Bote) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		    			    
