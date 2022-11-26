@@ -35,5 +35,16 @@ public class ConexionBDTest {
 		assertNull(ConexionBD.getUsuario("juan", "prueba"));
 		assertNull(ConexionBD.getUsuario("ruben.garcia", "prueba"));
 	}
+	
+	@Test 
+	public void testComprobarUsuario() {
+		assertTrue(ConexionBD.comprobarUsuario("Ruben"));
+		assertFalse(ConexionBD.comprobarUsuario("Juanjo"));
+	}
+	
+	@Test 
+	public void testInsertarUsuario() {
+		
+	}
 
 }

@@ -124,7 +124,7 @@ public class ConexionBD {
 	
 	
 	//Comprobar si ya está el usuario en la base de datos, por nombre de usuario
-	public boolean comprobarUsuario(String miUsuario){
+	public static boolean comprobarUsuario(String miUsuario){
 		
 		logger.info("Buscando si "+ miUsuario +" está en la base de datos");
 		
