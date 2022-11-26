@@ -178,9 +178,9 @@ public class ConexionBD {
 		logger.info("Insertando en la BD el usuario "+ usuario);
 		
 		try {
-		    Connection conn = DriverManager.getConnection("jdbc:sqlite:basededatos.db");
+		    Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db");
 		    	
-		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO Usuario (DNI, Nombre, Apellido, Usuario, Contraseña) VALUES (?, ?, ?, ?, ?)");
+		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO usuario (DNI, Nombre, Apellido, Usuario, Contraseña, IdLigaActual, Bote) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		    			    
 		    // establecemos los datos en la prepared statement teniendo en cuenta el orden de los ?
 		    stmt.setInt(1, dni);
@@ -188,9 +188,10 @@ public class ConexionBD {
 		    stmt.setString(3, apellido);
 		    stmt.setString(4, usuario);
 		    stmt.setString(5, contrasena);
-		    
-		    //los campos de liga y bote? por defecto 1 y 0 o?
-		    	
+		    stmt.setInt(6, 1);
+		    stmt.setInt(7, 0);
+
+		    		    	
 		    // ejecutamos la sentencia preparado como un update, en este caso
 		    stmt.executeUpdate();
 			logger.info(usuario+" guardado en la base de datos.");
