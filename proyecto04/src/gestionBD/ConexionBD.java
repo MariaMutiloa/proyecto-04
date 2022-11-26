@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import personas.Administrador;
 import personas.Usuario;
 
+//Contiene los metodos de creacion e inicializacion de base de datos. 
+
 public class ConexionBD {
 	
 	 private static Logger logger = Logger.getLogger(ConexionBD.class.getName());

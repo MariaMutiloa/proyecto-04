@@ -15,10 +15,15 @@ import javax.swing.JOptionPane;
 
 import personas.Usuario;
 
+//Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del administrador
+
+
 public class GestionPartidas {
 	
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 	
+	
+	//Crea una partida y la añade a la base de datos
 	public static void nueva(int IDPartida, float PremioB, float PremioL, int IDLiga) {
 		 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -48,7 +53,7 @@ public class GestionPartidas {
 		return 1;
 	}
 
-	public static ArrayList<Usuario> numeroParticipantes(int IDPartida) {
+	public static List<Usuario> numeroParticipantes(int IDPartida) {
 		List<Usuario> list = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
