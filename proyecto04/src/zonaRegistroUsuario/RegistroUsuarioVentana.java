@@ -7,15 +7,20 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
+import gestionBD.ConexionBD;
+import login.LogInVentana;
 
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 public class RegistroUsuarioVentana extends JFrame {
@@ -27,6 +32,8 @@ public class RegistroUsuarioVentana extends JFrame {
 
 	private JPanel contentPane;
 	
+	private static Logger logger = Logger.getLogger(RegistroUsuarioVentana.class.getName()); 
+
 	private JTextField txtDni;
 	private JTextField txtNombre;
 	private JTextField txtApellido;
@@ -139,8 +146,18 @@ public class RegistroUsuarioVentana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
+				if (ConexionBD.comprobarUsuario(txtUsuario.getText())) {
+					//usuario ya esta en bd
+					logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
+					JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR", JOptionPane.ERROR_MESSAGE);
+					txtUsuario.setText("");
+				}else {
+					//el usuario es valido
+					//METER USUARIO EN LA BASE DE DATOS
+					
+				}
 				
-				//METER USUARIO EN LA BASE DE DATOS
+				
 				
 			}
 		});

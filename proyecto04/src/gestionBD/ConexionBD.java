@@ -136,6 +136,37 @@ public class ConexionBD {
 	}
 	
 	
+	//Comprobar si ya está el usuario en la base de datos, por nombre de usuario
+	public static boolean comprobarUsuario(String miUsuario){
+		
+		logger.info("Buscando si "+ miUsuario +" está en la base de datos");
+		
+		boolean usado= false;
+				
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT Usuario FROM usuario");
+			
+			//recorremos fila a fila
+			while (rs.next()) {
+				if(miUsuario.equals(rs)) {
+					
+					//el usuario ya está cogido
+					usado=true;
+				}
+			}	
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// No se ha podido obtener la conexión a la base de datos
+			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		return usado;
+	}
+	
 	
 	
 	
