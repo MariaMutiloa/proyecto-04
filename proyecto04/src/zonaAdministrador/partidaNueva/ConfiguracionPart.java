@@ -2,6 +2,7 @@ package zonaAdministrador.partidaNueva;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ObjectInputFilter.Config;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -14,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
+import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
@@ -39,6 +41,18 @@ public class ConfiguracionPart extends JFrame {
 		JPanel superior = new JPanel();
 			JLabel lblTitulo = new JLabel ("Configuración de partida ");
 			superior.add(lblTitulo, BorderLayout.WEST);
+			JButton btnVolver = new JButton("Volver");
+			btnVolver.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					LogInVentana nueva = new LogInVentana();
+					nueva.setVisible(true);
+					ConfiguracionPart.this.dispose();
+					
+				}
+				
+			});
 	
 		JPanel central = new JPanel();
 			JPanel centralArriba = new JPanel();	
@@ -56,6 +70,14 @@ public class ConfiguracionPart extends JFrame {
 			JPanel inferior = new JPanel(); 
 				JPanel inferiorDerecha = new JPanel();
 					JButton btnEmpezar = new JButton("Empezar Partida");
+					btnEmpezar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+				
+							PartidaNueva nuevaVentana = new PartidaNueva(partidaActual);
+							nuevaVentana.setVisible(true);
+							ConfiguracionPart.this.dispose();
+						}
+					});
 					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
 				JPanel inferiorIzquierda = new JPanel();
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
@@ -64,6 +86,7 @@ public class ConfiguracionPart extends JFrame {
 					lblNumero.setIcon(imagenNumero(62));
 					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
+					
 					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
 				inferior.add(inferiorDerecha, BorderLayout.WEST);	
 				inferior.add(inferiorIzquierda, BorderLayout.EAST);	
