@@ -34,13 +34,13 @@ public class VentanaVerUsuario extends JFrame {
 	public VentanaVerUsuario() {
 		this.list = new JList();
 		this.model = new DefaultListModel();
-		this.listaUsuarios= new ArrayList<Usuario>();
+		this.listaUsuarios = new ArrayList<Usuario>();
 		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
-		
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		JPanel contentPane = new JPanel();;
+		JPanel contentPane = new JPanel();
+		;
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -58,6 +58,7 @@ public class VentanaVerUsuario extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if (list.getSelectedValue() != null) {
 					btnNewButton.setEnabled(true);
+					Usuario u = (Usuario) list.getSelectedValue();
 				} else {
 					btnNewButton.setEnabled(false);
 				}
@@ -73,13 +74,14 @@ public class VentanaVerUsuario extends JFrame {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			while (rs.next()) {
-				Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
+				Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						rs.getString(5), rs.getInt(6), rs.getInt(7));
 				listaUsuarios.add(persona);
 			}
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			//e.printStackTrace();
+			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
 		}
