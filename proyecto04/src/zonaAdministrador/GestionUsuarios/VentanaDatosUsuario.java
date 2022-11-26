@@ -18,7 +18,6 @@ public class VentanaDatosUsuario extends JFrame {
 
 	private JPanel contentPane;
 
-
 	/**
 	 * Create the frame.
 	 * 
