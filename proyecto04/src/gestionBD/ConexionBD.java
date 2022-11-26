@@ -36,7 +36,7 @@ public class ConexionBD {
 	}
 	
 	//Devuelve el usuario que tiene el usuario y contraseña que pasan como paramenros, en caso de no encontrarlo se devuelve null
-	public Usuario getUsuario(String miUsuario, String miContrasena){ //Encuentra el usuario que necesitamos
+	public static Usuario getUsuario(String miUsuario, String miContrasena){ //Encuentra el usuario que necesitamos
 		
 		logger.info("Buscando "+ miUsuario +" en la base de datos");
 		
