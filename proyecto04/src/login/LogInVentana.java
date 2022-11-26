@@ -57,46 +57,16 @@ public class LogInVentana extends JFrame {
 					//e.printStackTrace();
 				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				   logger.log(Level.SEVERE, "No se ha podido inicializar la applicacion");
-					
 				}
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	
-	
-//		JPanel pNorte = new JPanel(); // Panel norte
-//			pNorte.add( lMensaje );
-//			getContentPane().add( pNorte, BorderLayout.NORTH );
-	
-//		JPanel pOeste = new JPanel( new BorderLayout() ); // Lista oeste
-//			pOeste.add( new JLabel( "Usuarios:" ), BorderLayout.NORTH );
-//			pOeste.add( new JScrollPane(lUsuarios), BorderLayout.CENTER );
-//			getContentPane().add( pOeste, BorderLayout.WEST ); 
-	
-//		JPanel pPrincipal = new JPanel( new BorderLayout() ); // Panel central (tabla)
-//			pPrincipal.add( new JLabel( "Fotos:" ), BorderLayout.NORTH );
-//			pPrincipal.add( new JScrollPane( tFotos ), BorderLayout.CENTER );
-//			getContentPane().add( pPrincipal, BorderLayout.CENTER );
-//		getContentPane().add( lFoto, BorderLayout.EAST );  // Foto este
-	
-//		JPanel pBotonera = new JPanel(); // Panel inferior (botonera)
-//			pBotonera.add( bPendiente );
-//			getContentPane().add( pBotonera, BorderLayout.SOUTH );
+
 	
 	public LogInVentana() {
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setBounds(100, 100, 497, 439);
-//		contentPane = new JPanel();
-//		contentPane.setBackground(Color.WHITE);
-//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		setContentPane(contentPane);
-//		contentPane.setLayout(null);
-		
-		setSize( 566, 459 );
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
+		setSize( 566, 320 );
 		setTitle( "Juego BINGO!" );
 		
 		/*
@@ -123,7 +93,7 @@ public class LogInVentana extends JFrame {
 		 */
 		
 		JPanel pPrincipal = new JPanel( new BorderLayout() );
-		pPrincipal.setLayout(new GridLayout(3,4));
+		pPrincipal.setLayout(new GridLayout(3,2));
 		getContentPane().add( pPrincipal, BorderLayout.CENTER );
 		
 		//en el panel principal creamos un panel central para centrar todos los componentes
@@ -163,10 +133,11 @@ public class LogInVentana extends JFrame {
 //		pCentral.add(jpassClave, BorderLayout.EAST);
 		pPrincipal.add(jpassClave);
 		
-		//en el panel principal creamos un panel inferior que va a ir el boton aceptar
 		
-//		JPanel pInferiorPrincipal = new JPanel();
-//		pPrincipal.add(pInferiorPrincipal, BorderLayout.SOUTH);
+		//en el panel principal creamos un panel inferior que va a ir el boton aceptar
+
+		JPanel pInferiorPrincipal = new JPanel();
+		pPrincipal.add(pInferiorPrincipal);
 		
 		//boton aceptar
 		btnAceptar = new JButton("Aceptar");
@@ -209,8 +180,8 @@ public class LogInVentana extends JFrame {
 		});
 //		btnAceptar.setBounds(155, 242, 132, 29);
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//		pInferiorPrincipal.add(btnAceptar, BorderLayout.CENTER);
-		pPrincipal.add(btnAceptar);
+		pInferiorPrincipal.add(btnAceptar, BorderLayout.CENTER);
+//		pPrincipal.add(btnAceptar);
 		
 		
 		/*
