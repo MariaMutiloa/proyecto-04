@@ -31,11 +31,16 @@ public class GestionPartidas {
 			logger.info("Conectado a la base de datos para añadir partida");
 			
 			
-			//FALTA AÑADIR ESTOOOOO
-			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida I"
-					+ ", IDCartonB, IDCartonL VALUES (?, ?, ?)");
+			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida");
+			insertPartidaNueva.executeUpdate();
 			
-			//HASTA AQUI
+			Statement stmtForId = con.createStatement();
+			
+			ResultSet rs = stmtForId.executeQuery("SELECT last_insert_rowIDPartida() AS id FROM partida");
+			
+			if (rs.next()) {
+				IDPartida = rs.getInt("IDPartida");
+			}
 			
 			
 		} catch (SQLException e) {
