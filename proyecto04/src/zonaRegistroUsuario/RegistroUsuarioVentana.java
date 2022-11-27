@@ -197,8 +197,6 @@ public class RegistroUsuarioVentana extends JFrame {
 			}	
 		});
 		
-		//getContentPane().add(pSur, BorderLayout.CENTER);
-
 		
 		
 		
