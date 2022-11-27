@@ -82,8 +82,7 @@ public class ConfiguracionPart extends JFrame {
 				JPanel inferiorIzquierda = new JPanel();
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
 					JLabel lblNumero = new JLabel("");
-					//(partidaActual.getParticipantes()).size())
-					lblNumero.setIcon(imagenNumero(62));
+					lblNumero.setIcon(imagenNumero(partidaActual.getParticipantes().size()));
 					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
 					
