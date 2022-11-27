@@ -177,14 +177,27 @@ public class RegistroUsuarioVentana extends JFrame {
 			
 					}
 				}
-				
-				
 			}
 		});
 		btnCrear.setBounds(288, 293, 169, 29);
 		btnCrear.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pSur.add(btnCrear);
+		pSur.add(btnCrear, BorderLayout.EAST);
 		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(288, 293, 169, 29);
+		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		pSur.add(btnVolver, BorderLayout.WEST);
+		btnVolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LogInVentana parent = new LogInVentana();
+				parent.setVisible(true);
+				RegistroUsuarioVentana.this.dispose();
+			}	
+		});
+		
+		//getContentPane().add(pSur, BorderLayout.CENTER);
 
 		
 		
