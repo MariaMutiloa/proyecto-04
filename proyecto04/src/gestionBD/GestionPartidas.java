@@ -59,11 +59,10 @@ public class GestionPartidas {
 	public static void actualizarDatosBotes(int IDPartida, float bLinea, float bBingo) {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
-			//MIRAR COMO MODIFICAR LAS INSTANTCIAS
 			
-			PreparedStatement actualizacion = con.prepareStatement("INSERT INTO partida I");
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" PremioL = " +bLinea+ " WHERE IDPartida = "+ IDPartida);
+			actualizacion.executeUpdate();
 			
-			//Hasta aqui
 			logger.info("Añadidos los botes de linea y de bingo");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -91,7 +90,6 @@ public class GestionPartidas {
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
