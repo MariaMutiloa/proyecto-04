@@ -54,5 +54,16 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		});
 		botonCrearUsuario.setBounds(31, 157, 136, 34);
 		contentPane.add(botonCrearUsuario);
+		
+		JButton botonEliminar = new JButton("Elimiar usuario");
+		botonEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaEliminarUsuario eliminarUsuario = new VentanaEliminarUsuario();
+				eliminarUsuario.setVisible(true);
+				VentanaPrincipalGestionUsuarios.this.setVisible(false);
+			}
+		});
+		botonEliminar.setBounds(247, 76, 136, 34);
+		contentPane.add(botonEliminar);
 	}
 }

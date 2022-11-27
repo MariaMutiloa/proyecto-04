@@ -1,6 +1,7 @@
 package zonaAdministrador.GestionUsuarios;
 
-import java.awt.event.ActionEvent;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,85 +18,101 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import gestionBD.GestionPartidas;
 import personas.Usuario;
 
-import javax.swing.JList;
-import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class VentanaVerUsuario extends JFrame {
+public class VentanaEliminarUsuario extends JFrame {
 
-	/**
-	 * 
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textNombre;
 	private JList list;
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
 
-	public VentanaVerUsuario() {
+
+
+	/**
+	 * Create the frame.
+	 */
+	public VentanaEliminarUsuario() {
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
-		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
+		
 		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		JPanel contentPane = new JPanel();
-		;
+		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		JLabel labelNombre = new JLabel("Nombre");
+		labelNombre.setBounds(72, 45, 49, 14);
+		contentPane.add(labelNombre);
+		
+		textNombre = new JTextField();
+		textNombre.setBounds(51, 69, 96, 20);
+		contentPane.add(textNombre);
+		textNombre.setColumns(10);
+		
+		JButton botonBuscar = new JButton("Buscar");
+		
+		botonBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaUsuarios = anyadirUsuarios(listaUsuarios, textNombre);
+				cargarJList(listaUsuarios);
+			}
+		});
+		botonBuscar.setBounds(263, 65, 89, 23);
+		contentPane.add(botonBuscar);
+		
 		JList list = new JList();
-		list.setBounds(30, 28, 154, 224);
-		cargarJList(listaUsuarios);
+		list.setBounds(46, 114, 113, 138);
 		contentPane.add(list);
-
-		JButton btnNewButton = new JButton("Ver usuario");
-		btnNewButton.setBounds(262, 122, 116, 23);
-		contentPane.add(btnNewButton);
-		btnNewButton.setEnabled(false);
+		
+		JButton botonEliminar = new JButton("Eliminar");
+		botonEliminar.setEnabled(false);
 		// solo cuando el Administrador tiene un Usuario seleccionado deja pulsar el
-		// botón para ver sus datos
+		// botón para eliminar
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (list.getSelectedValue() != null) {
-					btnNewButton.setEnabled(true);
+					botonEliminar.setEnabled(true);
 					Usuario u = (Usuario) list.getSelectedValue();
 				} else {
-					btnNewButton.setEnabled(false);
+					botonEliminar.setEnabled(false);
 				}
 
 			}
 
-			// para poder ir a la Ventana de los datos cuando hace click en el botón Ver
-			// Usuario
-			public void actionPerformed(ActionEvent e) {
-				VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
-				nuevaVentanaDatos.setVisible(true);
-				VentanaVerUsuario.this.setVisible(false);
-
-			}
 		});
-
+		botonEliminar.setBounds(263, 161, 89, 23);
+		contentPane.add(botonEliminar);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(142, 114, 17, 138);
+		contentPane.add(scrollBar);
 	}
-	
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
-
-	// crea una lista con todos los usuarios que coinciden y la
-	// devuleve
-	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios) {
-
+	
+	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, JTextField text) {
+		
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
-			logger.info("Conectado a la base de datos para hacer la búsqueda");
+			logger.info("Conectado a la base de datos para hacer la busqueda");
+			String nombre = text.getSelectedText();
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
-			logger.info("Select hecha para sacar los usuarios en la Base de Datos");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario where Usuario = nombre");
+			logger.info("Select hecha para sacar los usuarios en la Base de Datos que tengan el nombre que se ha seleccionado");
 			while (rs.next()) {
 				Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getInt(6), rs.getInt(7));
@@ -113,14 +130,12 @@ public class VentanaVerUsuario extends JFrame {
 		return listaUsuarios;
 
 	}
-
-	// cargo el Jlist que tiene que aparecer a través de la lista que me devuelve el
-	// método anterior
-
+	
 	public void cargarJList(List<Usuario> listaUsuarios) {
 		for (Usuario persona : listaUsuarios) {
 			model.addElement(persona);
 		}
 		list.setModel(model);
+		logger.info("Lista cargada");
 	}
 }
