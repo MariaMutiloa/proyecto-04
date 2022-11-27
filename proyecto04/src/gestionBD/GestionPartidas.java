@@ -78,7 +78,7 @@ public class GestionPartidas {
 	}
 
 
-	public static List<Usuario> numeroParticipantes(int IDPartida) {
+	public static List<Usuario> participantes(int IDPartida) {
 		List<Usuario> list = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
