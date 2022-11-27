@@ -57,20 +57,26 @@ public class ConfiguracionPart extends JFrame {
 			});
 	
 		JPanel central = new JPanel();
+		central.setLayout(new BorderLayout());
 			JPanel centralArriba = new JPanel();	
+			centralArriba.setLayout(new BorderLayout());
 				centralArriba.add(new JLabel("Bote Linea"), BorderLayout.WEST);
 				JTextField txtLinea = new JTextField();
 				centralArriba.add(txtLinea, BorderLayout.EAST);
+				
 			JPanel centralAbajo = new JPanel();	
+			centralAbajo.setLayout(new BorderLayout());
 				centralAbajo.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
 				JTextField txtBingo = new JTextField();
 				centralAbajo.add(txtBingo, BorderLayout.EAST);
-				centralArriba.setBounds(100, 100, 200, 50);
+				
 			central.add(centralArriba, BorderLayout.NORTH);	
 			central.add(centralAbajo, BorderLayout.SOUTH);	
 
 			JPanel inferior = new JPanel(); 
+			inferior.setLayout(new BorderLayout());
 				JPanel inferiorDerecha = new JPanel();
+				inferiorDerecha.setLayout(new BorderLayout());
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -82,9 +88,10 @@ public class ConfiguracionPart extends JFrame {
 					});
 					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
 				JPanel inferiorIzquierda = new JPanel();
+				inferiorIzquierda.setLayout(new BorderLayout());
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
 					JLabel lblNumero = new JLabel("");
-					lblNumero.setIcon(imagenNumero(partidaActual.getParticipantes().size()));
+					lblNumero.setIcon(imagenNumero(0));
 					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
 					

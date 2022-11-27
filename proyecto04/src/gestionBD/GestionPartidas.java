@@ -32,6 +32,7 @@ public class GestionPartidas {
 			
 			
 			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida");
+			logger.info("Parida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
 			
 			Statement stmtForId = con.createStatement();
@@ -70,7 +71,8 @@ public class GestionPartidas {
 			
 			logger.info("Añadidos los botes de linea y de bingo");
 		} catch (Exception e) {
-			// TODO: handle exception
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
 		}
 		
 	}
