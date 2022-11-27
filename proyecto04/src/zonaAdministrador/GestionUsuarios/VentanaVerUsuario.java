@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import gestionBD.GestionPartidas;
 import personas.Usuario;
 
 import javax.swing.JList;
@@ -29,7 +33,7 @@ public class VentanaVerUsuario extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JList list;
-	private ArrayList<Usuario> listaUsuarios;
+	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
 
 	public VentanaVerUsuario() {
@@ -80,24 +84,30 @@ public class VentanaVerUsuario extends JFrame {
 		});
 
 	}
+	
+	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
 	// crea una lista con todos los usuarios que están registrados en la BD y la
 	// devuleve
-	public static ArrayList<Usuario> anyadirUsuarios(ArrayList<Usuario> listaUsuarios) {
+	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			logger.info("Conectado a la base de datos para añadir partida");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			logger.info("Select hecha para sacar los usuarios en la Base de Datos");
 			while (rs.next()) {
 				Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getInt(6), rs.getInt(7));
 				listaUsuarios.add(persona);
+				logger.info("Usuario creado y agrgado a lista de usuarios");
 			}
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
 			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
 		}
 		return listaUsuarios;
@@ -107,7 +117,7 @@ public class VentanaVerUsuario extends JFrame {
 	// cargo el Jlist que tiene que aparecer a través de la lista que me devuelve el
 	// método anterior
 
-	public void cargarJList(ArrayList<Usuario> listaUsuarios) {
+	public void cargarJList(List<Usuario> listaUsuarios) {
 		for (Usuario persona : listaUsuarios) {
 			model.addElement(persona);
 		}
