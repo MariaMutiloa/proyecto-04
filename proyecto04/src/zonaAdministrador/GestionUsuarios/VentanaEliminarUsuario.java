@@ -38,8 +38,6 @@ public class VentanaEliminarUsuario extends JFrame {
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
 
-
-
 	/**
 	 * Create the frame.
 	 */
@@ -47,7 +45,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
-		
+
 		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -55,18 +53,18 @@ public class VentanaEliminarUsuario extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel labelNombre = new JLabel("Nombre");
 		labelNombre.setBounds(72, 45, 49, 14);
 		contentPane.add(labelNombre);
-		
+
 		textNombre = new JTextField();
 		textNombre.setBounds(51, 69, 96, 20);
 		contentPane.add(textNombre);
 		textNombre.setColumns(10);
-		
+
 		JButton botonBuscar = new JButton("Buscar");
-		
+
 		botonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaUsuarios = anyadirUsuarios(listaUsuarios, textNombre);
@@ -75,11 +73,11 @@ public class VentanaEliminarUsuario extends JFrame {
 		});
 		botonBuscar.setBounds(263, 65, 89, 23);
 		contentPane.add(botonBuscar);
-		
+
 		JList list = new JList();
 		list.setBounds(46, 114, 113, 138);
 		contentPane.add(list);
-		
+
 		JButton botonEliminar = new JButton("Eliminar");
 		botonEliminar.setEnabled(false);
 		// solo cuando el Administrador tiene un Usuario seleccionado deja pulsar el
@@ -95,24 +93,48 @@ public class VentanaEliminarUsuario extends JFrame {
 
 			}
 
+			// cuando se selecciona un usuario y se da a eliminar se elimina de la Base de
+			// Datos
+			public void actionPerformed(ActionEvent e) {
+				try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+					logger.info("Conectado a la base de datos para eliminar");
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt
+							.executeQuery("DELETE from usuario where textNombre.getSelectedText() = Usuario ");
+					logger.info("Delete hecho");
+
+				} catch (SQLException e1) {
+					// e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+
+				}
+
+			}
+
 		});
 		botonEliminar.setBounds(263, 161, 89, 23);
 		contentPane.add(botonEliminar);
-		
+
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(142, 114, 17, 138);
 		contentPane.add(scrollBar);
 	}
+
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
-	
+
+	// carga la lista con los usuarios que están en la Base de Datos y coinciden con
+	// el nombre que se quiere buscar
+
 	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, JTextField text) {
-		
+
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para hacer la busqueda");
 			String nombre = text.getSelectedText();
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario where Usuario = nombre");
-			logger.info("Select hecha para sacar los usuarios en la Base de Datos que tengan el nombre que se ha seleccionado");
+			logger.info(
+					"Select hecha para sacar los usuarios en la Base de Datos que tengan el nombre que se ha seleccionado");
 			while (rs.next()) {
 				Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 						rs.getString(5), rs.getInt(6), rs.getInt(7));
@@ -130,7 +152,8 @@ public class VentanaEliminarUsuario extends JFrame {
 		return listaUsuarios;
 
 	}
-	
+
+	// carga la lista con el array que devuelve el método anterior
 	public void cargarJList(List<Usuario> listaUsuarios) {
 		for (Usuario persona : listaUsuarios) {
 			model.addElement(persona);
