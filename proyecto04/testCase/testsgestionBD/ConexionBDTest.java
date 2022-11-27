@@ -19,11 +19,11 @@ public class ConexionBDTest {
 	@Test
 	public void testGetAdministrador() {
 		Administrador a = new Administrador(56735467, "Carmen", "Perez", "carmen.perez", "carpez");
-		assertEquals(a.getNombre(), ConexionBD.getUsuario("carmen.perez", "carperez").getNombre());
-		assertEquals(a.getApellido(), ConexionBD.getUsuario("carmen.perez", "carperez").getDni());
-		assertEquals(a.getDni(), ConexionBD.getUsuario("carmen.perez", "carperez").getNombre());
-		assertNull(ConexionBD.getUsuario("juan", "prueba"));
-		assertNull(ConexionBD.getUsuario("carmen.perez", "prueba"));
+		assertEquals(a.getNombre(), ConexionBD.getAdministrador("carmen.perez", "carperez").getNombre());
+		assertEquals(a.getApellido(), ConexionBD.getAdministrador("carmen.perez", "carperez").getDni());
+		assertEquals(a.getDni(), ConexionBD.getAdministrador("carmen.perez", "carperez").getNombre());
+		assertNull(ConexionBD.getAdministrador("juan", "prueba"));
+		assertNull(ConexionBD.getAdministrador("carmen.perez", "prueba"));
 	}
 	
 	@Test
