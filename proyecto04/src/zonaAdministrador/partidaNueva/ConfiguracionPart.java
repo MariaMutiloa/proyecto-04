@@ -3,6 +3,7 @@ package zonaAdministrador.partidaNueva;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ObjectInputFilter.Config;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ public class ConfiguracionPart extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Partida partidaActual = new Partida();
+	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
 
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
@@ -100,6 +102,7 @@ public class ConfiguracionPart extends JFrame {
 
 	private Icon imagenNumero(int numero) {
 		Icon icono = null;
+		logger.info("Buscando imagen correspondiente a " +numero);
 		if(numero > 9) {
 			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
 		}else if (numero == 0){
