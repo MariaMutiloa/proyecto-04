@@ -106,4 +106,19 @@ public class GestionPartidas {
 		return list;
 
 	}
+
+
+	public static void empezada(int idPartida) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1 WHERE IDPartida = "+ idPartida);
+			actualizacion.executeUpdate();
+			
+			logger.info("Añadidos los botes de linea y de bingo");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
+		
+	}
 }

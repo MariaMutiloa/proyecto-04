@@ -24,6 +24,7 @@ public class PartidaNueva extends JFrame {
 	
 	public PartidaNueva(Partida partidaActual) {
 		this.partidaActual = partidaActual;
+		GestionPartidas.empezada(partidaActual.getIDPartida());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 250);
@@ -52,6 +53,7 @@ public class PartidaNueva extends JFrame {
 				JLabel unidades = new JLabel();
 				numero.add(unidades, BorderLayout.EAST);
 				derecha.add(numero, BorderLayout.NORTH);
+			derecha.setVisible(false);
 			inferior.add(derecha, BorderLayout.EAST);	
 		
 		contentPane.add(inferior, BorderLayout.SOUTH);
