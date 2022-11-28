@@ -12,18 +12,18 @@ public class Partida {
 	private float boteLinea;
 	private Carton ganadorLinea;
 	private Carton ganadorBingo;
-	private List<Usuario> participantes;
+	private List<Carton> participantes;
 	
 	public Partida() {
 		super();
 		this.IDPartida = GestionPartidas.nueva();
 	}
 	
-	public List<Usuario> getParticipantes(){
+	public List<Carton> getParticipantes(){
 		return this.participantes;
 	}
 
-	public void setParticipantes(List<Usuario> participantes) {
+	public void setParticipantes(List<Carton> participantes) {
 		this.participantes = participantes;
 	}
 
