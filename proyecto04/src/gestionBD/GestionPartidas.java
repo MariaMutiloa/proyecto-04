@@ -24,7 +24,7 @@ public class GestionPartidas {
 	
 	
 	//Crea una partida y la añade a la base de datos
-	public static int nueva(int IDLiga) {
+	public static int nueva() {
 		int IDPartida = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
@@ -33,7 +33,7 @@ public class GestionPartidas {
 			
 			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (Activa, IDLiga) VALUES (?,?)");
 			insertPartidaNueva.setInt(1, 0);
-			insertPartidaNueva.setInt(2, IDLiga);
+			insertPartidaNueva.setInt(2, 0);
 			logger.info("Partida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
 			
@@ -64,11 +64,11 @@ public class GestionPartidas {
 	}
 	
 	
-	public static void actualizarDatosBotes(int IDPartida, float bLinea, float bBingo) {
+	public static void actualizarDatos(int IDPartida, float bLinea, float bBingo, int liga) {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" PremioL = " +bLinea+ " WHERE IDPartida = "+ IDPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" PremioL = " +bLinea+ "IDLiga = "+liga+" WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadidos los botes de linea y de bingo");

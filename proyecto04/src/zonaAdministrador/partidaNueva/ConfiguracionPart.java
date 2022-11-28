@@ -63,25 +63,34 @@ public class ConfiguracionPart extends JFrame {
 				}
 				
 			});
-	
+			superior.add(btnVolver, BorderLayout.EAST);
+			
 		JPanel central = new JPanel();
 		central.setLayout(new BorderLayout());
 			JPanel centralArriba = new JPanel();	
 			centralArriba.setLayout(new BorderLayout());
 				centralArriba.add(new JLabel("Bote Linea"), BorderLayout.WEST);
 				JTextField txtLinea = new JTextField();
-				txtLinea.setColumns(45);
+				txtLinea.setColumns(25);
 				centralArriba.add(txtLinea, BorderLayout.EAST);
 				
-			JPanel centralAbajo = new JPanel();	
-			centralAbajo.setLayout(new BorderLayout());
-				centralAbajo.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
+			JPanel centralMedio = new JPanel();	
+			centralMedio.setLayout(new BorderLayout());
+				centralMedio.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
 				JTextField txtBingo = new JTextField();
-				txtBingo.setColumns(45);
-				centralAbajo.add(txtBingo, BorderLayout.EAST);
+				txtBingo.setColumns(25);
+				centralMedio.add(txtBingo, BorderLayout.EAST);
+			
+			JPanel centralBajo = new JPanel();	
+			centralBajo.setLayout(new BorderLayout());
+			centralBajo.add(new JLabel("IDLiga"), BorderLayout.WEST);
+				JTextField txtLiga = new JTextField();					
+				txtLiga.setColumns(25);
+				centralBajo.add(txtLiga, BorderLayout.EAST);	
 				
 			central.add(centralArriba, BorderLayout.NORTH);	
-			central.add(centralAbajo, BorderLayout.SOUTH);	
+			central.add(centralMedio, BorderLayout.CENTER);	
+			central.add(centralBajo, BorderLayout.SOUTH);	
 
 			JPanel inferior = new JPanel(); 
 			inferior.setLayout(new BorderLayout());
@@ -93,11 +102,13 @@ public class ConfiguracionPart extends JFrame {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
 							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
-							GestionPartidas.actualizarDatosBotes(partidaActual.getIDPartida(), boteL, boteB);
+							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, txtLiga.getText());
+						
 						}
 
 				
 					});
+					inferiorDerecha.add(btnRefrescar, BorderLayout.SOUTH);
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -144,7 +155,8 @@ public class ConfiguracionPart extends JFrame {
 	
 	//Ajusta la imagen al tamaño disponible
 	private Icon ajustarAEspacio(Icon icono) {
-		return null; 
+		//FALTA AÑADIR ESTOO
+		return icono; 
 	}
 	
 	private float calculoBote(int tamaño, String tipoBote) {
