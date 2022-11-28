@@ -9,8 +9,6 @@ public class Partida {
 	
 	private int IDPartida;
 	private float boteBingo;
-	private float boteLinea;
-	private Carton ganadorLinea;
 	private Carton ganadorBingo;
 	private List<Carton> participantes;
 	
@@ -38,18 +36,6 @@ public class Partida {
 	}
 	public void setBoteBingo(float boteBingo) {
 		this.boteBingo = boteBingo;
-	}
-	public float getBoteLinea() {
-		return boteLinea;
-	}
-	public void setBoteLinea(float boteLinea) {
-		this.boteLinea = boteLinea;
-	}
-	public Carton getGanadorLinea() {
-		return ganadorLinea;
-	}
-	public void setGanadorLinea(Carton ganadorLinea) {
-		this.ganadorLinea = ganadorLinea;
 	}
 	public Carton getGanadorBingo() {
 		return ganadorBingo;

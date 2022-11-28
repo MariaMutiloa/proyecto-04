@@ -90,10 +90,8 @@ public class ConfiguracionPart extends JFrame {
 					btnRefrescar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
-							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
-							txtLinea.setText(Float.toString(boteL));
-							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
-							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, Integer.parseInt(txtLiga.getText()));
+							float boteB = calculoBote(partidaActual.getParticipantes().size());
+							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB, Integer.parseInt(txtLiga.getText()));
 						
 						}
 
@@ -145,14 +143,14 @@ public class ConfiguracionPart extends JFrame {
 	}
 	
 	
-	private float calculoBote(int tamaño, String tipoBote) {
+	private float calculoBote(int tamaño) {
 		float ponderador = 0;
-		logger.info("Calculando los botes correspondientes");
+		logger.info("Calculando bote correspondiente");
 		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
             Properties properties = new Properties();
             properties.load(reader);
             
-            ponderador = Float.parseFloat(properties.getProperty(tipoBote));
+            ponderador = Float.parseFloat(properties.getProperty("bingo"));
            
 
         } catch (IOException e) {

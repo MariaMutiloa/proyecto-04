@@ -72,7 +72,7 @@ public class PartidaNueva extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 		
-					int ganadorB = GestionPartidas.revisar("gBingo");
+					int ganadorB = GestionPartidas.revisar();
 				
 					if (ganadorB != 0) {
 						int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
