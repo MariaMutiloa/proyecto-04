@@ -64,19 +64,13 @@ public class ConfiguracionPart extends JFrame {
 			
 		JPanel central = new JPanel();
 		central.setLayout(new BorderLayout());
+				
 			JPanel centralArriba = new JPanel();	
 			centralArriba.setLayout(new BorderLayout());
-				centralArriba.add(new JLabel("Bote Linea"), BorderLayout.WEST);
-				JTextField txtLinea = new JTextField();
-				txtLinea.setColumns(25);
-				centralArriba.add(txtLinea, BorderLayout.EAST);
-				
-			JPanel centralMedio = new JPanel();	
-			centralMedio.setLayout(new BorderLayout());
-				centralMedio.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
+			centralArriba.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
 				JTextField txtBingo = new JTextField();
 				txtBingo.setColumns(25);
-				centralMedio.add(txtBingo, BorderLayout.EAST);
+				centralArriba.add(txtBingo, BorderLayout.EAST);
 			
 			JPanel centralBajo = new JPanel();	
 			centralBajo.setLayout(new BorderLayout());
@@ -86,7 +80,6 @@ public class ConfiguracionPart extends JFrame {
 				centralBajo.add(txtLiga, BorderLayout.EAST);	
 				
 			central.add(centralArriba, BorderLayout.NORTH);	
-			central.add(centralMedio, BorderLayout.CENTER);	
 			central.add(centralBajo, BorderLayout.SOUTH);	
 
 			JPanel inferior = new JPanel(); 

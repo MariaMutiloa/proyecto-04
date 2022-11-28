@@ -64,14 +64,14 @@ public class GestionPartidas {
 	}
 	
 	
-	public static void actualizarDatos(int IDPartida, float bLinea, float bBingo, int liga) {
+	public static void actualizarDatos(int IDPartida, float bBingo, int liga) {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" PremioL = " +bLinea+ "IDLiga = "+liga+" WHERE IDPartida = "+ IDPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+ "IDLiga = "+liga+" WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
 			
-			logger.info("Añadidos los botes de linea y de bingo");
+			logger.info("Añadido el bote");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
@@ -123,14 +123,14 @@ public class GestionPartidas {
 	}
 
 
-	public static int revisar(String tipoBusqueda) {
-		int IDGanador = (Integer) null;
+	public static int revisar() {
+		int IDGanador = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE " + tipoBusqueda + " = true");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE bingo = true");
 
 			while (rs.next()) {
 				logger.info("Cartón ganador encontrado");

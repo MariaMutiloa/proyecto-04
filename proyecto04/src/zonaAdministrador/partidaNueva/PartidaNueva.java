@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -70,9 +71,21 @@ public class PartidaNueva extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int ganadorL = GestionPartidas.revisar("gLinea");
+		
 					int ganadorB = GestionPartidas.revisar("gBingo");
-					PartidaNueva.this.actualizar();	
+				
+					if (ganadorB != 0) {
+						int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
+					    switch (result) {
+					         case JOptionPane.YES_OPTION:
+					         //Nuevo hilo que combruebe;
+					         break;
+					         case JOptionPane.NO_OPTION:
+					      }
+					}  else {
+						PartidaNueva.this.actualizar();	
+					}
+					
 				}
 				
 			});
