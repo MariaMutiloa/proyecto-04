@@ -92,9 +92,9 @@ public class GestionPartidas {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE IDPartida =" +IDPartida);
 
 			while (rs.next()) {
-				logger.info("Usuario jugador encontrado");
-				Usuario persona= new Usuario(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getInt(6),rs.getInt(7));
-				list.add(persona);
+				logger.info("Cartón encontrado");
+				Carton jugador = new Carton(rs.getInt(1),rs.getInt(2),rs.getInt(3));
+				list.add(jugador);
 			}
 
 			rs.close();

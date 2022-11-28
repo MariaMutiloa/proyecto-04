@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -189,6 +190,45 @@ public class ConexionBD {
 			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");   
 		}
+	}
+
+	public static Usuario buscarUsuarioPorID(int IDUsuario) {
+		logger.info("Buscando "+ IDUsuario +" en la base de datos");
+		
+		Usuario u = null;
+		
+		try (Connection con = DriverManager.getConnection(connexion)) {
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE IDUsuario="+IDUsuario);
+			
+			//recorremos fila a fila
+			while (rs.next()) {
+					int dni = rs.getInt(1);
+					String nombre = rs.getString(2);
+					String apellido = rs.getString(3);
+					String usuario = rs.getString(4);
+					String contrasena = rs.getString(5);
+					int idLigaActual = rs.getInt(6);
+					int bote = rs.getInt(7);
+					
+					
+					u = new Usuario(dni, nombre, apellido, usuario, contrasena, idLigaActual, bote);
+					
+					logger.info(IDUsuario +" encontrado");
+				}
+			
+			rs.close();
+			stmt.close();
+			
+		
+		} catch (SQLException e) {
+			// No se ha podido obtener la conexión a la base de datos
+			//System.out.println("Error. No se ha podido conectar a la base de datos " + e.getMessage());
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		return u;
 	}
 	
 	
