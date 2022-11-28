@@ -40,14 +40,12 @@ public class UsuarioVentana extends JFrame {
 		
 		JLabel lblBienvenido = new JLabel("¡Bienvenidx " + u.getNombre() + "!");
 		superior.add(lblBienvenido);
-		//superior.add(lblBienvenido, BorderLayout.EAST);
 		
-		JLabel lblCartera = new JLabel("Cartera: "+u.getBote());
+		JLabel lblCartera = new JLabel("Cartera: "+u.getBote()+" €");
 		superior.add(lblCartera);
 		
 		JButton btnSalir = new JButton("Salir");
 		superior.add(btnSalir);
-		//inferior.add(btnVolver, BorderLayout.SOUTH);
 		btnSalir.addActionListener(new ActionListener() {
 
 			@Override
