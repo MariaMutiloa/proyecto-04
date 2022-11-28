@@ -92,6 +92,7 @@ public class PartidaNueva extends JFrame {
 		
 		contentPane.add(inferior, BorderLayout.SOUTH);
 		contentPane.setVisible(true);
+		setContentPane(contentPane);
 		
 	}
 	
