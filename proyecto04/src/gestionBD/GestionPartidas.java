@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import personas.Usuario;
 
@@ -80,9 +81,9 @@ public class GestionPartidas {
 		
 	}
 
-
-	public static List<Usuario> participantes(int IDPartida) {
-		List<Usuario> list = new ArrayList<>();
+	//Esto se tiene que cambiar
+	public static List<Carton> participantes(int IDPartida) {
+		List<Carton> list = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			logger.info("Conectado a la base de datos para extraer usuarios de la partida");
