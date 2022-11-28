@@ -101,8 +101,10 @@ public class ConfiguracionPart extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
+							txtLinea.setText(boteL);
+							
 							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
-							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, txtLiga.getText());
+							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, Integer.parseInt(txtLiga.getText()));
 						
 						}
 
@@ -119,6 +121,7 @@ public class ConfiguracionPart extends JFrame {
 						}
 					});
 					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
+					
 				JPanel inferiorIzquierda = new JPanel();
 				inferiorIzquierda.setLayout(new BorderLayout());
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
