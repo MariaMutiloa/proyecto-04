@@ -4,8 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputFilter.Config;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -22,11 +20,10 @@ import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import login.LogInVentana;
 import personas.Administrador;
-import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.FlowLayout;
 
 
 //ventana que deja al administrador configurar la partida a su gusto
@@ -127,7 +124,10 @@ public class ConfiguracionPart extends JFrame {
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
 					JLabel lblNumero = new JLabel("");
 					lblNumero.setIcon(imagenNumero(0));
-					inferiorIzquierda.add(lblNumero, BorderLayout.CENTER);
+					JPanel imagen = new JPanel();
+					imagen.setLayout(new FlowLayout());
+					imagen.add(lblNumero);
+					inferiorIzquierda.add(imagen, BorderLayout.CENTER);
 					JButton  btbVerParticipantes = new JButton("Ver Participantes");
 					
 					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
@@ -152,15 +152,9 @@ public class ConfiguracionPart extends JFrame {
 		}else {
 			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(numero) + ".jpg") );
 		}
-		icono = ajustarAEspacio(icono);
 		return icono;
 	}
 	
-	//Ajusta la imagen al tamaño disponible
-	private Icon ajustarAEspacio(Icon icono) {
-		//FALTA AÑADIR ESTOO
-		return icono; 
-	}
 	
 	private float calculoBote(int tamaño, String tipoBote) {
 		float ponderador = 0;
