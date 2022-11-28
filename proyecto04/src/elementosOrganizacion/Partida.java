@@ -16,7 +16,7 @@ public class Partida {
 	
 	public Partida() {
 		super();
-		this.IDPartida = GestionPartidas.nueva(IDPartida);
+		this.IDPartida = GestionPartidas.nueva();
 	}
 	
 	public List<Usuario> getParticipantes(){

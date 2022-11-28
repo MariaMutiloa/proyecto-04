@@ -44,7 +44,7 @@ public class ConfiguracionPart extends JFrame {
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 200, 200);
+		setBounds(100, 100, 350, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -101,7 +101,7 @@ public class ConfiguracionPart extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
-							txtLinea.setText(boteL);
+							txtLinea.setText(Float.toString(boteL));
 							
 							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, Integer.parseInt(txtLiga.getText()));
