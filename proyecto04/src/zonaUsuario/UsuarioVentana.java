@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import login.LogInVentana;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
+import javax.swing.JTable;
 
 public class UsuarioVentana extends JFrame {
 
@@ -58,8 +59,35 @@ public class UsuarioVentana extends JFrame {
 		});
 		
 		JPanel inferior = new JPanel();
+		inferior.setLayout(new GridLayout(1,2));
 		getContentPane().add(inferior, BorderLayout.SOUTH);
 		
+		JPanel infIzquierda = new JPanel();
+		inferior.add(infIzquierda, BorderLayout.WEST);
+		
+		JButton btnEstadisticas = new JButton("Ver estadisticas");
+		infIzquierda.add(btnEstadisticas);
+		
+		//METER VER ESTADISTICAS
+		
+		JPanel infDerecha = new JPanel();
+		inferior.add(infDerecha, BorderLayout.EAST);
+
+		//METEMOS LOS BOTONES DEL JUEGO
+		JButton btnLinea = new JButton("LINEA");
+		infDerecha.add(btnLinea, BorderLayout.EAST);
+		
+		JButton btnBingo = new JButton("BINGO!");
+		infDerecha.add(btnBingo, BorderLayout.WEST);
+		
+		
+		//PANEL IZQUIERDA
+		//aqui va a salir el número en grande y también podremos ver qué numeros han salido hasta ahora
+		
+		
+		//PANEL CENTRAL DERECHA
+		//aquí tendremos nuestro carton con los numeros
+		//hay posibilidad de clickar en el numero y se cambie de color 
 		
 		
 		
