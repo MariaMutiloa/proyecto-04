@@ -14,7 +14,7 @@ public class PartidaNueva extends JFrame {
 
 	
 	public PartidaNueva(Partida partidaActual) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

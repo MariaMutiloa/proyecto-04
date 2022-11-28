@@ -99,7 +99,7 @@ public class ConfiguracionPart extends JFrame {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
 							txtLinea.setText(Float.toString(boteL));
-							
+		
 							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, Integer.parseInt(txtLiga.getText()));
 						
@@ -128,9 +128,6 @@ public class ConfiguracionPart extends JFrame {
 					imagen.setLayout(new FlowLayout());
 					imagen.add(lblNumero);
 					inferiorIzquierda.add(imagen, BorderLayout.CENTER);
-					JButton  btbVerParticipantes = new JButton("Ver Participantes");
-					
-					inferiorIzquierda.add(btbVerParticipantes, BorderLayout.SOUTH);
 				inferior.add(inferiorDerecha, BorderLayout.EAST);	
 				inferior.add(inferiorIzquierda, BorderLayout.WEST);	
 
