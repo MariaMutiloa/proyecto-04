@@ -74,6 +74,7 @@ public class LogInVentana extends JFrame {
 		 * - imagen bingo
 		 */
 		JPanel pNorte = new JPanel(); // Panel norte
+		pNorte.setBackground(Color.WHITE);
 		getContentPane().add( pNorte, BorderLayout.NORTH );
 		
 		//imagen bingo
@@ -94,6 +95,7 @@ public class LogInVentana extends JFrame {
 		
 		JPanel pPrincipal = new JPanel( new BorderLayout() );
 		pPrincipal.setLayout(new GridLayout(3,2));
+		pPrincipal.setBackground(Color.WHITE);
 		getContentPane().add( pPrincipal, BorderLayout.CENTER );
 		
 		//en el panel principal creamos un panel central para centrar todos los componentes
@@ -131,6 +133,7 @@ public class LogInVentana extends JFrame {
 		//en el panel principal creamos un panel inferior que va a ir el boton aceptar
 
 		JPanel pInferiorPrincipal = new JPanel();
+		pInferiorPrincipal.setBackground(Color.WHITE);
 		pPrincipal.add(pInferiorPrincipal);
 		
 		//boton aceptar
@@ -183,6 +186,7 @@ public class LogInVentana extends JFrame {
 		 */
 		
 		JPanel pInferior = new JPanel();
+		pInferior.setBackground(Color.WHITE);
 		getContentPane().add( pInferior, BorderLayout.SOUTH );
 		
 		btnCrearUsuario = new JButton("Crear usuario");
