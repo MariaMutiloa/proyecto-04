@@ -70,8 +70,9 @@ public class PartidaNueva extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					PartidaNueva.this.actualizar();
-					
+					int ganadorL = GestionPartidas.revisar("gLinea");
+					int ganadorB = GestionPartidas.revisar("gBingo");
+					PartidaNueva.this.actualizar();	
 				}
 				
 			});
@@ -81,29 +82,33 @@ public class PartidaNueva extends JFrame {
 	}
 	
 	private void actualizar() {
+		logger.info("Extrayendo nuevo número");
 		Random rand = new Random(); //instance of random class
 	    int nuevoNumero = rand.nextInt(99); 
 	    numeros.add(nuevoNumero);
 	    String number = String.valueOf(nuevoNumero);
 	   	char[] digits = number.toCharArray();
+	   	logger.info("Numero nuevo conseguido");
 	    if(digits.length == 1) {
 	    	decenas.setIcon(this.imagenNumero(0));
+	    	unidades.setIcon(this.imagenNumero(digits[0]));
 	    }else {
-	    	
+	    	decenas.setIcon(this.imagenNumero(digits[0]));
+	    	unidades.setIcon(this.imagenNumero(digits[1]));
 	    }
 	}
 
 	private Icon imagenNumero(int i) {
-			Icon icono = null;
-			logger.info("Buscando imagen correspondiente a " +i);
-			if(i > 9) {
-				icono = new ImageIcon(getClass().getResource("/otro.jpg"));
-			}else if (i == 0){
-				icono = new ImageIcon(getClass().getResource("/0.jpeg"));
-			}else {
-				icono = new ImageIcon(getClass().getResource("/"+String.valueOf(i) + ".jpg") );
-			}
-			return icono;
+		Icon icono = null;
+		logger.info("Buscando imagen correspondiente a " +i);
+		if(i > 9) {				
+			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
+		}else if (i == 0){
+			icono = new ImageIcon(getClass().getResource("/0.jpeg"));
+		}else {
+			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(i) + ".jpg") );
+		}
+		return icono;
 	}
 
 }
