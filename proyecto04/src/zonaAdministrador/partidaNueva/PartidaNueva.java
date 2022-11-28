@@ -2,6 +2,7 @@ package zonaAdministrador.partidaNueva;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Partida;
@@ -27,7 +28,8 @@ public class PartidaNueva extends JFrame {
 		
 		//Panel izquierda con tabla de participantes
 		JTable tablaCartones = new JTable(); 
-		GestionPartidas.participantes(partidaActual.get());
+		//GestionPartidas.participantes(partidaActual.get());
+		GestionPartidas.participantes(partidaActual.getIDPartida());
 		
 		//Con añadir numero
 		
