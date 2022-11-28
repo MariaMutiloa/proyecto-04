@@ -1,5 +1,7 @@
 package zonaAdministrador.partidaNueva;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,6 +10,12 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.Logger;
 
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
@@ -17,6 +25,10 @@ public class PartidaNueva extends JFrame {
 
 	private JPanel contentPane;
 	private Partida partidaActual;
+	private static JLabel unidades = new JLabel();
+	private static JLabel decenas = new JLabel();
+	private static List<Integer> numeros = new ArrayList();
+	private static Logger logger = Logger.getLogger(PartidaNueva.class.getName());
 	 
 	private static final long serialVersionUID = 1L;
 
@@ -48,16 +60,50 @@ public class PartidaNueva extends JFrame {
 			JButton btnNuevoNum = new JButton("Nuevo número");
 			derecha.add(btnNuevoNum, BorderLayout.SOUTH);
 				JPanel numero = new JPanel();
-				JLabel decenas = new JLabel();
 				numero.add(decenas, BorderLayout.WEST);
-				JLabel unidades = new JLabel();
 				numero.add(unidades, BorderLayout.EAST);
 				derecha.add(numero, BorderLayout.NORTH);
 			derecha.setVisible(false);
 			inferior.add(derecha, BorderLayout.EAST);	
+			
+			btnNuevoNum.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					PartidaNueva.this.actualizar();
+					
+				}
+				
+			});
 		
 		contentPane.add(inferior, BorderLayout.SOUTH);
 		
+	}
+	
+	private void actualizar() {
+		Random rand = new Random(); //instance of random class
+	    int nuevoNumero = rand.nextInt(99); 
+	    numeros.add(nuevoNumero);
+	    String number = String.valueOf(nuevoNumero);
+	   	char[] digits = number.toCharArray();
+	    if(digits.length == 1) {
+	    	decenas.setIcon(this.imagenNumero(0));
+	    }else {
+	    	
+	    }
+	}
+
+	private Icon imagenNumero(int i) {
+			Icon icono = null;
+			logger.info("Buscando imagen correspondiente a " +i);
+			if(i > 9) {
+				icono = new ImageIcon(getClass().getResource("/otro.jpg"));
+			}else if (i == 0){
+				icono = new ImageIcon(getClass().getResource("/0.jpeg"));
+			}else {
+				icono = new ImageIcon(getClass().getResource("/"+String.valueOf(i) + ".jpg") );
+			}
+			return icono;
 	}
 
 }

@@ -99,7 +99,6 @@ public class ConfiguracionPart extends JFrame {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteL = calculoBote(partidaActual.getParticipantes().size(), "linea");
 							txtLinea.setText(Float.toString(boteL));
-		
 							float boteB = calculoBote(partidaActual.getParticipantes().size(), "bingo");
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteL, boteB, Integer.parseInt(txtLiga.getText()));
 						
@@ -139,7 +138,7 @@ public class ConfiguracionPart extends JFrame {
 	}
 
 	//Extrae la imagen de la carpeta de imagenes que corresponde
-	private Icon imagenNumero(int numero) {
+	public Icon imagenNumero(int numero) {
 		Icon icono = null;
 		logger.info("Buscando imagen correspondiente a " +numero);
 		if(numero > 9) {
