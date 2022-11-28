@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -101,12 +102,19 @@ public class ConfiguracionPart extends JFrame {
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							
-							GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()) );
+							if (txtLiga.getText()!= null && txtBingo.getText() != null) {
+							GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()));
 							PartidaNueva nuevaVentana = new PartidaNueva(partidaActual);
 							nuevaVentana.setVisible(true);
 							ConfiguracionPart.this.dispose();
-						}
+							} else {
+								JFrame frame = new JFrame();
+							    frame.setSize(200, 200);
+							    frame.setVisible(true);
+								JOptionPane.showMessageDialog(frame, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
+							      
+							}
+						}	
 					});
 					inferiorDerecha.add(btnEmpezar, BorderLayout.WEST);
 					
