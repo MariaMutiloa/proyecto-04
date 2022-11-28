@@ -19,8 +19,8 @@ public class Partida {
 		this.IDPartida = GestionPartidas.nueva();
 	}
 	
-	public List<Usuario> getParticipantes() {
-		return participantes;
+	public List<Usuario> getParticipantes(){
+		return this.participantes;
 	}
 
 	public void setParticipantes(List<Usuario> participantes) {
