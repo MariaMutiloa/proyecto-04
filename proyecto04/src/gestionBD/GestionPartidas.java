@@ -39,7 +39,7 @@ public class GestionPartidas {
 			
 			Statement stmtForId = con.createStatement();
 			
-			ResultSet rs = stmtForId.executeQuery("SELECT last_insert_rowIDPartida() AS id FROM partida");
+			ResultSet rs = stmtForId.executeQuery("SELECT last_insert_rowId() AS IDPartida FROM partida");
 			
 			if (rs.next()) {
 				IDPartida = rs.getInt("IDPartida");
