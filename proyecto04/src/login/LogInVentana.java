@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
 import personas.Administrador;
+import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaRegistroUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
@@ -154,9 +155,11 @@ public class LogInVentana extends JFrame {
 					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
 					
 					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
-						logger.info("Se ha encontrado el usuario");						
+						logger.info("Se ha encontrado el usuario");	
+						Usuario u = ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
+						
 						//ABRO UsuarioVentana
-						UsuarioVentana ventanaNueva = new UsuarioVentana();
+						UsuarioVentana ventanaNueva = new UsuarioVentana(u);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
 						
