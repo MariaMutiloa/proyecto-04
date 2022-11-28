@@ -24,15 +24,17 @@ public class GestionPartidas {
 	
 	
 	//Crea una partida y la añade a la base de datos
-	public static int nueva() {
+	public static int nueva(int IDLiga) {
 		int IDPartida = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 			logger.info("Conectado a la base de datos para añadir partida");
 			
 			
-			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida");
-			logger.info("Parida añadida en la base de datos");
+			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (Activa, IDLiga) VALUES (?,?)");
+			insertPartidaNueva.setInt(1, 0);
+			insertPartidaNueva.setInt(2, IDLiga);
+			logger.info("Partida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
 			
 			Statement stmtForId = con.createStatement();
