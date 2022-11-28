@@ -64,11 +64,11 @@ public class GestionPartidas {
 	}
 	
 	
-	public static void actualizarDatos(int IDPartida, float bBingo, int liga) {
+	public static void actualizarDatos(int IDPartida, float bBingo) {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+ "IDLiga = "+liga+" WHERE IDPartida = "+ IDPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadido el bote");
@@ -108,10 +108,10 @@ public class GestionPartidas {
 	}
 
 
-	public static void empezada(int idPartida) {
+	public static void empezada(int idPartida, int IDLiga) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1 WHERE IDPartida = "+ idPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1, IDLiga = "+IDLiga+ "WHERE IDPartida = "+ idPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadidos los botes de linea y de bingo");

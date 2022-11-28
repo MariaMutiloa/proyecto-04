@@ -91,7 +91,7 @@ public class ConfiguracionPart extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteB = calculoBote(partidaActual.getParticipantes().size());
-							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB, Integer.parseInt(txtLiga.getText()));
+							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB);
 						
 						}
 
@@ -101,7 +101,8 @@ public class ConfiguracionPart extends JFrame {
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-				
+							
+							GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()) );
 							PartidaNueva nuevaVentana = new PartidaNueva(partidaActual);
 							nuevaVentana.setVisible(true);
 							ConfiguracionPart.this.dispose();

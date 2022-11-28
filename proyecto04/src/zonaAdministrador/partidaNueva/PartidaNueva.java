@@ -37,7 +37,7 @@ public class PartidaNueva extends JFrame {
 	
 	public PartidaNueva(Partida partidaActual) {
 		this.partidaActual = partidaActual;
-		GestionPartidas.empezada(partidaActual.getIDPartida());
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 250);
@@ -91,6 +91,7 @@ public class PartidaNueva extends JFrame {
 			});
 		
 		contentPane.add(inferior, BorderLayout.SOUTH);
+		contentPane.setVisible(true);
 		
 	}
 	
