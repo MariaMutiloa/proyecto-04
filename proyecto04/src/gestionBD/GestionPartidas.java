@@ -14,8 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import elementosOrganizacion.Carton;
-import elementosOrganizacion.Partida;
-import personas.Usuario;
 
 //Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del administrador
 
