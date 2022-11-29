@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import elementosOrganizacion.Carton;
 import login.LogInVentana;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
@@ -96,7 +97,12 @@ public class UsuarioVentana extends JFrame {
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		
 		//CARTON --> hay que general el carton con los numeros
-		table = new JTable();
+		
+		int[][] miCarton = Carton.dibujarCarton();
+		
+        MyTableModel tableModel = new MyTableModel(miCarton);
+        
+		table = new JTable(tableModel);
 		pCentral.add(table);
 		
 		
