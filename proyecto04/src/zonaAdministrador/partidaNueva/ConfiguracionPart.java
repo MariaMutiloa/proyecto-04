@@ -45,6 +45,7 @@ public class ConfiguracionPart extends JFrame {
 		setBounds(100, 100, 350, 250);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setVisible(true);
 		
 		JPanel superior = new JPanel();
 			JLabel lblTitulo = new JLabel ("Configuración de partida ");
