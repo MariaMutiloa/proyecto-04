@@ -98,8 +98,7 @@ public class PartidaNueva extends JFrame {
 	
 	private void actualizar() {
 		logger.info("Extrayendo nuevo número");
-		Random rand = new Random(); //instance of random class
-	    int nuevoNumero = rand.nextInt(99); 
+	    int nuevoNumero = numeroRandom(); 
 	    numeros.add(nuevoNumero);
 	    String number = String.valueOf(nuevoNumero);
 	   	char[] digits = number.toCharArray();
@@ -111,6 +110,18 @@ public class PartidaNueva extends JFrame {
 	    	decenas.setIcon(this.imagenNumero(digits[0]));
 	    	unidades.setIcon(this.imagenNumero(digits[1]));
 	    }
+	}
+
+	private int numeroRandom() {
+		logger.info("creando un número random");
+		Random rand = new Random(); 
+		int numero = rand.nextInt(99); 
+		if (numeros.contains(numero)) {
+			return numero;
+		}else {
+			numero = numeroRandom();
+			return numero; 
+		}
 	}
 
 	private Icon imagenNumero(int i) {
