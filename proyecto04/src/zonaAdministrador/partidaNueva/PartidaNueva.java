@@ -112,18 +112,18 @@ public class PartidaNueva extends JFrame {
 	    }
 	}
 
-	private int numeroRandom() {
+	//Crea un numero random y comprueba que no haya sido ya usado (recursividad)
+	private int numeroRandom() { 
 		logger.info("creando un número random");
 		Random rand = new Random(); 
 		int numero = rand.nextInt(99); 
-		if (numeros.contains(numero)) {
-			return numero;
-		}else {
+		if (!numeros.contains(numero)) {
 			numero = numeroRandom();
-			return numero; 
 		}
+		return numero; 
 	}
 
+	//Extrae las imagenes correspondientes al numero
 	private Icon imagenNumero(int i) {
 		Icon icono = null;
 		logger.info("Buscando imagen correspondiente a " +i);
