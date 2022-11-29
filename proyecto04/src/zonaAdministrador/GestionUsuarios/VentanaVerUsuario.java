@@ -51,7 +51,7 @@ public class VentanaVerUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(30, 28, 154, 224);
 		cargarJList(listaUsuarios);
 		contentPane.add(list);
@@ -67,6 +67,9 @@ public class VentanaVerUsuario extends JFrame {
 				if (list.getSelectedValue() != null) {
 					btnNewButton.setEnabled(true);
 					Usuario u = (Usuario) list.getSelectedValue();
+					VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
+					nuevaVentanaDatos.setVisible(true);
+					VentanaVerUsuario.this.setVisible(false);
 				} else {
 					btnNewButton.setEnabled(false);
 				}

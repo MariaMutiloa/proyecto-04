@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -76,6 +77,7 @@ public class VentanaEliminarUsuario extends JFrame {
 
 		JList list = new JList();
 		list.setBounds(46, 114, 113, 138);
+		cargarJList(listaUsuarios);
 		contentPane.add(list);
 
 		JButton botonEliminar = new JButton("Eliminar");
@@ -98,18 +100,24 @@ public class VentanaEliminarUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 					logger.info("Conectado a la base de datos para eliminar");
-					Statement stmt = con.createStatement();
-					ResultSet rs = stmt
-							.executeQuery("DELETE from usuario where textNombre.getSelectedText() = Usuario ");
-					logger.info("Delete hecho");
+					int dni = u.getDni();
+					String sql = "DELETE from usuario where Usuario =?";
+					try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+						pstmt.setInt(1, dni);
+						ResultSet rs = pstmt.executeQuery();
+						logger.info("Delete hecho");
+						rs.close();
+					} catch (SQLException e1) {
+						// e.printStackTrace();
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
+					}
 
-				} catch (SQLException e1) {
-					// e.printStackTrace();
-					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				} catch (SQLException e2) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
-
 				}
-
 			}
 
 		});
@@ -131,26 +139,32 @@ public class VentanaEliminarUsuario extends JFrame {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para hacer la busqueda");
 			String nombre = text.getSelectedText();
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario where Usuario = nombre");
-			logger.info(
-					"Select hecha para sacar los usuarios en la Base de Datos que tengan el nombre que se ha seleccionado");
-			while (rs.next()) {
-				Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getString(5), rs.getInt(6), rs.getInt(7));
-				listaUsuarios.add(persona);
-				logger.info("Usuario creado y agrgado a lista de usuarios");
-			}
-			rs.close();
-			stmt.close();
-		} catch (SQLException e) {
-			// e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+			String sql = "select * from usuario where Usuario >=?";
+			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+				pstmt.setString(1, nombre);
+				ResultSet rs = pstmt.executeQuery();
+				logger.info(
+						"Select hecha para sacar los usuarios en la Base de Datos que tengan el nombre que se ha seleccionado");
+				while (rs.next()) {
+					Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+							rs.getString(5), rs.getInt(6), rs.getInt(7));
+					listaUsuarios.add(persona);
+					logger.info("Usuario creado y agrgado a lista de usuarios");
+				}
+				rs.close();
+			} catch (SQLException e) {
+				// e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
+			}
+
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
 		return listaUsuarios;
-
 	}
 
 	// carga la lista con el array que devuelve el método anterior
