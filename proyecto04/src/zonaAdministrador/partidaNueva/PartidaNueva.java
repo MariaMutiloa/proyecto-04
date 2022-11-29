@@ -37,6 +37,7 @@ public class PartidaNueva extends JFrame {
 
 	
 	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent) {
+		logger.info("Abriendo venta nueva partida");
 		this.partidaActual = partidaActual;
 		
 		

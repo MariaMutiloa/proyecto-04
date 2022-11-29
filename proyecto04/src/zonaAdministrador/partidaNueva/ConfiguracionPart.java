@@ -103,9 +103,9 @@ public class ConfiguracionPart extends JFrame {
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							if (txtLiga.getText()== null && txtBingo.getText() == null) {
+							if (txtLiga.getText()!= "" && txtBingo.getText() != "") {
 								GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()));
-								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual);
+								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
 								nuevaVentana.setVisible(true);
 							ConfiguracionPart.this.dispose();
 							} else {
