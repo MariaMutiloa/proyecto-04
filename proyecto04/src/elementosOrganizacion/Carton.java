@@ -12,6 +12,8 @@ public class Carton {
 	private int IDPartida;
 	private Usuario propietario;
 	
+	//private List<Integer> numeros;
+	
 	
 
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
@@ -19,6 +21,9 @@ public class Carton {
 		this.IDUsuario = IDUsuario;
 		this.IDPartida = IDPartida;
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
-		
 	}
+	
+	
+	//METODO GUARDA LOS NUMEROS DEL CARTON EN UNA LISTA
+	
 }
