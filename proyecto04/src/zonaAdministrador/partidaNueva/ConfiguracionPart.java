@@ -57,7 +57,7 @@ public class ConfiguracionPart extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					LogInVentana nueva = new LogInVentana();
 					nueva.setVisible(true);
-					ConfiguracionPart.this.dispose();
+					ConfiguracionPart.this.setVisible(false);
 					
 				}
 				

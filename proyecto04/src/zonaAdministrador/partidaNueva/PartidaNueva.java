@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
+import login.LogInVentana;
 
 
 public class PartidaNueva extends JFrame {
@@ -35,7 +36,7 @@ public class PartidaNueva extends JFrame {
 
 
 	
-	public PartidaNueva(Partida partidaActual) {
+	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent) {
 		this.partidaActual = partidaActual;
 		
 		
@@ -46,7 +47,20 @@ public class PartidaNueva extends JFrame {
 		
 		JPanel superior = new JPanel();
 		JLabel titulo = new JLabel("Partida "+partidaActual.getIDPartida());
+		superior.add(titulo, BorderLayout.WEST);
 		contentPane.add(superior, BorderLayout.NORTH);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.setVisible(true);
+				PartidaNueva.this.dispose();
+				
+			}
+			
+		});
+		superior.add(btnVolver, BorderLayout.EAST);
 		
 		JPanel inferior = new JPanel();
 		
