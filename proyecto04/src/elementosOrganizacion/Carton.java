@@ -11,6 +11,8 @@ public class Carton {
 	private int IDUsuario; 
 	private int IDPartida;
 	private Usuario propietario;
+	
+	
 
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
 		this.IDCarton = IDCarton;

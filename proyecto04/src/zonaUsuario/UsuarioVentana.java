@@ -15,6 +15,7 @@ import login.LogInVentana;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import javax.swing.JTable;
+import java.awt.Font;
 
 public class UsuarioVentana extends JFrame {
 
@@ -22,6 +23,7 @@ public class UsuarioVentana extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JTable table;
 	
 
 	/**
@@ -32,20 +34,20 @@ public class UsuarioVentana extends JFrame {
 		setTitle( "Ventana de usuario" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel superior = new JPanel();
-		superior.setSize(150, 50);
-		superior.setLayout(new GridLayout(1,4));
-		getContentPane().add(superior, BorderLayout.NORTH);
+		JPanel pSuperior = new JPanel();
+		pSuperior.setSize(150, 50);
+		pSuperior.setLayout(new GridLayout(1,4));
+		getContentPane().add(pSuperior, BorderLayout.NORTH);
 
 		
 		JLabel lblBienvenido = new JLabel("¡Bienvenidx " + u.getNombre() + "!");
-		superior.add(lblBienvenido);
+		pSuperior.add(lblBienvenido);
 		
 		JLabel lblCartera = new JLabel("Cartera: "+u.getBote()+" €");
-		superior.add(lblCartera);
+		pSuperior.add(lblCartera);
 		
 		JButton btnSalir = new JButton("Salir");
-		superior.add(btnSalir);
+		pSuperior.add(btnSalir);
 		btnSalir.addActionListener(new ActionListener() {
 
 			@Override
@@ -56,36 +58,48 @@ public class UsuarioVentana extends JFrame {
 			}
 		});
 		
-		JPanel inferior = new JPanel();
-		inferior.setLayout(new GridLayout(1,2));
-		getContentPane().add(inferior, BorderLayout.SOUTH);
+		JPanel pInferior = new JPanel();
+		pInferior.setLayout(new GridLayout(1,2));
+		getContentPane().add(pInferior, BorderLayout.SOUTH);
 		
 		JPanel infIzquierda = new JPanel();
-		inferior.add(infIzquierda, BorderLayout.WEST);
+		pInferior.add(infIzquierda, BorderLayout.WEST);
 		
 		JButton btnEstadisticas = new JButton("Ver estadisticas");
 		infIzquierda.add(btnEstadisticas);
 		
 		//METER VER ESTADISTICAS
 		
-		JPanel infDerecha = new JPanel();
-		inferior.add(infDerecha, BorderLayout.EAST);
-
-		//METEMOS LOS BOTONES DEL JUEGO
-		JButton btnLinea = new JButton("LINEA");
-		infDerecha.add(btnLinea, BorderLayout.EAST);
+		JPanel pInfDerecha = new JPanel();
+		pInferior.add(pInfDerecha, BorderLayout.EAST);
 		
 		JButton btnBingo = new JButton("BINGO!");
-		infDerecha.add(btnBingo, BorderLayout.WEST);
-		
+		pInfDerecha.add(btnBingo, BorderLayout.WEST);
+				
 		
 		//PANEL IZQUIERDA
 		//aqui va a salir el número en grande y también podremos ver qué numeros han salido hasta ahora
+		JPanel pIzquierda = new JPanel();
+		getContentPane().add(pIzquierda, BorderLayout.WEST);
 		
+		//AQUI VA A APARECER EL NUMERO Q SACA EL ADMINISTRADOR
+		JLabel lblNumero = new JLabel("New label");
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 20));
+		pIzquierda.add(lblNumero, BorderLayout.CENTER);
+		
+			
 		
 		//PANEL CENTRAL DERECHA
 		//aquí tendremos nuestro carton con los numeros
 		//hay posibilidad de clickar en el numero y se cambie de color 
+		JPanel pCentral = new JPanel();
+		getContentPane().add(pCentral, BorderLayout.CENTER);
+		
+		//CARTON --> hay que general el carton con los numeros
+		table = new JTable();
+		pCentral.add(table);
+		
+		
 		
 		
 		
