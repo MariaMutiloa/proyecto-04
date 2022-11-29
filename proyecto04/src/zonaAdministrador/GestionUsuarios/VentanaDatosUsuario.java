@@ -13,10 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaDatosUsuario extends JFrame {
 
 	private JPanel contentPane;
+	private Usuario usuario;
 
 	/**
 	 * Create the frame.
@@ -25,6 +28,7 @@ public class VentanaDatosUsuario extends JFrame {
 	 * @param ventanaVerUsuario
 	 */
 	public VentanaDatosUsuario(VentanaVerUsuario ventanaVerUsuario, Usuario u) {
+		this.usuario = u;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,24 +69,36 @@ public class VentanaDatosUsuario extends JFrame {
 		contentPane.add(labelPuntos);
 
 		JButton botonVolverVerUsuarios = new JButton("Volver a Ver Usuarios");
+		botonVolverVerUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaVerUsuario nuevaVentanaVerUsuarios = new VentanaVerUsuario();
+				nuevaVentanaVerUsuarios.setVisible(true);
+				VentanaDatosUsuario.this.setVisible(false);
+			}
+		});
 		botonVolverVerUsuarios.setBounds(287, 92, 139, 20);
 		contentPane.add(botonVolverVerUsuarios);
 
 		JButton botonGestionarUsuarios = new JButton("Volver a Gesti\u00F3n de usuarios");
+		botonGestionarUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios();
+				nuevaVentanaGestion.setVisible(true);
+				VentanaDatosUsuario.this.setVisible(false);
+			}
+		});
 		botonGestionarUsuarios.setBounds(255, 148, 181, 20);
 		contentPane.add(botonGestionarUsuarios);
 
-		JLabel lblNombrePuesto = new JLabel("New label");
+		JLabel lblNombrePuesto = new JLabel(usuario.getNombre());
 		lblNombrePuesto.setBackground(Color.WHITE);
 		lblNombrePuesto.setBounds(31, 36, 49, 14);
 		contentPane.add(lblNombrePuesto);
-		lblNombrePuesto.setText(u.getNombre());
 
-		JLabel lblApellidoPuesto = new JLabel("New label");
+		JLabel lblApellidoPuesto = new JLabel(usuario.getApellido());
 		lblApellidoPuesto.setBackground(Color.WHITE);
 		lblApellidoPuesto.setBounds(145, 36, 49, 14);
 		contentPane.add(lblApellidoPuesto);
-		lblNombrePuesto.setText(u.getApellido());
 
 		JLabel lblPartidasJugadas = new JLabel("New label");
 		lblPartidasJugadas.setBackground(Color.WHITE);
@@ -99,23 +115,24 @@ public class VentanaDatosUsuario extends JFrame {
 		lblPartidasP.setBounds(31, 148, 49, 14);
 		contentPane.add(lblPartidasP);
 
-		JLabel lblLiga = new JLabel("New label");
+		String idLiga = String.valueOf(usuario.getIdLigaActual());
+		JLabel lblLiga = new JLabel(idLiga);
 		lblLiga.setBackground(Color.WHITE);
 		lblLiga.setBounds(145, 148, 49, 14);
 		contentPane.add(lblLiga);
-		String idLiga = String.valueOf(u.getIdLigaActual());
-		lblNombrePuesto.setText(idLiga);
+		;
 
 		JLabel lblPuesto = new JLabel("New label");
 		lblPuesto.setBackground(Color.WHITE);
 		lblPuesto.setBounds(31, 204, 49, 14);
 		contentPane.add(lblPuesto);
 
-		JLabel lblPuntos = new JLabel("New label");
+		String bote = String.valueOf(usuario.getBote());
+		JLabel lblPuntos = new JLabel(bote);
 		lblPuntos.setBackground(Color.WHITE);
 		lblPuntos.setBounds(145, 204, 49, 14);
 		contentPane.add(lblPuntos);
-		String bote = String.valueOf(u.getBote());
-		lblNombrePuesto.setText(bote);
+
 	}
+
 }

@@ -42,7 +42,7 @@ public class VentanaVerUsuario extends JFrame {
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
 		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
-		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,9 +63,10 @@ public class VentanaVerUsuario extends JFrame {
 					VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
 					nuevaVentanaDatos.setVisible(true);
 					VentanaVerUsuario.this.setVisible(false);
+					
 				}
 
-			}
+			} 
 
 		});
 
