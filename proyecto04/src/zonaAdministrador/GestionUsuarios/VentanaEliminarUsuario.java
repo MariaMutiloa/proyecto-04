@@ -38,6 +38,7 @@ public class VentanaEliminarUsuario extends JFrame {
 	private JList list;
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
+	private Usuario usuario;
 
 	/**
 	 * Create the frame.
@@ -46,6 +47,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
+		
 
 		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,6 +76,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		});
 		botonBuscar.setBounds(263, 65, 89, 23);
 		contentPane.add(botonBuscar);
+		
 
 		JList list = new JList();
 		list.setBounds(46, 114, 113, 138);
@@ -94,6 +97,7 @@ public class VentanaEliminarUsuario extends JFrame {
 				}
 
 			}
+			
 
 			// cuando se selecciona un usuario y se da a eliminar se elimina de la Base de
 			// Datos
@@ -161,6 +165,7 @@ public class VentanaEliminarUsuario extends JFrame {
 							rs.getString(5), rs.getInt(6), rs.getInt(7));
 					listaUsuarios.add(persona);
 					logger.info("Usuario creado y agrgado a lista de usuarios");
+					
 				}
 				rs.close();
 			} catch (SQLException e) {

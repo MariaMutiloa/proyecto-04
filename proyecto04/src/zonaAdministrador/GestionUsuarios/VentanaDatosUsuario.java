@@ -92,12 +92,12 @@ public class VentanaDatosUsuario extends JFrame {
 
 		JLabel lblNombrePuesto = new JLabel(usuario.getNombre());
 		lblNombrePuesto.setBackground(Color.WHITE);
-		lblNombrePuesto.setBounds(31, 36, 49, 14);
+		lblNombrePuesto.setBounds(31, 36, 104, 14);
 		contentPane.add(lblNombrePuesto);
 
 		JLabel lblApellidoPuesto = new JLabel(usuario.getApellido());
 		lblApellidoPuesto.setBackground(Color.WHITE);
-		lblApellidoPuesto.setBounds(145, 36, 49, 14);
+		lblApellidoPuesto.setBounds(145, 36, 121, 14);
 		contentPane.add(lblApellidoPuesto);
 
 		JLabel lblPartidasJugadas = new JLabel("New label");
