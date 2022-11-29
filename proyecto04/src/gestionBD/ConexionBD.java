@@ -125,26 +125,26 @@ public class ConexionBD {
 	
 	
 	//Comprobar si ya está el usuario en la base de datos, por nombre de usuario
+	//si es true ya está usado
 	public static boolean comprobarUsuario(String miUsuario){
 		
 		logger.info("Buscando si "+ miUsuario +" está en la base de datos");
 		
 		boolean usado= false;
+		System.out.println("es false");
 				
 		try (Connection con = DriverManager.getConnection(connexion)) {
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT Usuario FROM usuario");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE Usuario='"+miUsuario+"'");
 			
 			//recorremos fila a fila
 			while (rs.next()) {
-				if(miUsuario.equals(rs)) {
-					
-					//el usuario ya está cogido
-					usado=true;
-					logger.info(miUsuario +" encontrado.");
-
-				}
+				//si ya esta repetido rs va a tener next por lo que entraria en el while
+				usado=true;
+				System.out.println("es true");
+				logger.info(miUsuario +" encontrado.");
+				
 			}	
 			rs.close();
 			stmt.close();
@@ -154,6 +154,7 @@ public class ConexionBD {
 			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
+		System.out.println("bucle terminado");
 		return usado;
 	}
 	
