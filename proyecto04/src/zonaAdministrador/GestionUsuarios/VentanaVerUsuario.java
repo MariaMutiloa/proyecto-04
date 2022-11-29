@@ -24,6 +24,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
 public class VentanaVerUsuario extends JFrame {
 
@@ -55,39 +56,32 @@ public class VentanaVerUsuario extends JFrame {
 		list.setBounds(30, 28, 154, 224);
 		cargarJList(listaUsuarios);
 		contentPane.add(list);
-
-		JButton btnNewButton = new JButton("Ver usuario");
-		btnNewButton.setBounds(262, 122, 116, 23);
-		contentPane.add(btnNewButton);
-		btnNewButton.setEnabled(false);
-		// solo cuando el Administrador tiene un Usuario seleccionado deja pulsar el
-		// botón para ver sus datos
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (list.getSelectedValue() != null) {
-					btnNewButton.setEnabled(true);
 					Usuario u = (Usuario) list.getSelectedValue();
 					VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
 					nuevaVentanaDatos.setVisible(true);
 					VentanaVerUsuario.this.setVisible(false);
-				} else {
-					btnNewButton.setEnabled(false);
 				}
 
 			}
 
-			// para poder ir a la Ventana de los datos cuando hace click en el botón Ver
-			// Usuario
-			public void actionPerformed(ActionEvent e) {
-				VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
-				nuevaVentanaDatos.setVisible(true);
-				VentanaVerUsuario.this.setVisible(false);
-
-			}
 		});
 
+		JButton btnNewButton = new JButton("Volver Gestion de usuarios");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios ();
+				nuevaVentanaGestion.setVisible(true);
+				VentanaVerUsuario.this.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(262, 122, 116, 23);
+		contentPane.add(btnNewButton);
+		
 	}
-	
+
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
 	// crea una lista con todos los usuarios que coinciden y la
