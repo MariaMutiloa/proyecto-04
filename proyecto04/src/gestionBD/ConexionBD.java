@@ -176,7 +176,7 @@ public class ConexionBD {
 		    stmt.setString(4, usuario);
 		    stmt.setString(5, contrasena);
 		    stmt.setInt(6, 1);
-		    stmt.setInt(7, 0);
+		    stmt.setInt(7, 10);
 
 		    		    	
 		    // ejecutamos la sentencia preparado como un update, en este caso
