@@ -127,6 +127,17 @@ public class VentanaEliminarUsuario extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(142, 114, 17, 138);
 		contentPane.add(scrollBar);
+		
+		JButton btnNewButton = new JButton("Volver Gestion de usuarios");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios();
+				nuevaVentanaGestion.setVisible(true);
+				VentanaEliminarUsuario.this.setVisible(false);
+			}
+		});
+		btnNewButton.setBounds(263, 229, 163, 23);
+		contentPane.add(btnNewButton);
 	}
 
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
