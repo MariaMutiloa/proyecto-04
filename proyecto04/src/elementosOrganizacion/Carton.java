@@ -13,6 +13,7 @@ public class Carton {
 	private int IDUsuario;
 	private int IDPartida;
 	private Usuario propietario;
+	private static List<Integer> listaNumeros; 
 
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
 		this.IDCarton = IDCarton;
@@ -56,10 +57,17 @@ public class Carton {
 		int numero = ra.nextInt(99);
 		if (!carton.contains(numero) && numero != 0) {
 			carton.add(numero);
+			listaNumeros.add(numero);
 			// logger.info("Numero ya esta repetido");
 		} else {
 			sacarNumero(carton);
 		}
 	}
 
+	public List<Integer> getListaNumeros() {
+		return listaNumeros;
+	}
+
+	
+	
 }

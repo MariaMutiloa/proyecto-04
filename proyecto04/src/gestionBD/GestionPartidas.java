@@ -175,4 +175,30 @@ public class GestionPartidas {
 		}
 		
 	}
+
+
+	public static Carton getCarton(int ganadorB) {
+			Carton ganador;
+			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+
+				logger.info("Conectado a la base de datos para revisar que no haya ganadores");
+				
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE IDCarton = "+ganadorB);
+
+				while (rs.next()) {
+					logger.info("Cartón ganador encontrado");
+					IDGanador = rs.getInt(1);
+				}
+
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+
+			}
+			return IDGanador;
+	}
 }
