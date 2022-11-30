@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import elementosOrganizacion.Carton;
+import elementosOrganizacion.Partida;
 
 //Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del administrador
 
@@ -114,7 +115,7 @@ public class GestionPartidas {
 			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1, IDLiga = "+IDLiga+ " WHERE IDPartida = "+ idPartida);
 			actualizacion.executeUpdate();
 			
-			logger.info("Añadidos los botes de linea y de bingo");
+			logger.info("Añadida la partida y cambiado estado");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -200,5 +201,21 @@ public class GestionPartidas {
 
 			}
 			return ganador;
+	}
+
+
+	public static void setGanadorBingo(int idCarton, Partida partida) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 3, ganadorB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
+			actualizacion.executeUpdate();
+			
+			logger.info("Actualizado el ganador");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
+		
 	}
 }

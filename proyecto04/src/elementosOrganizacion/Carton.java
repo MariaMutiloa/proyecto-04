@@ -67,6 +67,10 @@ public class Carton {
 	public List<Integer> getListaNumeros() {
 		return listaNumeros;
 	}
+	
+	public int getIDCarton() {
+		return IDCarton;
+	}
 
 	
 	

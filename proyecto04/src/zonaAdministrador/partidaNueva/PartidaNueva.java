@@ -92,7 +92,7 @@ public class PartidaNueva extends JFrame {
 						int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
 					    switch (result) {
 					         case JOptionPane.YES_OPTION:
-					         Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros));
+					         Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this));
 					         break;
 					         case JOptionPane.NO_OPTION:
 					      }
@@ -152,5 +152,8 @@ public class PartidaNueva extends JFrame {
 		}
 		return icono;
 	}
-
+	
+	 public Partida getPartidaActual(){
+		 return partidaActual;
+	 }
 }
