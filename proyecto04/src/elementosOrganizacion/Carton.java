@@ -15,7 +15,7 @@ public class Carton {
 	private int IDPartida;
 	private Usuario propietario;
 	
-	//private static List<Integer> listaNumeros; 
+	private static List<Integer> listaNumeros; 
 	
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 
@@ -68,9 +68,10 @@ public class Carton {
 		}
 	}
 
-//	public List<Integer> getListaNumeros() {
-//		return listaNumeros;
-//	}
+	public List<Integer> getListaNumeros() {
+		this.listaNumeros = generarCarton();
+		return listaNumeros;
+	}
 	
 	public int getIDCarton() {
 		return IDCarton;
