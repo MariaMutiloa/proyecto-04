@@ -79,7 +79,6 @@ public class PartidaNueva extends JFrame {
 				numero.add(decenas, BorderLayout.WEST);
 				numero.add(unidades, BorderLayout.EAST);
 				derecha.add(numero, BorderLayout.NORTH);
-			derecha.setVisible(false);
 			inferior.add(derecha, BorderLayout.EAST);	
 			
 			btnNuevoNum.addActionListener(new ActionListener() {
