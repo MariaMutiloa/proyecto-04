@@ -3,6 +3,7 @@ package elementosOrganizacion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import gestionBD.ConexionBD;
 import personas.Usuario;
@@ -13,7 +14,10 @@ public class Carton {
 	private int IDUsuario;
 	private int IDPartida;
 	private Usuario propietario;
-	private static List<Integer> listaNumeros; 
+	
+	//private static List<Integer> listaNumeros; 
+	
+	private static Logger logger = Logger.getLogger(Carton.class.getName());
 
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
 		this.IDCarton = IDCarton;
@@ -57,16 +61,16 @@ public class Carton {
 		int numero = ra.nextInt(99);
 		if (!carton.contains(numero) && numero != 0) {
 			carton.add(numero);
-			listaNumeros.add(numero);
-			// logger.info("Numero ya esta repetido");
+			//listaNumeros.add(numero);
 		} else {
+			logger.info("Numero ya esta repetido");
 			sacarNumero(carton);
 		}
 	}
 
-	public List<Integer> getListaNumeros() {
-		return listaNumeros;
-	}
+//	public List<Integer> getListaNumeros() {
+//		return listaNumeros;
+//	}
 	
 	public int getIDCarton() {
 		return IDCarton;
