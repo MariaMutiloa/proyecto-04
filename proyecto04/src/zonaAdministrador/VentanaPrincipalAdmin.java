@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 
 import login.LogInVentana;
 import personas.Administrador;
+import zonaAdministrador.Estadisticas.VerEstadisticas;
 import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
@@ -53,6 +54,17 @@ public class VentanaPrincipalAdmin extends JFrame {
 		
 		JButton btnEstadisticas = new JButton("Estad\u00EDsticas");
 		inferior.add(btnEstadisticas, BorderLayout.CENTER);
+		btnEstadisticas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VerEstadisticas ventanaEstadisticas = new VerEstadisticas();
+				ventanaEstadisticas.setVisible(true);
+				VentanaPrincipalAdmin.this.setVisible(false);
+				
+			}
+			
+		});
 		
 		JButton btnGestiónUsuarios = new JButton("Gesti\u00F3n Usuarios");
 		inferior.add(btnGestiónUsuarios, BorderLayout.SOUTH);
