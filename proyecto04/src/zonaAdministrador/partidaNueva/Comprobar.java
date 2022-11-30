@@ -22,7 +22,7 @@ public class Comprobar implements Runnable {
 	@Override
 	public void run() {
 		if(numeros.containsAll(cartonGanador.getListaNumeros())){
-			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton()), partida.getPartidaActual());
+			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual());
 			int result = JOptionPane.showConfirmDialog(null, "El bingo es correcto. Partida terminada. ¿Quiere guardar un resumen?");
 			switch (result) {
 	         case JOptionPane.YES_OPTION:

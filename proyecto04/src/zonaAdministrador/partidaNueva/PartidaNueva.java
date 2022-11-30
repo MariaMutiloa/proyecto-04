@@ -93,6 +93,7 @@ public class PartidaNueva extends JFrame {
 					    switch (result) {
 					         case JOptionPane.YES_OPTION:
 					         Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this));
+					         comprobar.start();
 					         break;
 					         case JOptionPane.NO_OPTION:
 					      }
