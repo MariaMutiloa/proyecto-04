@@ -148,4 +148,31 @@ public class GestionPartidas {
 		}
 		return IDGanador;
 	}
+
+	//Añade el numero en la base de datos para que los usuarios puedan acceder a el
+	public static void añadirNumero(int numero, int indexOf, int IDPartida) {
+		logger.info("Insertando en la BD el numero "+ numero);
+		
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+		    
+		    	
+		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO numero-partida (valor, posicion, partida) VALUES (?, ?, ?)");
+		    			    
+		    stmt.setInt(1, numero);
+		    stmt.setInt(2, indexOf);
+		    stmt.setInt(3, IDPartida);
+		  
+
+		    		    
+		    stmt.executeUpdate();
+			logger.info(numero+" guardado en la base de datos.");
+			    
+			stmt.close();
+					
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,  "Error. No se ha podido conectar a la base de datos" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");   
+		}
+		
+	}
 }

@@ -111,10 +111,12 @@ public class PartidaNueva extends JFrame {
 		
 	}
 	
+	//Extre nuevo numero random, lo muestra por pantalla y lo añade a lal base de datos
 	private void actualizar() {
 		logger.info("Extrayendo nuevo número");
 	    int nuevoNumero = numeroRandom(); 
 	    numeros.add(nuevoNumero);
+	    GestionPartidas.añadirNumero(nuevoNumero, numeros.indexOf(nuevoNumero), partidaActual.getIDPartida());
 	    String number = String.valueOf(nuevoNumero);
 	   	char[] digits = number.toCharArray();
 	   	logger.info("Numero nuevo conseguido");
