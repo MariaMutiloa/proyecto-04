@@ -178,7 +178,7 @@ public class GestionPartidas {
 
 
 	public static Carton getCarton(int ganadorB) {
-			Carton ganador;
+			Carton ganador = null;
 			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 				logger.info("Conectado a la base de datos para revisar que no haya ganadores");
@@ -188,7 +188,7 @@ public class GestionPartidas {
 
 				while (rs.next()) {
 					logger.info("Cartón ganador encontrado");
-					IDGanador = rs.getInt(1);
+					ganador = new Carton(rs.getInt(1), rs.getInt(2), rs.getInt(3));
 				}
 
 				rs.close();
@@ -199,6 +199,6 @@ public class GestionPartidas {
 				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
 			}
-			return IDGanador;
+			return ganador;
 	}
 }

@@ -29,7 +29,7 @@ public class PartidaNueva extends JFrame {
 	private Partida partidaActual;
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
-	private static List<Integer> numeros = new ArrayList();
+	private static List<Integer> numeros = new ArrayList<>();
 	private static Logger logger = Logger.getLogger(PartidaNueva.class.getName());
 	 
 	private static final long serialVersionUID = 1L;
@@ -92,7 +92,7 @@ public class PartidaNueva extends JFrame {
 						int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
 					    switch (result) {
 					         case JOptionPane.YES_OPTION:
-					         Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB));
+					         Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros));
 					         break;
 					         case JOptionPane.NO_OPTION:
 					      }
