@@ -13,6 +13,7 @@ public class Comprobar implements Runnable {
 	private List<Integer> numeros;
 	private PartidaNueva partida;
 	
+
 	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva) {
 		super();
 		this.cartonGanador = GestionPartidas.getCarton(ganadorB);
