@@ -19,7 +19,9 @@ public class Comprobar implements Runnable {
 	@Override
 	public void run() {
 		boolean bingo = false;
-		if(numeros.containsAll(cartonGanador.))
+		if(numeros.containsAll(cartonGanador.getListaNumeros())){
+			bingo = true;
+		}
 
 	}
 
