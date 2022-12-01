@@ -2,6 +2,8 @@ package zonaAdministrador.Estadisticas;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,24 +14,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeSet;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
+import login.LogInVentana;
+import zonaAdministrador.VentanaPrincipalAdmin;
+import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class VerEstadisticas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JLabel lblNewLabel_1;
+	private JLabel lblEstadisticas;
 	private JLabel lblNewLabel_2;
 	private JTextField textField_1;
 
-	public VerEstadisticas() {
+	public VerEstadisticas(VentanaPrincipalAdmin parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,27 +46,51 @@ public class VerEstadisticas extends JFrame {
 		contentPane.setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(218, 114, 130, 26);
+		textField.setBounds(222, 64, 130, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Números mas veces repetidos:");
-		lblNewLabel.setBounds(6, 119, 200, 16);
+		lblNewLabel.setBounds(10, 69, 200, 16);
 		contentPane.add(lblNewLabel);
 
-		lblNewLabel_1 = new JLabel("Estadisticas");
-		lblNewLabel_1.setBounds(196, 22, 100, 16);
-		contentPane.add(lblNewLabel_1);
+		lblEstadisticas = new JLabel("ESTADISTICAS");
+		lblEstadisticas.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEstadisticas.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblEstadisticas.setEnabled(false);
+		lblEstadisticas.setBounds(96, 22, 200, 16);
+		contentPane.add(lblEstadisticas);
 
 		lblNewLabel_2 = new JLabel("Bote máximo");
-		lblNewLabel_2.setBounds(6, 180, 200, 16);
+		lblNewLabel_2.setBounds(10, 130, 200, 16);
 		contentPane.add(lblNewLabel_2);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(218, 175, 130, 26);
+		textField_1.setBounds(222, 125, 130, 26);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
+		
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(363,222,63,30);
+		contentPane.add(btnVolver);
+		btnVolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				parent.setVisible(true);
+				VerEstadisticas.this.dispose();
+				
+			}
+			
+		});
+		
+		
 	}
+	
+	
+	
 
 	public void masUsado() {
 

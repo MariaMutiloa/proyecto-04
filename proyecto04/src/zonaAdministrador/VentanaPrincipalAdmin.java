@@ -58,7 +58,7 @@ public class VentanaPrincipalAdmin extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VerEstadisticas ventanaEstadisticas = new VerEstadisticas();
+				VerEstadisticas ventanaEstadisticas = new VerEstadisticas(VentanaPrincipalAdmin.this);
 				ventanaEstadisticas.setVisible(true);
 				VentanaPrincipalAdmin.this.setVisible(false);
 				
