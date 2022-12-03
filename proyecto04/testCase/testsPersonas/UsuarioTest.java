@@ -12,7 +12,7 @@ public class UsuarioTest {
 	Usuario u;
 	@Before
 	public void inicializar() {
-		u = new Usuario(35468792, "Pedro", "Rodriguez", "pedro.rodriguez", "rodri01", 1, 1000);
+		u = new Usuario(35468792, "Pedro", "Rodriguez", "pedro.rodriguez", "rodri01", 1, 10);
 	}
 
 	
@@ -30,7 +30,7 @@ public class UsuarioTest {
 	
 	@Test
 	public void testGetBote() {
-		assertEquals(1000, u.getBote());
+		assertEquals(10, u.getBote());
 	}
 	
 	@Test

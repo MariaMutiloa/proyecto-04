@@ -9,7 +9,7 @@ public class Usuario extends Persona{
 			int bote) {
 		super(dni, nombre, apellido, usuario, contrasena);
 		this.idLigaActual = 1;
-		this.bote = 0;
+		this.bote = 10;
 	}
 
 	public int getIdLigaActual() {
