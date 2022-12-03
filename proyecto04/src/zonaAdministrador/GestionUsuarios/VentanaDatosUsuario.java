@@ -63,8 +63,8 @@ public class VentanaDatosUsuario extends JFrame {
 		numeroPerdidas = numeroJugadas - numeroGanadas;
 		List<Usuario> UsuariosLista = new ArrayList<Usuario>();
 		UsuariosLista = VentanaVerUsuario.anyadirUsuarios(UsuariosLista);
-		UsuariosLista=ordenarUsuariosPuestos(UsuariosLista);
-		int puesto=contadorPuesto(UsuariosLista, usuario);
+		UsuariosLista = ordenarUsuariosPuestos(UsuariosLista);
+		int puesto = contadorPuesto(UsuariosLista, usuario);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -249,6 +249,7 @@ public class VentanaDatosUsuario extends JFrame {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+			logger.log(Level.SEVERE, "No hay partidas en la BD");
 		}
 
 		return contador;
@@ -310,11 +311,13 @@ public class VentanaDatosUsuario extends JFrame {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+			logger.log(Level.SEVERE, "No hay partidas");
 		}
 
 		return contador;
 
 	}
+
 // calcula el puesto
 	public static int contadorPuesto(List<Usuario> UsuariosLista, Usuario u) {
 		int contador = 0;
@@ -332,12 +335,13 @@ public class VentanaDatosUsuario extends JFrame {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No hay usuarios registardos");
-
+			logger.log(Level.SEVERE, "No hay usuarios");
 		}
 		return contadorFinal;
 
 	}
-	//creo un comparador para la lista
+
+	// creo un comparador para la lista
 	static class MiComparador implements Comparator<Usuario> {
 
 		@Override
@@ -347,7 +351,8 @@ public class VentanaDatosUsuario extends JFrame {
 		}
 
 	}
-	//ordeno la lista
+
+	// ordeno la lista
 	public static List<Usuario> ordenarUsuariosPuestos(List<Usuario> usuariosPuesto) {
 		Collections.sort(usuariosPuesto, new MiComparador());
 		return usuariosPuesto;
