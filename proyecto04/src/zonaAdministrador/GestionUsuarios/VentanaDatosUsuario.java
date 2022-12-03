@@ -48,11 +48,16 @@ public class VentanaDatosUsuario extends JFrame {
 		IdCartonesGanadoresLista = seleccionIdCartonesGanadores(IdCartonesGanadoresLista);
 		List<String> IdGanadoresLista = new ArrayList<String>();
 		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista);
-		Integer numeroGanadas = 0;
+		int numeroGanadas = 0;
 		numeroGanadas = numeroDeGanadas(u, IdGanadoresLista);
-		int numeroGanadasFinal = numeroGanadas;
-		numeroGanadasFinal = CambiarNull(numeroGanadas);
-
+		numeroGanadas = CambiarNull(numeroGanadas);
+		List<String> IdUsuarioCartones = new ArrayList<>();
+		IdUsuarioCartones = IdUsuarioCarton(IdUsuarioCartones);
+		int numeroJugadas = 0;
+		numeroJugadas = numeroDePartidas(u, IdUsuarioCartones);
+		int numeroPerdidas = 0;
+		numeroPerdidas= numeroJugadas - numeroGanadas;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -124,7 +129,7 @@ public class VentanaDatosUsuario extends JFrame {
 		lblApellidoPuesto.setBounds(145, 36, 121, 14);
 		contentPane.add(lblApellidoPuesto);
 
-		JLabel lblPartidasJugadas = new JLabel("New label");
+		JLabel lblPartidasJugadas = new JLabel(String.valueOf(numeroJugadas));
 		lblPartidasJugadas.setBackground(Color.WHITE);
 		lblPartidasJugadas.setBounds(31, 92, 49, 14);
 		contentPane.add(lblPartidasJugadas);
@@ -134,7 +139,7 @@ public class VentanaDatosUsuario extends JFrame {
 		lblPartidasG.setBounds(145, 92, 49, 14);
 		contentPane.add(lblPartidasG);
 
-		JLabel lblPartidasP = new JLabel("New label");
+		JLabel lblPartidasP = new JLabel(String.valueOf(numeroPerdidas));
 		lblPartidasP.setBackground(Color.WHITE);
 		lblPartidasP.setBounds(31, 148, 49, 14);
 		contentPane.add(lblPartidasP);
@@ -161,8 +166,7 @@ public class VentanaDatosUsuario extends JFrame {
 
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
-	// crea una lista con todos los usuarios que coinciden y la
-	// devuleve
+	// crea una lista con todos los cartones ganadores
 	public static List<String> seleccionIdCartonesGanadores(List<String> IdCartonesGanadoresLista) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -188,6 +192,7 @@ public class VentanaDatosUsuario extends JFrame {
 
 	}
 
+	// crea una lista con los ID de los usuarios ganadores
 	public static List<String> IdUsuarioGanador(List<String> IdGanadoresLista) {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -221,27 +226,28 @@ public class VentanaDatosUsuario extends JFrame {
 		return IdGanadoresLista;
 	}
 
+	// cuenta cuantas veces ha ganado un usuario
 	public static int numeroDeGanadas(Usuario u, List<String> IdGanadoresLista) {
 		int contador = 0;
 		try {
-		logger.info("Mirando los ganadores");
-		for (String ID : IdGanadoresLista) {
+			logger.info("Mirando los ganadores");
+			for (String ID : IdGanadoresLista) {
 
-			while (ID.equals(u.getUsuario())) {
-				logger.info("Contando las veces ganadas");
-				contador = contador + 1;
+				while (ID.equals(u.getUsuario())) {
+					logger.info("Contando las veces ganadas");
+					contador = contador + 1;
+				}
 			}
-		}
 
-			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
 		}
-		
+
 		return contador;
 
 	}
 
+	// cambia null por 0 para que no se vea null
 	public static int CambiarNull(Integer numeroGanadas) {
 
 		if (numeroGanadas == null) {
@@ -249,6 +255,56 @@ public class VentanaDatosUsuario extends JFrame {
 			logger.info("Cambiando para que en los datos no se vea null si no 0");
 		}
 		return numeroGanadas;
+
+	}
+
+	// seleccionar los ID de los Usuarios de los cartones
+	public static List<String> IdUsuarioCarton(List<String> IdUsuarioCarton) {
+		try {
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			logger.info("Conectado a la base de datos para hacer la búsqueda");
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT IDUsuario from carton");
+			logger.info("Select hecha para sacar los Id de usuarios");
+			while (rs.next()) {
+				String Id = "";
+				IdUsuarioCarton.add(Id);
+				logger.info("Id añadido a la lista");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+
+		}
+		return IdUsuarioCarton;
+
+	}
+
+// contando cuantas veces ha jugado un usuario
+	public static int numeroDePartidas(Usuario u, List<String> IdUsuarioCarton) {
+		int contador = 0;
+		try {
+			logger.info("Mirando los ID de los Usuarios de los cartones");
+			for (String ID : IdUsuarioCarton) {
+
+				while (ID.equals(u.getUsuario())) {
+					logger.info("Contando las veces jugadas");
+					contador = contador + 1;
+				}
+			}
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+		}
+
+		return contador;
 
 	}
 }
