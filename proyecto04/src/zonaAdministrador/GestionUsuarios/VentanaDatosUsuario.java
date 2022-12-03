@@ -25,7 +25,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
@@ -56,8 +60,12 @@ public class VentanaDatosUsuario extends JFrame {
 		int numeroJugadas = 0;
 		numeroJugadas = numeroDePartidas(u, IdUsuarioCartones);
 		int numeroPerdidas = 0;
-		numeroPerdidas= numeroJugadas - numeroGanadas;
-		
+		numeroPerdidas = numeroJugadas - numeroGanadas;
+		List<Usuario> UsuariosLista = new ArrayList<Usuario>();
+		UsuariosLista = VentanaVerUsuario.anyadirUsuarios(UsuariosLista);
+		UsuariosLista=ordenarUsuariosPuestos(UsuariosLista);
+		int puesto=contadorPuesto(UsuariosLista, usuario);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -151,7 +159,7 @@ public class VentanaDatosUsuario extends JFrame {
 		contentPane.add(lblLiga);
 		;
 
-		JLabel lblPuesto = new JLabel("New label");
+		JLabel lblPuesto = new JLabel(String.valueOf(puesto));
 		lblPuesto.setBackground(Color.WHITE);
 		lblPuesto.setBounds(31, 204, 49, 14);
 		contentPane.add(lblPuesto);
@@ -306,5 +314,42 @@ public class VentanaDatosUsuario extends JFrame {
 
 		return contador;
 
+	}
+// calcula el puesto
+	public static int contadorPuesto(List<Usuario> UsuariosLista, Usuario u) {
+		int contador = 0;
+		int contadorFinal = 0;
+		try {
+			for (int i = 0; i < UsuariosLista.size(); i++) {
+				logger.info("Hay usuarios");
+				Usuario usuario = UsuariosLista.get(i);
+				contador = contador + 1;
+				if (usuario.getUsuario().equals(u.getUsuario())) {
+					logger.info("Se ha encontrado una coincidencia");
+					contadorFinal = contador;
+				}
+
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No hay usuarios registardos");
+
+		}
+		return contadorFinal;
+
+	}
+	//creo un comparador para la lista
+	static class MiComparador implements Comparator<Usuario> {
+
+		@Override
+		public int compare(Usuario a, Usuario b) {
+
+			return a.getUsuario().compareTo(b.getUsuario());
+		}
+
+	}
+	//ordeno la lista
+	public static List<Usuario> ordenarUsuariosPuestos(List<Usuario> usuariosPuesto) {
+		Collections.sort(usuariosPuesto, new MiComparador());
+		return usuariosPuesto;
 	}
 }

@@ -85,7 +85,7 @@ public class VentanaVerUsuario extends JFrame {
 
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
-	// crea una lista con todos los usuarios que coinciden y la
+	// crea una lista con todos los usuarios  y la
 	// devuleve
 	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios) {
 
