@@ -322,7 +322,7 @@ public class ConexionBD {
 				for (int j = 0; j < miCarton[i].length; j++) {
 					
 					PreparedStatement stmt = conn.prepareStatement(
-							"INSERT INTO numero-carton (Valor, IDCarton) VALUES (?, ?)");
+							"INSERT INTO numerocarton (Valor, IDCarton) VALUES (?, ?)");
 					// establecemos los datos en la prepared statement teniendo en cuenta el orden de los ?
 					stmt.setInt(1, miCarton[i][j]);
 					stmt.setInt(2, IDCarton);
