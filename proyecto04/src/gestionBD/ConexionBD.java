@@ -291,43 +291,22 @@ public class ConexionBD {
 			Statement stmt = con.createStatement();
 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
-
 			// recorremos fila a fila
-
 			try {
-
 				while (rs.next()) {
-
 					boteMax = rs.getInt(5);
-
 					if (boteMax <= rs.getInt(5)) {// si es menor que e anterior se le asigna el nuevo
-
 						boteMax = rs.getInt(5);
-
 					}
-
 				}
-
 			} catch (SQLException e) {
-
-				// TODO Auto-generated catch block
-
 				e.printStackTrace();
-
 			}
-
 			rs.close();
-
 			stmt.close();
-
 		} catch (SQLException e1) {
-
-			// TODO Auto-generated catch block
-
 			e1.printStackTrace();
-
 		}
-
 		return boteMax;
 
 	}

@@ -98,6 +98,7 @@ public class UsuarioVentana extends JFrame {
 		
 		//CARTON --> hay que general el carton con los numeros
 		
+		//Carton c = new Carton(ERROR, ALLBITS, ABORT)
 		int[][] miCarton = Carton.dibujarCarton();
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
