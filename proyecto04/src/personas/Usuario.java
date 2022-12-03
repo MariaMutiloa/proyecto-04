@@ -36,7 +36,16 @@ public class Usuario extends Persona{
 	
 	
 	
-	
+	 @Override
+	    public boolean equals(Object o) {
+	        if (!(o instanceof Usuario)) 
+	            return false;
+
+	        Usuario e = (Usuario) o;
+	        return this.bote==(e.bote);
+	      
+	    }
+
 
 	
 	
