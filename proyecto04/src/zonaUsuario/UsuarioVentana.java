@@ -97,6 +97,14 @@ public class UsuarioVentana extends JFrame {
 		JPanel pCentral = new JPanel();
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		
+		
+		/*
+		 * TIENE QUE HABER UNA COMPROBARCION CON LA BASE DE DATOS Y MIRAR SI HAY ALGUNA PARTIDA ACTIVA
+		 * SI NO HAY PARTIDA ACTIVA --> NO PUEDE COMPRAR NINGUN CARTON
+		 * SI HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
+		 */
+		
+		
 		//CARTON --> hay que general el carton con los numeros
 		
 		Carton c = new Carton(u.getDni(), 1);
