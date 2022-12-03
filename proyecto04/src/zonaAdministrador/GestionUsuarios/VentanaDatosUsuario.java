@@ -5,15 +5,29 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import org.hamcrest.core.IsNull;
 
 import personas.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 public class VentanaDatosUsuario extends JFrame {
@@ -28,7 +42,17 @@ public class VentanaDatosUsuario extends JFrame {
 	 * @param ventanaVerUsuario
 	 */
 	public VentanaDatosUsuario(VentanaVerUsuario ventanaVerUsuario, Usuario u) {
+
 		this.usuario = u;
+		List<String> IdCartonesGanadoresLista = new ArrayList<String>();
+		IdCartonesGanadoresLista = seleccionIdCartonesGanadores(IdCartonesGanadoresLista);
+		List<String> IdGanadoresLista = new ArrayList<String>();
+		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista);
+		Integer numeroGanadas = 0;
+		numeroGanadas = numeroDeGanadas(u, IdGanadoresLista);
+		int numeroGanadasFinal = numeroGanadas;
+		numeroGanadasFinal = CambiarNull(numeroGanadas);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -105,7 +129,7 @@ public class VentanaDatosUsuario extends JFrame {
 		lblPartidasJugadas.setBounds(31, 92, 49, 14);
 		contentPane.add(lblPartidasJugadas);
 
-		JLabel lblPartidasG = new JLabel("New label");
+		JLabel lblPartidasG = new JLabel(String.valueOf(numeroGanadas));
 		lblPartidasG.setBackground(Color.WHITE);
 		lblPartidasG.setBounds(145, 92, 49, 14);
 		contentPane.add(lblPartidasG);
@@ -135,4 +159,96 @@ public class VentanaDatosUsuario extends JFrame {
 
 	}
 
+	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
+
+	// crea una lista con todos los usuarios que coinciden y la
+	// devuleve
+	public static List<String> seleccionIdCartonesGanadores(List<String> IdCartonesGanadoresLista) {
+
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			logger.info("Conectado a la base de datos para hacer la búsqueda");
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT IDCartonB from partida");
+			logger.info("Select hecha para sacar los ID de los cartones ganadores");
+			while (rs.next()) {
+				String Id = "";
+				Id = rs.getString(1);
+				IdCartonesGanadoresLista.add(Id);
+				logger.info("Id cartones seleccionados y agregados a un ArrayList");
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+
+		}
+		return IdCartonesGanadoresLista;
+
+	}
+
+	public static List<String> IdUsuarioGanador(List<String> IdGanadoresLista) {
+
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			logger.info("Conectado a la base de datos para hacer la busqueda");
+			for (String IdCartonGanador : IdGanadoresLista) {
+				String sql = ("select  IDUsuario from carton  where IDCarton =?");
+				try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+					pstmt.setString(1, IdCartonGanador);
+					ResultSet rs = pstmt.executeQuery();
+					logger.info("Select hecha para sacar los Id de usuarios de los cartones ganadores");
+					while (rs.next()) {
+						String Id = "";
+						IdGanadoresLista.add(Id);
+						logger.info("Id de usuarios agregados a la lista");
+
+					}
+					rs.close();
+				} catch (SQLException e) {
+					// e.printStackTrace();
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
+
+				}
+
+			}
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		return IdGanadoresLista;
+	}
+
+	public static int numeroDeGanadas(Usuario u, List<String> IdGanadoresLista) {
+		int contador = 0;
+		try {
+		logger.info("Mirando los ganadores");
+		for (String ID : IdGanadoresLista) {
+
+			while (ID.equals(u.getUsuario())) {
+				logger.info("Contando las veces ganadas");
+				contador = contador + 1;
+			}
+		}
+
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+		}
+		
+		return contador;
+
+	}
+
+	public static int CambiarNull(Integer numeroGanadas) {
+
+		if (numeroGanadas == null) {
+			numeroGanadas = 0;
+			logger.info("Cambiando para que en los datos no se vea null si no 0");
+		}
+		return numeroGanadas;
+
+	}
 }
