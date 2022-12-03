@@ -308,7 +308,42 @@ public class ConexionBD {
 			e1.printStackTrace();
 		}
 		return boteMax;
-
 	}
+	
+	
+	public static void insertarCartonEnBD(int[][] miCarton, int IDCarton) {
+
+		logger.info("Insertando en la BD los numeros del carton " + IDCarton);
+
+		try {
+			Connection conn = DriverManager.getConnection(connexion);
+
+			for (int i = 0; i < miCarton.length; i++) {
+				for (int j = 0; j < miCarton[i].length; j++) {
+					
+					PreparedStatement stmt = conn.prepareStatement(
+							"INSERT INTO numero-carton (Valor, IDCarton) VALUES (?, ?)");
+					// establecemos los datos en la prepared statement teniendo en cuenta el orden de los ?
+					stmt.setInt(1, miCarton[i][j]);
+					stmt.setInt(2, IDCarton);
+				
+					// ejecutamos la sentencia preparado como un update, en este caso
+					stmt.executeUpdate();
+					stmt.close();
+				}
+			}
+			logger.info("Carton "+ IDCarton + " guardado en la base de datos.");
+			conn.close(); // es importante desconectar la conexión al terminar
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+	}
+	
+
+	
+	
 
 }

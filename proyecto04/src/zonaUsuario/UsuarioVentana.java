@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Carton;
+import gestionBD.ConexionBD;
 import login.LogInVentana;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
@@ -26,10 +28,9 @@ public class UsuarioVentana extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	
+	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
+	
 
-	/**
-	 * Create the frame.
-	 */
 	public UsuarioVentana(Usuario u) {
 		setBounds(100, 100, 647, 319);
 		setTitle( "Ventana de usuario" );
@@ -98,8 +99,12 @@ public class UsuarioVentana extends JFrame {
 		
 		//CARTON --> hay que general el carton con los numeros
 		
-		//Carton c = new Carton(ERROR, ALLBITS, ABORT)
+		Carton c = new Carton(u.getDni(), 1);
 		int[][] miCarton = Carton.dibujarCarton();
+		//GUARDO CARTON EN BD
+		ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());
+		logger.info("Carton guardado correctamente en la BD");
+		
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
         

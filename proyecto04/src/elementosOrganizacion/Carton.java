@@ -9,6 +9,8 @@ import gestionBD.ConexionBD;
 import personas.Usuario;
 
 public class Carton {
+	
+	public static int IDActual=1; //cada vez que creo un nuevo objeto ese id lo voy a aumentar
 
 	private int IDCarton;
 	private int IDUsuario;
@@ -19,12 +21,19 @@ public class Carton {
 	
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 
-	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
-		this.IDCarton = IDCarton;
+	public Carton(int IDUsuario, int IDPartida) {
+		this.IDCarton = IDActual++;
 		this.IDUsuario = IDUsuario;
 		this.IDPartida = IDPartida;
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
 	}
+	
+	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
+		this.IDCarton=IDCarton;
+		this.IDUsuario=IDUsuario;
+		this.IDPartida=IDPartida;
+	}
+	
 
 	// METODO GUARDA LOS NUMEROS DEL CARTON EN UNA LISTA
 	public static int[][] dibujarCarton() {
@@ -44,6 +53,8 @@ public class Carton {
 				index++;
 			}
 		}
+		
+		
 		return carton;
 	}
 
