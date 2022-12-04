@@ -76,7 +76,7 @@ public class VentanaEliminarUsuario extends JFrame {
 				cargarJList(listaUsuarios);
 			}
 		});
-		botonBuscar.setBounds(263, 65, 89, 23);
+		botonBuscar.setBounds(216, 68, 89, 23);
 		contentPane.add(botonBuscar);
 
 		JList list = new JList();
@@ -125,7 +125,7 @@ public class VentanaEliminarUsuario extends JFrame {
 			}
 
 		});
-		botonEliminar.setBounds(263, 161, 89, 23);
+		botonEliminar.setBounds(216, 145, 89, 23);
 		contentPane.add(botonEliminar);
 
 		JScrollBar scrollBar = new JScrollBar();
@@ -140,7 +140,7 @@ public class VentanaEliminarUsuario extends JFrame {
 				VentanaEliminarUsuario.this.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(263, 229, 163, 23);
+		btnNewButton.setBounds(216, 218, 210, 34);
 		contentPane.add(btnNewButton);
 	}
 
