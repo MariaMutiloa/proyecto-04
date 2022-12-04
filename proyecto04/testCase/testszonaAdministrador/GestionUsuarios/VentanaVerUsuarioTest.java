@@ -25,11 +25,11 @@ public class VentanaVerUsuarioTest {
 			listaUsuarios.add(u3);
 			listaUsuarios.add(u4);
 
-
-			assertEquals(listaUsuarios, VentanaVerUsuario.anyadirUsuarios(listaUsuarios));
+			assertEquals(listaUsuarios, VentanaVerUsuario.anyadirUsuarios(listaUsuarios,"jdbc:sqlite:DatosBingoTest.db"));
 		} catch (Exception e) {
-			
+
 		}
 
 	}
+
 }

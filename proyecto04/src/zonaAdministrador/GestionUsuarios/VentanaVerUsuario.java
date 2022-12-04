@@ -36,13 +36,15 @@ public class VentanaVerUsuario extends JFrame {
 	private JList list;
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
+	private String url;
 
 	public VentanaVerUsuario() {
+
+		this.url = "jdbc:sqlite:DatosBingo.db";
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
-		this.listaUsuarios = anyadirUsuarios(listaUsuarios);
-		
+		this.listaUsuarios = anyadirUsuarios(listaUsuarios, url);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,33 +65,33 @@ public class VentanaVerUsuario extends JFrame {
 					VentanaDatosUsuario nuevaVentanaDatos = new VentanaDatosUsuario(VentanaVerUsuario.this, u);
 					nuevaVentanaDatos.setVisible(true);
 					VentanaVerUsuario.this.setVisible(false);
-					
+
 				}
 
-			} 
+			}
 
 		});
 
 		JButton btnNewButton = new JButton("Volver Gestion de usuarios");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios ();
+				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios();
 				nuevaVentanaGestion.setVisible(true);
 				VentanaVerUsuario.this.setVisible(false);
 			}
 		});
 		btnNewButton.setBounds(262, 122, 116, 23);
 		contentPane.add(btnNewButton);
-		
+
 	}
 
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
-	// crea una lista con todos los usuarios  y la
+	// crea una lista con todos los usuarios y la
 	// devuleve
-	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios) {
+	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, String url) {
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la búsqueda");
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
