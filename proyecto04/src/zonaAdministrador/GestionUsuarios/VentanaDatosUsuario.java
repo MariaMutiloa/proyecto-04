@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.hamcrest.core.IsNull;
 
+import gestionBD.ConexionBD;
 import personas.Usuario;
 
 import javax.swing.JLabel;
@@ -38,7 +39,7 @@ public class VentanaDatosUsuario extends JFrame {
 
 	private JPanel contentPane;
 	private Usuario usuario;
-
+	
 	/**
 	 * Create the frame.
 	 * 
