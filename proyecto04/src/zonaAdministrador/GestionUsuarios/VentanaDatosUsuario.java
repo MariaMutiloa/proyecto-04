@@ -114,7 +114,7 @@ public class VentanaDatosUsuario extends JFrame {
 				VentanaDatosUsuario.this.setVisible(false);
 			}
 		});
-		botonVolverVerUsuarios.setBounds(287, 92, 139, 20);
+		botonVolverVerUsuarios.setBounds(218, 92, 208, 31);
 		contentPane.add(botonVolverVerUsuarios);
 
 		JButton botonGestionarUsuarios = new JButton("Volver a Gesti\u00F3n de usuarios");
@@ -125,7 +125,7 @@ public class VentanaDatosUsuario extends JFrame {
 				VentanaDatosUsuario.this.setVisible(false);
 			}
 		});
-		botonGestionarUsuarios.setBounds(255, 148, 181, 20);
+		botonGestionarUsuarios.setBounds(218, 134, 208, 34);
 		contentPane.add(botonGestionarUsuarios);
 
 		JLabel lblNombrePuesto = new JLabel(usuario.getNombre());
