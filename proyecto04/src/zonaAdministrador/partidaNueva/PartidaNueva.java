@@ -134,7 +134,7 @@ public class PartidaNueva extends JFrame {
 		logger.info("creando un número random");
 		Random rand = new Random(); 
 		int numero = rand.nextInt(99); 
-		if (!numeros.contains(numero)) {
+		if (numeros.contains(numero)) {
 			numero = numeroRandom();
 		}
 		return numero; 
