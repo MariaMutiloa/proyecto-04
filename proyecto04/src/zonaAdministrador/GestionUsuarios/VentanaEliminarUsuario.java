@@ -39,15 +39,17 @@ public class VentanaEliminarUsuario extends JFrame {
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
 	private Usuario usuario;
+	private String url;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaEliminarUsuario() {
+
+		this.url = "jdbc:sqlite:DatosBingo.db";
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
-		
 
 		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,13 +72,12 @@ public class VentanaEliminarUsuario extends JFrame {
 
 		botonBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaUsuarios = anyadirUsuarios(listaUsuarios, textNombre);
+				listaUsuarios = anyadirUsuarios(listaUsuarios, textNombre, url);
 				cargarJList(listaUsuarios);
 			}
 		});
 		botonBuscar.setBounds(263, 65, 89, 23);
 		contentPane.add(botonBuscar);
-		
 
 		JList list = new JList();
 		list.setBounds(46, 114, 113, 138);
@@ -97,12 +98,11 @@ public class VentanaEliminarUsuario extends JFrame {
 				}
 
 			}
-			
 
 			// cuando se selecciona un usuario y se da a eliminar se elimina de la Base de
 			// Datos
 			public void actionPerformed(ActionEvent e) {
-				try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+				try (Connection con = DriverManager.getConnection(url)) {
 					logger.info("Conectado a la base de datos para eliminar");
 					int dni = u.getDni();
 					String sql = "DELETE from usuario where Usuario =?";
@@ -131,7 +131,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(142, 114, 17, 138);
 		contentPane.add(scrollBar);
-		
+
 		JButton btnNewButton = new JButton("Volver Gestion de usuarios");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,9 +149,9 @@ public class VentanaEliminarUsuario extends JFrame {
 	// carga la lista con los usuarios que están en la Base de Datos y coinciden con
 	// el nombre que se quiere buscar
 
-	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, JTextField text) {
+	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, JTextField text, String url) {
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la busqueda");
 			String nombre = text.getSelectedText();
 			String sql = "select * from usuario where Usuario >=?";
@@ -165,7 +165,7 @@ public class VentanaEliminarUsuario extends JFrame {
 							rs.getString(5), rs.getInt(6), rs.getInt(7));
 					listaUsuarios.add(persona);
 					logger.info("Usuario creado y agrgado a lista de usuarios");
-					
+
 				}
 				rs.close();
 			} catch (SQLException e) {

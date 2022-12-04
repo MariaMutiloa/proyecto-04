@@ -14,6 +14,7 @@ public class VentanaVerUsuarioTest {
 
 	@Test
 	public void testAnyadirUsuarios() {
+		String url = "jdbc:sqlite:DatosBingo.db";
 		try {
 			List<Usuario> listaUsuarios = new ArrayList<Usuario>();
 			Usuario u1 = new Usuario(24356782, "Ruben", "Garcia", "ruben.garcia", "ruben01", 1, 10);
@@ -25,7 +26,7 @@ public class VentanaVerUsuarioTest {
 			listaUsuarios.add(u3);
 			listaUsuarios.add(u4);
 
-			assertEquals(listaUsuarios, VentanaVerUsuario.anyadirUsuarios(listaUsuarios,"jdbc:sqlite:DatosBingoTest.db"));
+			assertEquals(listaUsuarios, VentanaVerUsuario.anyadirUsuarios(listaUsuarios,url));
 		} catch (Exception e) {
 
 		}

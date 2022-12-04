@@ -40,7 +40,7 @@ public class VentanaDatosUsuario extends JFrame {
 	private JPanel contentPane;
 	private Usuario usuario;
 	private String url;
-	
+
 	/**
 	 * Create the frame.
 	 * 
@@ -48,24 +48,24 @@ public class VentanaDatosUsuario extends JFrame {
 	 * @param ventanaVerUsuario
 	 */
 	public VentanaDatosUsuario(VentanaVerUsuario ventanaVerUsuario, Usuario u) {
-		
-		this.url="jdbc:sqlite:DatosBingo.db";
+
+		this.url = "jdbc:sqlite:DatosBingo.db";
 		this.usuario = u;
 		List<String> IdCartonesGanadoresLista = new ArrayList<String>();
-		IdCartonesGanadoresLista = seleccionIdCartonesGanadores(IdCartonesGanadoresLista,url);
+		IdCartonesGanadoresLista = seleccionIdCartonesGanadores(IdCartonesGanadoresLista, url);
 		List<String> IdGanadoresLista = new ArrayList<String>();
-		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista,url);
+		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista, url);
 		int numeroGanadas = 0;
 		numeroGanadas = numeroDeGanadas(u, IdGanadoresLista);
 		numeroGanadas = CambiarNull(numeroGanadas);
 		List<String> IdUsuarioCartones = new ArrayList<>();
-		IdUsuarioCartones = IdUsuarioCarton(IdUsuarioCartones,url);
+		IdUsuarioCartones = IdUsuarioCarton(IdUsuarioCartones, url);
 		int numeroJugadas = 0;
 		numeroJugadas = numeroDePartidas(u, IdUsuarioCartones);
 		int numeroPerdidas = 0;
 		numeroPerdidas = numeroJugadas - numeroGanadas;
 		List<Usuario> UsuariosLista = new ArrayList<Usuario>();
-		UsuariosLista = VentanaVerUsuario.anyadirUsuarios(UsuariosLista,url);
+		UsuariosLista = VentanaVerUsuario.anyadirUsuarios(UsuariosLista, url);
 		UsuariosLista = ordenarUsuariosPuestos(UsuariosLista);
 		int puesto = contadorPuesto(UsuariosLista, usuario);
 
@@ -178,7 +178,7 @@ public class VentanaDatosUsuario extends JFrame {
 	private static Logger logger = Logger.getLogger(VentanaVerUsuario.class.getName());
 
 	// crea una lista con todos los cartones ganadores
-	public static List<String> seleccionIdCartonesGanadores(List<String> IdCartonesGanadoresLista,String url) {
+	public static List<String> seleccionIdCartonesGanadores(List<String> IdCartonesGanadoresLista, String url) {
 
 		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la búsqueda");
