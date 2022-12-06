@@ -3,7 +3,6 @@ package testElementosOrganizacion;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.Test;
@@ -40,21 +39,6 @@ public class CartonTest {
 	    //assertEquals(1, (new HashSet<>(carton)).size());
 	}
 	
-	/*
-	 * // Crear una instancia del objeto
-MiObjeto obj = new MiObjeto();
-
-// Invocar el método getListaNumeros
-List<Integer> resultado = obj.getListaNumeros();
-
-// Comparar el resultado con lo que se espera
-assertEquals(resultado, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
-// Si la comparación falla, lanzar un mensaje de error
-if (resultado != [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) {
-  throw new AssertionError("Error: el resultado no es el esperado");
-}
-	 */
 
 	@Test
 	public void testGetListaNumeros() {
