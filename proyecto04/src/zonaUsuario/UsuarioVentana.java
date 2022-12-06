@@ -104,6 +104,8 @@ public class UsuarioVentana extends JFrame {
 		 * SI HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
 		 */
 		
+		ConexionBD.buscarPartidaActiva();
+		
 		
 		//CARTON --> hay que general el carton con los numeros
 		

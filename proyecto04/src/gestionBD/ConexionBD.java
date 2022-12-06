@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 import elementosOrganizacion.Carton;
+import elementosOrganizacion.Partida;
 import personas.Administrador;
 import personas.Usuario;
 
@@ -375,6 +376,46 @@ public class ConexionBD {
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
+	}
+	
+	public static Partida buscarPartidaActiva(){
+		
+		//VA A BUSCAR EN LA BD SI HAY ALGUNA PARTIDA ACTIVA --> activa=1
+		//SI HAY VARIAS ACTIVAS ENTRA EN ALGUNA RANDOM
+		
+		logger.info("Buscando partidas activas...");
+		
+		Partida p = null;
+		
+		try(Connection conn = DriverManager.getConnection(connexion)){
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE Activa=1");
+			
+			if(!rs.next()) {	//NO HAY NINGUN SELECT
+				logger.info("No hay ninguna partida activa, prueba en otro momento.");
+			}else {
+				while(rs.next()) {
+					int idPartida = rs.getInt(1);
+					int activa = rs.getInt(2);
+					int premioB = rs.getInt(3);
+					int idLiga = rs.getInt(4);
+					int idCartonB = rs.getInt(5);
+					
+					p = new Partida(idPartida, activa, premioB, idLiga, idCartonB);
+					logger.info("Partida activa encontrada: "+ idPartida);
+				}
+			}
+			rs.close();
+			stmt.close();
+			
+		}catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		
+		return p;
 	}
 
 	

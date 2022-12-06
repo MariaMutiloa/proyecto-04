@@ -8,6 +8,11 @@ import personas.Usuario;
 public class Partida {
 	
 	private int IDPartida;
+	private int activa;
+	private int premioB;
+	private int idLiga;
+	private int idCartonB;
+	
 	private float boteBingo;
 	private Carton ganadorBingo;
 	private List<Carton> participantes;
@@ -15,6 +20,14 @@ public class Partida {
 	public Partida() {
 		super();
 		this.IDPartida = GestionPartidas.nueva();
+	}
+	
+	public Partida(int idPartida, int activa, int premioB, int idLiga, int idCartonB) {
+		this.IDPartida=idPartida;
+		this.activa=activa;
+		this.premioB=premioB;
+		this.idLiga=idLiga;
+		this.idCartonB=idCartonB;
 	}
 	
 	public List<Carton> getParticipantes(){
