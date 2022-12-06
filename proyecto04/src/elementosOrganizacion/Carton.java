@@ -11,10 +11,16 @@ import personas.Usuario;
 public class Carton {
 	
 	public static int IDActual=1; //cada vez que creo un nuevo objeto ese id lo voy a aumentar
+	/*
+	 * PROBLEMA!!!!!!
+	 * TODO EL RATO SE GUARDA EL IDCarton a 1 YA QUE CADA VEZ QUE INICIA EL PROGRAMA SE REESTABLECE EL IDActual a 1
+	 */
 
 	private int IDCarton;
 	private int IDUsuario;
+	private float coste;
 	private int IDPartida;
+	private int bingo;
 	private Usuario propietario;
 	
 	private static List<Integer> listaNumeros; 
@@ -24,7 +30,9 @@ public class Carton {
 	public Carton(int IDUsuario, int IDPartida) {
 		this.IDCarton = IDActual++;
 		this.IDUsuario = IDUsuario;
+		this.coste = 2;	//todos los cartones valen 2€
 		this.IDPartida = IDPartida;
+		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
 	}
 	
@@ -86,6 +94,50 @@ public class Carton {
 	
 	public int getIDCarton() {
 		return IDCarton;
+	}
+
+	public int getIDUsuario() {
+		return IDUsuario;
+	}
+
+	public void setIDUsuario(int iDUsuario) {
+		IDUsuario = iDUsuario;
+	}
+
+	public float getCoste() {
+		return coste;
+	}
+
+	public void setCoste(float coste) {
+		this.coste = coste;
+	}
+
+	public int getIDPartida() {
+		return IDPartida;
+	}
+
+	public void setIDPartida(int iDPartida) {
+		IDPartida = iDPartida;
+	}
+
+	public int getBingo() {
+		return bingo;
+	}
+
+	public void setBingo(int bingo) {
+		this.bingo = bingo;
+	}
+
+	public Usuario getPropietario() {
+		return propietario;
+	}
+
+	public void setPropietario(Usuario propietario) {
+		this.propietario = propietario;
+	}
+
+	public void setIDCarton(int iDCarton) {
+		IDCarton = iDCarton;
 	}
 	
 

@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import elementosOrganizacion.Carton;
 import personas.Administrador;
 import personas.Usuario;
 
@@ -342,6 +343,39 @@ public class ConexionBD {
 		}
 	}
 	
+	
+	//PARA GUARDAR EL CARTON EN LA BD EN LA TABLA carton
+	public static void guardarInfoCartonEnBD(Carton c) {
+
+		logger.info("Insertando en la BD el carton número " + c.getIDCarton());
+
+		try {
+			Connection conn = DriverManager.getConnection(connexion);
+			
+			PreparedStatement stmt = conn.prepareStatement(
+					"INSERT INTO carton (IDCarton, IDUsuario, Coste, IDPartida, Bingo) VALUES (?,?,?,?,?)");
+
+			//metemos los valores en los ?
+			stmt.setInt(1, c.getIDCarton());
+			stmt.setInt(2, c.getIDUsuario());
+			stmt.setFloat(3, c.getCoste());
+			stmt.setInt(4, c.getIDPartida());
+			stmt.setInt(5, c.getBingo());
+			
+			//ejecutamos sentencia
+			stmt.executeUpdate();
+			logger.info("Carton "+ c.getIDCarton() + " guardado en la base de datos.");
+			
+			stmt.close();
+			conn.close();
+
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+	}
 
 	
 	
