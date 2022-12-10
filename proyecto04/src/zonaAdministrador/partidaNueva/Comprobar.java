@@ -1,12 +1,21 @@
 package zonaAdministrador.partidaNueva;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import elementosOrganizacion.Carton;
 import gestionBD.GestionPartidas;
+import personas.Usuario;
 
 public class Comprobar implements Runnable {
 
@@ -34,7 +43,7 @@ public class Comprobar implements Runnable {
 	        	 resumen();
 	         break;
 	         case JOptionPane.NO_OPTION:
-	        	 
+	         break;	 
 	      }
 		}
 
@@ -42,8 +51,24 @@ public class Comprobar implements Runnable {
 	
 	//Escribir en un fichero los datos de la partida
 	private void resumen() {
-		File archivoResumen = new File(null);
-		
+		JFileChooser fileChooser = new JFileChooser();
+        // solo se admiten ficheros con extensión ".txt"
+        FileFilter filter = new FileNameExtensionFilter("Fichero TXT", "txt");
+        fileChooser.setFileFilter(filter);
+		File file = fileChooser.getSelectedFile();
+		try (BufferedWriter bf = new BufferedWriter(new FileWriter(file))){
+			bf.write("Resumen partida "+ partida.getPartidaActual().getIDPartida()+"\n");
+			bf.write("Ha habido un total de "+partida.getPartidaActual().getParticipantes().size()+" cartones jugando");
+			bf.write("Los cartones han sido: ");
+			for(Carton u: partida.getPartidaActual().getParticipantes()) {
+				bf.write("Cartón número: "+u.getIDCarton()+" de " + u.getPropietario().getNombre()+ " "+u.getPropietario().getApellido());;
+			}
+			bf.write("El ganador ha sido el cartón "+partida.getPartidaActual().getGanadorBingo().getIDCarton()+ " que pertenece a " +
+			partida.getPartidaActual().getGanadorBingo().getPropietario().getNombre() + " "+ partida.getPartidaActual().getGanadorBingo().getPropietario().getApellido()
+			+ " con un bote de "+ partida.getPartidaActual().getBoteBingo());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 

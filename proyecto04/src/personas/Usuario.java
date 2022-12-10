@@ -35,7 +35,6 @@ public class Usuario extends Persona{
 
 	
 	
-	
 	 @Override
 	    public boolean equals(Object o) {
 	        if (!(o instanceof Usuario)) 
@@ -45,6 +44,8 @@ public class Usuario extends Persona{
 	        return this.bote==(e.bote);
 	      
 	    }
+	 
+	 
 
 
 	
