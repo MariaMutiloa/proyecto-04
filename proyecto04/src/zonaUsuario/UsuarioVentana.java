@@ -31,6 +31,7 @@ public class UsuarioVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JPanel pCentral;
 	
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 	
@@ -43,7 +44,7 @@ public class UsuarioVentana extends JFrame {
 		//PANEL CENTRAL DERECHA
 				//aquí tendremos nuestro carton con los numeros
 				//hay posibilidad de clickar en el numero y se cambie de color 
-		JPanel pCentral = new JPanel();
+		pCentral = new JPanel();
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		
 		//PANEL SUPERIOR
@@ -92,7 +93,6 @@ public class UsuarioVentana extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				
 				//click en boton --> crea carton
-				
 				//CARTON --> hay que general el carton con los numeros
 				
 				Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
@@ -158,6 +158,7 @@ public class UsuarioVentana extends JFrame {
 			//boton jugar 
 			btnJugar.setEnabled(true);
 			
+			
 		}
 		
 //		//CARTON --> hay que general el carton con los numeros
@@ -183,5 +184,26 @@ public class UsuarioVentana extends JFrame {
 		
 		
 	}
+	
+//	public static void hacerCarton(Partida p, Usuario u) {
+//		//CARTON --> hay que general el carton con los numeros
+//		
+//		Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
+//		
+//		//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
+//		int[][] miCarton = Carton.dibujarCarton();
+//		
+//		//GUARDO CARTON EN BD (carton)
+//		ConexionBD.guardarInfoCartonEnBD(c);
+//		
+//		//GUARDO CARTON EN BD (numerocarton)
+//		ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
+//		
+//        MyTableModel tableModel = new MyTableModel(miCarton);
+//        
+//		table = new JTable(tableModel);
+//		pCentral.add(table);
+//		
+//	}
 
 }

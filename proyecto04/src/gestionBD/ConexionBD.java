@@ -208,7 +208,7 @@ public class ConexionBD {
 		try (Connection con = DriverManager.getConnection(connexion)) {
 
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE IDUsuario=" + IDUsuario);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE DNI=" + IDUsuario);
 
 			// recorremos fila a fila
 			while (rs.next()) {
@@ -390,12 +390,13 @@ public class ConexionBD {
 		try(Connection conn = DriverManager.getConnection(connexion)){
 			
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE Activa=1");
+			//ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE Activa=1");
 			
-			if(!rs.next()) {	//NO HAY NINGUN SELECT
-				logger.info("No hay ninguna partida activa, prueba en otro momento.");
-			}else {
-				while(rs.next()) {
+			ResultSet rs =stmt.executeQuery("SELECT * FROM partida");
+			
+			int encontrado=0;
+			while(rs.next() && encontrado==0) {
+				if(rs.getInt(2)==1) {
 					int idPartida = rs.getInt(1);
 					int activa = rs.getInt(2);
 					int premioB = rs.getInt(3);
@@ -404,8 +405,28 @@ public class ConexionBD {
 					
 					p = new Partida(idPartida, activa, premioB, idLiga, idCartonB);
 					logger.info("Partida activa encontrada: "+ idPartida);
+					
+					encontrado=1;
+					
 				}
 			}
+			
+//			if(!rs.next()) {	//NO HAY NINGUN SELECT
+//				logger.info("No hay ninguna partida activa, prueba en otro momento.");
+//			}else {
+//				while(rs.next()) {
+//					int idPartida = rs.getInt(1);
+//					int activa = rs.getInt(2);
+//					int premioB = rs.getInt(3);
+//					int idLiga = rs.getInt(4);
+//					int idCartonB = rs.getInt(5);
+//					
+//					p = new Partida(idPartida, activa, premioB, idLiga, idCartonB);
+//					logger.info("Partida activa encontrada: "+ idPartida);
+//				}
+//			}
+			
+			
 			rs.close();
 			stmt.close();
 			
