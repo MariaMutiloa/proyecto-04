@@ -441,7 +441,7 @@ public class ConexionBD {
 	
 	
 	public static int ultimoIDCarton() {
-		int IDCarton = 1;
+		int IDCarton = 0;
 		try(Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
 			logger.info("Conectando a la base de datos para buscar ultimo carton.");
@@ -452,6 +452,7 @@ public class ConexionBD {
 			
 			if(rs.next()) {
 				IDCarton = rs.getInt("IDCarton");
+				System.out.println(IDCarton);
 			}
 		}catch (SQLException e) {
 			//e.printStackTrace();
