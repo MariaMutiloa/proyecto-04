@@ -162,6 +162,8 @@ public class ConfiguracionPart extends JFrame {
 
         } catch (IOException e) {
         	logger.info("No se ha podido acceder al fichero properties");
+        	JOptionPane.showMessageDialog(null, "No se pueden acceder al fichero de propiedades","Error en properties", JOptionPane.WARNING_MESSAGE);
+			 
         }
 		 return ponderador;
 	}
