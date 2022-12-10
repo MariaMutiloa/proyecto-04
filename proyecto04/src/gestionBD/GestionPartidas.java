@@ -157,11 +157,11 @@ public class GestionPartidas {
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 		    
 		    	
-		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO numero-partida (valor, posicion, partida) VALUES (?, ?, ?)");
+		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO numeropartida (valor, IDpartida, orden) VALUES (?, ?, ?)");
 		    			    
 		    stmt.setInt(1, numero);
-		    stmt.setInt(2, indexOf);
-		    stmt.setInt(3, IDPartida);
+		    stmt.setInt(2, IDPartida);
+		    stmt.setInt(3, indexOf);
 		  
 
 		    		    
