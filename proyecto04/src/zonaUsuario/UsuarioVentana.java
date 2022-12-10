@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -145,6 +146,7 @@ public class UsuarioVentana extends JFrame {
 		Partida p = ConexionBD.buscarPartidaActiva();
 		if(p==null) {
 			btnJugar.setEnabled(false);
+			JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.","", JOptionPane.WARNING_MESSAGE);
 		}else {
 			//boton jugar 
 			btnJugar.setEnabled(true);
