@@ -1,9 +1,14 @@
 package elementosOrganizacion;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 import gestionBD.ConexionBD;
 import personas.Usuario;
@@ -24,7 +29,8 @@ public class Carton {
 	public Carton(int IDUsuario, int IDPartida) {
 		this.IDCarton = ConexionBD.ultimoIDCarton();
 		this.IDUsuario = IDUsuario;
-		this.coste = 2;	//todos los cartones valen 2€
+		this.coste = costeCarton();
+		//this.coste = 2;	//todos los cartones valen 2€
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
@@ -133,6 +139,27 @@ public class Carton {
 	public void setIDCarton(int iDCarton) {
 		IDCarton = iDCarton;
 	}
+	
+	
+	//PARA SACAR DESDE PROPERTIES EL COSTE DEL CARTON
+	private float costeCarton() {
+		float coste = 0;
+		logger.info("Calculando coste correspondiente");
+		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
+            Properties properties = new Properties();
+            properties.load(reader);
+            
+            coste = Float.parseFloat(properties.getProperty("coste"));
+           
+
+        } catch (IOException e) {
+        	logger.info("No se ha podido acceder al fichero properties");
+        	JOptionPane.showMessageDialog(null, "No se pueden acceder al fichero de propiedades","Error en properties", JOptionPane.WARNING_MESSAGE);
+			 
+        }
+		 return coste;
+	}
+	
 	
 
 
