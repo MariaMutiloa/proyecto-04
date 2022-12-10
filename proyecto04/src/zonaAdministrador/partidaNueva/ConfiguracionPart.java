@@ -104,13 +104,13 @@ public class ConfiguracionPart extends JFrame {
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							if (txtLiga.getText().equals("") || txtBingo.getText().equals("")) {
+								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
+				
+							} else {
 								GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()));
 								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
 								nuevaVentana.setVisible(true);
-							ConfiguracionPart.this.dispose();
-							} else {
-								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
-							      
+								ConfiguracionPart.this.dispose();	  
 							}
 						}	
 					});
