@@ -109,10 +109,7 @@ public class ConfiguracionPart extends JFrame {
 								nuevaVentana.setVisible(true);
 							ConfiguracionPart.this.dispose();
 							} else {
-								JFrame frame = new JFrame();
-							    frame.setSize(200, 200);
-							    frame.setVisible(true);
-								JOptionPane.showMessageDialog(frame, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
 							      
 							}
 						}	
