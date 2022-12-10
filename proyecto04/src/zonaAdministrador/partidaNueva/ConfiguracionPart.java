@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import login.LogInVentana;
@@ -92,7 +93,7 @@ public class ConfiguracionPart extends JFrame {
 					btnRefrescar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
-							float boteB = calculoBote(partidaActual.getParticipantes().size());
+							float boteB = getPonderador()*partidaActual.getParticipantes().size()*Carton.costeCarton();
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB);
 						
 						}
@@ -150,7 +151,7 @@ public class ConfiguracionPart extends JFrame {
 	}
 	
 	
-	private float calculoBote(int tamaño) {
+	private float getPonderador() {
 		float ponderador = 0;
 		logger.info("Calculando bote correspondiente");
 		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
@@ -167,4 +168,6 @@ public class ConfiguracionPart extends JFrame {
         }
 		 return ponderador;
 	}
+	
+	
 }
