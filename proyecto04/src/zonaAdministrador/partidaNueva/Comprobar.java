@@ -1,5 +1,6 @@
 package zonaAdministrador.partidaNueva;
 
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -41,7 +42,8 @@ public class Comprobar implements Runnable {
 	
 	//Escribir en un fichero los datos de la partida
 	private void resumen() {
-		// TODO Auto-generated method stub
+		File archivoResumen = new File(null);
+		
 		
 	}
 
