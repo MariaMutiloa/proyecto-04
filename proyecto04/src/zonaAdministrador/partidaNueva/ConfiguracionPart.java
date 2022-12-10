@@ -142,8 +142,6 @@ public class ConfiguracionPart extends JFrame {
 		logger.info("Buscando imagen correspondiente a " +numero);
 		if(numero > 9) {
 			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
-		}else if (numero == 0){
-			icono = new ImageIcon(getClass().getResource("/0.jpeg"));
 		}else {
 			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(numero) + ".jpg") );
 		}

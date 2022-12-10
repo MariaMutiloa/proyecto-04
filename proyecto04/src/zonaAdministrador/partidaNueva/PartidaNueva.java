@@ -170,8 +170,6 @@ public class PartidaNueva extends JFrame {
 		logger.info("Buscando imagen correspondiente a " +i);
 		if(Integer.parseInt(i)>9) {				
 			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
-		}else if (Integer.parseInt(i) == 0){
-			icono = new ImageIcon(getClass().getResource("/0.jpeg"));
 		}else {
 			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(i) + ".jpg") );
 		}
