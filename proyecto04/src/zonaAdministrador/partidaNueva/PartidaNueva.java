@@ -111,7 +111,7 @@ public class PartidaNueva extends JFrame {
 		
 	}
 	
-	//Extre nuevo numero random, lo muestra por pantalla y lo añade a lal base de datos
+	//Extre nuevo numero random, lo muestra por pantalla y lo añade a la base de datos
 	private void actualizar() {
 		logger.info("Extrayendo nuevo número");
 	    int nuevoNumero = numeroRandom(); 
