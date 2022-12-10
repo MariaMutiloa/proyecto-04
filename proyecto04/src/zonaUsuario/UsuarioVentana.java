@@ -118,6 +118,12 @@ public class UsuarioVentana extends JFrame {
 		btnJugar.setEnabled(false);
 		
 		JButton btnBingo = new JButton("BINGO!");
+		btnBingo.setEnabled(false);
+		btnBingo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//AVISA AL ADMINISTRADOR EL BINGO
+			}
+		});
 		pInfDerecha.add(btnBingo, BorderLayout.WEST);
 				
 		
@@ -146,6 +152,7 @@ public class UsuarioVentana extends JFrame {
 		Partida p = ConexionBD.buscarPartidaActiva();
 		if(p==null) {
 			btnJugar.setEnabled(false);
+			btnBingo.setEnabled(false);
 			JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.","", JOptionPane.WARNING_MESSAGE);
 		}else {
 			//boton jugar 
