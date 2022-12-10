@@ -81,7 +81,8 @@ public class ConfiguracionPart extends JFrame {
 			centralBajo.setLayout(new BorderLayout());
 			centralBajo.add(new JLabel("IDLiga"), BorderLayout.WEST);
 			Integer[] ligas = GestionPartidas.getLigas();
-				JComboBox<Integer> CBliga = new JComboBox<Integer>(ligas);					
+				JComboBox<Integer> CBliga = new JComboBox<Integer>(ligas);	
+				CBliga.setSize(200,5);
 				centralBajo.add(CBliga, BorderLayout.EAST);	
 				
 			central.add(centralArriba, BorderLayout.NORTH);	

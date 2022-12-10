@@ -243,6 +243,11 @@ public class GestionPartidas {
 		}
 		
 		Integer[] arrayLigas = new Integer[ligas.size()];
+		int contador = 0;
+		for(Integer i:ligas) {
+			arrayLigas[contador] = i;
+			contador++;
+		}
 		return arrayLigas;
 	}
 
