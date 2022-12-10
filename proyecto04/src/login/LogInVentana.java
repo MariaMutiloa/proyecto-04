@@ -21,6 +21,7 @@ import gestionBD.ConexionBD;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
+import zonaAdministrador.partidaNueva.ConfiguracionPart;
 import zonaRegistroUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
 
@@ -53,6 +54,7 @@ public class LogInVentana extends JFrame {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
 					ConexionBD.realizarConexion("jdbc:sqlite:DatosBingo.db");
+					System.out.println(ConfiguracionPart.getPonderador());
 					
 				} catch (Exception e) {
 					//e.printStackTrace();

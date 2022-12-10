@@ -151,10 +151,10 @@ public class ConfiguracionPart extends JFrame {
 	}
 	
 	
-	private float getPonderador() {
+	public static float getPonderador() {
 		float ponderador = 0;
 		logger.info("Calculando bote correspondiente");
-		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
+		try (FileReader reader = new FileReader("configCostes.properties")) {
             Properties properties = new Properties();
             properties.load(reader);
             
@@ -163,6 +163,7 @@ public class ConfiguracionPart extends JFrame {
 
         } catch (IOException e) {
         	logger.info("No se ha podido acceder al fichero properties");
+        	e.printStackTrace();
         	JOptionPane.showMessageDialog(null, "No se pueden acceder al fichero de propiedades","Error en properties", JOptionPane.WARNING_MESSAGE);
 			 
         }
