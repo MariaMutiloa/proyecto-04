@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import login.LogInVentana;
@@ -92,7 +93,7 @@ public class ConfiguracionPart extends JFrame {
 					btnRefrescar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
-							float boteB = calculoBote(partidaActual.getParticipantes().size());
+							float boteB = getPonderador()*partidaActual.getParticipantes().size()*Carton.costeCarton();
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB);
 						
 						}
@@ -150,10 +151,10 @@ public class ConfiguracionPart extends JFrame {
 	}
 	
 	
-	private float calculoBote(int tamaño) {
+	public static float getPonderador() {
 		float ponderador = 0;
 		logger.info("Calculando bote correspondiente");
-		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
+		try (FileReader reader = new FileReader("configCostes.properties")) {
             Properties properties = new Properties();
             properties.load(reader);
             
@@ -162,9 +163,12 @@ public class ConfiguracionPart extends JFrame {
 
         } catch (IOException e) {
         	logger.info("No se ha podido acceder al fichero properties");
+        	e.printStackTrace();
         	JOptionPane.showMessageDialog(null, "No se pueden acceder al fichero de propiedades","Error en properties", JOptionPane.WARNING_MESSAGE);
 			 
         }
 		 return ponderador;
 	}
+	
+	
 }

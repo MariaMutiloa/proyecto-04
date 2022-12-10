@@ -143,6 +143,7 @@ public class Carton {
 	//PARA SACAR DESDE PROPERTIES EL COSTE DEL CARTON
 	public static float costeCarton() {
 		float coste = 1;
+
 		logger.info("Calculando coste correspondiente");
 		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
             Properties properties = new Properties();

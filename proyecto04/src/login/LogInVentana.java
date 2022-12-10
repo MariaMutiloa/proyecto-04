@@ -21,6 +21,7 @@ import gestionBD.ConexionBD;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
+import zonaAdministrador.partidaNueva.ConfiguracionPart;
 import zonaRegistroUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
 
