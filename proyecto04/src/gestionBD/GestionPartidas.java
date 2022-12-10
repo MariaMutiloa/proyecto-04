@@ -207,7 +207,7 @@ public class GestionPartidas {
 	public static void setGanadorBingo(int idCarton, Partida partida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 3, ganadorB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, ganadorB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
 			actualizacion.executeUpdate();
 			
 			logger.info("Actualizado el ganador");
@@ -218,4 +218,7 @@ public class GestionPartidas {
 		}
 		
 	}
+
+
+
 }
