@@ -1,4 +1,4 @@
-package elementosOrganizacion;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,6 @@ import gestionBD.ConexionBD;
 import personas.Usuario;
 
 public class Carton {
-	
-	public static int IDActual=1; //cada vez que creo un nuevo objeto ese id lo voy a aumentar
-	/*
-	 * PROBLEMA!!!!!!
-	 * TODO EL RATO SE GUARDA EL IDCarton a 1 YA QUE CADA VEZ QUE INICIA EL PROGRAMA SE REESTABLECE EL IDActual a 1
-	 */
 
 	private int IDCarton;
 	private int IDUsuario;
@@ -28,7 +22,7 @@ public class Carton {
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 
 	public Carton(int IDUsuario, int IDPartida) {
-		this.IDCarton = IDActual++;
+		this.IDCarton = ConexionBD.ultimoIDCarton();
 		this.IDUsuario = IDUsuario;
 		this.coste = 2;	//todos los cartones valen 2€
 		this.IDPartida = IDPartida;

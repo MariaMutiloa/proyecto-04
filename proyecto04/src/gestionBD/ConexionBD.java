@@ -1,4 +1,4 @@
-package gestionBD;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -416,6 +416,29 @@ public class ConexionBD {
 		}
 		
 		return p;
+	}
+	
+	
+	public static int ultimoIDCarton() {
+		int IDCarton = 1;
+		try(Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			
+			logger.info("Conectando a la base de datos para buscar ultimo carton.");
+			
+			Statement stmt = conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT last_insert_rowId() AS IDCarton FROM carton");
+			
+			if(rs.next()) {
+				IDCarton = rs.getInt("IDCarton");
+			}
+		}catch (SQLException e) {
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		
+		return IDCarton;
 	}
 
 	
