@@ -161,7 +161,7 @@ public class ConfiguracionPart extends JFrame {
            
 
         } catch (IOException e) {
-            
+        	logger.info("No se ha podido acceder al fichero properties");
         }
 		 return ponderador;
 	}
