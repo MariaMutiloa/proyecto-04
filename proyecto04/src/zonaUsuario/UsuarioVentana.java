@@ -13,12 +13,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Carton;
+import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
 import login.LogInVentana;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import javax.swing.JTable;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class UsuarioVentana extends JFrame {
 
@@ -36,6 +39,13 @@ public class UsuarioVentana extends JFrame {
 		setTitle( "Ventana de usuario" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//PANEL CENTRAL DERECHA
+				//aquí tendremos nuestro carton con los numeros
+				//hay posibilidad de clickar en el numero y se cambie de color 
+		JPanel pCentral = new JPanel();
+		getContentPane().add(pCentral, BorderLayout.CENTER);
+		
+		//PANEL SUPERIOR
 		JPanel pSuperior = new JPanel();
 		pSuperior.setSize(150, 50);
 		pSuperior.setLayout(new GridLayout(1,4));
@@ -75,6 +85,37 @@ public class UsuarioVentana extends JFrame {
 		JPanel pInfDerecha = new JPanel();
 		pInferior.add(pInfDerecha, BorderLayout.EAST);
 		
+		JButton btnJugar = new JButton("JUGAR");
+		btnJugar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//click en boton --> crea carton
+				
+				//CARTON --> hay que general el carton con los numeros
+				
+				Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
+				
+				//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
+				int[][] miCarton = Carton.dibujarCarton();
+				
+				//GUARDO CARTON EN BD (carton)
+				ConexionBD.guardarInfoCartonEnBD(c);
+				
+				//GUARDO CARTON EN BD (numerocarton)
+				ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
+				
+		        MyTableModel tableModel = new MyTableModel(miCarton);
+		        
+				table = new JTable(tableModel);
+				pCentral.add(table);
+				
+				
+			}
+		});
+		pInfDerecha.add(btnJugar);
+		btnJugar.setEnabled(false);
+		
 		JButton btnBingo = new JButton("BINGO!");
 		pInfDerecha.add(btnBingo, BorderLayout.WEST);
 				
@@ -91,11 +132,7 @@ public class UsuarioVentana extends JFrame {
 		
 			
 		
-		//PANEL CENTRAL DERECHA
-		//aquí tendremos nuestro carton con los numeros
-		//hay posibilidad de clickar en el numero y se cambie de color 
-		JPanel pCentral = new JPanel();
-		getContentPane().add(pCentral, BorderLayout.CENTER);
+		
 		
 		
 		/*
@@ -104,26 +141,33 @@ public class UsuarioVentana extends JFrame {
 		 * SI HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
 		 */
 		
-		ConexionBD.buscarPartidaActiva();
 		
+		Partida p = ConexionBD.buscarPartidaActiva();
+		if(p==null) {
+			btnJugar.setEnabled(false);
+		}else {
+			//boton jugar 
+			btnJugar.setEnabled(true);
+			
+		}
 		
-		//CARTON --> hay que general el carton con los numeros
-		
-		Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
-		
-		//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
-		int[][] miCarton = Carton.dibujarCarton();
-		
-		//GUARDO CARTON EN BD (carton)
-		ConexionBD.guardarInfoCartonEnBD(c);
-		
-		//GUARDO CARTON EN BD (numerocarton)
-		ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
-		
-        MyTableModel tableModel = new MyTableModel(miCarton);
-        
-		table = new JTable(tableModel);
-		pCentral.add(table);
+//		//CARTON --> hay que general el carton con los numeros
+//		
+//		Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
+//		
+//		//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
+//		int[][] miCarton = Carton.dibujarCarton();
+//		
+//		//GUARDO CARTON EN BD (carton)
+//		ConexionBD.guardarInfoCartonEnBD(c);
+//		
+//		//GUARDO CARTON EN BD (numerocarton)
+//		ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
+//		
+//        MyTableModel tableModel = new MyTableModel(miCarton);
+//        
+//		table = new JTable(tableModel);
+//		pCentral.add(table);
 		
 		
 		
