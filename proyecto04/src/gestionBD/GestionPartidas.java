@@ -108,7 +108,7 @@ public class GestionPartidas {
 
 	}
 
-
+	//Pone el set activa a 1 para que los usuarios puedan acceder a ella
 	public static void empezada(int idPartida, int IDLiga) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
@@ -124,7 +124,7 @@ public class GestionPartidas {
 		
 	}
 
-
+	//Revisa si hay algun jusgardor que haya cantado bingo
 	public static int revisar() {
 		int IDGanador = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -177,7 +177,7 @@ public class GestionPartidas {
 		
 	}
 
-
+	//Estrae el cartón con un ID especifico
 	public static Carton getCarton(int ganadorB) {
 			Carton ganador = null;
 			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -203,7 +203,7 @@ public class GestionPartidas {
 			return ganador;
 	}
 
-
+	//Añade a la BD el ganador del bingo
 	public static void setGanadorBingo(int idCarton, Partida partida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
