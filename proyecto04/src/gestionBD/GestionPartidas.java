@@ -224,6 +224,7 @@ public class GestionPartidas {
 
 	public static Integer[] getLigas() {
 		Set<Integer> ligas = new TreeSet<Integer>();
+		logger.info("Extrayendo las ligas creadas");
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
 
@@ -232,10 +233,10 @@ public class GestionPartidas {
 
 			
 			while(rs.next()) {
-				
+				ligas.add(rs.getInt(1));
 			}
 			
-			logger.info("Extrayendo las ligas creadas");
+			logger.info("Ligas extraidas");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"No se han podido extraer las ligas", "Error", JOptionPane.ERROR_MESSAGE);
