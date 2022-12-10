@@ -111,17 +111,18 @@ public class PartidaNueva extends JFrame {
 		
 	}
 	
-	//Extre nuevo numero random, lo muestra por pantalla y lo añade a lal base de datos
+	//Extre nuevo numero random, lo muestra por pantalla y lo añade a la base de datos
 	private void actualizar() {
 		logger.info("Extrayendo nuevo número");
 	    int nuevoNumero = numeroRandom(); 
 	    numeros.add(nuevoNumero);
 	    GestionPartidas.añadirNumero(nuevoNumero, numeros.indexOf(nuevoNumero), partidaActual.getIDPartida());
 	    String number = String.valueOf(nuevoNumero);
-	   	char[] digits = number.toCharArray();
+	   	String[] digits = number.split("(?<=.)");
+	   	System.out.println(digits);
 	   	logger.info("Numero nuevo conseguido");
 	    if(digits.length == 1) {
-	    	decenas.setIcon(this.imagenNumero(0));
+	    	decenas.setIcon(this.imagenNumero(Integer.toString(0)));
 	    	unidades.setIcon(this.imagenNumero(digits[0]));
 	    }else {
 	    	decenas.setIcon(this.imagenNumero(digits[0]));
@@ -141,12 +142,12 @@ public class PartidaNueva extends JFrame {
 	}
 
 	//Extrae las imagenes correspondientes al numero
-	private Icon imagenNumero(int i) {
+	private Icon imagenNumero(String i) {
 		Icon icono = null;
 		logger.info("Buscando imagen correspondiente a " +i);
-		if(i > 9) {				
+		if(Integer.parseInt(i)>9) {				
 			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
-		}else if (i == 0){
+		}else if (Integer.parseInt(i) == 0){
 			icono = new ImageIcon(getClass().getResource("/0.jpeg"));
 		}else {
 			icono = new ImageIcon(getClass().getResource("/"+String.valueOf(i) + ".jpg") );
