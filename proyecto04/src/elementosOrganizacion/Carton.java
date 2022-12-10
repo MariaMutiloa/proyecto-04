@@ -30,7 +30,6 @@ public class Carton {
 		this.IDCarton = ConexionBD.ultimoIDCarton();
 		this.IDUsuario = IDUsuario;
 		this.coste = costeCarton();
-		//this.coste = 2;	//todos los cartones valen 2€
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
@@ -143,7 +142,8 @@ public class Carton {
 	
 	//PARA SACAR DESDE PROPERTIES EL COSTE DEL CARTON
 	public static float costeCarton() {
-		float coste = 0;
+		float coste = 1;
+
 		logger.info("Calculando coste correspondiente");
 		try (FileReader reader = new FileReader("configuracion/configCostes.properties")) {
             Properties properties = new Properties();
