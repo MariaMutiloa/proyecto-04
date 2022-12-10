@@ -54,7 +54,6 @@ public class LogInVentana extends JFrame {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
 					ConexionBD.realizarConexion("jdbc:sqlite:DatosBingo.db");
-					System.out.println(ConfiguracionPart.getPonderador());
 					
 				} catch (Exception e) {
 					//e.printStackTrace();
