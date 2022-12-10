@@ -3,7 +3,7 @@ package personas;
 public class Usuario extends Persona{
 	
 	private int idLigaActual;
-	private int bote;
+	private float bote;
 	
 	public Usuario(int dni, String nombre, String apellido, String usuario, String contrasena, int idLigaActual,
 			int bote) {
@@ -20,12 +20,12 @@ public class Usuario extends Persona{
 		this.idLigaActual = idLigaActual;
 	}
 
-	public int getBote() {
+	public float getBote() {
 		return bote;
 	}
 
-	public void setBote(int bote) {
-		this.bote = bote;
+	public void setBote(float f) {
+		this.bote = f;
 	}
 
 	@Override

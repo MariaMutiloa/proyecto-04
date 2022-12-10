@@ -18,12 +18,15 @@ public class Comprobar implements Runnable {
 		super();
 		this.cartonGanador = GestionPartidas.getCarton(ganadorB);
 		this.numeros = lista;
+		this.partida = partidaNueva;
 	}
 
 	@Override
 	public void run() {
 		if(numeros.containsAll(cartonGanador.getListaNumeros())){
 			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual());
+			float bote = cartonGanador.getPropietario().getBote();
+			(cartonGanador.getPropietario()).setBote(bote+partida.getPartidaActual().getBoteBingo());
 			int result = JOptionPane.showConfirmDialog(null, "El bingo es correcto. Partida terminada. ¿Quiere guardar un resumen?");
 			switch (result) {
 	         case JOptionPane.YES_OPTION:
