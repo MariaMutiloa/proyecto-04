@@ -206,4 +206,5 @@ public class UsuarioVentana extends JFrame {
 //		
 //	}
 
+	
 }
