@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -220,7 +222,30 @@ public class GestionPartidas {
 	}
 
 
-	
+	public static Integer[] getLigas() {
+		Set<Integer> ligas = new TreeSet<Integer>();
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			
+
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM LIGA");
+
+			
+			while(rs.next()) {
+				
+			}
+			
+			logger.info("Extrayendo las ligas creadas");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null,"No se han podido extraer las ligas", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido acceder a la base de datos");
+		}
+		
+		Integer[] arrayLigas = new Integer[ligas.size()];
+		return arrayLigas;
+	}
+
 
 
 }

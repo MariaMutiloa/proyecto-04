@@ -4,12 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -78,9 +80,9 @@ public class ConfiguracionPart extends JFrame {
 			JPanel centralBajo = new JPanel();	
 			centralBajo.setLayout(new BorderLayout());
 			centralBajo.add(new JLabel("IDLiga"), BorderLayout.WEST);
-				JTextField txtLiga = new JTextField();					
-				txtLiga.setColumns(25);
-				centralBajo.add(txtLiga, BorderLayout.EAST);	
+			Integer[] ligas = GestionPartidas.getLigas();
+				JComboBox<Integer> CBliga = new JComboBox<Integer>(ligas);					
+				centralBajo.add(CBliga, BorderLayout.EAST);	
 				
 			central.add(centralArriba, BorderLayout.NORTH);	
 			central.add(centralBajo, BorderLayout.SOUTH);	
@@ -104,11 +106,11 @@ public class ConfiguracionPart extends JFrame {
 					JButton btnEmpezar = new JButton("Empezar Partida");
 					btnEmpezar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							if (txtLiga.getText().equals("") || txtBingo.getText().equals("")) {
+							if (txtBingo.getText().equals("")) {
 								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
 				
 							} else {
-								GestionPartidas.empezada(partidaActual.getIDPartida(), Integer.parseInt(txtLiga.getText()));
+								GestionPartidas.empezada(partidaActual.getIDPartida(), (Integer)CBliga.getSelectedItem());
 								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
 								nuevaVentana.setVisible(true);
 								ConfiguracionPart.this.dispose();	  
