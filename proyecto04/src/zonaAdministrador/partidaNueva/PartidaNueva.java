@@ -42,7 +42,7 @@ public class PartidaNueva extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 350, 250);
+		setBounds(100, 100, 450, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
@@ -63,11 +63,11 @@ public class PartidaNueva extends JFrame {
 		});
 		superior.add(btnVolver, BorderLayout.EAST);
 		
-		JPanel inferior = new JPanel();
+		JPanel central = new JPanel();
 		
 			//Panel izquierda con tabla de participantes
 			JTable tablaCartones = new JTable();
-			inferior.add(tablaCartones, BorderLayout.WEST);
+			central.add(tablaCartones, BorderLayout.WEST);
 			GestionPartidas.participantes(partidaActual.getIDPartida());
 		
 		
@@ -79,7 +79,7 @@ public class PartidaNueva extends JFrame {
 				numero.add(decenas, BorderLayout.WEST);
 				numero.add(unidades, BorderLayout.EAST);
 				derecha.add(numero, BorderLayout.NORTH);
-			inferior.add(derecha, BorderLayout.EAST);	
+			central.add(derecha, BorderLayout.EAST);	
 			
 			btnNuevoNum.addActionListener(new ActionListener() {
 
@@ -105,6 +105,29 @@ public class PartidaNueva extends JFrame {
 				
 			});
 		
+		JPanel inferior = new JPanel();
+		JButton btnFinalizar = new JButton("Finalizar Partida");
+		btnFinalizar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int result = JOptionPane.showConfirmDialog(null, "Aún no se ha cantado bingo, ¿Seguro que quieres terminar la partida?");
+			    switch (result) {
+			         case JOptionPane.YES_OPTION:
+			        	 GestionPartidas.setGanadorBingo(0, partidaActual);
+			        	 parent.setVisible(true);
+			        	 PartidaNueva.this.dispose();
+			        	 break;
+			         case JOptionPane.NO_OPTION:
+			        	 break;
+			      }
+				
+			}
+			
+		});
+		inferior.add(btnFinalizar, BorderLayout.CENTER);
+			
+		contentPane.add(central, BorderLayout.CENTER);
 		contentPane.add(inferior, BorderLayout.SOUTH);
 		contentPane.setVisible(true);
 		setContentPane(contentPane);

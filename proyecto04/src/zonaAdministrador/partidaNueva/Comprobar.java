@@ -43,8 +43,10 @@ public class Comprobar implements Runnable {
 	        	 resumen();
 	         break;
 	         case JOptionPane.NO_OPTION:
-	         break;	 
-	      }
+	         break;	  
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
