@@ -29,7 +29,7 @@ public class Carton {
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
 		this.IDCarton = IDCarton;
 		this.IDUsuario = IDUsuario;
-		this.coste = 6;
+		this.coste = 2;
 		//this.coste = costeCarton();
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1

@@ -42,7 +42,7 @@ public class CartonTest {
 
 	@Test
 	public void testGetListaNumeros() {
-		Carton obj = new Carton(1,1);
+		Carton obj = new Carton(1,1,1);
 		List<Integer> listaNumeros = obj.getListaNumeros();
 		assertEquals(15, listaNumeros.size());
 	}
