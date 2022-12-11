@@ -313,7 +313,7 @@ public class ConexionBD {
 	}
 	
 	
-	public static void insertarCartonEnBD(int[][] miCarton, int IDCarton) {
+	public static void insertarNumerosDelCarton(int[][] miCarton, int IDCarton) {
 
 		logger.info("Insertando en la BD los numeros del carton " + IDCarton);
 
@@ -346,36 +346,50 @@ public class ConexionBD {
 	
 	
 	//PARA GUARDAR EL CARTON EN LA BD EN LA TABLA carton
-	public static void guardarInfoCartonEnBD(Carton c) {
-
-		logger.info("Insertando en la BD el carton número " + c.getIDCarton());
+	public static int cartonNuevo(int IDUsuario, int IDPartida) {
+		int IDCarton = 0; 
+		logger.info("Insertando en la BD el carton nuevo");
 
 		try {
 			Connection conn = DriverManager.getConnection(connexion);
 			
 			PreparedStatement stmt = conn.prepareStatement(
-					"INSERT INTO carton (IDCarton, IDUsuario, Coste, IDPartida, Bingo) VALUES (?,?,?,?,?)");
+					"INSERT INTO carton (IDUsuario, IDPartida, Coste) VALUES (?,?,?)");
 
 			//metemos los valores en los ?
-			stmt.setInt(1, c.getIDCarton());
-			stmt.setInt(2, c.getIDUsuario());
-			stmt.setFloat(3, c.getCoste());
-			stmt.setInt(4, c.getIDPartida());
-			stmt.setInt(5, c.getBingo());
+			stmt.setInt(1, IDUsuario);
+			stmt.setInt(2, IDPartida);
+			stmt.setFloat(3, 6);
+			//stmt.setFloat(3, Carton.costeCarton()); ahora no funciona
 			
 			//ejecutamos sentencia
 			stmt.executeUpdate();
-			logger.info("Carton "+ c.getIDCarton() + " guardado en la base de datos.");
+			logger.info("Carton guardado en la base de datos.");
 			
 			stmt.close();
 			conn.close();
-
+			
+			Statement stmt2 = conn.createStatement();
+			
+			ResultSet rs = stmt2.executeQuery("SELECT last_insert_rowId() AS IDCarton FROM carton");
+			
+			if(rs.next()) {
+				IDCarton = rs.getInt("IDCarton");
+			}
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
+		if(IDCarton!= 0) {
+			return IDCarton;
+		}else {
+			logger.log(Level.SEVERE, "No se ha podido extraer el ID del cartón");
+			return IDCarton;
+		}
+		
+		
 	}
 	
 	public static Partida buscarPartidaActiva(){
@@ -437,30 +451,6 @@ public class ConexionBD {
 		}
 		
 		return p;
-	}
-	
-	
-	public static int ultimoIDCarton() {
-		int IDCarton = 0;
-		try(Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
-			
-			logger.info("Conectando a la base de datos para buscar ultimo carton.");
-			
-			Statement stmt = conn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT last_insert_rowId() AS IDCarton FROM carton");
-			
-			if(rs.next()) {
-				IDCarton = rs.getInt("IDCarton");
-				System.out.println(IDCarton);
-			}
-		}catch (SQLException e) {
-			//e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
-		}
-		
-		return IDCarton;
 	}
 
 	

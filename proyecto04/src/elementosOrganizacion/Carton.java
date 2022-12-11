@@ -26,20 +26,16 @@ public class Carton {
 	
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 
-	public Carton(int IDUsuario, int IDPartida) {
-		this.IDCarton = ConexionBD.ultimoIDCarton();
+	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
+		this.IDCarton = IDCarton;
 		this.IDUsuario = IDUsuario;
-		this.coste = costeCarton();
+		this.coste = 6;
+		//this.coste = costeCarton();
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
 		this.propietario = ConexionBD.buscarUsuarioPorID(IDUsuario);
 	}
 	
-	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
-		this.IDCarton=IDCarton;
-		this.IDUsuario=IDUsuario;
-		this.IDPartida=IDPartida;
-	}
 	
 
 	// METODO GUARDA LOS NUMEROS DEL CARTON EN UNA LISTA
