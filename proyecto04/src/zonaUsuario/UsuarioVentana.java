@@ -127,6 +127,7 @@ public class UsuarioVentana extends JFrame {
 				
 				table.setVisible(true);
 				pCentral.add(table);
+				pCentral.setVisible(true);
 				
 				
 			}
