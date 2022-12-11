@@ -40,7 +40,7 @@ public class UsuarioVentana extends JFrame {
 		setTitle( "Ventana de usuario" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//PANEL CENTRAL DERECHA
+		//PANEL CENTRAL
 				//aquí tendremos nuestro carton con los numeros
 				//hay posibilidad de clickar en el numero y se cambie de color 
 		pCentral = new JPanel();
@@ -104,6 +104,7 @@ public class UsuarioVentana extends JFrame {
 				ConexionBD.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
 				
 		        MyTableModel tableModel = new MyTableModel(miCarton);
+		        table = new JTable(tableModel);
 		        table.setDefaultRenderer(Object.class, new RendererTabla(datosColores));
 		        datosColores = new int[3][5];
 				table.addMouseListener(new MouseAdapter() {
@@ -123,7 +124,8 @@ public class UsuarioVentana extends JFrame {
 					    table.repaint();
 						}
 					});
-				table = new JTable(tableModel);
+				
+				table.setVisible(true);
 				pCentral.add(table);
 				
 				
