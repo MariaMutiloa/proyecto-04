@@ -91,8 +91,6 @@ public class UsuarioVentana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//click en boton --> crea carton
-				//CARTON --> hay que general el carton con los numeros
 				
 				//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
 				int[][] miCarton = Carton.dibujarCarton();
@@ -100,7 +98,6 @@ public class UsuarioVentana extends JFrame {
 				//GUARDO CARTON EN BD (carton)
 				int idCarton = ConexionBD.cartonNuevo(u.getDni(), 1);//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA	
 				Carton c = new Carton(idCarton, u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
-				
 				
 				
 				//GUARDO CARTON EN BD (numerocarton)

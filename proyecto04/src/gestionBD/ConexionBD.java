@@ -367,16 +367,17 @@ public class ConexionBD {
 			logger.info("Carton guardado en la base de datos.");
 			
 			stmt.close();
+			
+			Statement stmtForId = conn.createStatement();
+			
+			ResultSet rs = stmtForId.executeQuery("SELECT last_insert_rowId() AS IDCarton FROM carton");
+			
+			if (rs.next()) {
+				IDCarton = rs.getInt("IDCarton");
+				System.out.println(IDCarton);
+			}
 			conn.close();
 			
-			Statement stmt2 = conn.createStatement();
-			
-			ResultSet rs = stmt2.executeQuery("SELECT last_insert_rowId() AS IDCarton FROM carton");
-			
-			if(rs.next()) {
-				IDCarton = rs.getInt("IDCarton");
-			}
-
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
