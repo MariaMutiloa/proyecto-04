@@ -12,6 +12,12 @@ public class MyTableModel extends AbstractTableModel {
 		this.carton = carton;
 	}
 
+	//Para eliminar el hecho de que sea editable
+	@Override
+	public boolean isCellEditable(int fila, int columna) {
+		return false; 
+	}
+	
 	
 	// Para saber el total de filas que tiene que mostrar 
 	//en la tabla

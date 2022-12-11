@@ -32,6 +32,7 @@ public class UsuarioVentana extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JPanel pCentral;
+	private int[][] datosColores;
 	
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 	
@@ -107,7 +108,25 @@ public class UsuarioVentana extends JFrame {
 				ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
 				
 		        MyTableModel tableModel = new MyTableModel(miCarton);
-		        
+		        table.setDefaultRenderer(Object.class, new RendererTabla(datosColores));
+		        datosColores = new int[3][5];
+				table.addMouseListener(new MouseAdapter() {
+					public void mousePressed(MouseEvent e) {
+					    // Get the index of the selected row
+					    int row = table.getSelectedRow();
+
+					    // Get the index of the selected column
+					    int col = table.getSelectedColumn();
+					    if (datosColores[row][col] == 1) {
+					    	datosColores[row][col] = 0;
+					    }else {
+					    	datosColores[row][col] = 1;
+					    }
+					    
+					    
+					    table.repaint();
+						}
+					});
 				table = new JTable(tableModel);
 				pCentral.add(table);
 				
