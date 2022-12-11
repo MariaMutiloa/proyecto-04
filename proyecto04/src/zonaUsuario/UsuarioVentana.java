@@ -11,14 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
 import login.LogInVentana;
 import personas.Usuario;
-import zonaAdministrador.VentanaPrincipalAdmin;
 import javax.swing.JTable;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
