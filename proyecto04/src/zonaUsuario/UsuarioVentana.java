@@ -124,24 +124,7 @@ public class UsuarioVentana extends JFrame {
 			//boton jugar 
 			btnJugar.setEnabled(true);
 		
-		
-//		//CARTON --> hay que general el carton con los numeros
-//		
-//		Carton c = new Carton(u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
-//		
-//		//RELLENA EL CARTON CON LOS NUMEROS ALEATORIOS
-//		int[][] miCarton = Carton.dibujarCarton();
-//		
-//		//GUARDO CARTON EN BD (carton)
-//		ConexionBD.guardarInfoCartonEnBD(c);
-//		
-//		//GUARDO CARTON EN BD (numerocarton)
-//		ConexionBD.insertarCartonEnBD(miCarton, c.getIDCarton());		
-//		
-//        MyTableModel tableModel = new MyTableModel(miCarton);
-//        
-//		table = new JTable(tableModel);
-//		pCentral.add(table);
+		}
 		
 		
 		
