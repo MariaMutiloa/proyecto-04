@@ -64,11 +64,11 @@ public class CartonVentana extends JFrame {
 		ConexionBD.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
+        datosColores = new int[3][5];
         table = new JTable(tableModel);
         table.setFont(new Font("Tahoma", Font.PLAIN, 24));
         table.setRowHeight(50);
         table.setDefaultRenderer(Object.class, new RendererTabla(datosColores));
-        //datosColores = new int[3][5];
 		table.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 			    // Get the index of the selected row

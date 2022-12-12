@@ -18,6 +18,7 @@ public class RendererTabla extends DefaultTableCellRenderer {
 		this.pintar = datosColores;
 	}
 	
+	
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,boolean hasFocus, int row,int column) {
 		JLabel label = new JLabel();
