@@ -116,18 +116,14 @@ public class UsuarioVentana extends JFrame {
 		 * SI NO HAY PARTIDA ACTIVA --> NO PUEDE COMPRAR NINGUN CARTON
 		 * SI HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
 		 */
-		
-		
 		Partida p = ConexionBD.buscarPartidaActiva();
-		if(p==null) {
+		if (p.equals(null)) {
 			btnJugar.setEnabled(false);
 			JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.","", JOptionPane.WARNING_MESSAGE);
 		}else {
 			//boton jugar 
 			btnJugar.setEnabled(true);
-			
-			
-		}
+		
 		
 //		//CARTON --> hay que general el carton con los numeros
 //		
