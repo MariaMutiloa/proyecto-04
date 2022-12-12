@@ -67,7 +67,7 @@ public class CartonVentana extends JFrame {
         table = new JTable(tableModel);
         table.setFont(new Font("Tahoma", Font.PLAIN, 24));
         table.setRowHeight(50);
-        table.setDefaultRenderer(Object.class, new RendererTabla(miCarton));
+        table.setDefaultRenderer(Object.class, new RendererTabla(datosColores));
         //datosColores = new int[3][5];
 		table.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -76,10 +76,10 @@ public class CartonVentana extends JFrame {
 
 			    // Get the index of the selected column
 			    int col = table.getSelectedColumn();
-			    if (miCarton[row][col] == 1) {
-			    	miCarton[row][col] = 0;
+			    if (datosColores[row][col] == 1) {
+			    	datosColores[row][col] = 0;
 			    }else {
-			    	miCarton[row][col] = 1;
+			    	datosColores[row][col] = 1;
 			    }
 			    
 			    

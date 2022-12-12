@@ -21,7 +21,7 @@ public class RendererTabla extends DefaultTableCellRenderer {
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,boolean hasFocus, int row,int column) {
 		JLabel label = new JLabel();
-		label.setText(value.toString());
+		label.setText(((Object)value).toString());
 		if(pintar[row][column] == 1) {
 			label.setOpaque(true);
 			label.setBackground(Color.CYAN);
