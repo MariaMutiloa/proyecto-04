@@ -359,7 +359,8 @@ public class ConexionBD {
 			//metemos los valores en los ?
 			stmt.setInt(1, IDUsuario);
 			stmt.setInt(2, IDPartida);
-			stmt.setFloat(3, 6);
+			stmt.setFloat(3, 2);
+			//stmt.setFloat(3, carton.coste --> properties)
 			
 			//ejecutamos sentencia
 			stmt.executeUpdate();

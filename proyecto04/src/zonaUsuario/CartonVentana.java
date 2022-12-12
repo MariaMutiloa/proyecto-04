@@ -92,6 +92,9 @@ public class CartonVentana extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				c.setBingo(1);
 				ConexionBD.actualizarBingoBD(c.getIDCarton());
+				
+				//JOPTIONPANE comprobando bingo
+				
 			}
 		});
 		mitad.add(btnBingo);

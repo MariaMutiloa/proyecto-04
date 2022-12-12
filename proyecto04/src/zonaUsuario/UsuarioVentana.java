@@ -108,6 +108,9 @@ public class UsuarioVentana extends JFrame {
 				CartonVentana c = new CartonVentana(u, p);
 				c.setVisible(true);
 				
+				//POR COMPRAR UN CARTON LA CARTERA DEL USUARIO BAJA
+				
+				
 			}
 		});
 		pInfDerecha.add(btnJugar);
