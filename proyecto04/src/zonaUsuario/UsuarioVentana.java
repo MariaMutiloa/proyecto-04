@@ -29,6 +29,7 @@ public class UsuarioVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable table;
+	private JButton btnJugar;
 
 	private int[][] datosColores;
 	
@@ -82,19 +83,7 @@ public class UsuarioVentana extends JFrame {
 		JPanel pInfDerecha = new JPanel();
 		pInferior.add(pInfDerecha, BorderLayout.EAST);
 		
-		JButton btnJugar = new JButton("JUGAR");
-		btnJugar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				//ABRE VENTANA DEL CARTON
-				CartonVentana c = new CartonVentana(u);
-				c.setVisible(true);
-				
-			}
-		});
-		pInfDerecha.add(btnJugar);
-		btnJugar.setEnabled(false);
+		
 				
 		//PANEL CENTRAL
 		//aqui va a salir el número en grande y también podremos ver qué numeros han salido hasta ahora
@@ -108,15 +97,28 @@ public class UsuarioVentana extends JFrame {
 		
 		//LISTA CON TODOS LOS NUMEROS QUE HAN SALIDO
 		
+		Partida p = ConexionBD.buscarPartidaActiva();
 		
-		
+		btnJugar = new JButton("JUGAR");
+		btnJugar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//ABRE VENTANA DEL CARTON
+				CartonVentana c = new CartonVentana(u, p);
+				c.setVisible(true);
+				
+			}
+		});
+		pInfDerecha.add(btnJugar);
+		btnJugar.setEnabled(false);
 		
 		/*
 		 * TIENE QUE HABER UNA COMPROBARCION CON LA BASE DE DATOS Y MIRAR SI HAY ALGUNA PARTIDA ACTIVA
 		 * SI NO HAY PARTIDA ACTIVA --> NO PUEDE COMPRAR NINGUN CARTON
 		 * SI HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
 		 */
-		Partida p = ConexionBD.buscarPartidaActiva();
+		
 		if (p.equals(null)) {
 			btnJugar.setEnabled(false);
 			JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.","", JOptionPane.WARNING_MESSAGE);
@@ -125,6 +127,8 @@ public class UsuarioVentana extends JFrame {
 			btnJugar.setEnabled(true);
 		
 		}
+		
+		
 		
 		
 		

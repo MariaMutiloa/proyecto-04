@@ -360,7 +360,6 @@ public class ConexionBD {
 			stmt.setInt(1, IDUsuario);
 			stmt.setInt(2, IDPartida);
 			stmt.setFloat(3, 6);
-			//stmt.setFloat(3, Carton.costeCarton()); ahora no funciona
 			
 			//ejecutamos sentencia
 			stmt.executeUpdate();
@@ -405,7 +404,6 @@ public class ConexionBD {
 		try(Connection conn = DriverManager.getConnection(connexion)){
 			
 			Statement stmt = conn.createStatement();
-			//ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE Activa=1");
 			
 			ResultSet rs =stmt.executeQuery("SELECT * FROM partida");
 			
@@ -424,23 +422,7 @@ public class ConexionBD {
 					encontrado=1;
 					
 				}
-			}
-			
-//			if(!rs.next()) {	//NO HAY NINGUN SELECT
-//				logger.info("No hay ninguna partida activa, prueba en otro momento.");
-//			}else {
-//				while(rs.next()) {
-//					int idPartida = rs.getInt(1);
-//					int activa = rs.getInt(2);
-//					int premioB = rs.getInt(3);
-//					int idLiga = rs.getInt(4);
-//					int idCartonB = rs.getInt(5);
-//					
-//					p = new Partida(idPartida, activa, premioB, idLiga, idCartonB);
-//					logger.info("Partida activa encontrada: "+ idPartida);
-//				}
-//			}
-			
+			}			
 			
 			rs.close();
 			stmt.close();
@@ -454,6 +436,21 @@ public class ConexionBD {
 		return p;
 	}
 
+	//ACTUALIZAR TABLA CARTON COLUMNA BINGO
+	public static void actualizarBingoBD(int IDCarton) {
+		
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+			
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 1 WHERE IDCarton = "+ IDCarton);
+			actualizacion.executeUpdate();
+			
+			logger.info("Actualizado el bingo");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
+		
+	}
 	
 	
 

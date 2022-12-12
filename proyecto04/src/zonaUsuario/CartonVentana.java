@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Carton;
+import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
 import personas.Usuario;
 
@@ -30,22 +31,11 @@ public class CartonVentana extends JFrame {
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 
 
-	public CartonVentana(Usuario u) {
+	public CartonVentana(Usuario u, Partida p) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 576, 240);
 		setTitle("Tu carton");
-		
-		JPanel pInferior = new JPanel();
-		pInferior.setLayout(new GridLayout(1,2));
-		getContentPane().add(pInferior, BorderLayout.SOUTH);
-		
-		JPanel mitad = new JPanel();
-		pInferior.add(mitad, BorderLayout.CENTER);
-		
-		JButton btnBingo = new JButton("BINGO!");
-		mitad.add(btnBingo);
-		
-		
+				
 		 
 		//AQUI SE VA A VER EL CARTON
 		JPanel pCentral = new JPanel();
@@ -55,9 +45,9 @@ public class CartonVentana extends JFrame {
 		int[][] miCarton = Carton.dibujarCarton();
 		
 		//GUARDO CARTON EN BD (carton)
-		int idCarton = ConexionBD.cartonNuevo(u.getDni(), 1);//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA	
+		int idCarton = ConexionBD.cartonNuevo(u.getDni(), p.getIDPartida());
 		
-		Carton c = new Carton(idCarton, u.getDni(), 1);	//HE PUESTO IDPartida "1", PERO ESTO DESPUES SERA UNA VARIALBE, DEPENDIENDO DE QUÉ PARTIDA ESTÉ ACTIVA
+		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida());	
 		
 		
 		//GUARDO CARTON EN BD (numerocarton)
@@ -88,6 +78,24 @@ public class CartonVentana extends JFrame {
 			});
 		pCentral.add(table);
 
+		
+		JPanel pInferior = new JPanel();
+		pInferior.setLayout(new GridLayout(1,2));
+		getContentPane().add(pInferior, BorderLayout.SOUTH);
+		
+		JPanel mitad = new JPanel();
+		pInferior.add(mitad, BorderLayout.CENTER);
+		
+		JButton btnBingo = new JButton("BINGO!");
+		btnBingo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				c.setBingo(1);
+				ConexionBD.actualizarBingoBD(c.getIDCarton());
+			}
+		});
+		mitad.add(btnBingo);
+		
 		
 		}
 	
