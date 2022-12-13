@@ -155,7 +155,7 @@ public class ConfiguracionPart extends JFrame {
 	public static float getPonderador() {
 		float ponderador = 0;
 		logger.info("Calculando bote correspondiente");
-		try (FileReader reader = new FileReader("configCostes.properties")) {
+		try (FileReader reader = new FileReader("src/configuracion/configCostes.properties")) {
             Properties properties = new Properties();
             properties.load(reader);
             
