@@ -104,6 +104,7 @@ public class RegistroUsuarioVentana extends JFrame {
 		txtDni.setBounds(160, 122, 185, 22);
 		txtDni.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtDni.setColumns(10);
+		txtDni.setToolTipText("SIN LETRA");
 		pCentral.add(txtDni);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
