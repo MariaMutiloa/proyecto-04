@@ -359,8 +359,8 @@ public class ConexionBD {
 			//metemos los valores en los ?
 			stmt.setInt(1, IDUsuario);
 			stmt.setInt(2, IDPartida);
-			stmt.setFloat(3, 2);
-			//stmt.setFloat(3, carton.coste --> properties)
+			//stmt.setFloat(3, 2);
+			stmt.setFloat(3, Carton.costeCarton()); //desde properties
 			
 			//ejecutamos sentencia
 			stmt.executeUpdate();
@@ -374,7 +374,7 @@ public class ConexionBD {
 			
 			if (rs.next()) {
 				IDCarton = rs.getInt("IDCarton");
-				System.out.println(IDCarton);
+				//System.out.println(IDCarton);
 			}
 			conn.close();
 			
