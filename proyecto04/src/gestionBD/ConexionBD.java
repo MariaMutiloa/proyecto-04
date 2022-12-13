@@ -453,6 +453,22 @@ public class ConexionBD {
 		
 	}
 	
+	//ACTUALIZAR TABLA CARTON COLUMNA BINGO
+		public static void actualizarCarteraBD(int IDUsuario, float cartera) {
+			
+			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+				
+				PreparedStatement actualizacion = con.prepareStatement("UPDATE usuario SET Bote =" +cartera+ " WHERE DNI = "+ IDUsuario);
+				actualizacion.executeUpdate();
+				
+				logger.info("Actualizado el bote del usuario");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+			}
+			
+		}
+	
 	
 
 }

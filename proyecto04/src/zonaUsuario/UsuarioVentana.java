@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -104,11 +105,30 @@ public class UsuarioVentana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				//ABRE VENTANA DEL CARTON
-				CartonVentana c = new CartonVentana(u, p);
-				c.setVisible(true);
-				
-				//POR COMPRAR UN CARTON LA CARTERA DEL USUARIO BAJA
+				//SALE JOptionPane diciendo si confirmar compra carton o no
+				int confirmado = JOptionPane.showConfirmDialog(null, "El carton cuesta "+ Carton.costeCarton() +"€\n¿Quieres comprar un carton?");
+
+						if (JOptionPane.OK_OPTION == confirmado) {
+							logger.info("El usuario ha aceptado comprar carton.");
+							
+							//POR COMPRAR UN CARTON(bote) LA CARTERA DEL USUARIO BAJA
+							//comprar si tiene dinero suficiente y bajar cartera
+							boolean suficienteDinero=comprobarSuficienteDinero(u);
+							if(suficienteDinero) {
+								//bajar cartera + actualizar en BD
+								Carton.bajarCartera(u);
+								lblCartera.setText("Cartera: "+u.getBote()+" €");
+								
+								//ABRE VENTANA DEL CARTON
+								CartonVentana c = new CartonVentana(u, p);
+								c.setVisible(true);
+								logger.info("Abro carton");
+							}
+							
+							
+						}else {
+							logger.info("El usuario no quiere comprar carton");
+						}
 				
 				
 			}
@@ -134,9 +154,19 @@ public class UsuarioVentana extends JFrame {
 		
 		
 		
+	}
+	
+	public static boolean comprobarSuficienteDinero(Usuario u) {
+		float precioCarton = Carton.costeCarton();
+		float carteraUsuario = u.getBote();
 		
-		
-		
+		if(carteraUsuario>=precioCarton) {
+			logger.info("Tiene suficiente dinero.");
+			return true;
+		}else {
+			logger.log(Level.WARNING, "No tiene suficiente dinero.");
+			return false;
+		}
 	}
 
 

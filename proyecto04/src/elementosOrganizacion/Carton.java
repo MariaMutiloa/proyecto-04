@@ -155,6 +155,19 @@ public class Carton {
 		 return coste;
 	}
 	
+	//AL COMPRAR CARTON SE ME BAJA LA CARTERA(bote)
+	public static void bajarCartera(Usuario u) {
+		float precioCarton = costeCarton();
+		float nuevoBote = u.getBote()-precioCarton;
+		u.setBote(nuevoBote);
+		
+		//GUARDAR EN BD
+		ConexionBD.actualizarCarteraBD(u.getDni(), nuevoBote);
+		logger.info("Cartera actualizada");
+		
+		
+	}
+	
 	
 
 
