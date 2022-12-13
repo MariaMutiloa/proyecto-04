@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import elementosOrganizacion.Carton;
 import gestionBD.ConexionBD;
 import personas.Administrador;
 import personas.Usuario;
