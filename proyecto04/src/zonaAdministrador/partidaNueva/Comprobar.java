@@ -53,11 +53,16 @@ public class Comprobar implements Runnable {
 	
 	//Escribir en un fichero los datos de la partida
 	private void resumen() {
+		File file = null; 
 		JFileChooser fileChooser = new JFileChooser();
         // solo se admiten ficheros con extensión ".txt"
         FileFilter filter = new FileNameExtensionFilter("Fichero TXT", "txt");
         fileChooser.setFileFilter(filter);
-		File file = fileChooser.getSelectedFile();
+        int chooser = fileChooser.showSaveDialog(fileChooser);
+		if (chooser == JFileChooser.APPROVE_OPTION) {
+			fileChooser.getSelectedFile();
+			file = fileChooser.getSelectedFile();
+		}	
 		try (BufferedWriter bf = new BufferedWriter(new FileWriter(file))){
 			bf.write("Resumen partida "+ partida.getPartidaActual().getIDPartida()+"\n");
 			bf.write("Ha habido un total de "+partida.getPartidaActual().getParticipantes().size()+" cartones jugando");
