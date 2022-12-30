@@ -2,6 +2,7 @@ package zonaAdministrador.GestionUsuarios;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.GraphicsConfiguration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import personas.Administrador;
+import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 import zonaRegistroUsuario.RegistroUsuarioVentana;
@@ -20,6 +23,7 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 	private JPanel contentPane;
 
 	public VentanaPrincipalGestionUsuarios() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -54,7 +58,7 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		});
 		botonCrearUsuario.setBounds(31, 157, 136, 34);
 		contentPane.add(botonCrearUsuario);
-		
+
 		JButton botonEliminar = new JButton("Eliminar usuario");
 		botonEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +69,7 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		});
 		botonEliminar.setBounds(247, 76, 136, 34);
 		contentPane.add(botonEliminar);
-		
+
 		JButton btnNewButton_1 = new JButton("Buscar usuario");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,4 +81,5 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		btnNewButton_1.setBounds(247, 157, 136, 34);
 		contentPane.add(btnNewButton_1);
 	}
+
 }

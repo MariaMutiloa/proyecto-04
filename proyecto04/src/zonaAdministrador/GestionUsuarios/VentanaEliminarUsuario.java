@@ -79,7 +79,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		botonBuscar.setBounds(216, 68, 89, 23);
 		contentPane.add(botonBuscar);
 
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(46, 114, 113, 138);
 		cargarJList(listaUsuarios);
 		contentPane.add(list);
@@ -163,7 +163,7 @@ public class VentanaEliminarUsuario extends JFrame {
 					Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 							rs.getString(5), rs.getInt(6), rs.getInt(7));
 					listaUsuarios.add(persona);
-					logger.info("Usuario creado y agrgado a lista de usuarios");
+					logger.info("Usuario encontrado y agrgado a lista de usuarios");
 
 				}
 				if (listaUsuarios.isEmpty()) {
