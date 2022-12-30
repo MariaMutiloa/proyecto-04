@@ -134,7 +134,6 @@ public class VentanaBuscarUsuario extends JFrame {
 			model.addElement(persona);
 		}
 		list.setModel(model);
-		System.out.println(list);
 		logger.info("Lista cargada");
 	}
 }
