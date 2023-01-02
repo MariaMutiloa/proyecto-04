@@ -44,7 +44,7 @@ public class VentanaVerUsuario extends JFrame {
 		this.list = new JList();
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
-		this.listaUsuarios = anyadirUsuarios(listaUsuarios, url);
+		listaUsuarios = anyadirUsuarios(listaUsuarios, url);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

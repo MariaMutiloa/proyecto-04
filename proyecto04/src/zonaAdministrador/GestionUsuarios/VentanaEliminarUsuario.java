@@ -79,7 +79,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		botonBuscar.setBounds(216, 68, 89, 23);
 		contentPane.add(botonBuscar);
 
-		JList list = new JList();
+		list = new JList();
 		list.setBounds(46, 114, 113, 138);
 		cargarJList(listaUsuarios);
 		contentPane.add(list);
@@ -153,9 +153,8 @@ public class VentanaEliminarUsuario extends JFrame {
 
 		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la busqueda");
-			String nombre = text.getSelectedText();
-			String sql = "select * from usuario where Usuario >=?";
-			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+			String nombre = text.getText();
+			try (PreparedStatement pstmt = con.prepareStatement("SELECT * FROM usuario WHERE Nombre == ?")) {
 				pstmt.setString(1, nombre);
 				ResultSet rs = pstmt.executeQuery();
 				logger.info(
@@ -164,8 +163,11 @@ public class VentanaEliminarUsuario extends JFrame {
 					Usuario persona = new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
 							rs.getString(5), rs.getInt(6), rs.getInt(7));
 					listaUsuarios.add(persona);
-					logger.info("Usuario creado y agrgado a lista de usuarios");
+					logger.info("Usuario encontrado y agrgado a lista de usuarios");
 
+				}
+				if (listaUsuarios.isEmpty()) {
+					JOptionPane.showMessageDialog(null,"No se ha encontrado ningún usuario con ese nombre");
 				}
 				rs.close();
 			} catch (SQLException e) {

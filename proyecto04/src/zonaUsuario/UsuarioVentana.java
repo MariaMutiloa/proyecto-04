@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
+import gestionBD.GestionUsuarios;
 import login.LogInVentana;
 import personas.Usuario;
 import javax.swing.JTable;
@@ -98,7 +99,7 @@ public class UsuarioVentana extends JFrame {
 		
 		//LISTA CON TODOS LOS NUMEROS QUE HAN SALIDO
 		
-		Partida p = ConexionBD.buscarPartidaActiva();
+		Partida p = GestionUsuarios.buscarPartidaActiva();
 		
 		btnJugar = new JButton("JUGAR");
 		btnJugar.addMouseListener(new MouseAdapter() {

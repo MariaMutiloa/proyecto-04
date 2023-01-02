@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import elementosOrganizacion.Carton;
 import gestionBD.ConexionBD;
+import gestionBD.GestionUsuarios;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
@@ -154,20 +155,20 @@ public class LogInVentana extends JFrame {
 				}else {
 					
 					//Comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
-					ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
+					GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal);
 					
-					if(ConexionBD.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
+					if(GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
 						logger.info("Se ha encontrado el usuario");	
-						Usuario u = ConexionBD.getUsuario(txtUsuario.getText(), claveFinal);
+						Usuario u = GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal);
 						
 						//ABRO UsuarioVentana
 						UsuarioVentana ventanaNueva = new UsuarioVentana(u);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
 						
-					}else if (ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
+					}else if (GestionUsuarios.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						logger.info("Se ha encontrado el administrador");		
-						Administrador a = ConexionBD.getAdministrador(txtUsuario.getText(), claveFinal);
+						Administrador a = GestionUsuarios.getAdministrador(txtUsuario.getText(), claveFinal);
 						
 						//ABRO VentanaPrincipalAdmin
 						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);
