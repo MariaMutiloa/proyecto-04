@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
+import gestionBD.GestionUsuarios;
 import personas.Usuario;
 
 import javax.swing.JButton;
@@ -45,13 +46,13 @@ public class CartonVentana extends JFrame {
 		int[][] miCarton = Carton.dibujarCarton();
 		
 		//GUARDO CARTON EN BD (carton)
-		int idCarton = ConexionBD.cartonNuevo(u.getDni(), p.getIDPartida());
+		int idCarton = GestionUsuarios.cartonNuevo(u.getDni(), p.getIDPartida());
 		
 		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida());	
 		
 		
 		//GUARDO CARTON EN BD (numerocarton)
-		ConexionBD.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
+		GestionUsuarios.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
         datosColores = new int[3][5];
@@ -91,7 +92,7 @@ public class CartonVentana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.setBingo(1);
-				ConexionBD.actualizarBingoBD(c.getIDCarton());
+				GestionUsuarios.actualizarBingoBD(c.getIDCarton());
 				
 				//JOPTIONPANE comprobando bingo
 				

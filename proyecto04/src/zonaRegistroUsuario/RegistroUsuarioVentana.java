@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import gestionBD.ConexionBD;
+import gestionBD.GestionUsuarios;
 import login.LogInVentana;
 
 import javax.swing.JPasswordField;
@@ -156,7 +157,7 @@ public class RegistroUsuarioVentana extends JFrame {
 
 						// no comprueba bien si el usuario está repetido!!!!
 
-						if (ConexionBD.comprobarUsuario(txtUsuario.getText())) {
+						if (GestionUsuarios.comprobarUsuario(txtUsuario.getText())) {
 							// usuario ya esta en bd
 							logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
 							JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR",
@@ -170,7 +171,7 @@ public class RegistroUsuarioVentana extends JFrame {
 							char[] clave = passwordField.getPassword();
 							String claveFinal = new String(clave);
 
-							ConexionBD.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
+							GestionUsuarios.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
 									txtApellido.getText(), txtUsuario.getText(), claveFinal);
 							txtDni.setText("");
 							txtNombre.setText("");
