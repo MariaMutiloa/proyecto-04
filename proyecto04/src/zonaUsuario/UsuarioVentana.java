@@ -152,7 +152,8 @@ public class UsuarioVentana extends JFrame {
 												
 												//Por otra parte cambia el numero mostrado en grande
 												int numero = modeloNuevo.getElementAt(modeloNuevo.getSize()-1);
-												
+												//TIENES EL NUMERO FALTA AÑADIRLOS A LAS LABELS (esta heco en partida nueva metodo actualizar)
+												//seguramente tendras que hacer las labels de los nuemeros globales
 											}
 											
 										});
