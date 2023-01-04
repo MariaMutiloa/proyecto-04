@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import login.LogInVentana;
+import visualizacionGenericos.ModeloTablaUsuarios;
 
 
 public class PartidaNueva extends JFrame {
@@ -66,8 +68,9 @@ public class PartidaNueva extends JFrame {
 		JPanel central = new JPanel();
 		
 			//Panel izquierda con tabla de participantes
-			JTable tablaCartones = new JTable();
-			central.add(tablaCartones, BorderLayout.WEST);
+			JTable tablaCartones = new JTable(new ModeloTablaUsuarios(partidaActual.getParticipantes()));
+			JScrollPane scrolIzquierda = new JScrollPane(tablaCartones);
+			central.add(scrolIzquierda, BorderLayout.WEST);
 			GestionPartidas.participantes(partidaActual.getIDPartida());
 		
 		
