@@ -10,7 +10,6 @@ public class Partida {
 	private int IDPartida;
 	private int activa;
 	private int premioB;
-	private int idLiga;
 	private int idCartonB;
 	
 	private float boteBingo;
@@ -22,11 +21,10 @@ public class Partida {
 		this.IDPartida = GestionPartidas.nueva();
 	}
 	
-	public Partida(int idPartida, int activa, int premioB, int idLiga, int idCartonB) {
+	public Partida(int idPartida, int activa, int premioB, int idCartonB) {
 		this.IDPartida=idPartida;
 		this.activa=activa;
 		this.premioB=premioB;
-		this.idLiga=idLiga;
 		this.idCartonB=idCartonB;
 	}
 	

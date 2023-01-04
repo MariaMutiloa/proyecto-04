@@ -34,9 +34,8 @@ public class GestionPartidas {
 			logger.info("Conectado a la base de datos para añadir partida");
 			
 			
-			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (Activa, IDLiga) VALUES (?,?)");
+			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida Activa VALUES (?)");
 			insertPartidaNueva.setInt(1, 0);
-			insertPartidaNueva.setInt(2, 0);
 			logger.info("Partida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
 			
@@ -50,7 +49,6 @@ public class GestionPartidas {
 			
 			
 		} catch (SQLException e) {
-			//e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -111,10 +109,10 @@ public class GestionPartidas {
 	}
 
 	//Pone el set activa a 1 para que los usuarios puedan acceder a ella
-	public static void empezada(int idPartida, int IDLiga) {
+	public static void empezada(int idPartida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1, IDLiga = "+IDLiga+ " WHERE IDPartida = "+ idPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1 WHERE IDPartida = "+ idPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadida la partida y cambiado estado");

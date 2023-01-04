@@ -154,14 +154,11 @@ public class UsuarioVentana extends JFrame {
 									@Override
 									public void actionPerformed(ActionEvent e) {
 										// Por una parte cambia el modelo de la lista de datos
-										ListModel<Integer> modeloNuevo = GestionUsuarios
-												.numerosPartida(p.getIDPartida());
+										ListModel<Integer> modeloNuevo = GestionUsuarios.numerosPartida(p.getIDPartida());
 										numeros.setModel(modeloNuevo);
 
 										// Por otra parte cambia el numero mostrado en grande
-										int numero = modeloNuevo.getElementAt(modeloNuevo.getSize() - 1);
-										// TIENES EL NUMERO FALTA AÑADIRLOS A LAS LABELS 
-										// seguramente tendras que hacer las labels de los nuemeros globales
+										int numero = modeloNuevo.getElementAt(modeloNuevo.getSize());
 										String number = String.valueOf(numero);
 										String[] digits = number.split("(?<=.)");
 										System.out.println(digits);
@@ -232,22 +229,6 @@ public class UsuarioVentana extends JFrame {
 			logger.log(Level.WARNING, "No tiene suficiente dinero.");
 			return false;
 		}
-	}
-
-	// Extrae las imagenes correspondientes al numero
-//	private Icon imagenNumero(String i) {
-//		Icon icono = null;
-//		logger.info("Buscando imagen correspondiente a " + i);
-//		if (Integer.parseInt(i) > 9) {
-//			icono = new ImageIcon(getClass().getResource("/otro.jpg"));
-//		} else {
-//			icono = new ImageIcon(getClass().getResource("/" + String.valueOf(i) + ".jpg"));
-//		}
-//		return icono;
-//	}
-
-	private static void refrescarLista() {
-		//HACER ANE
 	}
 
 }

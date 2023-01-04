@@ -29,8 +29,12 @@ import zonaAdministrador.VentanaPrincipalAdmin;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+/**
+ * 
+ * La ventana deja que el administrador pueda configurar la partida y deja que los usuarios se conecten
+ *
+ */
 
-//ventana que deja al administrador configurar la partida a su gusto
 
 public class ConfiguracionPart extends JFrame {
 
@@ -69,25 +73,13 @@ public class ConfiguracionPart extends JFrame {
 			
 		JPanel central = new JPanel();
 		central.setLayout(new BorderLayout());
-				
-			JPanel centralArriba = new JPanel();	
-			centralArriba.setLayout(new BorderLayout());
-			centralArriba.add(new JLabel("Bote Bingo"), BorderLayout.WEST);
-				JTextField txtBingo = new JTextField();
-				txtBingo.setColumns(25);
-				centralArriba.add(txtBingo, BorderLayout.EAST);
+		JLabel lblbingo = new JLabel("Bote bingo");
+		central.add(lblbingo, BorderLayout.WEST);
+		JTextField txtBingo = new JTextField();
+		txtBingo.setColumns(25);
+		central.add(txtBingo, BorderLayout.EAST);
 			
-			JPanel centralBajo = new JPanel();	
-			centralBajo.setLayout(new BorderLayout());
-			centralBajo.add(new JLabel("IDLiga"), BorderLayout.WEST);
-			//Integer[] ligas = GestionPartidas.getLigas();
-			Integer[] ligas = {1, 2, 3};
- 				JComboBox<Integer> CBliga = new JComboBox<Integer>(ligas);	
-				CBliga.setSize(200,5);
-				centralBajo.add(CBliga, BorderLayout.EAST);	
-				
-			central.add(centralArriba, BorderLayout.NORTH);	
-			central.add(centralBajo, BorderLayout.SOUTH);	
+		
 
 			JPanel inferior = new JPanel(); 
 			inferior.setLayout(new BorderLayout());
@@ -98,6 +90,7 @@ public class ConfiguracionPart extends JFrame {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteB = getPonderador()*partidaActual.getParticipantes().size()*Carton.costeCarton();
+							partidaActual.setBoteBingo(boteB);
 							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB);
 						
 						}
@@ -112,7 +105,7 @@ public class ConfiguracionPart extends JFrame {
 								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
 				
 							} else {
-								GestionPartidas.empezada(partidaActual.getIDPartida(), (Integer)CBliga.getSelectedItem());
+								GestionPartidas.empezada(partidaActual.getIDPartida());
 								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
 								nuevaVentana.setVisible(true);
 								ConfiguracionPart.this.dispose();	  
