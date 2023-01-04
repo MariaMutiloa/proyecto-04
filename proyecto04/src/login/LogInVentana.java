@@ -142,6 +142,7 @@ public class LogInVentana extends JFrame {
 		
 		//boton aceptar
 		btnAceptar = new JButton("Aceptar");
+		pPrincipal.add(btnAceptar, BorderLayout.SOUTH);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -181,9 +182,8 @@ public class LogInVentana extends JFrame {
 					}
 				}	
 		});
-//		btnAceptar.setBounds(155, 242, 132, 29);
-		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		pInferiorPrincipal.add(btnAceptar, BorderLayout.CENTER);
+		//		btnAceptar.setBounds(155, 242, 132, 29);
+				btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		
 		/*

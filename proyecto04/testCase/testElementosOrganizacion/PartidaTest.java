@@ -50,5 +50,11 @@ public class PartidaTest {
 		
 		assertEquals(carton, partida.getGanadorBingo());
 	}
+	
+	@Test
+	public void testPartida() {
+		Partida p = new Partida(1, 1, 2, 1, 1);
+		assertEquals(1, p.getIDPartida());
+	}
 
 }
