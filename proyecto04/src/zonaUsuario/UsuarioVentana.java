@@ -10,8 +10,10 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
@@ -32,6 +34,7 @@ public class UsuarioVentana extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTable table;
 	private JButton btnJugar;
+	private Partida p;
 
 	private int[][] datosColores;
 	
@@ -43,7 +46,7 @@ public class UsuarioVentana extends JFrame {
 		setTitle( "Ventana de usuario" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
+		p = GestionUsuarios.buscarPartidaActiva();
 		
 		//PANEL SUPERIOR
 		JPanel pSuperior = new JPanel();
@@ -89,17 +92,21 @@ public class UsuarioVentana extends JFrame {
 				
 		//PANEL CENTRAL
 		//aqui va a salir el número en grande y también podremos ver qué numeros han salido hasta ahora
+		
 		JPanel pCentral = new JPanel();
 		getContentPane().add(pCentral, BorderLayout.CENTER);
+		pCentral.setVisible(false);
+		
+		JList numeros = new JList();
+		JScrollPane scrollNumeros = new JScrollPane(numeros);
+		pCentral.add(scrollNumeros, BorderLayout.WEST);
+		
 		
 		//AQUI VA A APARECER EL NUMERO Q SACA EL ADMINISTRADOR
 		JLabel lblNumero = new JLabel("New label");
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 20));
-		pCentral.add(lblNumero, BorderLayout.CENTER);
+		pCentral.add(lblNumero, BorderLayout.EAST);
 		
-		//LISTA CON TODOS LOS NUMEROS QUE HAN SALIDO
-		
-		Partida p = GestionUsuarios.buscarPartidaActiva();
 		
 		btnJugar = new JButton("JUGAR");
 		btnJugar.addMouseListener(new MouseAdapter() {
@@ -149,6 +156,7 @@ public class UsuarioVentana extends JFrame {
 		}else {
 			//boton jugar 
 			btnJugar.setEnabled(true);
+			pCentral.setVisible(true);
 		
 		}
 		
