@@ -35,7 +35,7 @@ public class GestionPartidas {
 			
 			
 			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida Activa VALUES (?)");
-			insertPartidaNueva.setInt(1, 0);
+			insertPartidaNueva.setInt(1, 1);
 			logger.info("Partida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
 			
@@ -108,11 +108,11 @@ public class GestionPartidas {
 
 	}
 
-	//Pone el set activa a 1 para que los usuarios puedan acceder a ella
+	//Pone el set activa a 0 para que los usuarios no puedan acceder a ella, ya que esta empezada
 	public static void empezada(int idPartida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 1 WHERE IDPartida = "+ idPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0 WHERE IDPartida = "+ idPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadida la partida y cambiado estado");
@@ -124,7 +124,7 @@ public class GestionPartidas {
 		
 	}
 
-	//Revisa si hay algun jusgardor que haya cantado bingo
+	//Revisa si hay algun jugador que haya cantado bingo
 	public static int revisar() {
 		int IDGanador = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {

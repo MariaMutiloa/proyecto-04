@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.lang.System.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class Comprobar implements Runnable {
 	private Carton cartonGanador;
 	private List<Integer> numeros;
 	private PartidaNueva partida;
+	private Logger logger;
 	
 
 	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva) {
@@ -74,7 +76,9 @@ public class Comprobar implements Runnable {
 			partida.getPartidaActual().getGanadorBingo().getPropietario().getNombre() + " "+ partida.getPartidaActual().getGanadorBingo().getPropietario().getApellido()
 			+ " con un bote de "+ partida.getPartidaActual().getBoteBingo());
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se ha podido guardar un resuumen", "Error", JOptionPane.ERROR_MESSAGE);
+			
 		}
 		
 	}
