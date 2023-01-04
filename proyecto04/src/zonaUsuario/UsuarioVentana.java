@@ -22,6 +22,9 @@ import gestionBD.GestionUsuarios;
 import login.LogInVentana;
 import personas.Usuario;
 import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.Timer;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,6 +38,8 @@ public class UsuarioVentana extends JFrame {
 	private JTable table;
 	private JButton btnJugar;
 	private Partida p;
+	private JPanel pCentral;
+	private JList<Integer> numeros;
 
 	private int[][] datosColores;
 	
@@ -43,7 +48,6 @@ public class UsuarioVentana extends JFrame {
 
 	public UsuarioVentana(Usuario u) {
 		setBounds(100, 100, 647, 319);
-		setTitle( "Ventana de usuario" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		p = GestionUsuarios.buscarPartidaActiva();
@@ -93,11 +97,13 @@ public class UsuarioVentana extends JFrame {
 		//PANEL CENTRAL
 		//aqui va a salir el número en grande y también podremos ver qué numeros han salido hasta ahora
 		
-		JPanel pCentral = new JPanel();
+		pCentral = new JPanel();
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		pCentral.setVisible(false);
 		
-		JList numeros = new JList();
+		
+		numeros = new JList<>();
+		numeros.setModel(GestionUsuarios.numerosPartida(p.getIDPartida()));
 		JScrollPane scrollNumeros = new JScrollPane(numeros);
 		pCentral.add(scrollNumeros, BorderLayout.WEST);
 		
@@ -130,7 +136,32 @@ public class UsuarioVentana extends JFrame {
 								//ABRE VENTANA DEL CARTON
 								CartonVentana c = new CartonVentana(u, p);
 								c.setVisible(true);
-								logger.info("Abro carton");
+								pCentral.setVisible(true);
+								logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
+								Thread t = new Thread (new Runnable() {
+
+									@Override
+									public void run() {
+										Timer timer = new Timer(3000, new ActionListener() {
+											
+											@Override
+											public void actionPerformed(ActionEvent e) {
+												//Por una parte cambia el modelo de la lista de datos
+												ListModel<Integer> modeloNuevo = GestionUsuarios.numerosPartida(p.getIDPartida());
+												numeros.setModel(modeloNuevo);
+												
+												//Por otra parte cambia el numero mostrado en grande
+												int numero = modeloNuevo.getElementAt(modeloNuevo.getSize()-1);
+												
+											}
+											
+										});
+										timer.start();	
+									}
+									
+								});
+								t.start();
+								logger.info("Abro cartón");
 							}
 							
 							
@@ -156,7 +187,7 @@ public class UsuarioVentana extends JFrame {
 		}else {
 			//boton jugar 
 			btnJugar.setEnabled(true);
-			pCentral.setVisible(true);
+			
 		
 		}
 		
@@ -176,6 +207,10 @@ public class UsuarioVentana extends JFrame {
 			logger.log(Level.WARNING, "No tiene suficiente dinero.");
 			return false;
 		}
+	}
+	
+	private static void refrescarLista () {
+		
 	}
 
 

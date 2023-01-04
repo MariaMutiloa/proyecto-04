@@ -6,10 +6,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
@@ -361,6 +364,14 @@ public class GestionUsuarios {
 			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
 		}
 
+	}
+	
+	//Extrae todos los numeros cantados a la partida
+	public static ListModel<Integer> numerosPartida(int idPartida) {
+		ListModel<Integer> numeros = new DefaultListModel<>();
+		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
+		
+		return numeros;
 	}
 
 }
