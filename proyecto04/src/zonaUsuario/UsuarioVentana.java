@@ -134,9 +134,11 @@ public class UsuarioVentana extends JFrame {
 					// comprar si tiene dinero suficiente y bajar cartera
 					boolean suficienteDinero = comprobarSuficienteDinero(u);
 					if (suficienteDinero) {
-						// bajar cartera + actualizar en BD
+						// bajar cartera
 						Carton.bajarCartera(u);
 						lblCartera.setText("Cartera: " + u.getBote() + " €");
+						// actualizar cartera en BD
+						
 
 						// ABRE VENTANA DEL CARTON
 						CartonVentana c = new CartonVentana(u, p);

@@ -356,9 +356,11 @@ public class GestionUsuarios {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
-			PreparedStatement actualizacion = con
-					.prepareStatement("UPDATE usuario SET Bote =" + cartera + " WHERE DNI = " + IDUsuario);
-			actualizacion.executeUpdate();
+			//PreparedStatement actualizacion = con.prepareStatement("UPDATE usuario SET Bote =" + cartera + " WHERE DNI = " + IDUsuario);
+			PreparedStatement stmt = con.prepareStatement("UPDATE usuario SET Bote=? WHERE DNI=?");
+			stmt.setFloat(1, cartera);
+			stmt.setInt(2, IDUsuario);
+			stmt.executeUpdate();
 
 			logger.info("Actualizado el bote del usuario");
 		} catch (Exception e) {
