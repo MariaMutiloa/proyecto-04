@@ -164,16 +164,10 @@ public class UsuarioVentana extends JFrame {
 										System.out.println(digits);
 										logger.info("Numero nuevo conseguido");
 										if (digits.length == 1) {
-//											decenas.setIcon(this.imagenNumero(Integer.toString(0)));
-//											unidades.setIcon(this.imagenNumero(digits[0]));
-											
 											decenas.setIcon(new ImageIcon(getClass().getResource("/" + String.valueOf(0) + ".jpg")));
 											unidades.setIcon(new ImageIcon(getClass().getResource("/" + String.valueOf(digits[0]) + ".jpg")));
 											
 										}else {
-//											decenas.setIcon(this.imagenNumero(digits[0]));
-//											unidades.setIcon(this.imagenNumero(digits[1]));
-											
 											decenas.setIcon(new ImageIcon(getClass().getResource("/" + String.valueOf(digits[0]) + ".jpg")));
 											unidades.setIcon(new ImageIcon(getClass().getResource("/" + String.valueOf(digits[1]) + ".jpg")));
 											

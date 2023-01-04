@@ -23,8 +23,6 @@ public class Comprobar implements Runnable {
 	private Carton cartonGanador;
 	private List<Integer> numeros;
 	private PartidaNueva partida;
-	private Logger logger;
-	
 
 	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva) {
 		super();
