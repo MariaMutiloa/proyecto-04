@@ -34,7 +34,7 @@ public class GestionPartidas {
 			logger.info("Conectado a la base de datos para añadir partida");
 			
 			
-			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida Activa VALUES (?)");
+			PreparedStatement insertPartidaNueva = con.prepareStatement("INSERT INTO partida (Activa) VALUES (?)");
 			insertPartidaNueva.setInt(1, 1);
 			logger.info("Partida añadida en la base de datos");
 			insertPartidaNueva.executeUpdate();
