@@ -44,14 +44,13 @@ public class PartidaNueva extends JFrame {
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 325);
+		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		JPanel superior = new JPanel();
 		JLabel titulo = new JLabel("Partida "+partidaActual.getIDPartida());
 		superior.add(titulo, BorderLayout.WEST);
-		contentPane.add(superior, BorderLayout.NORTH);
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 
@@ -130,6 +129,7 @@ public class PartidaNueva extends JFrame {
 		});
 		inferior.add(btnFinalizar, BorderLayout.CENTER);
 			
+		contentPane.add(superior, BorderLayout.CENTER);
 		contentPane.add(central, BorderLayout.CENTER);
 		contentPane.add(inferior, BorderLayout.SOUTH);
 		contentPane.setVisible(true);
@@ -137,7 +137,7 @@ public class PartidaNueva extends JFrame {
 		
 	}
 	
-	//Extre nuevo numero random, lo muestra por pantalla y lo añade a la base de datos
+	//Extrae nuevo numero random, lo muestra por pantalla y lo añade a la base de datos
 	private void actualizar() {
 		logger.info("Extrayendo nuevo número");
 	    int nuevoNumero = numeroRandom(); 
