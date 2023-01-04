@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -370,6 +372,27 @@ public class GestionUsuarios {
 	public static ListModel<Integer> numerosPartida(int idPartida) {
 		ListModel<Integer> numeros = new DefaultListModel<>();
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
+		List<Integer> todosLosNumeros = new ArrayList<>();
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT Valor FROM numeropartida WHERE IDPartida="+idPartida+ " ORDER BY Orden ASC");
+			//tengo en orden los valores cantados
+			while (rs.next()) {
+				todosLosNumeros.add(rs.getInt(1));
+			}
+			
+			rs.close();
+			stmt.close();
+			
+			for (Integer i : todosLosNumeros) {
+				numeros.addElement(i);
+			}
+			
+			
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
+		}
 		
 		return numeros;
 	}
