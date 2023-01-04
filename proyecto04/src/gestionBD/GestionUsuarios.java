@@ -20,6 +20,7 @@ import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import personas.Administrador;
 import personas.Usuario;
+import visualizacionGenericos.ModeloListaValoresCantados;
 
 //Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del usuario
 
@@ -370,8 +371,11 @@ public class GestionUsuarios {
 	
 	//Extrae todos los numeros cantados a la partida
 	public static ListModel<Integer> numerosPartida(int idPartida) {
-		ListModel<Integer> numeros = new DefaultListModel<>();
+		//ListModel<Integer> numeros = new DefaultListModel<>();
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
+		
+		ModeloListaValoresCantados modeloLista = null;
+		
 		List<Integer> todosLosNumeros = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
@@ -385,16 +389,16 @@ public class GestionUsuarios {
 			rs.close();
 			stmt.close();
 			
-			for (Integer i : todosLosNumeros) {
-				numeros.addElement(i);
-			}
+			modeloLista = new ModeloListaValoresCantados(todosLosNumeros);
+
 			
 			
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
 		}
+		return modeloLista;
 		
-		return numeros;
+	
 	}
 
 }
