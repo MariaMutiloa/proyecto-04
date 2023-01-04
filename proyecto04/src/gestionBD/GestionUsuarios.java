@@ -310,10 +310,9 @@ public class GestionUsuarios {
 					int idPartida = rs.getInt(1);
 					int activa = rs.getInt(2);
 					int premioB = rs.getInt(3);
-					int idLiga = rs.getInt(4);
-					int idCartonB = rs.getInt(5);
+					int idCartonB = rs.getInt(4);
 
-					p = new Partida(idPartida, activa, premioB, idLiga, idCartonB);
+					p = new Partida(idPartida, activa, premioB, idCartonB);
 					logger.info("Partida activa encontrada: " + idPartida);
 
 					encontrado = 1;
