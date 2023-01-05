@@ -69,7 +69,7 @@ public class GestionPartidas {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" WHERE IDPartida = "+ IDPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+", activa = 0 WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadido el bote");
@@ -108,21 +108,6 @@ public class GestionPartidas {
 
 	}
 
-	//Pone el set activa a 0 para que los usuarios no puedan acceder a ella, ya que esta empezada
-	public static void empezada(int idPartida) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
-			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0 WHERE IDPartida = "+ idPartida);
-			actualizacion.executeUpdate();
-			
-			logger.info("Añadida la partida y cambiado estado");
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
-			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
-		}
-		
-	}
 
 	//Revisa si hay algun jugador que haya cantado bingo
 	public static int revisar() {
@@ -207,7 +192,7 @@ public class GestionPartidas {
 	public static void setGanadorBingo(int idCarton, Partida partida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, ganadorB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, IDCartonB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
 			actualizacion.executeUpdate();
 			
 			logger.info("Actualizado el ganador");

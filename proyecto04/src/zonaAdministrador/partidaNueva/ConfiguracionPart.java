@@ -91,7 +91,8 @@ public class ConfiguracionPart extends JFrame {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
 							float boteB = getPonderador()*partidaActual.getParticipantes().size()*Carton.costeCarton();
 							partidaActual.setBoteBingo(boteB);
-							GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), boteB);
+							txtBingo.setText(String.valueOf(boteB));
+							
 						
 						}
 
@@ -105,7 +106,7 @@ public class ConfiguracionPart extends JFrame {
 								JOptionPane.showMessageDialog(null, "Los campos IDLiga y Bote bingo deben ser rellenados","Datos incompletos", JOptionPane.WARNING_MESSAGE);
 				
 							} else {
-								GestionPartidas.empezada(partidaActual.getIDPartida());
+								GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()));
 								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
 								nuevaVentana.setVisible(true);
 								ConfiguracionPart.this.dispose();	  

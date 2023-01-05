@@ -192,7 +192,6 @@ public class PartidaNueva extends JFrame {
 		GestionPartidas.añadirNumero(nuevoNumero, numeros.indexOf(nuevoNumero), partidaActual.getIDPartida());
 		String number = String.valueOf(nuevoNumero);
 		String[] digits = number.split("(?<=.)");
-		System.out.println(digits);
 		logger.info("Numero nuevo conseguido");
 		if (digits.length == 1) {
 			decenas.setIcon(this.imagenNumero(Integer.toString(0)));
