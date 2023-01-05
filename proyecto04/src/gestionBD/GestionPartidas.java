@@ -239,7 +239,7 @@ public class GestionPartidas {
 	public static void noEsBingo(Carton cartonGanador) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 0 WHERE ICarton = " + cartonGanador.getIDCarton());
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 0 WHERE IDCarton = " + cartonGanador.getIDCarton());
 			actualizacion.executeUpdate();
 
 			logger.info("Eliminada marca de ganador");
