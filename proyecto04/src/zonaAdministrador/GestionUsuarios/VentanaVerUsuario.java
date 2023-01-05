@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import gestionBD.GestionPartidas;
 import personas.Usuario;
+import zonaAdministrador.GestionUsuarios.VentanaDatosUsuario.MiComparador;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -45,7 +48,7 @@ public class VentanaVerUsuario extends JFrame {
 		this.model = new DefaultListModel();
 		this.listaUsuarios = new ArrayList<Usuario>();
 		listaUsuarios = anyadirUsuarios(listaUsuarios, url);
-
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		JPanel contentPane = new JPanel();
@@ -101,6 +104,8 @@ public class VentanaVerUsuario extends JFrame {
 						rs.getString(5), rs.getInt(6), rs.getInt(7));
 				listaUsuarios.add(persona);
 				logger.info("Usuario creado y agrgado a lista de usuarios");
+				listaUsuarios= ordenarUsuariosNombre(listaUsuarios);
+				logger.info("Lista ordenada");
 			}
 			rs.close();
 			stmt.close();
@@ -123,4 +128,21 @@ public class VentanaVerUsuario extends JFrame {
 		}
 		list.setModel(model);
 	}
+	
+	// creo un comparador para la lista
+		static class MiComparador implements Comparator<Usuario> {
+
+			@Override
+			public int compare(Usuario a, Usuario b) {
+
+				return a.getNombre().compareTo(b.getNombre());
+			}
+
+		}
+
+		// ordeno la lista
+		public static List<Usuario> ordenarUsuariosNombre(List<Usuario> usuariosPuesto) {
+			Collections.sort(usuariosPuesto, new MiComparador());
+			return usuariosPuesto;
+		}
 }

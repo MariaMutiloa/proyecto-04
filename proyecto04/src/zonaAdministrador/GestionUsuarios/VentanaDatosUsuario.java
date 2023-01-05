@@ -66,7 +66,7 @@ public class VentanaDatosUsuario extends JFrame {
 		numeroPerdidas = numeroJugadas - numeroGanadas;
 		List<Usuario> UsuariosLista = new ArrayList<Usuario>();
 		UsuariosLista = VentanaVerUsuario.anyadirUsuarios(UsuariosLista, url);
-		UsuariosLista = ordenarUsuariosPuestos(UsuariosLista);
+		UsuariosLista = ordenarUsuariosNombre(UsuariosLista);
 		int puesto = contadorPuesto(UsuariosLista, usuario);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -350,13 +350,13 @@ public class VentanaDatosUsuario extends JFrame {
 		@Override
 		public int compare(Usuario a, Usuario b) {
 
-			return a.getUsuario().compareTo(b.getUsuario());
+			return a.getNombre().compareTo(b.getNombre());
 		}
 
 	}
 
 	// ordeno la lista
-	public static List<Usuario> ordenarUsuariosPuestos(List<Usuario> usuariosPuesto) {
+	public static List<Usuario> ordenarUsuariosNombre(List<Usuario> usuariosPuesto) {
 		Collections.sort(usuariosPuesto, new MiComparador());
 		return usuariosPuesto;
 	}
