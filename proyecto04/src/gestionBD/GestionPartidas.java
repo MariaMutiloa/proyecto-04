@@ -236,5 +236,21 @@ public class GestionPartidas {
 	}
 
 
+	public static void noEsBingo(Carton cartonGanador) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 0 WHERE ICarton = " + cartonGanador.getIDCarton());
+			actualizacion.executeUpdate();
+
+			logger.info("Eliminada marca de ganador");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
+
+	}
+
 
 }
