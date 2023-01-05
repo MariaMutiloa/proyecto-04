@@ -44,6 +44,7 @@ public class ConfiguracionPart extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Partida partidaActual = new Partida();
+	private JLabel lblNumero;
 	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
 
 
@@ -89,6 +90,7 @@ public class ConfiguracionPart extends JFrame {
 					btnRefrescar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
+							lblNumero.setIcon(imagenNumero(partidaActual.getParticipantes().size()));
 							float boteB = getPonderador()*partidaActual.getParticipantes().size()*Carton.costeCarton();
 							partidaActual.setBoteBingo(boteB);
 							txtBingo.setText(String.valueOf(boteB));
@@ -118,7 +120,7 @@ public class ConfiguracionPart extends JFrame {
 				JPanel inferiorIzquierda = new JPanel();
 				inferiorIzquierda.setLayout(new BorderLayout());
 					inferiorIzquierda.add(new JLabel ("Participantes conectados"), BorderLayout.NORTH);
-					JLabel lblNumero = new JLabel("");
+					lblNumero = new JLabel("");
 					lblNumero.setIcon(imagenNumero(0));
 					JPanel imagen = new JPanel();
 					imagen.setLayout(new FlowLayout());
