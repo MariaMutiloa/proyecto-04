@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import personas.Usuario;
 
@@ -54,6 +56,20 @@ public class VentanaBuscarUsuario extends JFrame {
 		list = new JList();
 		list.setBounds(10, 66, 219, 186);
 		contentPane.add(list);
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				if (list.getSelectedValue() != null) {
+					Usuario u = (Usuario) list.getSelectedValue();
+					VentanaVerDatosUsuarioBuscado nuevaVentanaDatos = new VentanaVerDatosUsuarioBuscado(VentanaBuscarUsuario.this, u);
+					nuevaVentanaDatos.setVisible(true);
+					VentanaBuscarUsuario.this.setVisible(false);
+
+				}
+
+			}
+
+		});
+
 
 		textFieldNombre = new JTextField();
 		textFieldNombre.setBounds(10, 35, 219, 20);
