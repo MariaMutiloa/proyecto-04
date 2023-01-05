@@ -112,11 +112,6 @@ public class PartidaNueva extends JFrame {
 
 		JPanel central = new JPanel();
 
-		// Panel izquierda con tabla de participantes
-		JTable tablaCartones = new JTable(new ModeloTablaUsuarios(partidaActual.getParticipantes()));
-		JScrollPane scrolIzquierda = new JScrollPane(tablaCartones);
-		central.add(scrolIzquierda, BorderLayout.WEST);
-		GestionPartidas.participantes(partidaActual.getIDPartida());
 
 		// Con añadir numero
 		JPanel derecha = new JPanel();

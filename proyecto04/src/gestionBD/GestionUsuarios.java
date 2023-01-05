@@ -271,7 +271,6 @@ public class GestionUsuarios {
 
 			if (rs.next()) {
 				IDCarton = rs.getInt("IDCarton");
-				// System.out.println(IDCarton);
 			}
 			conn.close();
 

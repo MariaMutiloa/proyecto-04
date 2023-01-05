@@ -45,10 +45,12 @@ public class ConfiguracionPart extends JFrame {
 	private JPanel contentPane;
 	private Partida partidaActual = new Partida();
 	private JLabel lblNumero;
+	private VentanaPrincipalAdmin parent;
 	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
 
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
+		this.parent = parent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 350);
 		contentPane = new JPanel();
@@ -63,8 +65,7 @@ public class ConfiguracionPart extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					LogInVentana nueva = new LogInVentana();
-					nueva.setVisible(true);
+					parent.setVisible(true);
 					ConfiguracionPart.this.setVisible(false);
 					
 				}

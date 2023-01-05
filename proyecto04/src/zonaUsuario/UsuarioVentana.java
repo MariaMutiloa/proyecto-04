@@ -157,30 +157,34 @@ public class UsuarioVentana extends JFrame {
 											logger.info("Mirando si hay numero nuevo");
 
 											// Por una parte cambia el modelo de la lista de datos
-											List<Integer> numerosCantados = GestionUsuarios.numerosPartida(p.getIDPartida());
-											ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(numerosCantados);
+											List<Integer> numerosCantados = GestionUsuarios
+													.numerosPartida(p.getIDPartida());
+											ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
+													numerosCantados);
 											numeros.setModel(modeloNuevo);
 
 											// Por otra parte cambia el numero mostrado en grande
-											int numero = numerosCantados.get(modeloNuevo.getSize());
-											String number = String.valueOf(numero);
-											String[] digits = number.split("(?<=.)");
-											System.out.println(digits);
-											logger.info("Numero nuevo conseguido");
-											if (digits.length == 1) {
-												decenas.setIcon(new ImageIcon(
-														getClass().getResource("/" + String.valueOf(0) + ".jpg")));
-												unidades.setIcon(new ImageIcon(getClass()
-														.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
+											if (numerosCantados.size() > 0) {
+												int numero = numerosCantados.get(numerosCantados.size()-1);
+												String number = String.valueOf(numero);
+												String[] digits = number.split("(?<=.)");
+												System.out.println(digits);
+												logger.info("Numero nuevo conseguido");
+												if (digits.length == 1) {
+													decenas.setIcon(new ImageIcon(
+															getClass().getResource("/" + String.valueOf(0) + ".jpg")));
+													unidades.setIcon(new ImageIcon(getClass()
+															.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
 
-											} else {
-												decenas.setIcon(new ImageIcon(getClass()
-														.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
-												unidades.setIcon(new ImageIcon(getClass()
-														.getResource("/" + String.valueOf(digits[1]) + ".jpg")));
+												} else {
+													decenas.setIcon(new ImageIcon(getClass()
+															.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
+													unidades.setIcon(new ImageIcon(getClass()
+															.getResource("/" + String.valueOf(digits[1]) + ".jpg")));
+
+												}
 
 											}
-
 										}
 
 									});
