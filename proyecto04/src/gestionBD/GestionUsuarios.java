@@ -371,11 +371,9 @@ public class GestionUsuarios {
 	}
 	
 	//Extrae todos los numeros cantados a la partida
-	public static ListModel<Integer> numerosPartida(int idPartida) {
-		//ListModel<Integer> numeros = new DefaultListModel<>();
+	public static List<Integer> numerosPartida(int idPartida) {
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
 		
-		ModeloListaValoresCantados modeloLista = null;
 		
 		List<Integer> todosLosNumeros = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
@@ -389,15 +387,13 @@ public class GestionUsuarios {
 			
 			rs.close();
 			stmt.close();
-			
-			modeloLista = new ModeloListaValoresCantados(todosLosNumeros);
 
 			
 			
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
 		}
-		return modeloLista;
+		return todosLosNumeros;
 		
 	
 	}

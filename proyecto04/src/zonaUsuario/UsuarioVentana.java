@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
 import login.LogInVentana;
 import personas.Usuario;
+import visualizacionGenericos.ModeloListaValoresCantados;
 import zonaAdministrador.partidaNueva.PartidaNueva;
 
 import javax.swing.JTable;
@@ -155,12 +157,12 @@ public class UsuarioVentana extends JFrame {
 											logger.info("Mirando si hay numero nuevo");
 
 											// Por una parte cambia el modelo de la lista de datos
-											ListModel<Integer> modeloNuevo = GestionUsuarios
-													.numerosPartida(p.getIDPartida());
+											List<Integer> numerosCantados = GestionUsuarios.numerosPartida(p.getIDPartida());
+											ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(numerosCantados);
 											numeros.setModel(modeloNuevo);
 
 											// Por otra parte cambia el numero mostrado en grande
-											int numero = modeloNuevo.getElementAt(modeloNuevo.getSize());
+											int numero = numerosCantados.get(modeloNuevo.getSize());
 											String number = String.valueOf(numero);
 											String[] digits = number.split("(?<=.)");
 											System.out.println(digits);
