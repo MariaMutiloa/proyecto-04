@@ -123,7 +123,6 @@ public class VentanaBuscarUsuario extends JFrame {
 							rs.getString(5), rs.getInt(6), rs.getInt(7));
 					listaUsuarios.add(persona);
 					logger.info("Usuario encontrtado y agrgado a lista de usuarios");
-
 				}
 				if (listaUsuarios.isEmpty()) {
 					JOptionPane.showMessageDialog(null,"No se ha encontrado ningún usuario con ese nombre");
