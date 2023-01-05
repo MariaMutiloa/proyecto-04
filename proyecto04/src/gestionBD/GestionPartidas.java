@@ -110,14 +110,14 @@ public class GestionPartidas {
 
 
 	//Revisa si hay algun jugador que haya cantado bingo
-	public static int revisar() {
+	public static int revisar(int IDPartida) {
 		int IDGanador = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE Bingo = 1");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE Bingo = 1 AND IDPartida = "+IDPartida);
 
 			while (rs.next()) {
 				logger.info("Cartón ganador encontrado");

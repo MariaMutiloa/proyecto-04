@@ -128,7 +128,7 @@ public class PartidaNueva extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int ganadorB = GestionPartidas.revisar();
+				int ganadorB = GestionPartidas.revisar(partidaActual.getIDPartida());
 
 				if (ganadorB != 0) {
 					int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
