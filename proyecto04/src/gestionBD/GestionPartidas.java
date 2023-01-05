@@ -117,7 +117,7 @@ public class GestionPartidas {
 			logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE bingo = true");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE Bingo = 1");
 
 			while (rs.next()) {
 				logger.info("Cartón ganador encontrado");
