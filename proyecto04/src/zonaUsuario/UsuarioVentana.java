@@ -56,7 +56,6 @@ public class UsuarioVentana extends JFrame {
 		setBounds(100, 100, 647, 319);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		p = GestionUsuarios.buscarPartidaActiva();
 
 		// PANEL SUPERIOR
 		JPanel pSuperior = new JPanel();
@@ -121,135 +120,87 @@ public class UsuarioVentana extends JFrame {
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				p = GestionUsuarios.buscarPartidaActiva();
+				logger.info("Comprobando si existen partidas activas");
+				if (p != null) {
+					// SALE JOptionPane diciendo si confirmar compra carton o no
+					int confirmado = JOptionPane.showConfirmDialog(null,
+							"El carton cuesta " + Carton.costeCarton() + "€\n¿Quieres comprar un carton?");
 
-				// SALE JOptionPane diciendo si confirmar compra carton o no
-				int confirmado = JOptionPane.showConfirmDialog(null,
-						"El carton cuesta " + Carton.costeCarton() + "€\n¿Quieres comprar un carton?");
+					if (JOptionPane.OK_OPTION == confirmado) {
+						logger.info("El usuario ha aceptado comprar carton.");
 
-				if (JOptionPane.OK_OPTION == confirmado) {
-					logger.info("El usuario ha aceptado comprar carton.");
+						// POR COMPRAR UN CARTON(bote) LA CARTERA DEL USUARIO BAJA
+						// comprar si tiene dinero suficiente y bajar cartera
+						boolean suficienteDinero = comprobarSuficienteDinero(u);
+						if (suficienteDinero) {
+							// bajar cartera
+							Carton.bajarCartera(u);
+							lblCartera.setText("Cartera: " + u.getBote() + " €");
+							// actualizar cartera en BD
 
-					// POR COMPRAR UN CARTON(bote) LA CARTERA DEL USUARIO BAJA
-					// comprar si tiene dinero suficiente y bajar cartera
-					boolean suficienteDinero = comprobarSuficienteDinero(u);
-					if (suficienteDinero) {
-						// bajar cartera
-						Carton.bajarCartera(u);
-						lblCartera.setText("Cartera: " + u.getBote() + " €");
-						// actualizar cartera en BD
+							// ABRE VENTANA DEL CARTON
+							CartonVentana c = new CartonVentana(u, p);
+							c.setVisible(true);
+							pCentral.setVisible(true);
+							logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
+							Thread t = new Thread(new Runnable() {
 
-						// ABRE VENTANA DEL CARTON
-						CartonVentana c = new CartonVentana(u, p);
-						c.setVisible(true);
-						pCentral.setVisible(true);
-						logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
-						Thread t = new Thread(new Runnable() {
+								@Override
+								public void run() {
+									Timer timer = new Timer(3000, new ActionListener() {
 
-							@Override
-							public void run() {
-								Timer timer = new Timer(3000, new ActionListener() {
+										@Override
+										public void actionPerformed(ActionEvent e) {
+											logger.info("Mirando si hay numero nuevo");
 
-									@Override
-									public void actionPerformed(ActionEvent e) {
-										logger.info("Mirando si hay numero nuevo");
+											// Por una parte cambia el modelo de la lista de datos
+											ListModel<Integer> modeloNuevo = GestionUsuarios
+													.numerosPartida(p.getIDPartida());
+											numeros.setModel(modeloNuevo);
 
-										// Por una parte cambia el modelo de la lista de datos
-										ListModel<Integer> modeloNuevo = GestionUsuarios
-												.numerosPartida(p.getIDPartida());
-										numeros.setModel(modeloNuevo);
+											// Por otra parte cambia el numero mostrado en grande
+											int numero = modeloNuevo.getElementAt(modeloNuevo.getSize());
+											String number = String.valueOf(numero);
+											String[] digits = number.split("(?<=.)");
+											System.out.println(digits);
+											logger.info("Numero nuevo conseguido");
+											if (digits.length == 1) {
+												decenas.setIcon(new ImageIcon(
+														getClass().getResource("/" + String.valueOf(0) + ".jpg")));
+												unidades.setIcon(new ImageIcon(getClass()
+														.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
 
-										// Por otra parte cambia el numero mostrado en grande
-										int numero = modeloNuevo.getElementAt(modeloNuevo.getSize());
-										String number = String.valueOf(numero);
-										String[] digits = number.split("(?<=.)");
-										System.out.println(digits);
-										logger.info("Numero nuevo conseguido");
-										if (digits.length == 1) {
-											decenas.setIcon(new ImageIcon(
-													getClass().getResource("/" + String.valueOf(0) + ".jpg")));
-											unidades.setIcon(new ImageIcon(
-													getClass().getResource("/" + String.valueOf(digits[0]) + ".jpg")));
+											} else {
+												decenas.setIcon(new ImageIcon(getClass()
+														.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
+												unidades.setIcon(new ImageIcon(getClass()
+														.getResource("/" + String.valueOf(digits[1]) + ".jpg")));
 
-										} else {
-											decenas.setIcon(new ImageIcon(
-													getClass().getResource("/" + String.valueOf(digits[0]) + ".jpg")));
-											unidades.setIcon(new ImageIcon(
-													getClass().getResource("/" + String.valueOf(digits[1]) + ".jpg")));
+											}
 
 										}
 
-									}
+									});
+									timer.start();
+								}
 
-								});
-								timer.start();
-							}
+							});
+							t.start();
+							logger.info("Abro cartón");
+						}
 
-						});
-						t.start();
-						logger.info("Abro cartón");
+					} else {
+						logger.info("El usuario no quiere comprar carton");
 					}
 
 				} else {
-					logger.info("El usuario no quiere comprar carton");
+					JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.", "",
+							JOptionPane.WARNING_MESSAGE);
 				}
-
 			}
 		});
 		pInfDerecha.add(btnJugar);
-		btnJugar.setEnabled(false);
-
-		// HILO
-		logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-				while (!Thread.currentThread().isInterrupted()) {
-					Timer timer = new Timer(3000, new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							logger.info("Mirando si hay partida activa");
-
-							p = GestionUsuarios.buscarPartidaActiva();
-
-							if (p == null) {
-								btnJugar.setEnabled(false);
-								JOptionPane.showMessageDialog(null,
-										"No hay ninguna partida activa. Inténtelo más tarde.", "",
-										JOptionPane.WARNING_MESSAGE);
-							} else {
-								// boton jugar
-								btnJugar.setEnabled(true);
-								Thread.currentThread().interrupt();
-							}
-						}
-					});
-					timer.start();
-				}
-
-			}
-
-		});
-		t.start();
-		//
-
-		/*
-		 * TIENE QUE HABER UNA COMPROBARCION CON LA BASE DE DATOS Y MIRAR SI HAY ALGUNA
-		 * PARTIDA ACTIVA SI NO HAY PARTIDA ACTIVA --> NO PUEDE COMPRAR NINGUN CARTON SI
-		 * HAY PARTIDA ACTIVA --> BOTON JUGAR Y APARECE CARTON
-		 */
-
-		if (p == null) {
-			btnJugar.setEnabled(false);
-			JOptionPane.showMessageDialog(null, "No hay ninguna partida activa. Inténtelo más tarde.", "",
-					JOptionPane.WARNING_MESSAGE);
-		} else {
-			// boton jugar
-			btnJugar.setEnabled(true);
-
-		}
 
 	}
 
