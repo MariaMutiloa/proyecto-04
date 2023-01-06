@@ -24,7 +24,7 @@ import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
-import zonaRegistroUsuario.RegistroUsuarioVentana;
+import zonaUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
 
 import java.awt.BorderLayout;
@@ -199,7 +199,7 @@ public class LogInVentana extends JFrame {
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana();
+				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana(LogInVentana.this);
 				ventanaNueva.setVisible(true);
 				LogInVentana.this.dispose();				
 			}

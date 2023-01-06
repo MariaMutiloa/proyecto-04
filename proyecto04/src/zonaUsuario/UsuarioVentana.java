@@ -46,6 +46,7 @@ public class UsuarioVentana extends JFrame {
 	private Partida p;
 	private JPanel pCentral;
 	private JList<Integer> numeros;
+	private Usuario u;
 
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
@@ -55,9 +56,9 @@ public class UsuarioVentana extends JFrame {
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 
 	public UsuarioVentana(Usuario u) {
+		this.u = u;
 		setBounds(100, 100, 647, 319);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 		// PANEL SUPERIOR
 		JPanel pSuperior = new JPanel();
@@ -154,36 +155,56 @@ public class UsuarioVentana extends JFrame {
 
 										@Override
 										public void actionPerformed(ActionEvent e) {
-											logger.info("Mirando si hay numero nuevo");
+											logger.info("Mirando si alguien ha ganado el bingo");
 
-											// Por una parte cambia el modelo de la lista de datos
-											List<Integer> numerosCantados = GestionUsuarios
-													.numerosPartida(p.getIDPartida());
-											ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
-													numerosCantados);
-											numeros.setModel(modeloNuevo);
+											// Primero mira si se ha cantado bingo
 
-											// Por otra parte cambia el numero mostrado en grande
-											if (numerosCantados.size() > 0) {
-												int numero = numerosCantados.get(numerosCantados.size()-1);
-												String number = String.valueOf(numero);
-												String[] digits = number.split("(?<=.)");
-												System.out.println(digits);
-												logger.info("Numero nuevo conseguido");
-												if (digits.length == 1) {
-													decenas.setIcon(new ImageIcon(
-															getClass().getResource("/" + String.valueOf(0) + ".jpg")));
-													unidades.setIcon(new ImageIcon(getClass()
-															.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
-
+											Integer ganador = GestionUsuarios.comprobarSiGanador(p.getIDPartida());
+											logger.info("el ganador es: "+ganador);
+											if (ganador != 0) {
+												if (ganador == u.getDni()) {
+													JOptionPane.showMessageDialog(null, "Enhorabuena",
+															"El bingo es correcto, el bote se ha añadido a tu cartera",
+															JOptionPane.INFORMATION_MESSAGE);
 												} else {
-													decenas.setIcon(new ImageIcon(getClass()
-															.getResource("/" + String.valueOf(digits[0]) + ".jpg")));
-													unidades.setIcon(new ImageIcon(getClass()
-															.getResource("/" + String.valueOf(digits[1]) + ".jpg")));
+													JOptionPane.showMessageDialog(null, "Partida terminada",
+															"Alguien ha cantado un bingo correcto",
+															JOptionPane.INFORMATION_MESSAGE);
+													c.dispose();
+												}
+											} else {
+												logger.info("La partida sigue abierta");
+												logger.info("Buscando nuevos numeros");
+
+												// Por una parte cambia el modelo de la lista de datos
+												List<Integer> numerosCantados = GestionUsuarios
+														.numerosPartida(p.getIDPartida());
+												ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
+														numerosCantados);
+												numeros.setModel(modeloNuevo);
+
+												// Por otra parte cambia el numero mostrado en grande
+												if (numerosCantados.size() > 0) {
+													int numero = numerosCantados.get(numerosCantados.size() - 1);
+													String number = String.valueOf(numero);
+													String[] digits = number.split("(?<=.)");
+													System.out.println(digits);
+													logger.info("Numero nuevo conseguido");
+													if (digits.length == 1) {
+														decenas.setIcon(new ImageIcon(getClass()
+																.getResource("/" + String.valueOf(0) + ".jpg")));
+														unidades.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[0]) + ".jpg")));
+
+													} else {
+														decenas.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[0]) + ".jpg")));
+														unidades.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[1]) + ".jpg")));
+
+													}
 
 												}
-
 											}
 										}
 

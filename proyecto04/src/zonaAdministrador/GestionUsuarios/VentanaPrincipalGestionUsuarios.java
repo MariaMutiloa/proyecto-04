@@ -14,7 +14,7 @@ import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
-import zonaRegistroUsuario.RegistroUsuarioVentana;
+import zonaUsuario.RegistroUsuarioVentana;
 
 import javax.swing.JButton;
 
@@ -49,7 +49,7 @@ public class VentanaPrincipalGestionUsuarios extends JFrame {
 		JButton botonCrearUsuario = new JButton("Crear usuario");
 		botonCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegistroUsuarioVentana nuevaUsuarioRegistro = new RegistroUsuarioVentana();
+				RegistroUsuarioVentana nuevaUsuarioRegistro = new RegistroUsuarioVentana(VentanaPrincipalGestionUsuarios.this);
 				nuevaUsuarioRegistro.setVisible(true);
 				VentanaPrincipalGestionUsuarios.this.setVisible(false);
 

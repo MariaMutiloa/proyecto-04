@@ -373,10 +373,10 @@ public class GestionUsuarios {
 	public static List<Integer> numerosPartida(int idPartida) {
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
 		
-		
 		List<Integer> todosLosNumeros = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
+			logger.info("Buscando los numeros de la partida");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT Valor FROM numeropartida WHERE IDPartida="+idPartida+ " ORDER BY Orden ASC");
 			//tengo en orden los valores cantados
@@ -395,6 +395,26 @@ public class GestionUsuarios {
 		return todosLosNumeros;
 		
 	
+	}
+	
+	public static Integer comprobarSiGanador(int idPartida) {
+		Integer ganador = null;
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE IDPartida=" + idPartida);
+			
+			while (rs.next()) {
+				ganador = rs.getInt(4);
+				System.out.println(ganador);
+			}
+
+			rs.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
+		}
+		return ganador;
 	}
 
 }

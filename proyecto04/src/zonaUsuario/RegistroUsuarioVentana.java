@@ -1,4 +1,4 @@
-package zonaRegistroUsuario;
+package zonaUsuario;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -40,8 +40,10 @@ public class RegistroUsuarioVentana extends JFrame {
 	private JPasswordField passwordField;
 	private JButton btnCrear;
 	private JLabel lblInfo;
+	private JFrame parent;
 
-	public RegistroUsuarioVentana() {
+	public RegistroUsuarioVentana(JFrame parent) {
+		this.parent = parent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(551, 203);
 		setTitle("Juego BINGO!");
@@ -202,7 +204,6 @@ public class RegistroUsuarioVentana extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LogInVentana parent = new LogInVentana();
 				parent.setVisible(true);
 				RegistroUsuarioVentana.this.dispose();
 			}
