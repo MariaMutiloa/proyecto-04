@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -93,8 +94,8 @@ public class CartonVentana extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				c.setBingo(1);
 				GestionUsuarios.actualizarBingoBD(c.getIDCarton());
-				
-				//JOPTIONPANE comprobando bingo
+				JOptionPane.showMessageDialog(null, "Se esta comprobando el bingo","Espere a que el administrador compruebe su bingo", JOptionPane.WARNING_MESSAGE);
+				 
 				
 			}
 		});
