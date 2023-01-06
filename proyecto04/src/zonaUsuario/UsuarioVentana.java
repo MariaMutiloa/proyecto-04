@@ -146,8 +146,8 @@ public class UsuarioVentana extends JFrame {
 							c.setVisible(true);
 							pCentral.setVisible(true);
 							logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
-							
-							interrumpir=false;
+
+							interrumpir = false;
 							Thread t = new Thread(new Runnable() {
 
 								@Override
@@ -157,65 +157,65 @@ public class UsuarioVentana extends JFrame {
 
 										@Override
 										public void actionPerformed(ActionEvent e) {
-											
-											while(interrumpir==false) {
-												logger.info("Mirando si alguien ha ganado el bingo");
 
-												// Primero mira si se ha cantado bingo
+											logger.info("Mirando si alguien ha ganado el bingo");
 
-												Integer ganador = GestionUsuarios.comprobarSiGanador(p.getIDPartida());
-												logger.info("el ganador es: " + ganador);
-												if (ganador != 0) {
-													if (ganador == u.getDni()) {
-														JOptionPane.showMessageDialog(null, "Enhorabuena",
-																"El bingo es correcto, el bote se ha añadido a tu cartera",
-																JOptionPane.INFORMATION_MESSAGE);
-													} else {
-														JOptionPane.showMessageDialog(null, "Partida terminada",
-																"Alguien ha cantado un bingo correcto",
-																JOptionPane.INFORMATION_MESSAGE);
-														c.dispose();
-														// SE TIENE QUE PARAR EL HILO --> vamos a cerrar esa ventana usuario
-														// y crear una nueva
-														UsuarioVentana nuevaUsuarioVentana = new UsuarioVentana(u);
-														nuevaUsuarioVentana.setVisible(true);
-														UsuarioVentana.this.dispose();
-														interrumpir=true;
+											// Primero mira si se ha cantado bingo
 
-													}
+											Integer ganador = GestionUsuarios.comprobarSiGanador(p.getIDPartida());
+											logger.info("el ganador es: " + ganador);
+											if (ganador != 0) {
+												if (ganador == u.getDni()) {
+													JOptionPane.showMessageDialog(null, "Enhorabuena",
+															"El bingo es correcto, el bote se ha añadido a tu cartera",
+															JOptionPane.INFORMATION_MESSAGE);
 												} else {
-													logger.info("La partida sigue abierta");
-													logger.info("Buscando nuevos numeros");
+													JOptionPane.showMessageDialog(null, "Partida terminada",
+															"Alguien ha cantado un bingo correcto",
+															JOptionPane.INFORMATION_MESSAGE);
+													c.dispose();
+													// SE TIENE QUE PARAR EL HILO --> vamos a cerrar esa ventana usuario
+													// y crear una nueva
+													UsuarioVentana nuevaUsuarioVentana = new UsuarioVentana(u);
+													nuevaUsuarioVentana.setVisible(true);
+													UsuarioVentana.this.dispose();
+													interrumpir = true;
+													Thread.currentThread().stop();
+													
 
-													// Por una parte cambia el modelo de la lista de datos
-													List<Integer> numerosCantados = GestionUsuarios
-															.numerosPartida(p.getIDPartida());
-													ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
-															numerosCantados);
-													numeros.setModel(modeloNuevo);
+												}
+											} else {
+												logger.info("La partida sigue abierta");
+												logger.info("Buscando nuevos numeros");
 
-													// Por otra parte cambia el numero mostrado en grande
-													if (numerosCantados.size() > 0) {
-														int numero = numerosCantados.get(numerosCantados.size() - 1);
-														String number = String.valueOf(numero);
-														String[] digits = number.split("(?<=.)");
-														System.out.println(digits);
-														logger.info("Numero nuevo conseguido");
-														if (digits.length == 1) {
-															decenas.setIcon(new ImageIcon(getClass()
-																	.getResource("/" + String.valueOf(0) + ".jpg")));
-															unidades.setIcon(new ImageIcon(getClass().getResource(
-																	"/" + String.valueOf(digits[0]) + ".jpg")));
+												// Por una parte cambia el modelo de la lista de datos
+												List<Integer> numerosCantados = GestionUsuarios
+														.numerosPartida(p.getIDPartida());
+												ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
+														numerosCantados);
+												numeros.setModel(modeloNuevo);
 
-														} else {
-															decenas.setIcon(new ImageIcon(getClass().getResource(
-																	"/" + String.valueOf(digits[0]) + ".jpg")));
-															unidades.setIcon(new ImageIcon(getClass().getResource(
-																	"/" + String.valueOf(digits[1]) + ".jpg")));
+												// Por otra parte cambia el numero mostrado en grande
+												if (numerosCantados.size() > 0) {
+													int numero = numerosCantados.get(numerosCantados.size() - 1);
+													String number = String.valueOf(numero);
+													String[] digits = number.split("(?<=.)");
+													System.out.println(digits);
+													logger.info("Numero nuevo conseguido");
+													if (digits.length == 1) {
+														decenas.setIcon(new ImageIcon(getClass()
+																.getResource("/" + String.valueOf(0) + ".jpg")));
+														unidades.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[0]) + ".jpg")));
 
-														}
+													} else {
+														decenas.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[0]) + ".jpg")));
+														unidades.setIcon(new ImageIcon(getClass().getResource(
+																"/" + String.valueOf(digits[1]) + ".jpg")));
 
 													}
+
 												}
 											}
 
