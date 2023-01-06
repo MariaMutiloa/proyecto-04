@@ -171,6 +171,7 @@ public class UsuarioVentana extends JFrame {
 															"Alguien ha cantado un bingo correcto",
 															JOptionPane.INFORMATION_MESSAGE);
 													c.dispose();
+													
 												}
 											} else {
 												logger.info("La partida sigue abierta");
