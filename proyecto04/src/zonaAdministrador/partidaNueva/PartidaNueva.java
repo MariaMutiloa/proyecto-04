@@ -25,12 +25,14 @@ import java.util.logging.Logger;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import login.LogInVentana;
+import personas.Administrador;
 import visualizacionGenericos.ModeloTablaUsuarios;
 
 public class PartidaNueva extends JFrame {
 
 	private JPanel contentPane;
 	private Partida partidaActual;
+	private Administrador admin;
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
 	private static List<Integer> numeros = new ArrayList<>();
@@ -38,9 +40,10 @@ public class PartidaNueva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent) {
+	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent, Administrador admin) {
 		logger.info("Abriendo venta nueva partida");
 		this.partidaActual = partidaActual;
+		this.admin = admin;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowListener() {
@@ -134,7 +137,7 @@ public class PartidaNueva extends JFrame {
 					int result = JOptionPane.showConfirmDialog(null, "¿Quiere comprobar el bingo?", "Han cantado bingo", JOptionPane.YES_NO_OPTION);
 					switch (result) {
 					case JOptionPane.YES_OPTION:
-						Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this));
+						Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this, admin));
 						comprobar.start();
 						break;
 					case JOptionPane.NO_OPTION:

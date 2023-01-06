@@ -16,19 +16,23 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import elementosOrganizacion.Carton;
 import gestionBD.GestionPartidas;
+import personas.Administrador;
 import personas.Usuario;
+import zonaAdministrador.VentanaPrincipalAdmin;
 
 public class Comprobar implements Runnable {
 
 	private Carton cartonGanador;
 	private List<Integer> numeros;
 	private PartidaNueva partida;
+	private Administrador admin;
 
-	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva) {
+	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva, Administrador admin) {
 		super();
 		this.cartonGanador = GestionPartidas.getCarton(ganadorB);
 		this.numeros = lista;
 		this.partida = partidaNueva;
+		this.admin = admin;
 	}
 
 	@Override
@@ -46,6 +50,10 @@ public class Comprobar implements Runnable {
 	         case JOptionPane.NO_OPTION:
 	         break;	  
 			}
+			VentanaPrincipalAdmin nuevaVentanaAdmin = new VentanaPrincipalAdmin(admin);
+			nuevaVentanaAdmin.setVisible(true);
+			partida.dispose();
+
 //		}else {
 //			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
 //			GestionPartidas.noEsBingo(cartonGanador);

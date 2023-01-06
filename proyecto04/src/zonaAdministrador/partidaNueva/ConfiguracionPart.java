@@ -46,11 +46,13 @@ public class ConfiguracionPart extends JFrame {
 	private Partida partidaActual = new Partida();
 	private JLabel lblNumero;
 	private VentanaPrincipalAdmin parent;
+	private Administrador admin;
 	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
 
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
 		this.parent = parent;
+		this.admin = admin;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 350);
 		contentPane = new JPanel();
@@ -110,7 +112,7 @@ public class ConfiguracionPart extends JFrame {
 				
 							} else {
 								GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()));
-								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this);
+								PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this, admin);
 								nuevaVentana.setVisible(true);
 								ConfiguracionPart.this.dispose();	  
 							}
