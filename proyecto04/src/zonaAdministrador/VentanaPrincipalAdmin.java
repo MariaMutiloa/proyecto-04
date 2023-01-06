@@ -10,8 +10,10 @@ import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,7 +26,7 @@ public class VentanaPrincipalAdmin extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	public VentanaPrincipalAdmin(Administrador admin) {
-		setBounds(100, 100, 160, 200);
+		setBounds(100, 100, 320, 215);
 		setTitle( "Ventana de administrador" );
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -34,8 +36,11 @@ public class VentanaPrincipalAdmin extends JFrame {
 		superior.add(lblBienvenido, BorderLayout.NORTH);
 		getContentPane().add(superior, BorderLayout.NORTH);
 		
-
+		//PANEL DE BOTONES
 		JPanel inferior = new JPanel();
+		
+		GridLayout layoutGrid = new GridLayout(5,0);
+		inferior.setLayout(layoutGrid);
 	
 		JButton btnNuevaPartida = new JButton("Nueva Partida");
 		btnNuevaPartida.addActionListener(new ActionListener() {
@@ -50,10 +55,12 @@ public class VentanaPrincipalAdmin extends JFrame {
 			
 		});
 		
-		inferior.add(btnNuevaPartida, BorderLayout.NORTH);
+		//inferior.add(btnNuevaPartida, BorderLayout.NORTH);
+		inferior.add(btnNuevaPartida);
 		
 		JButton btnEstadisticas = new JButton("Estad\u00EDsticas");
-		inferior.add(btnEstadisticas, BorderLayout.CENTER);
+		//inferior.add(btnEstadisticas, BorderLayout.CENTER);
+		inferior.add(btnEstadisticas);
 		btnEstadisticas.addActionListener(new ActionListener() {
 
 			@Override
@@ -67,7 +74,8 @@ public class VentanaPrincipalAdmin extends JFrame {
 		});
 		
 		JButton btnGestionUsuarios = new JButton("Gesti\u00F3n Usuarios");
-		inferior.add(btnGestionUsuarios, BorderLayout.SOUTH);
+		//inferior.add(btnGestionUsuarios, BorderLayout.SOUTH);
+		inferior.add(btnGestionUsuarios);
 		btnGestionUsuarios.addActionListener(new ActionListener() {
 
 			@Override
@@ -81,12 +89,14 @@ public class VentanaPrincipalAdmin extends JFrame {
 		});
 		
 		JButton btnGestionLigas = new JButton("Gestión Ligas");
-		inferior.add(btnGestionLigas, BorderLayout.SOUTH);
+		inferior.add(btnGestionLigas);
+		//inferior.add(btnGestionLigas, BorderLayout.SOUTH);
 		//ABRIR VENTANA
 		
 		
 		JButton btnVolver = new JButton("Volver");
-		inferior.add(btnVolver, BorderLayout.SOUTH);
+		inferior.add(btnVolver);
+		//inferior.add(btnVolver, BorderLayout.SOUTH);
 		btnVolver.addActionListener(new ActionListener() {
 
 			@Override
