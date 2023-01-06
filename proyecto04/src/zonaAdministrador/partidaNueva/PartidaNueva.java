@@ -94,38 +94,45 @@ public class PartidaNueva extends JFrame {
 		});
 
 		setBounds(100, 100, 500, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 
-		JPanel superior = new JPanel();
+		/*
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
+		//CON LAYOUTS
+		
+		//Partida X + btnVolver
+		JPanel pNorte = new JPanel();
+		getContentPane().add(pNorte, BorderLayout.NORTH);
+		
 		JLabel titulo = new JLabel("Partida " + partidaActual.getIDPartida());
-		superior.add(titulo, BorderLayout.WEST);
+		pNorte.add(titulo, BorderLayout.WEST);
+		
 		JButton btnVolver = new JButton("Volver");
+		pNorte.add(btnVolver, BorderLayout.EAST);
 		btnVolver.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.setVisible(true);
 				PartidaNueva.this.dispose();
-
 			}
-
 		});
-		superior.add(btnVolver, BorderLayout.EAST);
-
-		JPanel central = new JPanel();
-
-
-		// Con añadir numero
-		JPanel derecha = new JPanel();
+		
+		
+		//btnNuevoNumero + imagenes numeros
+		JPanel pCentral = new JPanel();
+		getContentPane().add(pCentral, BorderLayout.CENTER);
+		
+		JPanel pCentralDerecha = new JPanel();
+		pCentral.add(pCentralDerecha, BorderLayout.EAST);
+		
 		JButton btnNuevoNum = new JButton("Nuevo número");
-		derecha.add(btnNuevoNum, BorderLayout.SOUTH);
-		JPanel numero = new JPanel();
-		numero.add(decenas, BorderLayout.WEST);
-		numero.add(unidades, BorderLayout.EAST);
-		derecha.add(numero, BorderLayout.NORTH);
-		central.add(derecha, BorderLayout.EAST);
-
+		pCentralDerecha.add(btnNuevoNum, BorderLayout.EAST);
 		btnNuevoNum.addActionListener(new ActionListener() {
 
 			@Override
@@ -149,11 +156,21 @@ public class PartidaNueva extends JFrame {
 			}
 
 		});
-
-		JPanel inferior = new JPanel();
+		
+		JPanel pCentralNumero = new JPanel();
+		pCentral.add(pCentralNumero, BorderLayout.CENTER);
+		pCentralNumero.add(decenas, BorderLayout.WEST);
+		pCentralNumero.add(unidades, BorderLayout.EAST);
+		
+		
+		
+		//btnFinalizarPartida
+		JPanel pSur = new JPanel();
+		getContentPane().add(pSur, BorderLayout.SOUTH);
+		
 		JButton btnFinalizar = new JButton("Finalizar Partida");
+		pSur.add(btnFinalizar);
 		btnFinalizar.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int result = JOptionPane.showConfirmDialog(null,
@@ -167,17 +184,10 @@ public class PartidaNueva extends JFrame {
 				case JOptionPane.NO_OPTION:
 					break;
 				}
-
 			}
-
 		});
-		inferior.add(btnFinalizar, BorderLayout.CENTER);
-
-		contentPane.add(superior, BorderLayout.CENTER);
-		contentPane.add(central, BorderLayout.CENTER);
-		contentPane.add(inferior, BorderLayout.SOUTH);
-		contentPane.setVisible(true);
-		setContentPane(contentPane);
+		
+		
 
 	}
 
