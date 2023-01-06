@@ -93,10 +93,6 @@ public class UsuarioVentana extends JFrame {
 		JPanel infIzquierda = new JPanel();
 		pInferior.add(infIzquierda, BorderLayout.WEST);
 
-		JButton btnEstadisticas = new JButton("Ver estadisticas");
-		infIzquierda.add(btnEstadisticas);
-
-		// METER FUNCIONALIDAD VER ESTADISTICAS
 
 		JPanel pInfDerecha = new JPanel();
 		pInferior.add(pInfDerecha, BorderLayout.EAST);
