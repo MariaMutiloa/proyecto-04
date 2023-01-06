@@ -171,6 +171,8 @@ public class UsuarioVentana extends JFrame {
 															"Alguien ha cantado un bingo correcto",
 															JOptionPane.INFORMATION_MESSAGE);
 													c.dispose();
+													//SE TIENE QUE PARAR EL HILO
+													Thread.currentThread().interrupt();
 													
 												}
 											} else {
