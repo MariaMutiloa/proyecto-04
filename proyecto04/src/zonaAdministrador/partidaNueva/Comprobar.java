@@ -26,19 +26,21 @@ public class Comprobar implements Runnable {
 	private List<Integer> numeros;
 	private PartidaNueva partida;
 	private Administrador admin;
+	private float botePartida;
 
-	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva, Administrador admin) {
+	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva, Administrador admin, float botePartida) {
 		super();
 		this.cartonGanador = GestionPartidas.getCarton(ganadorB);
 		this.numeros = lista;
 		this.partida = partidaNueva;
 		this.admin = admin;
+		this.botePartida = botePartida;
 	}
 
 	@Override
 	public void run() {
 		//if(numeros.containsAll(cartonGanador.getListaNumeros())){
-			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual());
+			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual(), botePartida);
 			partida.getPartidaActual().setGanadorBingo(cartonGanador);
 			float bote = cartonGanador.getPropietario().getBote();
 			(cartonGanador.getPropietario()).setBote(bote+partida.getPartidaActual().getBoteBingo());

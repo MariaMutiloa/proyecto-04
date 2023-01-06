@@ -34,7 +34,7 @@ public class PartidaNueva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent, Administrador admin) {
+	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent, Administrador admin, float botePartida) {
 		logger.info("Abriendo venta nueva partida");
 		this.partidaActual = partidaActual;
 		this.admin = admin;
@@ -51,7 +51,7 @@ public class PartidaNueva extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 
-				GestionPartidas.setGanadorBingo(0, partidaActual);
+				GestionPartidas.setGanadorBingo(0, partidaActual, 0);
 
 			}
 
@@ -128,7 +128,7 @@ public class PartidaNueva extends JFrame {
 					int result = JOptionPane.showConfirmDialog(null, "¿Quiere comprobar el bingo?", "Han cantado bingo", JOptionPane.YES_NO_OPTION);
 					switch (result) {
 					case JOptionPane.YES_OPTION:
-						Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this, admin));
+						Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this, admin, botePartida));
 						comprobar.start();
 						break;
 					case JOptionPane.NO_OPTION:
@@ -161,7 +161,7 @@ public class PartidaNueva extends JFrame {
 						"Aún no se ha cantado bingo, ¿Seguro que quieres terminar la partida?");
 				switch (result) {
 				case JOptionPane.YES_OPTION:
-					GestionPartidas.setGanadorBingo(0, partidaActual);
+					GestionPartidas.setGanadorBingo(0, partidaActual, 0);
 					parent.setVisible(true);
 					PartidaNueva.this.dispose();
 					break;

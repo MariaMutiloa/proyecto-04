@@ -184,7 +184,7 @@ public class GestionPartidas {
 	}
 
 	//Añade a la BD el ganador del bingo
-	public static void setGanadorBingo(int idCarton, Partida partida) {
+	public static void setGanadorBingo(int idCarton, Partida partida, float botePartida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
 			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, IDCartonB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
@@ -192,11 +192,41 @@ public class GestionPartidas {
 			
 			logger.info("Actualizado el ganador");
 		} catch (Exception e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
 		}
 		
+		//HAY QUE SUMAR EL BOTE EN LA CARTERA DEL GANADOR
+		sumarBoteGanador(idCarton, botePartida);
+		
+	}
+	
+	//Suma el bote al ganador de la partida --> incrementa cartera
+	public static void sumarBoteGanador(int idCarton, float botePartida) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+
+			int dniGanador;
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT IDUsuario FROM carton WHERE IDCarton = "+idCarton);
+			dniGanador=rs.getInt(1);
+			rs.close();
+			
+			ResultSet rs1 = stmt.executeQuery("SELECT Bote FROM usuario WHERE DNI = "+dniGanador);
+			float bote = rs1.getFloat(1);
+			rs.close();
+			stmt.close();
+						
+			float nuevoBote = botePartida+bote;
+			PreparedStatement stmt2 = con.prepareStatement("UPDATE usuario SET Bote = ? WHERE DNI = ?");
+			stmt2.setFloat(1, nuevoBote);
+			stmt2.setInt(2, dniGanador);
+			stmt2.executeUpdate();
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
 	}
 
 

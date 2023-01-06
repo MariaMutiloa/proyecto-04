@@ -109,7 +109,7 @@ public class ConfiguracionPart extends JFrame {
 
 				} else {
 					GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()));
-					PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this, admin);
+					PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this, admin, Float.valueOf(txtBingo.getText()));
 					nuevaVentana.setVisible(true);
 					ConfiguracionPart.this.dispose();
 				}

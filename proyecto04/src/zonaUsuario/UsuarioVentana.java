@@ -179,7 +179,7 @@ public class UsuarioVentana extends JFrame {
 													UsuarioVentana nuevaUsuarioVentana = new UsuarioVentana(u);
 													nuevaUsuarioVentana.setVisible(true);
 													UsuarioVentana.this.dispose();
-													interrumpir = true;
+													interrumpir = true; //?? PONER EN WHILE ?
 													Thread.currentThread().stop();
 													
 
