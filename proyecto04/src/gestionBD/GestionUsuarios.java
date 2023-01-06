@@ -56,8 +56,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -92,8 +90,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -125,8 +121,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -200,8 +194,6 @@ public class GestionUsuarios {
 
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -256,7 +248,6 @@ public class GestionUsuarios {
 			// metemos los valores en los ?
 			stmt.setInt(1, IDUsuario);
 			stmt.setInt(2, IDPartida);
-			// stmt.setFloat(3, 2);
 			stmt.setFloat(3, Carton.costeCarton()); // desde properties
 
 			// ejecutamos sentencia
@@ -354,7 +345,6 @@ public class GestionUsuarios {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
-			//PreparedStatement actualizacion = con.prepareStatement("UPDATE usuario SET Bote =" + cartera + " WHERE DNI = " + IDUsuario);
 			PreparedStatement stmt = con.prepareStatement("UPDATE usuario SET Bote=? WHERE DNI=?");
 			stmt.setFloat(1, cartera);
 			stmt.setInt(2, IDUsuario);

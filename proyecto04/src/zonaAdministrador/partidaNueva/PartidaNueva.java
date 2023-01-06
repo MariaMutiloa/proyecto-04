@@ -89,16 +89,6 @@ public class PartidaNueva extends JFrame {
 
 		setBounds(100, 100, 500, 400);
 		
-
-		/*
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
-		//CON LAYOUTS
 		
 		//Partida X + btnVolver
 		JPanel pNorte = new JPanel();

@@ -36,7 +36,6 @@ public class ConexionBD {
 			JOptionPane.showMessageDialog(null, "No se ha podido cargar el driver de la base de datos", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido cargar el driver de base de datos");
-			// System.out.println("No se ha podido cargar el driver de la base de datos");
 		}
 	}
 

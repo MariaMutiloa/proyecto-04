@@ -34,7 +34,6 @@ public class CartonVentana extends JFrame {
 
 
 	public CartonVentana(Usuario u, Partida p) {
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 576, 240);
 		setTitle("Tu carton");
 				

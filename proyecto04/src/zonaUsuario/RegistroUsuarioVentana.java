@@ -128,7 +128,6 @@ public class RegistroUsuarioVentana extends JFrame {
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		passwordField.setBounds(486, 182, 185, 22);
 		pCentral.add(passwordField);
-		// ALGUNA CONDICION? minimo 8 caracteres, letras y numeros...?
 
 		/*
 		 * PANEL INFERIOR - boton crear usuario
@@ -152,12 +151,10 @@ public class RegistroUsuarioVentana extends JFrame {
 
 					// COMPROBAR QUE DNI NO TENGA LETRA PORQUE VA A SER UN INT
 					try {
-						// isNumeric(txtDni.getText());
 						Integer.parseInt(txtDni.getText());
 
 						// TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
 
-						// no comprueba bien si el usuario está repetido!!!!
 
 						if (GestionUsuarios.comprobarUsuario(txtUsuario.getText())) {
 							// usuario ya esta en bd

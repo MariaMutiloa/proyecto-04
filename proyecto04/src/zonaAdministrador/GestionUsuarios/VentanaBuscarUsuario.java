@@ -129,14 +129,12 @@ public class VentanaBuscarUsuario extends JFrame {
 				}
 				rs.close();
 			} catch (SQLException e) {
-				// e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
 			}
 
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}

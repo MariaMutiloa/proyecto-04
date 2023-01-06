@@ -110,7 +110,6 @@ public class VentanaVerUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 

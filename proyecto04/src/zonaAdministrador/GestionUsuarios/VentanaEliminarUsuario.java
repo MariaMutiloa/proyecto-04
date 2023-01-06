@@ -112,13 +112,11 @@ public class VentanaEliminarUsuario extends JFrame {
 						logger.info("Delete hecho");
 						rs.close();
 					} catch (SQLException e1) {
-						// e.printStackTrace();
 						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 						logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 					}
 
 				} catch (SQLException e2) {
-					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 				}
@@ -171,14 +169,12 @@ public class VentanaEliminarUsuario extends JFrame {
 				}
 				rs.close();
 			} catch (SQLException e) {
-				// e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
 			}
 
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}

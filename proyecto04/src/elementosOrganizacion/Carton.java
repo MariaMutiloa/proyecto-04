@@ -40,7 +40,7 @@ public class Carton {
 
 	// METODO GUARDA LOS NUMEROS DEL CARTON EN UNA LISTA
 	public static int[][] dibujarCarton() {
-
+		logger.info("Guardando los numeros del carton en una lista");
 		List<Integer> numerosGenerados = generarCarton();
 		int[][] carton = new int[3][5];
 
@@ -52,12 +52,9 @@ public class Carton {
 			for (int j = 0; j < numcolumnas; j++) {
 				int numero = numerosGenerados.get(index);
 				carton[i][j] = numero;
-				// System.out.println(carton[i][j]);
 				index++;
 			}
-		}
-		
-		
+		}		
 		return carton;
 	}
 
@@ -75,7 +72,6 @@ public class Carton {
 		int numero = ra.nextInt(99);
 		if (!carton.contains(numero) && numero != 0) {
 			carton.add(numero);
-			//listaNumeros.add(numero);
 		} else {
 			logger.info("Numero ya esta repetido");
 			sacarNumero(carton);

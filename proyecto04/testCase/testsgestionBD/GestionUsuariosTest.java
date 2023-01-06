@@ -105,10 +105,7 @@ public class GestionUsuariosTest {
 	
 	@Test
 	public void testActualizarBingoBD() {
-//		GestionUsuarios.actualizarBingoBD(30);
-//		Carton c = GestionPartidas.getCarton(30);
-//		System.out.println(c.getIDCarton());
-//		assertEquals(1, c.getBingo());
+
 	}
 	
 	@Test
