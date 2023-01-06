@@ -33,7 +33,7 @@ public class Comprobar implements Runnable {
 
 	@Override
 	public void run() {
-		if(numeros.containsAll(cartonGanador.getListaNumeros())){
+		//if(numeros.containsAll(cartonGanador.getListaNumeros())){
 			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual());
 			partida.getPartidaActual().setGanadorBingo(cartonGanador);
 			float bote = cartonGanador.getPropietario().getBote();
@@ -46,10 +46,10 @@ public class Comprobar implements Runnable {
 	         case JOptionPane.NO_OPTION:
 	         break;	  
 			}
-		}else {
-			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
-			GestionPartidas.noEsBingo(cartonGanador);
-		}
+//		}else {
+//			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
+//			GestionPartidas.noEsBingo(cartonGanador);
+//		}
 
 	}
 	
