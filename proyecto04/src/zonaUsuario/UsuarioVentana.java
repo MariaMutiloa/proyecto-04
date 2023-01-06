@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ import zonaAdministrador.partidaNueva.PartidaNueva;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.Timer;
+import javax.swing.plaf.DimensionUIResource;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -110,6 +112,7 @@ public class UsuarioVentana extends JFrame {
 		// muestra todos los numeros que han salido en la partida
 		numeros = new JList<>();
 		JScrollPane scrollNumeros = new JScrollPane(numeros);
+		scrollNumeros.setPreferredSize(new Dimension(50, 175));
 		pCentral.add(scrollNumeros, BorderLayout.WEST);
 
 		// Panel central east --> el numero que ha salido en grande
