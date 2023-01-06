@@ -131,7 +131,7 @@ public class PartidaNueva extends JFrame {
 				int ganadorB = GestionPartidas.revisar(partidaActual.getIDPartida());
 
 				if (ganadorB != 0) {
-					int result = JOptionPane.showConfirmDialog(null, "Han cantado bingo");
+					int result = JOptionPane.showConfirmDialog(null, "¿Quiere comprobar el bingo?", "Han cantado bingo", JOptionPane.YES_NO_OPTION);
 					switch (result) {
 					case JOptionPane.YES_OPTION:
 						Thread comprobar = new Thread((Runnable) new Comprobar(ganadorB, numeros, PartidaNueva.this));
