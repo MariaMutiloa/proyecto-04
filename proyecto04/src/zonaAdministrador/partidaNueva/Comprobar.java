@@ -35,6 +35,7 @@ public class Comprobar implements Runnable {
 	public void run() {
 		if(numeros.containsAll(cartonGanador.getListaNumeros())){
 			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual());
+			partida.getPartidaActual().setGanadorBingo(cartonGanador);
 			float bote = cartonGanador.getPropietario().getBote();
 			(cartonGanador.getPropietario()).setBote(bote+partida.getPartidaActual().getBoteBingo());
 			int result = JOptionPane.showConfirmDialog(null, "El bingo es correcto. Partida terminada. ¿Quiere guardar un resumen?");
@@ -66,10 +67,10 @@ public class Comprobar implements Runnable {
 		}	
 		try (BufferedWriter bf = new BufferedWriter(new FileWriter(file))){
 			bf.write("Resumen partida "+ partida.getPartidaActual().getIDPartida()+"\n");
-			bf.write("Ha habido un total de "+partida.getPartidaActual().getParticipantes().size()+" cartones jugando");
-			bf.write("Los cartones han sido: ");
+			bf.write("Ha habido un total de "+partida.getPartidaActual().getParticipantes().size()+" cartones jugando\n");
+			bf.write("Los cartones han sido: \n");
 			for(Carton u: partida.getPartidaActual().getParticipantes()) {
-				bf.write("Cartón número: "+u.getIDCarton()+" de " + u.getPropietario().getNombre()+ " "+u.getPropietario().getApellido());;
+				bf.write("- Cartón número: "+u.getIDCarton()+" de " + u.getPropietario().getNombre()+ " "+u.getPropietario().getApellido()+"\n");
 			}
 			bf.write("El ganador ha sido el cartón "+partida.getPartidaActual().getGanadorBingo().getIDCarton()+ " que pertenece a " +
 			partida.getPartidaActual().getGanadorBingo().getPropietario().getNombre() + " "+ partida.getPartidaActual().getGanadorBingo().getPropietario().getApellido()
