@@ -25,7 +25,7 @@ public abstract class Persona {
 		this.contrasena = contrasena;
 	}
 	
-	public Persona (int dni, String nombre,String apellido,String usuario,String contraseña, int partidasJ, int partidasG, int partidasE,int partidasP, int liga, int puesto,int bote) {
+	public Persona (int dni, String nombre,String apellido,String usuario,String contrasena, int partidasJ, int partidasG, int partidasE,int partidasP, int liga, int puesto,int bote) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;
