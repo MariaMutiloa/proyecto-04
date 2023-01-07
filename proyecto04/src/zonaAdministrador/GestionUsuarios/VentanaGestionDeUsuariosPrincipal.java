@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private String url;
-	private int seleccionFila;
+	private int seleccionFila =-1;
 	//seleccion de fila
 	private void tuTablaMouseClicked(java.awt.event.MouseEvent evt) {
 		seleccionFila = table.rowAtPoint(evt.getPoint());
@@ -52,9 +53,9 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaGestionDeUsuariosPrincipal() {
+		int contadorG=0;
 		VentanaGestionDeUsuariosPrincipal ventana = VentanaGestionDeUsuariosPrincipal.this;
 		this.url = "jdbc:sqlite:DatosBingo.db";
-		seleccionFila=-1;
 		GestionUsuarios gUsuarios = new GestionUsuarios();
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios = anyadirUsuarios(usuarios, url);
@@ -75,13 +76,36 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			int dni = usuario.getDni();
 			String contrasena = usuario.getContrasena();
 			int partidasJ = 0;
-			if (IdUsuarioCartones.contains(usuario.getDni())) {
-				partidasJ = partidasJ + 1;
+			try {
+				for (String g : IdGanadoresLista) {
+				logger.info("Mirando los ganadores");
+				int dniComparar = Integer.parseInt(g);
+					while (dniComparar==usuario.getDni()) {
+						logger.info("Contando las veces ganadas");
+						contadorG = contadorG + 1;
+					}
+				}
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+				logger.log(Level.SEVERE, "No hay partidas en la BD");
 			}
 			int partidasG = 0;
-			if (IdGanadoresLista.contains(usuario.getDni())) {
-				partidasG = partidasG + 1;
+			try {
+				for (String g : IdUsuarioCartones) {
+				logger.info("Mirando los ganadores");
+				int dniComparar2 = Integer.parseInt(g);
+					while (dniComparar2 == usuario.getDni()) {
+						logger.info("Contando las veces ganadas");
+						contadorG = contadorG + 1;
+					}
+				}
+
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
+				logger.log(Level.SEVERE, "No hay partidas en la BD");
 			}
+			
 			int partidasP = partidasJ - partidasG;
 			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG,
 					partidasP, puesto);
