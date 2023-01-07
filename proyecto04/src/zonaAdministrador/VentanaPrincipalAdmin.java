@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.Estadisticas.VerEstadisticas;
+import zonaAdministrador.GestionUsuarios.VentanaGestionDeUsuariosPrincipal;
 import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
@@ -72,7 +73,7 @@ public class VentanaPrincipalAdmin extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalGestionUsuarios nuevaVentanaPrincipal = new VentanaPrincipalGestionUsuarios();
+				VentanaGestionDeUsuariosPrincipal nuevaVentanaPrincipal = new VentanaGestionDeUsuariosPrincipal();
 				nuevaVentanaPrincipal.setVisible(true);
 				VentanaPrincipalAdmin.this.setVisible(false);
 				

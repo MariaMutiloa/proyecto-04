@@ -351,7 +351,11 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 		@Override
 		public int compare(Usuario a, Usuario b) {
 
-			return a.getUsuario().compareTo(b.getUsuario());
+			if (a.getBote()<b.getBote()) {
+				return -1;
+			} else {
+				return 1;
+			}
 		}
 
 	}

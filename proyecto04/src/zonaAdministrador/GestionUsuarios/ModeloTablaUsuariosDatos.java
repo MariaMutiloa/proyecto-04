@@ -10,7 +10,7 @@ public class ModeloTablaUsuariosDatos implements TableModel {
 	
 	private List<Usuario> usuarios;
 	
-	public void ModeloTablaUsuarios(List<Usuario> usuarios) {
+	public ModeloTablaUsuariosDatos(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 
