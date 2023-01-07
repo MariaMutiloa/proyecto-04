@@ -35,21 +35,26 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private String url;
+	private int seleccionFila;
 
 	/**
 	 * Create the frame.
 	 */
 	public VentanaGestionDeUsuariosPrincipal() {
+		VentanaGestionDeUsuariosPrincipal ventana = VentanaGestionDeUsuariosPrincipal.this;
 		this.url = "jdbc:sqlite:DatosBingo.db";
+		seleccionFila=-1;
 		GestionUsuarios gUsuarios = new GestionUsuarios();
-		List<Usuario> usuarios= new ArrayList<>();
-		usuarios=anyadirUsuarios(usuarios, url);
-		usuarios=ordenarUsuariosPuestos(usuarios);
+		List<Usuario> usuarios = new ArrayList<>();
+		usuarios = anyadirUsuarios(usuarios, url);
+		usuarios = ordenarUsuariosPuestos(usuarios);
 		logger.info("Lista ordenada");
 		List<String> IdGanadoresLista = new ArrayList<String>();
 		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista, url);
@@ -57,24 +62,25 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		IdUsuarioCartones = IdUsuarioCarton(IdUsuarioCartones, url);
 		List<Usuario> usuariosDatos = new ArrayList<>();
 		for (Usuario usuario : usuarios) {
-			String nombre= usuario.getNombre();
-			String apellido= usuario.getApellido();
+			String nombre = usuario.getNombre();
+			String apellido = usuario.getApellido();
 			String nombreUsuario = usuario.getUsuario();
-			int liga =usuario.getIdLigaActual();
-			int puesto = (usuarios.indexOf(usuario))+1;
+			int liga = usuario.getIdLigaActual();
+			int puesto = (usuarios.indexOf(usuario)) + 1;
 			float bote = usuario.getBote();
-			int dni= usuario.getDni();
-			String contrasena=usuario.getContrasena();
-			int partidasJ=0;
-			if(IdUsuarioCartones.contains(usuario.getDni())) {
-				partidasJ=partidasJ+1;
+			int dni = usuario.getDni();
+			String contrasena = usuario.getContrasena();
+			int partidasJ = 0;
+			if (IdUsuarioCartones.contains(usuario.getDni())) {
+				partidasJ = partidasJ + 1;
 			}
-			int partidasG=0;
-			if(IdGanadoresLista.contains(usuario.getDni())) {
-				partidasG=partidasG+1;
+			int partidasG = 0;
+			if (IdGanadoresLista.contains(usuario.getDni())) {
+				partidasG = partidasG + 1;
 			}
-			int partidasP= partidasJ-partidasG;
-			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG, partidasP, puesto);
+			int partidasP = partidasJ - partidasG;
+			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG,
+					partidasP, puesto);
 			usuariosDatos.add(u);
 			System.out.println(usuariosDatos);
 			logger.info("Añadida la persona");
@@ -85,49 +91,86 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JTable table = new JTable( new ModeloTablaUsuariosDatos(usuariosDatos));
+
+		JTable table = new JTable(new ModeloTablaUsuariosDatos(usuariosDatos));
 		table.setBounds(10, 36, 294, 216);
 		contentPane.add(table);
-		
+
 		textField = new JTextField();
 		textField.setBounds(314, 95, 112, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
-		
+
 		JButton btnBuscar = new JButton("Nuevo usuario");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(ventana);
+				nuevoUsuario.setVisible(true);
+				VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
+			}
+		});
 		btnBuscar.setBounds(315, 208, 111, 20);
 		contentPane.add(btnBuscar);
-		
+
 		JLabel lblNewLabel = new JLabel("DNI Usuario Buscar");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(314, 70, 122, 14);
 		contentPane.add(lblNewLabel);
-		
+
 		JScrollPane scroll = new JScrollPane(table);
 		scroll.setBounds(289, 36, 15, 216);
-		add(scroll);
-		
+		getContentPane().add(scroll);
+
+		JButton btnNewButton = new JButton("Eliminar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try (Connection con = DriverManager.getConnection(url)) {
+					logger.info("Conectado a la base de datos para eliminar");
+					Usuario u= usuariosDatos.get(seleccionFila);
+					int dni = u.getDni();
+					String sql = "DELETE from usuario where DNI =?";
+					try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+						pstmt.setInt(1, dni);
+						ResultSet rs = pstmt.executeQuery();
+						logger.info("Delete hecho");
+						rs.close();
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+						logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
+					}
+
+				} catch (SQLException e2) {
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+				}
+
+			}
+		});
+		btnNewButton.setBounds(314, 174, 112, 23);
+		contentPane.add(btnNewButton);
+
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
-			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
 				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				String texto = (String) table.getModel().getValueAt(row, 3);
-				if(texto == textField.getText()) {
-					((JComponent)c).setBackground(Color.RED);
-					((JComponent)c).setForeground(Color.black);
-				}else {
-					((JComponent)c).setBackground(Color.white);
-					((JComponent)c).setForeground(Color.black);
+				if (texto == textField.getText()) {
+					((JComponent) c).setBackground(Color.RED);
+					((JComponent) c).setForeground(Color.black);
+				} else {
+					((JComponent) c).setBackground(Color.white);
+					((JComponent) c).setForeground(Color.black);
 				}
 				return c;
-	}});
+			}
+		});
 	}
 
 	private static Logger logger = Logger.getLogger(VentanaGestionDeUsuariosPrincipal.class.getName());
 	private JTable table;
 	private JTextField textField;
-	
+
 	// crea una lista con todos los usuarios y la
 	// devuleve
 	public static List<Usuario> anyadirUsuarios(List<Usuario> listaUsuarios, String url) {
@@ -142,7 +185,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 						rs.getString(5), rs.getInt(6), rs.getInt(7));
 				listaUsuarios.add(persona);
 				logger.info("Usuario creado y agrgado a lista de usuarios");
-				listaUsuarios= ordenarUsuariosPuestos(listaUsuarios);
+				listaUsuarios = ordenarUsuariosPuestos(listaUsuarios);
 				logger.info("Lista ordenada");
 			}
 			rs.close();
@@ -246,14 +289,13 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 	}
 
-
 	// creo un comparador para la lista
 	static class MiComparador implements Comparator<Usuario> {
 
 		@Override
 		public int compare(Usuario a, Usuario b) {
 
-			if (a.getBote()<b.getBote()) {
+			if (a.getBote() < b.getBote()) {
 				return -1;
 			} else {
 				return 1;
@@ -267,5 +309,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		Collections.sort(usuariosPuesto, new MiComparador());
 		return usuariosPuesto;
 	}
-}
 
+	private void tuTablaMouseClicked(java.awt.event.MouseEvent evt) {
+		seleccionFila = table.rowAtPoint(evt.getPoint());
+	}
+}

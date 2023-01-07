@@ -105,7 +105,7 @@ public class VentanaEliminarUsuario extends JFrame {
 				try (Connection con = DriverManager.getConnection(url)) {
 					logger.info("Conectado a la base de datos para eliminar");
 					int dni = u.getDni();
-					String sql = "DELETE from usuario where Usuario =?";
+					String sql = "DELETE from usuario where DNI =?";
 					try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 						pstmt.setInt(1, dni);
 						ResultSet rs = pstmt.executeQuery();
