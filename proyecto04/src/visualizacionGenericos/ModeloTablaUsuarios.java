@@ -48,7 +48,6 @@ public class ModeloTablaUsuarios implements TableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		String valor;
 		Carton cartonSel = cartones.get(rowIndex);
 		switch (columnIndex) {
 		case 1:

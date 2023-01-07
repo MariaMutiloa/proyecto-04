@@ -1,14 +1,10 @@
 package zonaUsuario;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
@@ -16,7 +12,6 @@ import gestionBD.GestionUsuarios;
 import personas.Usuario;
 
 import javax.swing.JButton;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -24,6 +19,11 @@ import java.util.logging.Logger;
 import java.awt.Font;
 
 public class CartonVentana extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
 	

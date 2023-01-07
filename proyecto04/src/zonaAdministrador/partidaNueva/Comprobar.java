@@ -1,12 +1,8 @@
 package zonaAdministrador.partidaNueva;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.lang.System.Logger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFileChooser;
@@ -17,7 +13,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import elementosOrganizacion.Carton;
 import gestionBD.GestionPartidas;
 import personas.Administrador;
-import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
 public class Comprobar implements Runnable {
@@ -39,7 +34,7 @@ public class Comprobar implements Runnable {
 
 	@Override
 	public void run() {
-		//if(numeros.containsAll(cartonGanador.getListaNumeros())){
+		if(numeros.containsAll(cartonGanador.getListaNumeros())){
 			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual(), botePartida);
 			partida.getPartidaActual().setGanadorBingo(cartonGanador);
 			float bote = cartonGanador.getPropietario().getBote();
@@ -56,10 +51,10 @@ public class Comprobar implements Runnable {
 			nuevaVentanaAdmin.setVisible(true);
 			partida.dispose();
 
-//		}else {
-//			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
-//			GestionPartidas.noEsBingo(cartonGanador);
-//		}
+		}else {
+			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
+			GestionPartidas.noEsBingo(cartonGanador);
+		}
 
 	}
 	

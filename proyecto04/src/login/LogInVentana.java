@@ -15,15 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import elementosOrganizacion.Carton;
 import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
-import zonaAdministrador.partidaNueva.ConfiguracionPart;
 import zonaUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
 
@@ -39,7 +35,6 @@ public class LogInVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
 	private static Logger logger = Logger.getLogger(LogInVentana.class.getName()); 
 	private JTextField txtUsuario;
 	private JPasswordField jpassClave; 

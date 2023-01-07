@@ -3,15 +3,10 @@ package elementosOrganizacion;
 import java.util.List;
 
 import gestionBD.GestionPartidas;
-import personas.Usuario;
 
 public class Partida {
 	
 	private int IDPartida;
-	private int activa;
-	private int premioB;
-	private int idCartonB;
-	
 	private float boteBingo;
 	private Carton ganadorBingo;
 	private List<Carton> participantes;
@@ -23,9 +18,6 @@ public class Partida {
 	
 	public Partida(int idPartida, int activa, int premioB, int idCartonB) {
 		this.IDPartida=idPartida;
-		this.activa=activa;
-		this.premioB=premioB;
-		this.idCartonB=idCartonB;
 	}
 	
 	public List<Carton> getParticipantes(){

@@ -7,20 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import personas.Administrador;
 import personas.Usuario;
-import visualizacionGenericos.ModeloListaValoresCantados;
 
 //Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del usuario
 

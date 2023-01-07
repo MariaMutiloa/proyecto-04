@@ -1,13 +1,10 @@
 package zonaAdministrador.GestionUsuarios;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,12 +30,15 @@ import java.awt.event.ActionEvent;
 
 public class VentanaEliminarUsuario extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textNombre;
-	private JList list;
+	private JList<Usuario> list;
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
-	private Usuario usuario;
 	private String url;
 
 	/**
@@ -47,8 +47,8 @@ public class VentanaEliminarUsuario extends JFrame {
 	public VentanaEliminarUsuario() {
 
 		this.url = "jdbc:sqlite:DatosBingo.db";
-		this.list = new JList();
-		this.model = new DefaultListModel();
+		this.list = new JList<Usuario>();
+		this.model = new DefaultListModel<Usuario>();
 		this.listaUsuarios = new ArrayList<Usuario>();
 
 		Usuario u = new Usuario(0, " ", " ", " ", " ", 0, 0);
@@ -79,7 +79,7 @@ public class VentanaEliminarUsuario extends JFrame {
 		botonBuscar.setBounds(216, 68, 89, 23);
 		contentPane.add(botonBuscar);
 
-		list = new JList();
+		list = new JList<Usuario>();
 		list.setBounds(46, 114, 113, 138);
 		cargarJList(listaUsuarios);
 		contentPane.add(list);
@@ -92,7 +92,7 @@ public class VentanaEliminarUsuario extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if (list.getSelectedValue() != null) {
 					botonEliminar.setEnabled(true);
-					Usuario u = (Usuario) list.getSelectedValue();
+					list.getSelectedValue();
 				} else {
 					botonEliminar.setEnabled(false);
 				}

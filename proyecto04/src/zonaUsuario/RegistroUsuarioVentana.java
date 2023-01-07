@@ -11,10 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
-import login.LogInVentana;
-
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -29,8 +26,6 @@ public class RegistroUsuarioVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
-
 	private static Logger logger = Logger.getLogger(RegistroUsuarioVentana.class.getName());
 
 	private JTextField txtDni;
@@ -40,10 +35,7 @@ public class RegistroUsuarioVentana extends JFrame {
 	private JPasswordField passwordField;
 	private JButton btnCrear;
 	private JLabel lblInfo;
-	private JFrame parent;
-
 	public RegistroUsuarioVentana(JFrame parent) {
-		this.parent = parent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(551, 203);
 		setTitle("Juego BINGO!");

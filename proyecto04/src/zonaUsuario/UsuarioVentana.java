@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,14 +25,8 @@ import gestionBD.GestionUsuarios;
 import login.LogInVentana;
 import personas.Usuario;
 import visualizacionGenericos.ModeloListaValoresCantados;
-import zonaAdministrador.partidaNueva.PartidaNueva;
-
-import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.Timer;
-import javax.swing.plaf.DimensionUIResource;
-
-import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -43,7 +36,6 @@ public class UsuarioVentana extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTable table;
 	private JButton btnJugar;
 	private Partida p;
 	private JPanel pCentral;
@@ -54,7 +46,6 @@ public class UsuarioVentana extends JFrame {
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
 
-	private int[][] datosColores;
 
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
 

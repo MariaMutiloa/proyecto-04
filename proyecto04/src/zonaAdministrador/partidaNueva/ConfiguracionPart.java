@@ -45,13 +45,9 @@ public class ConfiguracionPart extends JFrame {
 	private JPanel contentPane;
 	private Partida partidaActual = new Partida();
 	private JLabel lblNumero;
-	private VentanaPrincipalAdmin parent;
-	private Administrador admin;
 	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
-		this.parent = parent;
-		this.admin = admin;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 350);
 		setTitle("Configuración de partida");

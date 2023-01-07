@@ -1,14 +1,7 @@
 package zonaAdministrador.Estadisticas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,10 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
-import login.LogInVentana;
 import zonaAdministrador.VentanaPrincipalAdmin;
-import zonaAdministrador.partidaNueva.ConfiguracionPart;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -31,6 +21,10 @@ import javax.swing.SwingConstants;
 
 public class VerEstadisticas extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLabel lblEstadisticas;

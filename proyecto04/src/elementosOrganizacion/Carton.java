@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
-import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
 import personas.Usuario;
 
@@ -23,7 +22,7 @@ public class Carton {
 	private int bingo;
 	private Usuario propietario;
 	
-	private static List<Integer> listaNumeros; 
+	private List<Integer> listaNumeros; 
 	
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 

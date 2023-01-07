@@ -24,9 +24,7 @@ import personas.Administrador;
 
 public class PartidaNueva extends JFrame {
 
-	private JPanel contentPane;
 	private Partida partidaActual;
-	private Administrador admin;
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
 	private static List<Integer> numeros = new ArrayList<>();
@@ -37,8 +35,6 @@ public class PartidaNueva extends JFrame {
 	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent, Administrador admin, float botePartida) {
 		logger.info("Abriendo venta nueva partida");
 		this.partidaActual = partidaActual;
-		this.admin = admin;
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowListener() {
 
