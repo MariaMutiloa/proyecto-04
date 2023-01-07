@@ -4,14 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
-import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
@@ -105,7 +102,7 @@ public class ConfiguracionPart extends JFrame {
 
 				} else {
 					GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()));
-					PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, ConfiguracionPart.this, admin, Float.valueOf(txtBingo.getText()));
+					PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, admin, Float.valueOf(txtBingo.getText()));
 					nuevaVentana.setVisible(true);
 					ConfiguracionPart.this.dispose();
 				}

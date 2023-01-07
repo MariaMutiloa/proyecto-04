@@ -42,6 +42,7 @@ public class UsuarioVentana extends JFrame {
 	private JList<Integer> numeros;
 	private Usuario u;
 	private boolean interrumpir;
+	private Thread t;
 
 	private static JLabel unidades = new JLabel();
 	private static JLabel decenas = new JLabel();
@@ -75,6 +76,7 @@ public class UsuarioVentana extends JFrame {
 				LogInVentana parent = new LogInVentana();
 				parent.setVisible(true);
 				UsuarioVentana.this.dispose();
+				t.stop();
 			}
 		});
 
@@ -139,7 +141,7 @@ public class UsuarioVentana extends JFrame {
 							logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
 
 							interrumpir = false;
-							Thread t = new Thread(new Runnable() {
+							t = new Thread(new Runnable() {
 
 								@Override
 								public void run() {
@@ -172,6 +174,8 @@ public class UsuarioVentana extends JFrame {
 													UsuarioVentana.this.dispose();
 													interrumpir = true; //?? PONER EN WHILE ?
 													Thread.currentThread().stop();
+													unidades = new JLabel("");
+													decenas = new JLabel("");
 													
 
 												}

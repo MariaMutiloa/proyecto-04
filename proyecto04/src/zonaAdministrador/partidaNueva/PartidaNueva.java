@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import elementosOrganizacion.Partida;
 import gestionBD.GestionPartidas;
 import personas.Administrador;
+import zonaAdministrador.VentanaPrincipalAdmin;
 
 public class PartidaNueva extends JFrame {
 
@@ -32,7 +33,7 @@ public class PartidaNueva extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	public PartidaNueva(Partida partidaActual, ConfiguracionPart parent, Administrador admin, float botePartida) {
+	public PartidaNueva(Partida partidaActual, Administrador admin, float botePartida) {
 		logger.info("Abriendo venta nueva partida");
 		this.partidaActual = partidaActual;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,11 +44,10 @@ public class PartidaNueva extends JFrame {
 				// TODO Auto-generated method stub
 
 			}
-
 			@Override
 			public void windowClosing(WindowEvent e) {
 
-				GestionPartidas.setGanadorBingo(0, partidaActual, 0);
+				GestionPartidas.setGanadorBingo(1, partidaActual, 0);
 
 			}
 
@@ -98,7 +98,7 @@ public class PartidaNueva extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
+				VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin)
 				PartidaNueva.this.dispose();
 			}
 		});
@@ -157,7 +157,7 @@ public class PartidaNueva extends JFrame {
 						"Aún no se ha cantado bingo, ¿Seguro que quieres terminar la partida?");
 				switch (result) {
 				case JOptionPane.YES_OPTION:
-					GestionPartidas.setGanadorBingo(0, partidaActual, 0);
+					GestionPartidas.setGanadorBingo(1, partidaActual, 0);
 					parent.setVisible(true);
 					PartidaNueva.this.dispose();
 					break;
