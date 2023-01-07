@@ -8,13 +8,7 @@ public abstract class Persona {
 	private String apellido;
 	private String usuario;
 	private String contrasena;
-	int partidasJ;
-	int partidasG;
-	int partidasE;
-	int partidasP;
-	int liga;
-	int puesto;
-	int bote;
+	
 	
 	public Persona(int dni, String nombre, String apellido, String usuario, String contrasena) {
 		super();
@@ -25,21 +19,6 @@ public abstract class Persona {
 		this.contrasena = contrasena;
 	}
 	
-	public Persona (int dni, String nombre,String apellido,String usuario,String contrasena, int partidasJ, int partidasG, int partidasE,int partidasP, int liga, int puesto,int bote) {
-		super();
-		this.dni = dni;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.usuario = usuario;
-		this.contrasena = contrasena;
-		this.partidasJ=partidasJ;
-		this.partidasG=partidasG;
-		this.partidasE=partidasE;
-		this.partidasP=partidasP;
-		this.liga=liga;
-		this.puesto=puesto;
-		this.bote=bote;
-	}
 
 	public int getDni() {
 		return dni;
@@ -86,6 +65,16 @@ public abstract class Persona {
 	public String toString() {
 		return nombre + " " + apellido;
 	}
+	
+	 @Override
+	    public boolean equals(Object o) {
+	        if (!(o instanceof Persona)) 
+	            return false;
+
+	        Persona e = (Persona) o;
+	        return this.dni==(e.dni);
+	      
+	    }
 	
 	
 	
