@@ -43,6 +43,10 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 	private JPanel contentPane;
 	private String url;
 	private int seleccionFila;
+	//seleccion de fila
+	private void tuTablaMouseClicked(java.awt.event.MouseEvent evt) {
+		seleccionFila = table.rowAtPoint(evt.getPoint());
+	}
 
 	/**
 	 * Create the frame.
@@ -82,7 +86,6 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG,
 					partidasP, puesto);
 			usuariosDatos.add(u);
-			System.out.println(usuariosDatos);
 			logger.info("Añadida la persona");
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,6 +126,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 		JButton btnNewButton = new JButton("Eliminar");
 		btnNewButton.addActionListener(new ActionListener() {
+			//Elimino la persona que selecciono
 			public void actionPerformed(ActionEvent e) {
 				try (Connection con = DriverManager.getConnection(url)) {
 					logger.info("Conectado a la base de datos para eliminar");
@@ -310,7 +314,5 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		return usuariosPuesto;
 	}
 
-	private void tuTablaMouseClicked(java.awt.event.MouseEvent evt) {
-		seleccionFila = table.rowAtPoint(evt.getPoint());
-	}
+	
 }
