@@ -7,20 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import javax.swing.ListModel;
-
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import personas.Administrador;
 import personas.Usuario;
-import visualizacionGenericos.ModeloListaValoresCantados;
 
 //Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del usuario
 
@@ -56,8 +51,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -92,8 +85,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -125,8 +116,6 @@ public class GestionUsuarios {
 			stmt.close();
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -200,8 +189,6 @@ public class GestionUsuarios {
 
 		} catch (SQLException e) {
 			// No se ha podido obtener la conexión a la base de datos
-			// System.out.println("Error. No se ha podido conectar a la base de datos " +
-			// e.getMessage());
 			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
 					"Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
@@ -256,7 +243,6 @@ public class GestionUsuarios {
 			// metemos los valores en los ?
 			stmt.setInt(1, IDUsuario);
 			stmt.setInt(2, IDPartida);
-			// stmt.setFloat(3, 2);
 			stmt.setFloat(3, Carton.costeCarton()); // desde properties
 
 			// ejecutamos sentencia
@@ -271,7 +257,6 @@ public class GestionUsuarios {
 
 			if (rs.next()) {
 				IDCarton = rs.getInt("IDCarton");
-				// System.out.println(IDCarton);
 			}
 			conn.close();
 
@@ -355,7 +340,6 @@ public class GestionUsuarios {
 
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
-			//PreparedStatement actualizacion = con.prepareStatement("UPDATE usuario SET Bote =" + cartera + " WHERE DNI = " + IDUsuario);
 			PreparedStatement stmt = con.prepareStatement("UPDATE usuario SET Bote=? WHERE DNI=?");
 			stmt.setFloat(1, cartera);
 			stmt.setInt(2, IDUsuario);
@@ -371,15 +355,13 @@ public class GestionUsuarios {
 	}
 	
 	//Extrae todos los numeros cantados a la partida
-	public static ListModel<Integer> numerosPartida(int idPartida) {
-		//ListModel<Integer> numeros = new DefaultListModel<>();
+	public static List<Integer> numerosPartida(int idPartida) {
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
-		
-		ModeloListaValoresCantados modeloLista = null;
 		
 		List<Integer> todosLosNumeros = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
+			logger.info("Buscando los numeros de la partida");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT Valor FROM numeropartida WHERE IDPartida="+idPartida+ " ORDER BY Orden ASC");
 			//tengo en orden los valores cantados
@@ -389,17 +371,35 @@ public class GestionUsuarios {
 			
 			rs.close();
 			stmt.close();
-			
-			modeloLista = new ModeloListaValoresCantados(todosLosNumeros);
 
 			
 			
 		} catch (SQLException e) {
 			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
 		}
-		return modeloLista;
+		return todosLosNumeros;
 		
 	
+	}
+	
+	public static Integer comprobarSiGanador(int idPartida) {
+		Integer ganador = null;
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE IDPartida=" + idPartida);
+			
+			while (rs.next()) {
+				ganador = rs.getInt(4);
+				System.out.println(ganador);
+			}
+
+			rs.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			logger.log(Level.SEVERE, "No se han podido obtener los numeros cantados");
+		}
+		return ganador;
 	}
 
 }

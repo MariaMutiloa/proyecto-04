@@ -2,21 +2,14 @@ package gestionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
-
-import elementosOrganizacion.Carton;
-import elementosOrganizacion.Partida;
-import personas.Administrador;
-import personas.Usuario;
 
 //Contiene los metodos de creacion e inicializacion de base de datos. 
 
@@ -36,7 +29,6 @@ public class ConexionBD {
 			JOptionPane.showMessageDialog(null, "No se ha podido cargar el driver de la base de datos", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido cargar el driver de base de datos");
-			// System.out.println("No se ha podido cargar el driver de la base de datos");
 		}
 	}
 

@@ -1,8 +1,5 @@
 package zonaAdministrador.GestionUsuarios;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +8,6 @@ import javax.swing.event.ListSelectionListener;
 
 import personas.Usuario;
 
-import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -35,15 +31,15 @@ public class VentanaBuscarUsuario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField textFieldNombre;
-	private JList list;
+	private JList<Usuario> list;
 	private List<Usuario> listaUsuarios;
 	private DefaultListModel<Usuario> model;
 	private String url;
 
 	public VentanaBuscarUsuario() {
 		this.url = "jdbc:sqlite:DatosBingo.db";
-		this.list = new JList();
-		this.model = new DefaultListModel();
+		this.list = new JList<Usuario>();
+		this.model = new DefaultListModel<Usuario>();
 		this.listaUsuarios = new ArrayList<Usuario>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +49,7 @@ public class VentanaBuscarUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		list = new JList();
+		list = new JList<Usuario>();
 		list.setBounds(10, 66, 219, 186);
 		contentPane.add(list);
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -129,14 +125,12 @@ public class VentanaBuscarUsuario extends JFrame {
 				}
 				rs.close();
 			} catch (SQLException e) {
-				// e.printStackTrace();
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
 			}
 
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}

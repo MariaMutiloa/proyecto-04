@@ -195,7 +195,6 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -223,7 +222,6 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 					}
 					rs.close();
 				} catch (SQLException e) {
-					// e.printStackTrace();
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
@@ -231,7 +229,6 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 
 			}
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
@@ -276,7 +273,6 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 		try {
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la búsqueda");
@@ -291,7 +287,6 @@ public class VentanaVerDatosUsuarioBuscado extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 

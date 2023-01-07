@@ -1,4 +1,4 @@
-package zonaRegistroUsuario;
+package zonaUsuario;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -11,10 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
-import login.LogInVentana;
-
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
@@ -29,8 +26,6 @@ public class RegistroUsuarioVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
-
 	private static Logger logger = Logger.getLogger(RegistroUsuarioVentana.class.getName());
 
 	private JTextField txtDni;
@@ -40,8 +35,7 @@ public class RegistroUsuarioVentana extends JFrame {
 	private JPasswordField passwordField;
 	private JButton btnCrear;
 	private JLabel lblInfo;
-
-	public RegistroUsuarioVentana() {
+	public RegistroUsuarioVentana(JFrame parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(551, 203);
 		setTitle("Juego BINGO!");
@@ -126,7 +120,6 @@ public class RegistroUsuarioVentana extends JFrame {
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		passwordField.setBounds(486, 182, 185, 22);
 		pCentral.add(passwordField);
-		// ALGUNA CONDICION? minimo 8 caracteres, letras y numeros...?
 
 		/*
 		 * PANEL INFERIOR - boton crear usuario
@@ -150,12 +143,10 @@ public class RegistroUsuarioVentana extends JFrame {
 
 					// COMPROBAR QUE DNI NO TENGA LETRA PORQUE VA A SER UN INT
 					try {
-						// isNumeric(txtDni.getText());
 						Integer.parseInt(txtDni.getText());
 
 						// TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
 
-						// no comprueba bien si el usuario está repetido!!!!
 
 						if (GestionUsuarios.comprobarUsuario(txtUsuario.getText())) {
 							// usuario ya esta en bd
@@ -202,7 +193,6 @@ public class RegistroUsuarioVentana extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LogInVentana parent = new LogInVentana();
 				parent.setVisible(true);
 				RegistroUsuarioVentana.this.dispose();
 			}

@@ -15,16 +15,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import elementosOrganizacion.Carton;
 import gestionBD.ConexionBD;
 import gestionBD.GestionUsuarios;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
-import zonaAdministrador.partidaNueva.ConfiguracionPart;
-import zonaRegistroUsuario.RegistroUsuarioVentana;
+import zonaUsuario.RegistroUsuarioVentana;
 import zonaUsuario.UsuarioVentana;
 
 import java.awt.BorderLayout;
@@ -39,7 +35,6 @@ public class LogInVentana extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contentPane;
 	private static Logger logger = Logger.getLogger(LogInVentana.class.getName()); 
 	private JTextField txtUsuario;
 	private JPasswordField jpassClave; 
@@ -58,7 +53,6 @@ public class LogInVentana extends JFrame {
 					ConexionBD.realizarConexion("jdbc:sqlite:DatosBingo.db");
 					
 				} catch (Exception e) {
-					//e.printStackTrace();
 				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				   logger.log(Level.SEVERE, "No se ha podido inicializar la applicacion");
 				}
@@ -93,8 +87,6 @@ public class LogInVentana extends JFrame {
 		 * - contraseña + introducir
 		 * panel inferior
 		 * - boton entrar
-		 * 
-		 * 3 lineas 2 columnas
 		 */
 		
 		JPanel pPrincipal = new JPanel( new BorderLayout() );
@@ -109,13 +101,11 @@ public class LogInVentana extends JFrame {
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setForeground(Color.BLACK);
-//		lblUsuario.setBounds(68, 129, 95, 29);
 		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 18));
 		pPrincipal.add(lblUsuario);
 		
 		//txtUsuario
 		txtUsuario = new JTextField();
-//		txtUsuario.setBounds(215, 136, 139, 22);
 		txtUsuario.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtUsuario.setColumns(10);
 		pPrincipal.add(txtUsuario);
@@ -123,7 +113,6 @@ public class LogInVentana extends JFrame {
 		//Contraseña
 		JLabel lblContrasena = new JLabel("Contraseña:");
 		lblContrasena.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblContrasena.setBounds(68, 180, 113, 29);
 		lblContrasena.setFont(new Font("Tahoma", Font.BOLD, 18));
 		pPrincipal.add(lblContrasena);
 	
@@ -182,7 +171,6 @@ public class LogInVentana extends JFrame {
 					}
 				}	
 		});
-		//		btnAceptar.setBounds(155, 242, 132, 29);
 				btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
 		
@@ -199,13 +187,12 @@ public class LogInVentana extends JFrame {
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		
-				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana();
+				RegistroUsuarioVentana ventanaNueva = new RegistroUsuarioVentana(LogInVentana.this);
 				ventanaNueva.setVisible(true);
 				LogInVentana.this.dispose();				
 			}
 		});
 		btnCrearUsuario.setFont(new Font("Tahoma", Font.PLAIN, 18));
-//		btnCrearUsuario.setBounds(305, 334, 157, 29);
 		pInferior.add(btnCrearUsuario);
 		
 

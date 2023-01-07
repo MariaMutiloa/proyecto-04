@@ -8,6 +8,10 @@ import java.awt.Color;
 
 public class RendererTabla extends DefaultTableCellRenderer {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int[][] pintar;
 
 	public RendererTabla(int[][] datosColores) {

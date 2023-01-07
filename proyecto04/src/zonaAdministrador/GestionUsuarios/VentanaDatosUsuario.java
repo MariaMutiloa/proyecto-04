@@ -1,21 +1,13 @@
 package zonaAdministrador.GestionUsuarios;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import org.hamcrest.core.IsNull;
-
-import gestionBD.ConexionBD;
 import personas.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -29,14 +21,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 
 public class VentanaDatosUsuario extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Usuario usuario;
 	private String url;
@@ -194,7 +188,6 @@ public class VentanaDatosUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -222,7 +215,6 @@ public class VentanaDatosUsuario extends JFrame {
 					}
 					rs.close();
 				} catch (SQLException e) {
-					// e.printStackTrace();
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 
@@ -230,7 +222,6 @@ public class VentanaDatosUsuario extends JFrame {
 
 			}
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
@@ -290,7 +281,6 @@ public class VentanaDatosUsuario extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 

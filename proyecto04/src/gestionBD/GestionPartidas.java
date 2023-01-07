@@ -69,7 +69,7 @@ public class GestionPartidas {
 	
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+" WHERE IDPartida = "+ IDPartida);
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+", activa = 0 WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
 			
 			logger.info("Añadido el bote");
@@ -99,40 +99,22 @@ public class GestionPartidas {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
-
 		}
 		return list;
-
 	}
 
-	//Pone el set activa a 0 para que los usuarios no puedan acceder a ella, ya que esta empezada
-	public static void empezada(int idPartida) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
-			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0 WHERE IDPartida = "+ idPartida);
-			actualizacion.executeUpdate();
-			
-			logger.info("Añadida la partida y cambiado estado");
-		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
-			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
-		}
-		
-	}
 
 	//Revisa si hay algun jugador que haya cantado bingo
-	public static int revisar() {
+	public static int revisar(int IDPartida) {
 		int IDGanador = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 
 			logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 			
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE bingo = true");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM carton WHERE Bingo = 1 AND IDPartida = "+IDPartida);
 
 			while (rs.next()) {
 				logger.info("Cartón ganador encontrado");
@@ -142,7 +124,6 @@ public class GestionPartidas {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -195,7 +176,6 @@ public class GestionPartidas {
 				rs.close();
 				stmt.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -204,19 +184,49 @@ public class GestionPartidas {
 	}
 
 	//Añade a la BD el ganador del bingo
-	public static void setGanadorBingo(int idCarton, Partida partida) {
+	public static void setGanadorBingo(int idCarton, Partida partida, float botePartida) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			
-			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, ganadorB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, IDCartonB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
 			actualizacion.executeUpdate();
 			
 			logger.info("Actualizado el ganador");
 		} catch (Exception e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
 		}
 		
+		//HAY QUE SUMAR EL BOTE EN LA CARTERA DEL GANADOR
+		sumarBoteGanador(idCarton, botePartida);
+		
+	}
+	
+	//Suma el bote al ganador de la partida --> incrementa cartera
+	public static void sumarBoteGanador(int idCarton, float botePartida) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+
+			int dniGanador;
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT IDUsuario FROM carton WHERE IDCarton = "+idCarton);
+			dniGanador=rs.getInt(1);
+			rs.close();
+			
+			ResultSet rs1 = stmt.executeQuery("SELECT Bote FROM usuario WHERE DNI = "+dniGanador);
+			float bote = rs1.getFloat(1);
+			rs.close();
+			stmt.close();
+						
+			float nuevoBote = botePartida+bote;
+			PreparedStatement stmt2 = con.prepareStatement("UPDATE usuario SET Bote = ? WHERE DNI = ?");
+			stmt2.setFloat(1, nuevoBote);
+			stmt2.setInt(2, dniGanador);
+			stmt2.executeUpdate();
+			
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"No se han podido actualizar los datos", "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
 	}
 
 
@@ -250,6 +260,22 @@ public class GestionPartidas {
 		return arrayLigas;
 	}
 
+
+	public static void noEsBingo(Carton cartonGanador) {
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+
+			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 0 WHERE IDCarton = " + cartonGanador.getIDCarton());
+			actualizacion.executeUpdate();
+
+			logger.info("Eliminada marca de ganador");
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se han podido actualizar los datos", "Error",
+					JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se han podido actualizar los datos");
+		}
+
+	}
 
 
 }
