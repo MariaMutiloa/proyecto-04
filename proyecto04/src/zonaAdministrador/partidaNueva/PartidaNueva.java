@@ -98,7 +98,7 @@ public class PartidaNueva extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin)
+				VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin);
 				PartidaNueva.this.dispose();
 			}
 		});
