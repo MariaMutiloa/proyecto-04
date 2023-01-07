@@ -98,7 +98,7 @@ public class PartidaNueva extends JFrame {
 		btnVolver.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin)
+				VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin);
 				PartidaNueva.this.dispose();
 			}
 		});
@@ -158,7 +158,7 @@ public class PartidaNueva extends JFrame {
 				switch (result) {
 				case JOptionPane.YES_OPTION:
 					GestionPartidas.setGanadorBingo(1, partidaActual, 0);
-					parent.setVisible(true);
+					VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin);
 					PartidaNueva.this.dispose();
 					break;
 				case JOptionPane.NO_OPTION:
