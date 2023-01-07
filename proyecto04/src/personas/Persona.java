@@ -8,6 +8,13 @@ public abstract class Persona {
 	private String apellido;
 	private String usuario;
 	private String contrasena;
+	int partidasJ;
+	int partidasG;
+	int partidasE;
+	int partidasP;
+	int liga;
+	int puesto;
+	int bote;
 	
 	public Persona(int dni, String nombre, String apellido, String usuario, String contrasena) {
 		super();
@@ -16,6 +23,22 @@ public abstract class Persona {
 		this.apellido = apellido;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
+	}
+	
+	public Persona (int dni, String nombre,String apellido,String usuario,String contraseña, int partidasJ, int partidasG, int partidasE,int partidasP, int liga, int puesto,int bote) {
+		super();
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+		this.partidasJ=partidasJ;
+		this.partidasG=partidasG;
+		this.partidasE=partidasE;
+		this.partidasP=partidasP;
+		this.liga=liga;
+		this.puesto=puesto;
+		this.bote=bote;
 	}
 
 	public int getDni() {
@@ -61,7 +84,7 @@ public abstract class Persona {
 	
 	@Override
 	public String toString() {
-		return dni + ": " + nombre + " " + apellido + " Usuario: " + usuario + " Contra: " + contrasena;
+		return nombre + " " + apellido;
 	}
 	
 	
