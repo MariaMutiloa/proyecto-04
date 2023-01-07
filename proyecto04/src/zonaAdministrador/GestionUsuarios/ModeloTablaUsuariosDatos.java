@@ -3,10 +3,10 @@ package zonaAdministrador.GestionUsuarios;
 import java.util.List;
 
 import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
 import personas.Usuario;
 
-public class ModeloTablaUsuariosDatos implements TableModel {
+public class ModeloTablaUsuariosDatos extends DefaultTableModel {
 	
 	private List<Usuario> usuarios;
 	
@@ -16,6 +16,9 @@ public class ModeloTablaUsuariosDatos implements TableModel {
 
 	@Override
 	public int getRowCount() {
+		if (usuarios == null) {
+			return 0;
+		}
 		return usuarios.size();
 	}
 
