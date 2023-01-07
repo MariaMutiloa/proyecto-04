@@ -4,10 +4,10 @@ public class Usuario extends Persona {
 
 	private int idLigaActual;
 	private float bote;
-	int partidasJ;
-	int partidasG;
-	int partidasP;
-	int puesto;
+	private int partidasJ;
+	private int partidasG;
+	private int partidasP;
+	private int puesto;
 
 	public Usuario(int dni, String nombre, String apellido, String usuario, String contrasena, int idLigaActual,
 			int bote) {
@@ -17,7 +17,7 @@ public class Usuario extends Persona {
 	}
 
 	public Usuario(int dni, String nombre, String apellido, String usuario, String contrasena, int idLigaActual,
-			int bote, int partidasJ, int partidasG, int partidasP, int puesto) {
+			float bote, int partidasJ, int partidasG, int partidasP, int puesto) {
 		super(dni, nombre, apellido, usuario, contrasena);
 		this.partidasJ = partidasJ;
 		this.partidasG = partidasG;
@@ -70,8 +70,8 @@ public class Usuario extends Persona {
 		return bote;
 	}
 
-	public void setBote(float f) {
-		this.bote = f;
+	public void setBote(float bote) {
+		this.bote = bote;
 	}
 
 	@Override

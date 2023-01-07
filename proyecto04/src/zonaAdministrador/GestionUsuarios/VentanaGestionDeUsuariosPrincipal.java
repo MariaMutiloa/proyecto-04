@@ -1,6 +1,8 @@
 package zonaAdministrador.GestionUsuarios;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,10 +22,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.AttributeSet.ColorAttribute;
 
 import gestionBD.GestionUsuarios;
 import personas.Usuario;
 import zonaAdministrador.GestionUsuarios.VentanaVerDatosUsuarioBuscado.MiComparador;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
@@ -38,6 +49,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		GestionUsuarios gUsuarios = new GestionUsuarios();
 		List<Usuario> usuarios= new ArrayList<>();
 		usuarios=anyadirUsuarios(usuarios, url);
+		usuarios=ordenarUsuariosPuestos(usuarios);
+		logger.info("Lista ordenada");
 		List<String> IdGanadoresLista = new ArrayList<String>();
 		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista, url);
 		List<String> IdUsuarioCartones = new ArrayList<>();
@@ -48,7 +61,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			String apellido= usuario.getApellido();
 			String nombreUsuario = usuario.getUsuario();
 			int liga =usuario.getIdLigaActual();
-			int puesto = usuarios.indexOf(usuario)+1;
+			int puesto = (usuarios.indexOf(usuario))+1;
 			float bote = usuario.getBote();
 			int dni= usuario.getDni();
 			String contrasena=usuario.getContrasena();
@@ -61,19 +74,59 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 				partidasG=partidasG+1;
 			}
 			int partidasP= partidasJ-partidasG;
-			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, dni, partidasJ, partidasG, partidasP, puesto);
+			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG, partidasP, puesto);
 			usuariosDatos.add(u);
+			System.out.println(usuariosDatos);
+			logger.info("Añadida la persona");
 		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		JTable tabla= new JTable(new ModeloTablaUsuariosDatos(usuariosDatos));
+		contentPane.setLayout(null);
+		
+		JTable table = new JTable( new ModeloTablaUsuariosDatos(usuariosDatos));
+		table.setBounds(10, 36, 294, 216);
+		contentPane.add(table);
+		
+		textField = new JTextField();
+		textField.setBounds(314, 95, 112, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnBuscar = new JButton("Nuevo usuario");
+		btnBuscar.setBounds(315, 208, 111, 20);
+		contentPane.add(btnBuscar);
+		
+		JLabel lblNewLabel = new JLabel("DNI Usuario Buscar");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel.setBounds(314, 70, 122, 14);
+		contentPane.add(lblNewLabel);
+		
+		JScrollPane scroll = new JScrollPane(table);
+		scroll.setBounds(289, 36, 15, 216);
+		add(scroll);
+		
+		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				String texto = (String) table.getModel().getValueAt(row, 3);
+				if(texto == textField.getText()) {
+					((JComponent)c).setBackground(Color.RED);
+					((JComponent)c).setForeground(Color.black);
+				}else {
+					((JComponent)c).setBackground(Color.white);
+					((JComponent)c).setForeground(Color.black);
+				}
+				return c;
+	}});
 	}
 
 	private static Logger logger = Logger.getLogger(VentanaGestionDeUsuariosPrincipal.class.getName());
+	private JTable table;
+	private JTextField textField;
 	
 	// crea una lista con todos los usuarios y la
 	// devuleve
