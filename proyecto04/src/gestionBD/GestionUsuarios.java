@@ -27,12 +27,18 @@ public class GestionUsuarios {
 		int resultado = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para eliminar");
-			String sql = "SELECT COUNT (*) from usuario where DNI = "+ dni;
+			String sql = "SELECT * from carton";
 			try (PreparedStatement psmt = con.prepareStatement(sql)) {
 				ResultSet rs = psmt.executeQuery();
 				logger.info("Consulta hecha");
-				rs.next();
-				resultado = rs.getInt(1);
+				while (rs.next()) {
+					if (rs.getInt(2) == dni) {
+						resultado = resultado + 1;
+					}
+
+				}
+
+
 				rs.close();
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -116,7 +122,7 @@ public class GestionUsuarios {
 		for (Integer id : idCartonesG) {
 			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 				logger.info("Conectado a la base de datos para realizar consulta");
-				String sql = "SELECT IDUsuario from carton where  IDCarton = "+ id;
+				String sql = "SELECT IDUsuario from carton where  IDCarton = " + id;
 				try (PreparedStatement psmt = con.prepareStatement(sql)) {
 					ResultSet rs = psmt.executeQuery();
 					logger.info("Consulta hecha");
@@ -144,10 +150,23 @@ public class GestionUsuarios {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 			logger.info("Conectado a la base de datos para eliminar");
+<<<<<<< HEAD
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM usuario WHERE DNI ="+dni);
 			pstmt.executeUpdate();
 			logger.info("Usuario eliminado");
 			
+=======
+			String sql = "DELETE FROM usuario WHERE Dni =" + ParteDni;
+			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
+				ResultSet rs = pstmt.executeQuery();
+				logger.info("Delete hecho");
+				rs.close();
+			} catch (SQLException e1) {
+				JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
+			}
+
+>>>>>>> branch 'master' of https://github.com/MariaMutiloa/proyecto-04.git
 		} catch (SQLException e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
