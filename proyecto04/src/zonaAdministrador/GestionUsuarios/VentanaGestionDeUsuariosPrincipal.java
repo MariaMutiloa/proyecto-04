@@ -45,7 +45,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		tablaUsuarios = new JTable();
 		add(new JScrollPane(tablaUsuarios), BorderLayout.CENTER);
-		setSize(800, 600);
+		setSize(830, 320);
 		setVisible(true);
 
 		renderer = new RendererTablaU();

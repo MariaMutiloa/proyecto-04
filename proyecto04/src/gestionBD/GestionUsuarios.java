@@ -28,7 +28,7 @@ public class GestionUsuarios {
 		int resultado = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para eliminar");
-			String sql = "SELECT COUNT (*) from usuario where DNI like %" + dni + "%";
+			String sql = "SELECT COUNT (*) from usuario where Dni = "+ dni;
 			try (PreparedStatement psmt = con.prepareStatement(sql)) {
 				ResultSet rs = psmt.executeQuery();
 				logger.info("Consulta hecha");
@@ -117,7 +117,7 @@ public class GestionUsuarios {
 		for (Integer id : idCartonesG) {
 			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 				logger.info("Conectado a la base de datos para realizar consulta");
-				String sql = "SELECT IDUsuario from carton where  IDCarton %" + id + "%";
+				String sql = "SELECT IDUsuario from carton where  IDCarton = "+ id;
 				try (PreparedStatement psmt = con.prepareStatement(sql)) {
 					ResultSet rs = psmt.executeQuery();
 					logger.info("Consulta hecha");
@@ -144,7 +144,7 @@ public class GestionUsuarios {
 	public static void eliminar(int ParteDni) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para eliminar");
-			String sql = "DELETE from usuario where DNI like %" + ParteDni + "%";
+			String sql = "DELETE FROM usuario WHERE Dni =" +ParteDni;
 			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
 				ResultSet rs = pstmt.executeQuery();
 				logger.info("Delete hecho");
