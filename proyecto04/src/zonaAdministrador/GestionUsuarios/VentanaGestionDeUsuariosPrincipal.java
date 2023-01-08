@@ -53,18 +53,24 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaGestionDeUsuariosPrincipal() {
-		int contadorG=0;
-		VentanaGestionDeUsuariosPrincipal ventana = VentanaGestionDeUsuariosPrincipal.this;
+
+		VentanaGestionDeUsuariosPrincipal ventanaPrincipal = VentanaGestionDeUsuariosPrincipal.this;
 		this.url = "jdbc:sqlite:DatosBingo.db";
 		GestionUsuarios gUsuarios = new GestionUsuarios();
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios = anyadirUsuarios(usuarios, url);
 		usuarios = ordenarUsuariosPuestos(usuarios);
 		logger.info("Lista ordenada");
-		List<String> IdGanadoresLista = new ArrayList<String>();
-		IdGanadoresLista = seleccionIdCartonesGanadores(IdGanadoresLista, url);
-		List<String> IdUsuarioCartones = new ArrayList<>();
-		IdUsuarioCartones = IdUsuarioCarton(IdUsuarioCartones, url);
+		
+		List<Integer> IdUsuariosConCartones = new ArrayList<>();
+		IdUsuariosConCartones= IdUsuarioCarton(IdUsuariosConCartones, url); //lista de los Id Usuarios con carton
+		
+		List <Integer> IdCartonesGanadores = new ArrayList<>();
+		IdCartonesGanadores=seleccionIdCartonesGanadores(IdCartonesGanadores, url); //lista Id de los cartones ganadores
+		
+		List <Integer> IdUsuariosGanadores = new ArrayList<>();
+		IdUsuariosGanadores=IdUsuarioGanador(IdCartonesGanadores, IdUsuariosGanadores, url); //lista Id Usuarios con Cartones ganadores
+		
 		List<Usuario> usuariosDatos = new ArrayList<>();
 		for (Usuario usuario : usuarios) {
 			String nombre = usuario.getNombre();
@@ -75,29 +81,27 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			float bote = usuario.getBote();
 			int dni = usuario.getDni();
 			String contrasena = usuario.getContrasena();
-			int partidasJ = 0;
+			int contadorG1 = 0;
 			try {
-				for (String g : IdGanadoresLista) {
+			for (int g : IdUsuariosGanadores) {
 				logger.info("Mirando los ganadores");
-				int dniComparar = Integer.parseInt(g);
-					while (dniComparar==usuario.getDni()) {
+				if (g==usuario.getDni()) {
 						logger.info("Contando las veces ganadas");
-						contadorG = contadorG + 1;
+						contadorG1 = contadorG1 + 1;
 					}
 				}
 
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "No hay partidas en la BD");
-				logger.log(Level.SEVERE, "No hay partidas en la BD");
+				JOptionPane.showMessageDialog(null, "No hay cartones ganadores en la BD");
+				logger.log(Level.SEVERE, "No hay partidas ganadas en la BD");
 			}
-			int partidasG = 0;
+			int contadorJ = 0;
 			try {
-				for (String g : IdUsuarioCartones) {
-				logger.info("Mirando los ganadores");
-				int dniComparar2 = Integer.parseInt(g);
-					while (dniComparar2 == usuario.getDni()) {
-						logger.info("Contando las veces ganadas");
-						contadorG = contadorG + 1;
+				for (int g : IdUsuariosConCartones) {
+				logger.info("Mirando las partidas");
+					if (g == usuario.getDni()) {
+						logger.info("Ha coincidido");
+						contadorJ = contadorJ + 1;
 					}
 				}
 
@@ -106,8 +110,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 				logger.log(Level.SEVERE, "No hay partidas en la BD");
 			}
 			
-			int partidasP = partidasJ - partidasG;
-			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, partidasJ, partidasG,
+			int partidasP = contadorJ - contadorG1;
+			Usuario u = new Usuario(dni, nombre, apellido, nombreUsuario, contrasena, liga, bote, contadorJ, contadorG1,
 					partidasP, puesto);
 			usuariosDatos.add(u);
 			logger.info("Añadida la persona");
@@ -131,7 +135,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		JButton btnBuscar = new JButton("Nuevo usuario");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(ventana);
+				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(ventanaPrincipal);
 				nuevoUsuario.setVisible(true);
 				VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
 			}
@@ -150,7 +154,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 		JButton btnNewButton = new JButton("Eliminar");
 		btnNewButton.addActionListener(new ActionListener() {
-			//Elimino la persona que selecciono
+			//Elimino la persona que seleccionada
 			public void actionPerformed(ActionEvent e) {
 				try (Connection con = DriverManager.getConnection(url)) {
 					logger.info("Conectado a la base de datos para eliminar");
@@ -229,7 +233,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 	}
 
 	// crea una lista con todos los cartones ganadores
-	public static List<String> seleccionIdCartonesGanadores(List<String> IdCartonesGanadoresLista, String url) {
+	public static List<Integer> seleccionIdCartonesGanadores(List<Integer> IdCartonesGanadoresLista, String url) {
 
 		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la búsqueda");
@@ -237,8 +241,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			ResultSet rs = stmt.executeQuery("SELECT IDCartonB from partida");
 			logger.info("Select hecha para sacar los ID de los cartones ganadores");
 			while (rs.next()) {
-				String Id = "";
-				Id = rs.getString(1);
+				int Id = rs.getInt(1);
 				IdCartonesGanadoresLista.add(Id);
 				logger.info("Id cartones seleccionados y agregados a un ArrayList");
 			}
@@ -255,19 +258,19 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 	}
 
 	// crea una lista con los ID de los usuarios ganadores
-	public static List<String> IdUsuarioGanador(List<String> IdGanadoresLista, String url) {
+	public static List<Integer> IdUsuarioGanador(List<Integer> IdCartonesGanadoresLista,List<Integer> listaDevoler, String url) {
 
 		try (Connection con = DriverManager.getConnection(url)) {
 			logger.info("Conectado a la base de datos para hacer la busqueda");
-			for (String IdCartonGanador : IdGanadoresLista) {
+			for (int IdCartonGanador : IdCartonesGanadoresLista) { //para cada carton ganador miro cual es su usuario
 				String sql = ("select  IDUsuario from carton  where IDCarton =?");
 				try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-					pstmt.setString(1, IdCartonGanador);
+					pstmt.setInt(1, IdCartonGanador);
 					ResultSet rs = pstmt.executeQuery();
 					logger.info("Select hecha para sacar los Id de usuarios de los cartones ganadores");
 					while (rs.next()) {
-						String Id = "";
-						IdGanadoresLista.add(Id);
+						int Id = rs.getInt(1);
+						listaDevoler.add(Id);
 						logger.info("Id de usuarios agregados a la lista");
 
 					}
@@ -285,11 +288,11 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
-		return IdGanadoresLista;
+		return listaDevoler;
 	}
 
 	// seleccionar los ID de los Usuarios de los cartones
-	public static List<String> IdUsuarioCarton(List<String> IdUsuarioCarton, String url) {
+	public static List<Integer> IdUsuarioCarton(List<Integer> IdUsuariosCarton, String url) {
 		try {
 
 		} catch (Exception e) {
@@ -301,8 +304,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			ResultSet rs = stmt.executeQuery("SELECT IDUsuario from carton");
 			logger.info("Select hecha para sacar los Id de usuarios");
 			while (rs.next()) {
-				String Id = "";
-				IdUsuarioCarton.add(Id);
+				int Id = rs.getInt(1);
+				IdUsuariosCarton.add(Id);
 				logger.info("Id añadido a la lista");
 			}
 			rs.close();
@@ -313,7 +316,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
 		}
-		return IdUsuarioCarton;
+		return IdUsuariosCarton;
 
 	}
 
