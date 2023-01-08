@@ -83,8 +83,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			String contrasena = usuario.getContrasena();
 			int contadorG1 = 0;
 			try {
-			for (int g : IdUsuariosGanadores) {
 				logger.info("Mirando los ganadores");
+			for (int g : IdUsuariosGanadores) {
 				if (g==usuario.getDni()) {
 						logger.info("Contando las veces ganadas");
 						contadorG1 = contadorG1 + 1;
@@ -97,8 +97,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			}
 			int contadorJ = 0;
 			try {
-				for (int g : IdUsuariosConCartones) {
 				logger.info("Mirando las partidas");
+				for (int g : IdUsuariosConCartones) {
 					if (g == usuario.getDni()) {
 						logger.info("Ha coincidido");
 						contadorJ = contadorJ + 1;
@@ -140,7 +140,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 				VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
 			}
 		});
-		btnBuscar.setBounds(315, 208, 111, 20);
+		btnBuscar.setBounds(314, 232, 122, 20);
 		contentPane.add(btnBuscar);
 
 		JLabel lblNewLabel = new JLabel("DNI Usuario Buscar");
