@@ -191,7 +191,7 @@ public class VentanaNuevoUsuario extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaPrincipalGestionUsuarios nuevaVentanaGestion = new VentanaPrincipalGestionUsuarios();
+				VentanaGestionDeUsuariosPrincipal nuevaVentanaGestion = new VentanaGestionDeUsuariosPrincipal();
 				nuevaVentanaGestion.setVisible(true);
 				VentanaNuevoUsuario.this.dispose();
 			}

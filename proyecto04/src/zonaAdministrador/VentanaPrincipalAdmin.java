@@ -7,7 +7,6 @@ import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.Estadisticas.VerEstadisticas;
 import zonaAdministrador.GestionUsuarios.VentanaGestionDeUsuariosPrincipal;
-import zonaAdministrador.GestionUsuarios.VentanaPrincipalGestionUsuarios;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.BorderLayout;

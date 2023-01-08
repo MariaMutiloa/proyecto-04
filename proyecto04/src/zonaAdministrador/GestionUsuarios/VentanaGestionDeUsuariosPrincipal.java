@@ -28,7 +28,6 @@ import javax.swing.text.AttributeSet.ColorAttribute;
 
 import gestionBD.GestionUsuarios;
 import personas.Usuario;
-import zonaAdministrador.GestionUsuarios.VentanaVerDatosUsuarioBuscado.MiComparador;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComponent;
