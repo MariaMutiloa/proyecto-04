@@ -20,7 +20,7 @@ import gestionBD.GestionZonaUsuario;
 import personas.Administrador;
 import personas.Usuario;
 
-public class GestionUsuariosTest {
+public class GestionZonaUsuarioTest {
 
 	private static Logger logger = Logger.getLogger(GestionZonaUsuario.class.getName());
 
