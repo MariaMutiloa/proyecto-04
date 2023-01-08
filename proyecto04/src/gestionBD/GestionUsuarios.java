@@ -24,14 +24,14 @@ public class GestionUsuarios {
 	static List<Integer> IdCartonesGanadores = new ArrayList<>();
 
 	public static int getPartidasJugadas(int dni) {
-		// TODO Auto-generated method stub
 		int resultado = 0;
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			logger.info("Conectado a la base de datos para eliminar");
-			String sql = "SELECT COUNT (*) from usuario where Dni = "+ dni;
+			String sql = "SELECT COUNT (*) from usuario where DNI = "+ dni;
 			try (PreparedStatement psmt = con.prepareStatement(sql)) {
 				ResultSet rs = psmt.executeQuery();
 				logger.info("Consulta hecha");
+				rs.next();
 				resultado = rs.getInt(1);
 				rs.close();
 			} catch (Exception e) {
@@ -110,7 +110,6 @@ public class GestionUsuarios {
 	}
 
 	public static int getPartidasGanadas(int dni) {
-		// TODO Auto-generated method stub
 		int resultado = 0;
 		int idUsuario = 0;
 		List<Integer> idCartonesG = cartonesGanadores(IdCartonesGanadores);
@@ -141,19 +140,14 @@ public class GestionUsuarios {
 		return resultado;
 	}
 
-	public static void eliminar(int ParteDni) {
+	public static void eliminar(int dni) {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			
 			logger.info("Conectado a la base de datos para eliminar");
-			String sql = "DELETE FROM usuario WHERE Dni =" +ParteDni;
-			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-				ResultSet rs = pstmt.executeQuery();
-				logger.info("Delete hecho");
-				rs.close();
-			} catch (SQLException e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
-			}
-
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM usuario WHERE DNI ="+dni);
+			pstmt.executeUpdate();
+			logger.info("Usuario eliminado");
+			
 		} catch (SQLException e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");

@@ -91,7 +91,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 				try {
 					GestionUsuarios.eliminar(Integer.parseInt(buscador.getText()));
 					usuarios = GestionUsuarios.getAllUsuarios();
-					tablaUsuarios.repaint();
+					tablaUsuarios.setModel(new TablaUsuarios(usuarios));
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "No hay coincidencias", "Error", JOptionPane.ERROR_MESSAGE);
 					

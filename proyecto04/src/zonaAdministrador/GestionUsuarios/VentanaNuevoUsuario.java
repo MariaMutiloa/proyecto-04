@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import gestionBD.GestionZonaUsuario;
 import personas.Administrador;
+import zonaAdministrador.VentanaPrincipalAdmin;
 import zonaUsuario.RegistroUsuarioVentana;
 
 public class VentanaNuevoUsuario extends JFrame {
@@ -34,7 +35,12 @@ public class VentanaNuevoUsuario extends JFrame {
 	private JPasswordField passwordField;
 	private JButton btnCrear;
 	private JLabel lblInfo;
+	private JFrame parent;
+	private Administrador ad;
+	
 	public VentanaNuevoUsuario(VentanaGestionDeUsuariosPrincipal parent, Administrador ad) {
+		this.ad=ad;
+		this.parent = parent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(551, 203);
 		setTitle("Juego BINGO!");
@@ -192,7 +198,12 @@ public class VentanaNuevoUsuario extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
+				if (parent instanceof VentanaGestionDeUsuariosPrincipal) {
+					VentanaGestionDeUsuariosPrincipal nueva = new VentanaGestionDeUsuariosPrincipal(new VentanaPrincipalAdmin(ad), ad);
+					nueva.setVisible(true);
+				}else {
+					parent.setVisible(true);
+				}
 				VentanaNuevoUsuario.this.setVisible(false);
 				VentanaNuevoUsuario.this.dispose();
 			}
