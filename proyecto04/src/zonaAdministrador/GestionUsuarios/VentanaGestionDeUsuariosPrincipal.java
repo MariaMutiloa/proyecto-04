@@ -1,6 +1,7 @@
 package zonaAdministrador.GestionUsuarios;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -52,6 +53,10 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 		tablaUsuarios.setModel(new TablaUsuarios(usuarios));
 		
 		JPanel izquierda = new JPanel();
+		
+		GridLayout layoutGrid = new GridLayout(10,0);
+		izquierda.setLayout(layoutGrid);
+		
 		JLabel buscadorDNI = new JLabel("Busca por DNI de usuario: ");
 		buscador = new JTextField();
 		buscador.setColumns(15);
@@ -77,6 +82,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 			}
 		});
 		
+		
 		JButton eliminar = new JButton("Eliminar usuario en rojo");
 		eliminar.addActionListener(new ActionListener() {
 
@@ -96,9 +102,28 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 			
 		});
 		
+		JButton volver =new JButton("Volver a Ventana Administrador");
+		volver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			parent.setVisible(true);
+			VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
+			}
+		});
+		
+		JButton nuevoUsuario = new JButton ("Crear usuario");
+		nuevoUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(VentanaGestionDeUsuariosPrincipal.this, a);
+				nuevoUsuario.setVisible(true);
+				VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
+			}
+		});
+		
 		izquierda.add(buscadorDNI, BorderLayout.NORTH);
 		izquierda.add(buscador, BorderLayout.CENTER);
 		izquierda.add(eliminar, BorderLayout.SOUTH);
+		izquierda.add(volver,BorderLayout.SOUTH);
+		izquierda.add(nuevoUsuario,BorderLayout.SOUTH);
 		add(izquierda, BorderLayout.WEST);
 
 		
