@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Usuario;
 
 public class Carton {
@@ -32,7 +32,7 @@ public class Carton {
 		this.coste = costeCarton();	//esta en properties coste=2
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
-		this.propietario = GestionUsuarios.buscarUsuarioPorID(IDUsuario);
+		this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario);
 	}
 	
 	
@@ -158,7 +158,7 @@ public class Carton {
 		u.setBote(nuevoBote);
 		
 		//GUARDAR EN BD
-		GestionUsuarios.actualizarCarteraBD(u.getDni(), nuevoBote);
+		GestionZonaUsuario.actualizarCarteraBD(u.getDni(), nuevoBote);
 		logger.info("Cartera actualizada");
 		
 		

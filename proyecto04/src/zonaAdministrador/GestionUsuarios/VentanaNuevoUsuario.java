@@ -18,7 +18,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Administrador;
 import zonaUsuario.RegistroUsuarioVentana;
 
@@ -147,7 +147,7 @@ public class VentanaNuevoUsuario extends JFrame {
 						// TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
 
 
-						if (GestionUsuarios.comprobarUsuario(txtUsuario.getText())) {
+						if (GestionZonaUsuario.comprobarUsuario(txtUsuario.getText())) {
 							// usuario ya esta en bd
 							logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
 							JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR",
@@ -161,7 +161,7 @@ public class VentanaNuevoUsuario extends JFrame {
 							char[] clave = passwordField.getPassword();
 							String claveFinal = new String(clave);
 
-							GestionUsuarios.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
+							GestionZonaUsuario.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
 									txtApellido.getText(), txtUsuario.getText(), claveFinal);
 							txtDni.setText("");
 							txtNombre.setText("");

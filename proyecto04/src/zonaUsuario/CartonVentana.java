@@ -8,7 +8,7 @@ import javax.swing.JTable;
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Usuario;
 
 import javax.swing.JButton;
@@ -46,13 +46,13 @@ public class CartonVentana extends JFrame {
 		int[][] miCarton = Carton.dibujarCarton();
 		
 		//GUARDO CARTON EN BD (carton)
-		int idCarton = GestionUsuarios.cartonNuevo(u.getDni(), p.getIDPartida());
+		int idCarton = GestionZonaUsuario.cartonNuevo(u.getDni(), p.getIDPartida());
 		
 		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida());	
 		
 		
 		//GUARDO CARTON EN BD (numerocarton)
-		GestionUsuarios.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
+		GestionZonaUsuario.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
         datosColores = new int[3][5];
@@ -92,7 +92,7 @@ public class CartonVentana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.setBingo(1);
-				GestionUsuarios.actualizarBingoBD(c.getIDCarton());
+				GestionZonaUsuario.actualizarBingoBD(c.getIDCarton());
 				JOptionPane.showMessageDialog(null, "Se esta comprobando el bingo","Espere a que el administrador compruebe su bingo", JOptionPane.WARNING_MESSAGE);
 				 
 				

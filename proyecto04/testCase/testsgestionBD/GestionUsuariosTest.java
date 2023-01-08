@@ -16,13 +16,13 @@ import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
 import gestionBD.GestionPartidas;
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Administrador;
 import personas.Usuario;
 
 public class GestionUsuariosTest {
 
-	private static Logger logger = Logger.getLogger(GestionUsuarios.class.getName());
+	private static Logger logger = Logger.getLogger(GestionZonaUsuario.class.getName());
 
 	
 	@Before
@@ -34,35 +34,35 @@ public class GestionUsuariosTest {
 	@Test
 	public void testGetUsuario() {
 		Usuario u = new Usuario(24356782, "Ruben", "Garcia", "ruben.garcia", "ruben01", 1, 0);
-		assertEquals(u.getNombre(), GestionUsuarios.getUsuario("ruben.garcia", "ruben01").getNombre());
-		assertEquals(u.getApellido(), GestionUsuarios.getUsuario("ruben.garcia", "ruben01").getApellido());
-		assertEquals(u.getIdLigaActual(), GestionUsuarios.getUsuario("ruben.garcia", "ruben01").getIdLigaActual());
-		assertNull(GestionUsuarios.getUsuario("juan", "prueba"));
-		assertNull(GestionUsuarios.getUsuario("ruben.garcia", "prueba"));
+		assertEquals(u.getNombre(), GestionZonaUsuario.getUsuario("ruben.garcia", "ruben01").getNombre());
+		assertEquals(u.getApellido(), GestionZonaUsuario.getUsuario("ruben.garcia", "ruben01").getApellido());
+		assertEquals(u.getIdLigaActual(), GestionZonaUsuario.getUsuario("ruben.garcia", "ruben01").getIdLigaActual());
+		assertNull(GestionZonaUsuario.getUsuario("juan", "prueba"));
+		assertNull(GestionZonaUsuario.getUsuario("ruben.garcia", "prueba"));
 	}
 	
 	@Test
 	public void testGetAdministrador() {
 		Administrador a = new Administrador(56735467, "Carmen", "Perez", "carmen.perez", "carpez");
-		assertEquals(a.getNombre(), GestionUsuarios.getAdministrador("carmen.perez", "carpez").getNombre());
-		assertEquals(a.getApellido(), GestionUsuarios.getAdministrador("carmen.perez", "carpez").getApellido());
-		assertEquals(a.getDni(), GestionUsuarios.getAdministrador("carmen.perez", "carpez").getDni());
-		assertNull(GestionUsuarios.getAdministrador("juan", "prueba"));
-		assertNull(GestionUsuarios.getAdministrador("carmen.perez", "prueba"));
+		assertEquals(a.getNombre(), GestionZonaUsuario.getAdministrador("carmen.perez", "carpez").getNombre());
+		assertEquals(a.getApellido(), GestionZonaUsuario.getAdministrador("carmen.perez", "carpez").getApellido());
+		assertEquals(a.getDni(), GestionZonaUsuario.getAdministrador("carmen.perez", "carpez").getDni());
+		assertNull(GestionZonaUsuario.getAdministrador("juan", "prueba"));
+		assertNull(GestionZonaUsuario.getAdministrador("carmen.perez", "prueba"));
 	}
 	
 	@Test
 	public void testComprobarUsuario() {
-		assertTrue(GestionUsuarios.comprobarUsuario("ruben.garcia"));
-		assertFalse(GestionUsuarios.comprobarUsuario("juanjo"));
+		assertTrue(GestionZonaUsuario.comprobarUsuario("ruben.garcia"));
+		assertFalse(GestionZonaUsuario.comprobarUsuario("juanjo"));
 	} 
 	
 	
 	@Test 
 	public void testInsertarUsuario() {
 		
-		GestionUsuarios.insertarUsuario(11111111, "Ana", "Escudero", "anaescudero", "123");
-		assertTrue(GestionUsuarios.comprobarUsuario("anaescudero"));
+		GestionZonaUsuario.insertarUsuario(11111111, "Ana", "Escudero", "anaescudero", "123");
+		assertTrue(GestionZonaUsuario.comprobarUsuario("anaescudero"));
 		
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
 			System.out.println("entro try");
@@ -78,7 +78,7 @@ public class GestionUsuariosTest {
 	
 	@Test
 	public void testBuscarUsuarioPorID() {
-		Usuario u = GestionUsuarios.buscarUsuarioPorID(24356782);
+		Usuario u = GestionZonaUsuario.buscarUsuarioPorID(24356782);
 		
 		assertEquals("Ruben", u.getNombre());
 		assertEquals("Garcia", u.getApellido());
@@ -98,7 +98,7 @@ public class GestionUsuariosTest {
 	
 	@Test
 	public void testBuscarPartidaActiva() {
-		Partida p = GestionUsuarios.buscarPartidaActiva();
+		Partida p = GestionZonaUsuario.buscarPartidaActiva();
 		assertEquals(1, p.getIDPartida());
 		assertNotEquals(0, p.getIDPartida());
 	}

@@ -21,7 +21,7 @@ import javax.swing.JScrollPane;
 import elementosOrganizacion.Carton;
 import elementosOrganizacion.Partida;
 import gestionBD.ConexionBD;
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import login.LogInVentana;
 import personas.Usuario;
 import visualizacionGenericos.ModeloListaValoresCantados;
@@ -115,7 +115,7 @@ public class UsuarioVentana extends JFrame {
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				p = GestionUsuarios.buscarPartidaActiva();
+				p = GestionZonaUsuario.buscarPartidaActiva();
 				logger.info("Comprobando si existen partidas activas");
 				if (p != null) {
 					// SALE JOptionPane diciendo si confirmar compra carton o no
@@ -155,7 +155,7 @@ public class UsuarioVentana extends JFrame {
 
 											// Primero mira si se ha cantado bingo
 
-											Integer ganador = GestionUsuarios.comprobarSiGanador(p.getIDPartida());
+											Integer ganador = GestionZonaUsuario.comprobarSiGanador(p.getIDPartida());
 											logger.info("el ganador es: " + ganador);
 											if (ganador != 0) {
 												if (ganador == u.getDni()) {
@@ -184,7 +184,7 @@ public class UsuarioVentana extends JFrame {
 												logger.info("Buscando nuevos numeros");
 
 												// Por una parte cambia el modelo de la lista de datos
-												List<Integer> numerosCantados = GestionUsuarios
+												List<Integer> numerosCantados = GestionZonaUsuario
 														.numerosPartida(p.getIDPartida());
 												ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
 														numerosCantados);

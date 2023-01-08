@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import gestionBD.ConexionBD;
-import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Administrador;
 import personas.Usuario;
 import zonaAdministrador.VentanaPrincipalAdmin;
@@ -145,20 +145,20 @@ public class LogInVentana extends JFrame {
 				}else {
 					
 					//Comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
-					GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal);
+					GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal);
 					
-					if(GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
+					if(GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
 						logger.info("Se ha encontrado el usuario");	
-						Usuario u = GestionUsuarios.getUsuario(txtUsuario.getText(), claveFinal);
+						Usuario u = GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal);
 						
 						//ABRO UsuarioVentana
 						UsuarioVentana ventanaNueva = new UsuarioVentana(u);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
 						
-					}else if (GestionUsuarios.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
+					}else if (GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
 						logger.info("Se ha encontrado el administrador");		
-						Administrador a = GestionUsuarios.getAdministrador(txtUsuario.getText(), claveFinal);
+						Administrador a = GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal);
 						
 						//ABRO VentanaPrincipalAdmin
 						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);
