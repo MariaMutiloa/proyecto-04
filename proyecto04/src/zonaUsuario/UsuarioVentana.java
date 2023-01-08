@@ -169,13 +169,14 @@ public class UsuarioVentana extends JFrame {
 													c.dispose();
 													// SE TIENE QUE PARAR EL HILO --> vamos a cerrar esa ventana usuario
 													// y crear una nueva
+													unidades = new JLabel("");
+													decenas = new JLabel("");
 													UsuarioVentana nuevaUsuarioVentana = new UsuarioVentana(u);
 													nuevaUsuarioVentana.setVisible(true);
 													UsuarioVentana.this.dispose();
 													interrumpir = true; //?? PONER EN WHILE ?
 													Thread.currentThread().stop();
-													unidades = new JLabel("");
-													decenas = new JLabel("");
+													
 													
 
 												}
