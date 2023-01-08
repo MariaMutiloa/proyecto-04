@@ -77,7 +77,7 @@ public class VentanaPrincipalAdmin extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaGestionDeUsuariosPrincipal nuevaVentanaPrincipal = new VentanaGestionDeUsuariosPrincipal();
+				VentanaGestionDeUsuariosPrincipal nuevaVentanaPrincipal = new VentanaGestionDeUsuariosPrincipal(VentanaPrincipalAdmin.this, admin);
 				nuevaVentanaPrincipal.setVisible(true);
 				VentanaPrincipalAdmin.this.setVisible(false);
 				

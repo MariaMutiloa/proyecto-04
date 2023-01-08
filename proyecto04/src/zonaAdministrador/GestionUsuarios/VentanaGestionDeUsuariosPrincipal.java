@@ -27,7 +27,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.text.AttributeSet.ColorAttribute;
 
 import gestionBD.GestionUsuarios;
+import personas.Administrador;
 import personas.Usuario;
+import zonaAdministrador.VentanaPrincipalAdmin;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -50,8 +53,12 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param admin 
+	 * @param ventanaPrincipalAdmin 
 	 */
-	public VentanaGestionDeUsuariosPrincipal() {
+	public VentanaGestionDeUsuariosPrincipal(VentanaPrincipalAdmin parent, Administrador admin) {
+		
+		Administrador ad = admin;
 
 		VentanaGestionDeUsuariosPrincipal ventanaPrincipal = VentanaGestionDeUsuariosPrincipal.this;
 		this.url = "jdbc:sqlite:DatosBingo.db";
@@ -133,7 +140,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		JButton btnBuscar = new JButton("Nuevo usuario");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(ventanaPrincipal);
+				VentanaNuevoUsuario nuevoUsuario = new VentanaNuevoUsuario(ventanaPrincipal, ad);
 				nuevoUsuario.setVisible(true);
 				VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
 			}
@@ -178,6 +185,16 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		});
 		btnNewButton.setBounds(314, 174, 112, 23);
 		contentPane.add(btnNewButton);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			parent.setVisible(true);
+			VentanaGestionDeUsuariosPrincipal.this.setVisible(false);
+			}
+		});
+		btnVolver.setBounds(325, 11, 89, 23);
+		contentPane.add(btnVolver);
 
 		table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			@Override
@@ -335,6 +352,4 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		Collections.sort(usuariosPuesto, new MiComparador());
 		return usuariosPuesto;
 	}
-
-	
 }
