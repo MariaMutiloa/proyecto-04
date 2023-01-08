@@ -58,7 +58,6 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		GestionUsuarios gUsuarios = new GestionUsuarios();
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios = anyadirUsuarios(usuarios, url);
-		usuarios = ordenarUsuariosPuestos(usuarios);
 		logger.info("Lista ordenada");
 		
 		List<Integer> IdUsuariosConCartones = new ArrayList<>();
@@ -227,6 +226,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
 		}
+		Collections.sort(listaUsuarios, new MiComparador());
 		return listaUsuarios;
 
 	}
@@ -310,7 +310,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
-			// e.printStackTrace();
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 
@@ -325,11 +325,7 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame {
 		@Override
 		public int compare(Usuario a, Usuario b) {
 
-			if (a.getBote() < b.getBote()) {
-				return -1;
-			} else {
-				return 1;
-			}
+			return a.getNombre().compareTo(b.getNombre());
 		}
 
 	}
