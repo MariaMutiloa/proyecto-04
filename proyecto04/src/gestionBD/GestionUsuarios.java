@@ -108,7 +108,8 @@ public class GestionUsuarios {
 				idCartonesGanadores.add(id);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 		}
 
 		return idCartonesGanadores;
@@ -136,10 +137,12 @@ public class GestionUsuarios {
 					rs.close();
 
 				} catch (Exception e) {
-					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+					logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
 				}
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
 			}
 
 		}
@@ -150,23 +153,11 @@ public class GestionUsuarios {
 		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
 			
 			logger.info("Conectado a la base de datos para eliminar");
-<<<<<<< HEAD
+
 			PreparedStatement pstmt = con.prepareStatement("DELETE FROM usuario WHERE DNI ="+dni);
 			pstmt.executeUpdate();
 			logger.info("Usuario eliminado");
 			
-=======
-			String sql = "DELETE FROM usuario WHERE Dni =" + ParteDni;
-			try (PreparedStatement pstmt = con.prepareStatement(sql)) {
-				ResultSet rs = pstmt.executeQuery();
-				logger.info("Delete hecho");
-				rs.close();
-			} catch (SQLException e1) {
-				JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				logger.log(Level.SEVERE, "No se ha podido realizar la consulta");
-			}
-
->>>>>>> branch 'master' of https://github.com/MariaMutiloa/proyecto-04.git
 		} catch (SQLException e2) {
 			JOptionPane.showMessageDialog(null, e2.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
