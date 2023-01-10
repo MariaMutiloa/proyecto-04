@@ -1,6 +1,8 @@
 package zonaAdministrador.gestionLigas;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -33,13 +35,42 @@ public class GestionLigas extends JFrame{
 		JPanel superior = new JPanel();
 		JButton volver = new JButton("Volver");
 		superior.add(volver, BorderLayout.CENTER);
+		volver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.setVisible(true);
+				GestionLigas.this.dispose();
+				
+			}
+			
+		});
 		
 		
 		JPanel derecha = new JPanel();
 		JScrollPane tabla = new JScrollPane(ligas);
 		derecha.add(tabla, BorderLayout.NORTH);
+		ligas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				tablaLigas.setModel(new NuestraTabla(GestionLigasYEstadisticas.getUsuariosLiga((int) ligas.getSelectedItem())));
+			}
+			
+		});
 		
 		JButton refrescar = new JButton("Actualizar las ligas");
+		refrescar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestionLigasYEstadisticas.actualizarLigas();
+				ligas = new JComboBox<Integer>(GestionLigasYEstadisticas.getLigas());
+				tablaLigas.setModel(new NuestraTabla(GestionLigasYEstadisticas.getUsuariosLiga((int) ligas.getSelectedItem())));
+				
+			}
+			
+		});
 		
 		derecha.add(refrescar,BorderLayout.SOUTH);
 		contentPane.add(superior, BorderLayout.NORTH);
