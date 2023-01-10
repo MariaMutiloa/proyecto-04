@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gestionBD.ConexionBD;
+import gestionBD.GestionEstadisticas;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
