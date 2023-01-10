@@ -2,8 +2,15 @@ package testsgestionBD;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import gestionBD.GestionUsuarios;
@@ -15,6 +22,18 @@ public class GestionUsuariosTest {
 	private static String bdReal = "jdbc:sqlite:DatosBingo.db";
 	private static String bdTest = "jdbc:sqlite:DatosBingoTest.db";
 
+	@Before
+	public void insertarUsuario() {
+		try(Connection conn = DriverManager.getConnection(bdTest);
+		   
+		    Statement stmt = conn.createStatement();
+		    ResultSet rs = stmt.executeQuery("INSERT INTO usuario VALUES (45236798,Maria,Mutiloa,mariamutiloa,maria.mutiloa,1,10)")) {
+			conn.close();
+		} catch (Exception e) {
+			 System.out.println("No se ha podido conectar a la base de datos.");
+			    System.out.println(e.getMessage());
+		}
+	}
 	
 	@Test
 	public void testGetPartidasJugadas() {
@@ -33,6 +52,20 @@ public class GestionUsuariosTest {
 		assertEquals(u2, lista.get(1));
 		assertEquals(u3, lista.get(2));
 		assertEquals(u4, lista.get(3));
+	}
+	
+	@Test 
+	public void testEliminar() {
+		GestionUsuarios.eliminar(45236798,bdTest );
+		List<UsuarioExtendido> lista = GestionUsuarios.getAllUsuarios(bdTest);
+		List<UsuarioExtendido> listaComparar = new ArrayList<>();
+		for (UsuarioExtendido u : lista) {
+			if(u.getDni() == 45236798) {
+				listaComparar.add(u);
+			}
+		}
+		
+		assertEquals(0, listaComparar.size());
 	}
 
 }
