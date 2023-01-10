@@ -132,7 +132,7 @@ public class UsuarioVentana extends JFrame {
 						boolean suficienteDinero = comprobarSuficienteDinero(u);
 						if (suficienteDinero) {
 							// bajar cartera
-							Carton.bajarCartera(u);
+							Carton.bajarCartera(u, bd);
 							lblCartera.setText("Cartera: " + u.getBote() + " €");
 							// actualizar cartera en BD
 
