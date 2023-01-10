@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -85,5 +86,42 @@ public class GestionEstadisticas {
 			}
 			return boteMax;
 		}
+
+		// USUARIO CON MAYOR CARTERA
+		public static String usuarioMayorCartera() {
+			logger.info("Buscando en la base de datos usuario con mayor cartera.");
+			float carteraMax = 0;
+			String usuario = null;
+
+			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT Usuario, Bote FROM usuario");
+				// recorremos fila a fila
+				while (rs.next()) {
+					
+					if(rs.getFloat(2)>carteraMax) {
+						carteraMax=rs.getFloat(2);
+						usuario=rs.getString(1);
+					}
+
+				}
+				logger.info("Ya tenemos el usuario con mayor cartera");
+				rs.close();
+				stmt.close();
+
+			} catch (SQLException e) {
+				// No se ha podido obtener la conexión a la base de datos
+				JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+			}
+			DecimalFormat format = new DecimalFormat("#.00");
+			String carteraMaxFormat = format.format(carteraMax);
+			
+			return String.format("%s con %s €", usuario, carteraMaxFormat);
+		}
+		
+			
+
 		
 }
