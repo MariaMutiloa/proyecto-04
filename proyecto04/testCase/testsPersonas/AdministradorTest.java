@@ -17,7 +17,7 @@ public class AdministradorTest {
 	
 	@Test
 	public void testToString() {
-		String ms = "123456789: Sara Martinez Usuario: sara.martinez Contra: 123";
+		String ms = "Sara Martinez";
 		assertEquals(ms, a.toString());
 	}
 
