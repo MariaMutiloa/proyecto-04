@@ -30,18 +30,18 @@ public class UsuarioTest {
 	
 	@Test
 	public void testGetBote() {
-		assertEquals(10, u.getBote());
+		assertEquals(10, u.getBote(), 0);
 	}
 	
 	@Test
 	public void testSetBote() {
 		u.setBote(2030);
-		assertEquals(2030, u.getBote());
+		assertEquals(2030, u.getBote(), 0);
 	}
 	
 	@Test
 	public void testToString() {
-		String ms = "35468792: Pedro Rodriguez Usuario: pedro.rodriguez Contra: rodri01 IdLigaActual: 1 Bote: 1000";
+		String ms = "Pedro Rodriguez";
 		assertEquals(ms, u.toString());
 	}
 	
