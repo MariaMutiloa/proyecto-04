@@ -9,6 +9,10 @@ import personas.Usuario;
 public class TablaLigas extends AbstractTableModel{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] cabecera = { "Usuario", "Nombre", "Apelllido", "Bote" };
 	private List<Usuario> usuarios;
 
@@ -18,14 +22,14 @@ public class TablaLigas extends AbstractTableModel{
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return usuarios.size();
 	}
 
 	@Override
 	public String getColumnName(int index) {
-		// TODO Auto-generated method stub
-		return cabecera[index];	}
+		return cabecera[index];	
+	}
+	
 	@Override
 	public int getColumnCount() {
 		return 4;

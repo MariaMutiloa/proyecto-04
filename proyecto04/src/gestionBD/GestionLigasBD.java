@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 import personas.Usuario;
 
-public class GestionLigasYEstadisticas {
+public class GestionLigasBD {
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 
 	public static Integer[] getLigas(String bd) {
@@ -83,7 +83,7 @@ public class GestionLigasYEstadisticas {
 
 			@Override
 			public int compare(Usuario o1, Usuario o2) {
-				if (o1.getBote() < o2.getBote()) {
+				if (o1.getBote() > o2.getBote()) {
 					return -2;
 				} else {
 					return 1;

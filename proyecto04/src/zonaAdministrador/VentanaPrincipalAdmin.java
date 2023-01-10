@@ -7,6 +7,7 @@ import login.LogInVentana;
 import personas.Administrador;
 import zonaAdministrador.Estadisticas.VerEstadisticas;
 import zonaAdministrador.GestionUsuarios.VentanaGestionDeUsuariosPrincipal;
+import zonaAdministrador.gestionLigas.GestionLigas;
 import zonaAdministrador.partidaNueva.ConfiguracionPart;
 
 import java.awt.BorderLayout;
@@ -87,7 +88,17 @@ public class VentanaPrincipalAdmin extends JFrame {
 		
 		JButton btnGestionLigas = new JButton("Gestión Ligas");
 		inferior.add(btnGestionLigas);
-		//ABRIR VENTANA
+		btnGestionLigas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GestionLigas parent = new GestionLigas(VentanaPrincipalAdmin.this);
+				parent.setVisible(true);
+				VentanaPrincipalAdmin.this.dispose();
+				
+			}
+			
+		});
 		
 		
 		JButton btnVolver = new JButton("Volver");
