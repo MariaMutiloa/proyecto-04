@@ -93,4 +93,50 @@ public class GestionLigasYEstadisticas {
 		});
 		return listaUsuarios;
 	}
+	
+	
+
+	public static List<Usuario> getAllUsuarios() {
+		logger.info("Extrayendo todos los usuarios");
+		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+			// recorremos fila a fila
+			while (rs.next()) {
+				// obtenemos columnas
+				int dni = rs.getInt(1);
+				String nombre = rs.getString(2);
+				String apellido = rs.getString(3);
+				String usuario = rs.getString(4);
+				String contrasena = rs.getString(5);
+				int idLigaActual = rs.getInt(6);
+				int bote = rs.getInt(7);
+
+				Usuario u = new Usuario(dni, nombre, apellido, usuario, contrasena, idLigaActual, bote);
+				listaUsuarios.add(u);
+				logger.info("Añadido "+u);
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
+		listaUsuarios.sort(new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario o1, Usuario o2) {
+				if (o1.getBote() < o2.getBote()) {
+					return -2;
+				} else {
+					return 1;
+				}
+
+			}
+
+		});
+		return listaUsuarios;
+	}
 }
