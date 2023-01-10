@@ -26,10 +26,11 @@ public class VerEstadisticas extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JLabel textNumMaxRep;
 	private JLabel lblEstadisticas;
 	private JLabel lblNewLabel_2;
-	private JTextField textField_1;
+	private JLabel txtBoteMax;
+	private JLabel txtUsuarioCartera;
 
 	public VerEstadisticas(VentanaPrincipalAdmin parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,12 +40,13 @@ public class VerEstadisticas extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		textField = new JTextField();
-		textField.setBounds(222, 64, 130, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textNumMaxRep = new JLabel();
+		textNumMaxRep.setText(String.valueOf(GestionEstadisticas.numMasVecesCantado()));
+		textNumMaxRep.setBounds(222, 64, 130, 26);
+		contentPane.add(textNumMaxRep);
 
-		JLabel lblNewLabel = new JLabel("Números mas veces repetidos:");
+		JLabel lblNewLabel = new JLabel("Nï¿½meros mas veces cantado:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(10, 69, 200, 16);
 		contentPane.add(lblNewLabel);
 
@@ -55,14 +57,15 @@ public class VerEstadisticas extends JFrame {
 		lblEstadisticas.setBounds(96, 22, 200, 16);
 		contentPane.add(lblEstadisticas);
 
-		lblNewLabel_2 = new JLabel("Bote máximo");
+		lblNewLabel_2 = new JLabel("Bote mï¿½ximo de partida:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_2.setBounds(10, 130, 200, 16);
 		contentPane.add(lblNewLabel_2);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(222, 125, 130, 26);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtBoteMax = new JLabel();
+		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida())+" â‚¬");
+		txtBoteMax.setBounds(222, 125, 130, 26);
+		contentPane.add(txtBoteMax);
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -81,6 +84,26 @@ public class VerEstadisticas extends JFrame {
 		});
 		
 		
+		JLabel lblNewLabel_2_1 = new JLabel("Usuario con mayor cartera:");
+		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel_2_1.setBounds(10, 144, 200, 16);
+		contentPane.add(lblNewLabel_2_1);
+		
+		txtUsuarioCartera = new JLabel();
+		txtUsuarioCartera.setText(GestionEstadisticas.usuarioMayorCartera());
+		txtUsuarioCartera.setBounds(222, 138, 204, 26);
+		contentPane.add(txtUsuarioCartera);
+		btnVolver.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				parent.setVisible(true);
+				VerEstadisticas.this.dispose();
+				
+			}
+			
+		});
 	}
 	
 	
@@ -124,8 +147,8 @@ public class VerEstadisticas extends JFrame {
 
 			s = (TreeSet) h2.get(ocurrenciasNumArray);
 			if (s == null) {
-				// Primera vez que encontramos un número con esa cantidad de ocurrencias
-				// Creamos el conjunto de números para esa ocurrencia añadimos el número
+				// Primera vez que encontramos un nï¿½mero con esa cantidad de ocurrencias
+				// Creamos el conjunto de nï¿½meros para esa ocurrencia aï¿½adimos el nï¿½mero
 
 				s = new TreeSet();
 				s.add(numeroArray);
@@ -134,7 +157,7 @@ public class VerEstadisticas extends JFrame {
 				s.add(numeroArray);
 			}
 		}
-		textField.setText("Los números " + (TreeSet) h2.get(maxOcurrencias) + " tienen ocurrencias máximas:"
+		textNumMaxRep.setText("Los nï¿½meros " + (TreeSet) h2.get(maxOcurrencias) + " tienen ocurrencias mï¿½ximas:"
 				+ maxOcurrencias.intValue());
 	}
 
@@ -143,7 +166,7 @@ public class VerEstadisticas extends JFrame {
 		String a = "";
 		String b = "Son" + ConexionBD.getBoteMax() + "euros";
 		a.replaceAll(a, b);
-		textField_1.setText("Son" + a + "euros");
+		txtBoteMax.setText("Son" + a + "euros");
 	}
 
 }
