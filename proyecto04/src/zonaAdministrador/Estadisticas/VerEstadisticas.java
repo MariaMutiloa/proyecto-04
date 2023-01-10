@@ -115,7 +115,7 @@ public class VerEstadisticas extends JFrame {
 	public void masUsado() {
 
 		int[] ai = {};
-		List<Integer> numeros = ConexionBD.anyadirNum();
+		List<Integer> numeros = GestionEstadisticas.anyadirNum(bd);
 		for (Integer integer : numeros) {
 			for (int i = 0; i < ai.length; i++) {
 				ai[i] = integer;
@@ -167,7 +167,7 @@ public class VerEstadisticas extends JFrame {
 	public void boteMaximo() {
 
 		String a = "";
-		String b = "Son" + ConexionBD.getBoteMax() + "euros";
+		String b = "Son" + GestionEstadisticas.getBoteMax(bd) + "euros";
 		a.replaceAll(a, b);
 		txtBoteMax.setText("Son" + a + "euros");
 	}

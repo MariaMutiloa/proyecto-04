@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -122,6 +123,51 @@ public class GestionEstadisticas {
 			return String.format("%s con %s â‚¬", usuario, carteraMaxFormat);
 		}
 		
+		public static ArrayList<Integer> anyadirNum(String bd) {// devuelve todos los numeros con repeticiones
+			logger.info("Añadiendo todos los numeros");
+			ArrayList<Integer> todosNumeros = new ArrayList<>();
+			try (Connection con = DriverManager.getConnection(bd)) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT Valor FROM Numero-Carton");
+				// recorremos fila a fila
+				while (rs.next()) {
+					todosNumeros.add(rs.getInt("Valor"));
+				}
+				rs.close();
+				stmt.close();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+			}
+			return todosNumeros;
+		}
+
+		public static int getBoteMax(String bd) {
+			logger.info("Buscando usuarios en la base de datos");
+			int boteMax = 0;
+			try (Connection con = DriverManager.getConnection(bd)) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
+				// recorremos fila a fila
+				try {
+					while (rs.next()) {
+						boteMax = rs.getInt(5);
+						if (boteMax <= rs.getInt(5)) {// si es menor que e anterior se le asigna el nuevo
+							boteMax = rs.getInt(5);
+						}
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				rs.close();
+				stmt.close();
+
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			return boteMax;
+		}
 			
 
 		

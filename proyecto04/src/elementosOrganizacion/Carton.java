@@ -154,7 +154,7 @@ public class Carton {
 	}
 	
 	//AL COMPRAR CARTON SE ME BAJA LA CARTERA(bote)
-	public static void bajarCartera(Usuario u) {
+	public static void bajarCartera(Usuario u, String bd) {
 		float precioCarton = costeCarton();
 		float nuevoBote = u.getBote()-precioCarton;
 		u.setBote(nuevoBote);

@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Test;
 
 import elementosOrganizacion.Carton;
+import gestionBD.GestionUsuarios;
+import gestionBD.GestionZonaUsuario;
 import personas.Usuario;
 
 public class CartonTest {
@@ -105,6 +107,18 @@ public class CartonTest {
 		Carton c = new Carton(12, 13, 1);
 		c.setIDCarton(11);
 		assertEquals(11, c.getIDCarton());
+	}
+	
+
+	@Test
+	public void testBajarCartera() {
+		Usuario u = new Usuario(1, "Prueba", "Prueba", "prueba", "prueba", 1, 10);
+		GestionZonaUsuario.insertarUsuario(u.getDni(), u.getNombre(), u.getApellido(), u.getUsuario(), u.getContrasena(), "jdbc:sqlite:DatosBingoTest.db");
+		Carton.bajarCartera(u, "jdbc:sqlite:DatosBingoTest.db");
+		Usuario uPost = GestionZonaUsuario.getUsuario("prueba", "prueba", "jdbc:sqlite:DatosBingoTest.db");
+		assertEquals(8, uPost.getBote(), 0);
+		//ELIMINAR USUARIO
+		GestionUsuarios.eliminar(1, "jdbc:sqlite:DatosBingoTest.db");
 	}
 	
 	
