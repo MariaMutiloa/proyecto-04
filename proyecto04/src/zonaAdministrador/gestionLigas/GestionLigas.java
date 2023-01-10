@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import gestionBD.GestionLigasYEstadisticas;
+import gestionBD.GestionLigasBD;
 import zonaAdministrador.VentanaPrincipalAdmin;
 
 public class GestionLigas extends JFrame{
@@ -20,8 +20,8 @@ public class GestionLigas extends JFrame{
 	private static String bd = "jdbc:sqlite:DatosBingo.db";
 	
 	private JPanel contentPane;
-	private JComboBox<Integer> ligas = new JComboBox<Integer>(GestionLigasYEstadisticas.getLigas(bd));
-	private JTable tablaLigas = new JTable(new NuestraTabla(GestionLigasYEstadisticas.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
+	private JComboBox<Integer> ligas = new JComboBox<Integer>(GestionLigasBD.getLigas(bd));
+	private JTable tablaLigas = new JTable(new TablaLigas(GestionLigasBD.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
 	private VentanaPrincipalAdmin parent;
 	
 	public GestionLigas(VentanaPrincipalAdmin parent) {
@@ -56,7 +56,7 @@ public class GestionLigas extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				tablaLigas.setModel(new NuestraTabla(GestionLigasYEstadisticas.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
+				tablaLigas.setModel(new TablaLigas(GestionLigasBD.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
 			}
 			
 		});
@@ -66,9 +66,9 @@ public class GestionLigas extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GestionLigasYEstadisticas.actualizarLigas(bd);
-				ligas = new JComboBox<Integer>(GestionLigasYEstadisticas.getLigas(bd));
-				tablaLigas.setModel(new NuestraTabla(GestionLigasYEstadisticas.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
+				GestionLigasBD.actualizarLigas(bd);
+				ligas = new JComboBox<Integer>(GestionLigasBD.getLigas(bd));
+				tablaLigas.setModel(new TablaLigas(GestionLigasBD.getUsuariosLiga((int) ligas.getSelectedItem(), bd)));
 				
 			}
 			
