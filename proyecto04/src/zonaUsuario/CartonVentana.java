@@ -36,7 +36,7 @@ public class CartonVentana extends JFrame {
 
 
 	public CartonVentana(Usuario u, Partida p) {
-		setBounds(100, 100, 576, 240);
+		setBounds(100, 100, 463, 239);
 		setTitle("Tu carton");
 				
 		 
