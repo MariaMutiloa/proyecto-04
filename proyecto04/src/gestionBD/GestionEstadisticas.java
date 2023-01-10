@@ -57,4 +57,33 @@ public class GestionEstadisticas {
 		}
 		return numeroMax;
 	}
+	// BOTE MAX DE PARTIDA - PremioB en la tabla
+		public static float boteMaxPartida() {
+			logger.info("Buscando en la base de datos bote maximo de partida");
+			float boteMax = 0;
+
+			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+				Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT PremioB FROM partida");
+				// recorremos fila a fila
+				while (rs.next()) {
+					
+					if(rs.getFloat(1)>boteMax) {
+						boteMax=rs.getFloat(1);
+					}
+
+				}
+				logger.info("Ya tenemos el bote maximos");
+				rs.close();
+				stmt.close();
+
+			} catch (SQLException e) {
+				// No se ha podido obtener la conexión a la base de datos
+				JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
+				logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+			}
+			return boteMax;
+		}
+		
 }
