@@ -19,18 +19,40 @@ public class TablaLigas extends AbstractTableModel{
 	@Override
 	public int getRowCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return usuarios.size();
 	}
 
 	@Override
-	public int getColumnCount() {
+	public String getColumnName(int index) {
 		// TODO Auto-generated method stub
-		return 0;
+		return cabecera[index];	}
+	@Override
+	public int getColumnCount() {
+		return 4;
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		if (usuarios.size() != 0) {
+			Usuario u = usuarios.get(rowIndex);
+			switch (columnIndex) {
+			case 0:
+				return u.getUsuario();
+			case 1:
+				return u.getNombre();
+			case 2:
+				return u.getApellido();
+			case 3:
+				return u.getBote();
+			default:
+				return null;
+			}
+	} else {
+		return "";
 	}
+}
+	@Override
+    public boolean isCellEditable(int row, int column) {
+        return false; //No es editable
+    }
 }
