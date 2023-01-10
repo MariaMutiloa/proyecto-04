@@ -47,10 +47,8 @@ public class VentanaNuevoUsuario extends JFrame {
 		setSize(551, 203);
 		setTitle("Juego BINGO!");
 
-		/*
-		 * PANEL SUPERIOR - mensaje
-		 */
-		JPanel pNorte = new JPanel(); // Panel inferior
+		
+		JPanel pNorte = new JPanel(); 
 		getContentPane().add(pNorte, BorderLayout.NORTH);
 
 		lblInfo = new JLabel("Est\u00E1s creando un usuario nuevo");
@@ -59,9 +57,7 @@ public class VentanaNuevoUsuario extends JFrame {
 		lblInfo.setBounds(113, 32, 532, 40);
 		pNorte.add(lblInfo);
 
-		/*
-		 * PANEL CENTRAL - insertar datos
-		 */
+		
 		JPanel pCentral = new JPanel();
 		pCentral.setLayout(new GridLayout(3, 4));
 		getContentPane().add(pCentral, BorderLayout.CENTER);
@@ -114,8 +110,6 @@ public class VentanaNuevoUsuario extends JFrame {
 		txtUsuario.setColumns(10);
 		txtUsuario.setBounds(486, 118, 185, 22);
 		pCentral.add(txtUsuario);
-		// HAY QUE COMPROBAR QUE NO HAYA UN USUARIO CON EL MISMO NOMBRE --> si hay
-		// podemos usar renderer de si esta repetido se ponga en rojo
 
 		JLabel lblContrasena = new JLabel("Contrase\u00F1a:");
 		lblContrasena.setForeground(Color.BLACK);
@@ -128,17 +122,13 @@ public class VentanaNuevoUsuario extends JFrame {
 		passwordField.setBounds(486, 182, 185, 22);
 		pCentral.add(passwordField);
 
-		/*
-		 * PANEL INFERIOR - boton crear usuario
-		 */
-		JPanel pSur = new JPanel(); // Panel inferior
+		
+		JPanel pSur = new JPanel(); 
 		getContentPane().add(pSur, BorderLayout.SOUTH);
 
 		btnCrear = new JButton("Crear usuario");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// SI HAY ALGUN CAMPO VACIO, POR FAVOR, RELLENAR
 				if (txtDni.getText().length() == 0 || txtNombre.getText().length() == 0
 						|| txtApellido.getText().length() == 0 || txtUsuario.getText().length() == 0
 						|| passwordField.getPassword().length == 0) {
@@ -148,24 +138,16 @@ public class VentanaNuevoUsuario extends JFrame {
 
 				} else {
 
-					// COMPROBAR QUE DNI NO TENGA LETRA PORQUE VA A SER UN INT
 					try {
 						Integer.parseInt(txtDni.getText());
-
-						// TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
-
-
 						if (GestionZonaUsuario.comprobarUsuario(txtUsuario.getText(), bd)) {
-							// usuario ya esta en bd
+							
 							logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
 							JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR",
 									JOptionPane.ERROR_MESSAGE);
 							txtUsuario.setText("");
 						} else {
-							// el usuario es valido
-							// METER USUARIO EN LA BASE DE DATOS
-
-							// extraer contraseña a String
+						
 							char[] clave = passwordField.getPassword();
 							String claveFinal = new String(clave);
 

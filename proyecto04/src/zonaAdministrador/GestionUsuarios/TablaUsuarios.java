@@ -68,7 +68,7 @@ public class TablaUsuarios extends AbstractTableModel {
 	
 	 @Override
      public boolean isCellEditable(int row, int column) {
-         return false; //No es editable
+         return false; 
      }
 
 }
