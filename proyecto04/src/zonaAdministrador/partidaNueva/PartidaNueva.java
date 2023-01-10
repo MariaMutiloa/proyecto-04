@@ -31,6 +31,8 @@ public class PartidaNueva extends JFrame {
 	private static List<Integer> numeros = new ArrayList<>();
 	private static Logger logger = Logger.getLogger(PartidaNueva.class.getName());
 
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
+	
 	private static final long serialVersionUID = 1L;
 
 	public PartidaNueva(Partida partidaActual, Administrador admin, float botePartida) {
@@ -47,7 +49,7 @@ public class PartidaNueva extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 
-				GestionPartidas.setGanadorBingo(1, partidaActual, 0);
+				GestionPartidas.setGanadorBingo(1, partidaActual, 0, bd);
 
 			}
 
@@ -118,7 +120,7 @@ public class PartidaNueva extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int ganadorB = GestionPartidas.revisar(partidaActual.getIDPartida());
+				int ganadorB = GestionPartidas.revisar(partidaActual.getIDPartida(), bd);
 
 				if (ganadorB != 0) {
 					int result = JOptionPane.showConfirmDialog(null, "¿Quiere comprobar el bingo?", "Han cantado bingo", JOptionPane.YES_NO_OPTION);
@@ -157,7 +159,7 @@ public class PartidaNueva extends JFrame {
 						"Aún no se ha cantado bingo, ¿Seguro que quieres terminar la partida?");
 				switch (result) {
 				case JOptionPane.YES_OPTION:
-					GestionPartidas.setGanadorBingo(1, partidaActual, 0);
+					GestionPartidas.setGanadorBingo(1, partidaActual, 0, bd);
 					VentanaPrincipalAdmin nueva = new VentanaPrincipalAdmin(admin);
 					PartidaNueva.this.dispose();
 					break;
@@ -177,7 +179,7 @@ public class PartidaNueva extends JFrame {
 		logger.info("Extrayendo nuevo número");
 		int nuevoNumero = numeroRandom();
 		numeros.add(nuevoNumero);
-		GestionPartidas.añadirNumero(nuevoNumero, numeros.indexOf(nuevoNumero), partidaActual.getIDPartida());
+		GestionPartidas.añadirNumero(nuevoNumero, numeros.indexOf(nuevoNumero), partidaActual.getIDPartida(), bd);
 		String number = String.valueOf(nuevoNumero);
 		String[] digits = number.split("(?<=.)");
 		logger.info("Numero nuevo conseguido");

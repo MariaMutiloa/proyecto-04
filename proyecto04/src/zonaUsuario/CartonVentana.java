@@ -31,6 +31,8 @@ public class CartonVentana extends JFrame {
 	private JTable table;
 	
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 
 	public CartonVentana(Usuario u, Partida p) {
@@ -46,13 +48,13 @@ public class CartonVentana extends JFrame {
 		int[][] miCarton = Carton.dibujarCarton();
 		
 		//GUARDO CARTON EN BD (carton)
-		int idCarton = GestionZonaUsuario.cartonNuevo(u.getDni(), p.getIDPartida());
+		int idCarton = GestionZonaUsuario.cartonNuevo(u.getDni(), p.getIDPartida(), bd);
 		
 		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida());	
 		
 		
 		//GUARDO CARTON EN BD (numerocarton)
-		GestionZonaUsuario.insertarNumerosDelCarton(miCarton, c.getIDCarton());		
+		GestionZonaUsuario.insertarNumerosDelCarton(miCarton, c.getIDCarton(), bd);		
 		
         MyTableModel tableModel = new MyTableModel(miCarton);
         datosColores = new int[3][5];
@@ -92,7 +94,7 @@ public class CartonVentana extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				c.setBingo(1);
-				GestionZonaUsuario.actualizarBingoBD(c.getIDCarton());
+				GestionZonaUsuario.actualizarBingoBD(c.getIDCarton(), bd);
 				JOptionPane.showMessageDialog(null, "Se esta comprobando el bingo","Espere a que el administrador compruebe su bingo", JOptionPane.WARNING_MESSAGE);
 				 
 				

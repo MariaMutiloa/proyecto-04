@@ -6,12 +6,14 @@ public class UsuarioExtendido extends Usuario {
 	
 	private int partidasJugadas;
 	private int partidasGanadas;
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public UsuarioExtendido(int dni, String nombre, String apellido, String usuario, String contrasena,
 			int idLigaActual, int bote) {
 		super(dni, nombre, apellido, usuario, contrasena, idLigaActual, bote);
-		this.partidasJugadas = GestionUsuarios.getPartidasJugadas(dni);
-		this.partidasGanadas = GestionUsuarios.getPartidasGanadas(dni);
+		this.partidasJugadas = GestionUsuarios.getPartidasJugadas(dni, bd);
+		this.partidasGanadas = GestionUsuarios.getPartidasGanadas(dni, bd);
 		
 	}
 

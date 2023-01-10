@@ -17,14 +17,15 @@ import javax.swing.JOptionPane;
 public class GestionEstadisticas {
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 
+	//bd = "jdbc:sqlite:DatosBingo.db";
 
-	// NUMERO M√ÅS VECES CANTADO
-	public static int numMasVecesCantado() {
+	// NUMERO M√S VECES CANTADO
+	public static int numMasVecesCantado(String bd) {
 		logger.info("Buscando en la base de datos numero mas veces cantado");
 		int numeroMax = 0;
 		int veces = 0;
 		Map<Integer, Integer> mapaNumeros = new HashMap<>();
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT Valor FROM numeropartida");
 			// recorremos fila a fila
@@ -59,11 +60,11 @@ public class GestionEstadisticas {
 		return numeroMax;
 	}
 	// BOTE MAX DE PARTIDA - PremioB en la tabla
-		public static float boteMaxPartida() {
+		public static float boteMaxPartida(String bd) {
 			logger.info("Buscando en la base de datos bote maximo de partida");
 			float boteMax = 0;
 
-			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			try (Connection con = DriverManager.getConnection(bd)) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT PremioB FROM partida");
 				// recorremos fila a fila
@@ -88,12 +89,12 @@ public class GestionEstadisticas {
 		}
 
 		// USUARIO CON MAYOR CARTERA
-		public static String usuarioMayorCartera() {
+		public static String usuarioMayorCartera(String bd) {
 			logger.info("Buscando en la base de datos usuario con mayor cartera.");
 			float carteraMax = 0;
 			String usuario = null;
 
-			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			try (Connection con = DriverManager.getConnection(bd)) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT Usuario, Bote FROM usuario");
 				// recorremos fila a fila

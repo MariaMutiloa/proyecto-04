@@ -49,6 +49,8 @@ public class UsuarioVentana extends JFrame {
 
 
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public UsuarioVentana(Usuario u) {
 		this.u = u;
@@ -115,7 +117,7 @@ public class UsuarioVentana extends JFrame {
 		btnJugar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				p = GestionZonaUsuario.buscarPartidaActiva();
+				p = GestionZonaUsuario.buscarPartidaActiva(bd);
 				logger.info("Comprobando si existen partidas activas");
 				if (p != null) {
 					// SALE JOptionPane diciendo si confirmar compra carton o no
@@ -155,7 +157,7 @@ public class UsuarioVentana extends JFrame {
 
 											// Primero mira si se ha cantado bingo
 
-											Integer ganador = GestionZonaUsuario.comprobarSiGanador(p.getIDPartida());
+											Integer ganador = GestionZonaUsuario.comprobarSiGanador(p.getIDPartida(), bd);
 											logger.info("el ganador es: " + ganador);
 											if (ganador != 0) {
 												if (ganador == u.getDni()) {
@@ -186,7 +188,7 @@ public class UsuarioVentana extends JFrame {
 
 												// Por una parte cambia el modelo de la lista de datos
 												List<Integer> numerosCantados = GestionZonaUsuario
-														.numerosPartida(p.getIDPartida());
+														.numerosPartida(p.getIDPartida(), bd);
 												ListModel<Integer> modeloNuevo = new ModeloListaValoresCantados(
 														numerosCantados);
 												numeros.setModel(modeloNuevo);

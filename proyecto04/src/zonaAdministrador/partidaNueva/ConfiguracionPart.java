@@ -43,6 +43,8 @@ public class ConfiguracionPart extends JFrame {
 	private Partida partidaActual = new Partida();
 	private JLabel lblNumero;
 	private static Logger logger = Logger.getLogger(ConfiguracionPart.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public ConfiguracionPart(VentanaPrincipalAdmin parent, Administrador admin) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,7 +84,7 @@ public class ConfiguracionPart extends JFrame {
 		JButton btnRefrescar = new JButton("Refrescar");
 		btnRefrescar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida()));
+				partidaActual.setParticipantes(GestionPartidas.participantes(partidaActual.getIDPartida(), bd));
 				lblNumero.setIcon(imagenNumero(partidaActual.getParticipantes().size()));
 				float boteB = getPonderador() * partidaActual.getParticipantes().size() * Carton.costeCarton();
 				partidaActual.setBoteBingo(boteB);
@@ -101,7 +103,7 @@ public class ConfiguracionPart extends JFrame {
 							"Datos incompletos", JOptionPane.WARNING_MESSAGE);
 
 				} else {
-					GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()));
+					GestionPartidas.actualizarDatos(partidaActual.getIDPartida(), Float.parseFloat(txtBingo.getText()), bd);
 					PartidaNueva nuevaVentana = new PartidaNueva(partidaActual, admin, Float.valueOf(txtBingo.getText()));
 					nuevaVentana.setVisible(true);
 					ConfiguracionPart.this.dispose();

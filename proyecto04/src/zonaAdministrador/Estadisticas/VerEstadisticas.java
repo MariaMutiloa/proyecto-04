@@ -32,6 +32,8 @@ public class VerEstadisticas extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JLabel txtBoteMax;
 	private JLabel txtUsuarioCartera;
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public VerEstadisticas(VentanaPrincipalAdmin parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +44,7 @@ public class VerEstadisticas extends JFrame {
 		contentPane.setLayout(null);
 
 		textNumMaxRep = new JLabel();
-		textNumMaxRep.setText(String.valueOf(GestionEstadisticas.numMasVecesCantado()));
+		textNumMaxRep.setText(String.valueOf(GestionEstadisticas.numMasVecesCantado(bd)));
 		textNumMaxRep.setBounds(222, 64, 130, 26);
 		contentPane.add(textNumMaxRep);
 
@@ -64,7 +66,7 @@ public class VerEstadisticas extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		txtBoteMax = new JLabel();
-		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida())+" €");
+		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida(bd))+" €");
 		txtBoteMax.setBounds(222, 125, 130, 26);
 		contentPane.add(txtBoteMax);
 		
@@ -91,7 +93,7 @@ public class VerEstadisticas extends JFrame {
 		contentPane.add(lblNewLabel_2_1);
 		
 		txtUsuarioCartera = new JLabel();
-		txtUsuarioCartera.setText(GestionEstadisticas.usuarioMayorCartera());
+		txtUsuarioCartera.setText(GestionEstadisticas.usuarioMayorCartera(bd));
 		txtUsuarioCartera.setBounds(222, 138, 204, 26);
 		contentPane.add(txtUsuarioCartera);
 		btnVolver.addActionListener(new ActionListener() {

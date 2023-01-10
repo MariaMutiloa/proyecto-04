@@ -27,9 +27,9 @@ public class GestionPartidas {
 	
 	
 	//Crea una partida y la añade a la base de datos
-	public static int nueva() {
+	public static int nueva(String bd) {
 		int IDPartida = 0;
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			
 			logger.info("Conectado a la base de datos para añadir partida");
 			
@@ -65,9 +65,9 @@ public class GestionPartidas {
 	}
 	
 	
-	public static void actualizarDatos(int IDPartida, float bBingo) {
+	public static void actualizarDatos(int IDPartida, float bBingo, String bd) {
 	
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+		try (Connection con = DriverManager.getConnection(bd)){
 			
 			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET PremioB = "+bBingo+", activa = 0 WHERE IDPartida = "+ IDPartida);
 			actualizacion.executeUpdate();
@@ -81,9 +81,9 @@ public class GestionPartidas {
 	}
 
 	//Esto se tiene que cambiar
-	public static List<Carton> participantes(int IDPartida) {
+	public static List<Carton> participantes(int IDPartida, String bd) {
 		List<Carton> list = new ArrayList<>();
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			logger.info("Conectado a la base de datos para extraer usuarios de la partida");
 			
@@ -107,9 +107,9 @@ public class GestionPartidas {
 
 
 	//Revisa si hay algun jugador que haya cantado bingo
-	public static int revisar(int IDPartida) {
+	public static int revisar(int IDPartida, String bd) {
 		int IDGanador = 0;
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 			
@@ -132,10 +132,10 @@ public class GestionPartidas {
 	}
 
 	//Añade el numero en la base de datos para que los usuarios puedan acceder a el
-	public static void añadirNumero(int numero, int indexOf, int IDPartida) {
+	public static void añadirNumero(int numero, int indexOf, int IDPartida, String bd) {
 		logger.info("Insertando en la BD el numero "+ numero);
 		
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+		try (Connection conn = DriverManager.getConnection(bd)){
 		    
 		    	
 		    PreparedStatement stmt = conn.prepareStatement("INSERT INTO numeropartida (valor, IDpartida, orden) VALUES (?, ?, ?)");
@@ -159,9 +159,9 @@ public class GestionPartidas {
 	}
 
 	//Estrae el cartón con un ID especifico
-	public static Carton getCarton(int ganadorB) {
+	public static Carton getCarton(int ganadorB, String bd) {
 			Carton ganador = null;
-			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			try (Connection con = DriverManager.getConnection(bd)) {
 
 				logger.info("Conectado a la base de datos para revisar que no haya ganadores");
 				
@@ -184,8 +184,8 @@ public class GestionPartidas {
 	}
 
 	//Añade a la BD el ganador del bingo
-	public static void setGanadorBingo(int idCarton, Partida partida, float botePartida) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+	public static void setGanadorBingo(int idCarton, Partida partida, float botePartida, String bd) {
+		try (Connection con = DriverManager.getConnection(bd)){
 			
 			PreparedStatement actualizacion = con.prepareStatement("UPDATE partida SET Activa = 0, IDCartonB = "+idCarton+ " WHERE IDPartida = "+ partida.getIDPartida());
 			actualizacion.executeUpdate();
@@ -197,13 +197,13 @@ public class GestionPartidas {
 		}
 		
 		//HAY QUE SUMAR EL BOTE EN LA CARTERA DEL GANADOR
-		sumarBoteGanador(idCarton, botePartida);
+		sumarBoteGanador(idCarton, botePartida, bd);
 		
 	}
 	
 	//Suma el bote al ganador de la partida --> incrementa cartera
-	public static void sumarBoteGanador(int idCarton, float botePartida) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")){
+	public static void sumarBoteGanador(int idCarton, float botePartida, String bd) {
+		try (Connection con = DriverManager.getConnection(bd)){
 
 			int dniGanador;
 			Statement stmt = con.createStatement();
@@ -232,8 +232,8 @@ public class GestionPartidas {
 
 
 
-	public static void noEsBingo(Carton cartonGanador) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+	public static void noEsBingo(Carton cartonGanador, String bd) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			PreparedStatement actualizacion = con.prepareStatement("UPDATE carton SET Bingo = 0 WHERE IDCarton = " + cartonGanador.getIDCarton());
 			actualizacion.executeUpdate();

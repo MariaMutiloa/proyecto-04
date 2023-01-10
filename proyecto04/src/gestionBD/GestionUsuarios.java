@@ -23,9 +23,9 @@ public class GestionUsuarios {
 
 	static List<Integer> IdCartonesGanadores = new ArrayList<>();
 
-	public static int getPartidasJugadas(int dni) {
+	public static int getPartidasJugadas(int dni, String bd) {
 		int resultado = 0;
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			logger.info("Conectado a la base de datos para eliminar");
 			String sql = "SELECT * from carton";
 			try (PreparedStatement psmt = con.prepareStatement(sql)) {
@@ -53,10 +53,10 @@ public class GestionUsuarios {
 		return resultado;
 	}
 
-	public static List<UsuarioExtendido> getAllUsuarios() {
+	public static List<UsuarioExtendido> getAllUsuarios(String bd) {
 		logger.info("Extrayendo todos los usuarios");
 		List<UsuarioExtendido> listaUsuarios = new ArrayList<UsuarioExtendido>();
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			// recorremos fila a fila
@@ -98,9 +98,9 @@ public class GestionUsuarios {
 		return listaUsuarios;
 	}
 
-	public static List<Integer> cartonesGanadores(List<Integer> idCartonesGanadores) {
+	public static List<Integer> cartonesGanadores(List<Integer> idCartonesGanadores, String bd) {
 		logger.info("Extrayendo los Id de los cartones ganadores");
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT IDCartonB FROM partida");
 			while (rs.next()) {
@@ -116,12 +116,12 @@ public class GestionUsuarios {
 
 	}
 
-	public static int getPartidasGanadas(int dni) {
+	public static int getPartidasGanadas(int dni, String bd) {
 		int resultado = 0;
 		int idUsuario = 0;
-		List<Integer> idCartonesG = cartonesGanadores(IdCartonesGanadores);
+		List<Integer> idCartonesG = cartonesGanadores(IdCartonesGanadores, bd);
 		for (Integer id : idCartonesG) {
-			try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			try (Connection con = DriverManager.getConnection(bd)) {
 				logger.info("Conectado a la base de datos para realizar consulta");
 				String sql = "SELECT IDUsuario from carton where  IDCarton = " + id;
 				try (PreparedStatement psmt = con.prepareStatement(sql)) {
@@ -149,8 +149,8 @@ public class GestionUsuarios {
 		return resultado;
 	}
 
-	public static void eliminar(int dni) {
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+	public static void eliminar(int dni, String bd) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			
 			logger.info("Conectado a la base de datos para eliminar");
 

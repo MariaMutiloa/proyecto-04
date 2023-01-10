@@ -22,10 +22,12 @@ public class Comprobar implements Runnable {
 	private PartidaNueva partida;
 	private Administrador admin;
 	private float botePartida;
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public Comprobar(int ganadorB, List<Integer> lista, PartidaNueva partidaNueva, Administrador admin, float botePartida) {
 		super();
-		this.cartonGanador = GestionPartidas.getCarton(ganadorB);
+		this.cartonGanador = GestionPartidas.getCarton(ganadorB, bd);
 		this.numeros = lista;
 		this.partida = partidaNueva;
 		this.admin = admin;
@@ -35,7 +37,7 @@ public class Comprobar implements Runnable {
 	@Override
 	public void run() {
 		if(numeros.containsAll(cartonGanador.getListaNumeros())){
-			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual(), botePartida);
+			GestionPartidas.setGanadorBingo(cartonGanador.getIDCarton(), partida.getPartidaActual(), botePartida, bd);
 			partida.getPartidaActual().setGanadorBingo(cartonGanador);
 			float bote = cartonGanador.getPropietario().getBote();
 			(cartonGanador.getPropietario()).setBote(bote+partida.getPartidaActual().getBoteBingo());
@@ -53,7 +55,7 @@ public class Comprobar implements Runnable {
 
 		}else {
 			JOptionPane.showMessageDialog(null, "El bingo no es correcto", "Bingo no correcto", JOptionPane.ERROR_MESSAGE);
-			GestionPartidas.noEsBingo(cartonGanador);
+			GestionPartidas.noEsBingo(cartonGanador, bd);
 		}
 
 	}

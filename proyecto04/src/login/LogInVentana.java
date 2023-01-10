@@ -36,6 +36,8 @@ public class LogInVentana extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(LogInVentana.class.getName()); 
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
+	
 	private JTextField txtUsuario;
 	private JPasswordField jpassClave; 
 	private JButton btnAceptar;
@@ -50,7 +52,7 @@ public class LogInVentana extends JFrame {
 				try {
 					LogInVentana frame = new LogInVentana();
 					frame.setVisible(true);
-					ConexionBD.realizarConexion("jdbc:sqlite:DatosBingo.db");
+					ConexionBD.realizarConexion(bd);
 					
 				} catch (Exception e) {
 				   JOptionPane.showMessageDialog(null,  e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -145,20 +147,20 @@ public class LogInVentana extends JFrame {
 				}else {
 					
 					//Comprueba si existe usuario o administrador -->JOptionPane Bienvenido "nombre" 
-					GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal);
+					GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal, bd);
 					
-					if(GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal)!=null) { //hay coincidencia usuario
+					if(GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal, bd)!=null) { //hay coincidencia usuario
 						logger.info("Se ha encontrado el usuario");	
-						Usuario u = GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal);
+						Usuario u = GestionZonaUsuario.getUsuario(txtUsuario.getText(), claveFinal, bd);
 						
 						//ABRO UsuarioVentana
 						UsuarioVentana ventanaNueva = new UsuarioVentana(u);
 						ventanaNueva.setVisible(true);
 						LogInVentana.this.dispose();
 						
-					}else if (GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal)!=null) {
+					}else if (GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal, bd)!=null) {
 						logger.info("Se ha encontrado el administrador");		
-						Administrador a = GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal);
+						Administrador a = GestionZonaUsuario.getAdministrador(txtUsuario.getText(), claveFinal, bd);
 						
 						//ABRO VentanaPrincipalAdmin
 						VentanaPrincipalAdmin ventanaNueva = new VentanaPrincipalAdmin(a);

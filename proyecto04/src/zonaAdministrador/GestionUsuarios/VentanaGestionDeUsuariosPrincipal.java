@@ -31,9 +31,11 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(VentanaGestionDeUsuariosPrincipal.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	private JTable tablaUsuarios;
-	private List<UsuarioExtendido> usuarios = GestionUsuarios.getAllUsuarios();
+	private List<UsuarioExtendido> usuarios = GestionUsuarios.getAllUsuarios(bd);
 	private JTextField buscador;
 	private VentanaPrincipalAdmin parent;
 	private Administrador admin;
@@ -89,8 +91,8 @@ public class VentanaGestionDeUsuariosPrincipal extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					GestionUsuarios.eliminar(Integer.parseInt(buscador.getText()));
-					usuarios = GestionUsuarios.getAllUsuarios();
+					GestionUsuarios.eliminar(Integer.parseInt(buscador.getText()), bd);
+					usuarios = GestionUsuarios.getAllUsuarios(bd);
 					tablaUsuarios.setModel(new TablaUsuarios(usuarios));
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "No hay coincidencias", "Error", JOptionPane.ERROR_MESSAGE);

@@ -11,9 +11,11 @@ public class Partida {
 	private Carton ganadorBingo;
 	private List<Carton> participantes;
 	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
+	
 	public Partida() {
 		super();
-		this.IDPartida = GestionPartidas.nueva();
+		this.IDPartida = GestionPartidas.nueva(bd);
 	}
 	
 	public Partida(int idPartida, int activa, int premioB, int idCartonB) {

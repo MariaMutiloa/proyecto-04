@@ -27,6 +27,8 @@ public class VentanaNuevoUsuario extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private static Logger logger = Logger.getLogger(RegistroUsuarioVentana.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	private JTextField txtDni;
 	private JTextField txtNombre;
@@ -153,7 +155,7 @@ public class VentanaNuevoUsuario extends JFrame {
 						// TIENE QUE VERIFICAR QUE NO HAYA USUARIO REPETIDO
 
 
-						if (GestionZonaUsuario.comprobarUsuario(txtUsuario.getText())) {
+						if (GestionZonaUsuario.comprobarUsuario(txtUsuario.getText(), bd)) {
 							// usuario ya esta en bd
 							logger.log(Level.WARNING, "El usuario ya existe en la base de datos.");
 							JOptionPane.showMessageDialog(null, "El usuario no es válido.", "ERROR",
@@ -168,7 +170,7 @@ public class VentanaNuevoUsuario extends JFrame {
 							String claveFinal = new String(clave);
 
 							GestionZonaUsuario.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
-									txtApellido.getText(), txtUsuario.getText(), claveFinal);
+									txtApellido.getText(), txtUsuario.getText(), claveFinal, bd);
 							txtDni.setText("");
 							txtNombre.setText("");
 							txtApellido.setText("");

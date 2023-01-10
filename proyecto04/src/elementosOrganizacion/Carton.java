@@ -25,6 +25,8 @@ public class Carton {
 	private List<Integer> listaNumeros; 
 	
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
+	
+	private static String bd = "jdbc:sqlite:DatosBingo.db";
 
 	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
 		this.IDCarton = IDCarton;
@@ -32,7 +34,7 @@ public class Carton {
 		this.coste = costeCarton();	//esta en properties coste=2
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
-		this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario);
+		this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario, bd);
 	}
 	
 	
@@ -158,7 +160,7 @@ public class Carton {
 		u.setBote(nuevoBote);
 		
 		//GUARDAR EN BD
-		GestionZonaUsuario.actualizarCarteraBD(u.getDni(), nuevoBote);
+		GestionZonaUsuario.actualizarCarteraBD(u.getDni(), nuevoBote, bd);
 		logger.info("Cartera actualizada");
 		
 		

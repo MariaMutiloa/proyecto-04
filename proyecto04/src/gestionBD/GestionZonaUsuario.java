@@ -25,10 +25,10 @@ public class GestionZonaUsuario {
 
 	// Devuelve el usuario que tiene el usuario y contraseña que pasan como
 	// paramenros, en caso de no encontrarlo se devuelve null
-	public static Usuario getUsuario(String miUsuario, String miContrasena) { // Encuentra el usuario que necesitamos
+	public static Usuario getUsuario(String miUsuario, String miContrasena, String bd) { // Encuentra el usuario que necesitamos
 		logger.info("Buscando " + miUsuario + " en la base de datos");
 		Usuario u = null;
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			// recorremos fila a fila
@@ -60,10 +60,10 @@ public class GestionZonaUsuario {
 
 	// Devuelve el administrador que tiene el usuario y contraseña que pasan como
 	// paramenros, en caso de no encontrarlo se devuelve null
-	public static Administrador getAdministrador(String miAdmin, String miContrasena) { // Busca el administrador que queremos
+	public static Administrador getAdministrador(String miAdmin, String miContrasena, String bd) { // Busca el administrador que queremos
 		logger.info("Buscando " + miAdmin + " en la base de datos");
 		Administrador a = null;
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			boolean encontrado = false;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM administrador");
@@ -94,13 +94,13 @@ public class GestionZonaUsuario {
 
 	// Comprobar si ya está el usuario en la base de datos, por nombre de usuario
 	// si es true ya está usado
-	public static boolean comprobarUsuario(String miUsuario) {
+	public static boolean comprobarUsuario(String miUsuario, String bd) {
 
 		logger.info("Buscando si " + miUsuario + " está en la base de datos");
 
 		boolean usado = false;
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE Usuario='" + miUsuario + "'");
@@ -124,12 +124,12 @@ public class GestionZonaUsuario {
 		return usado;
 	}
 
-	public static void insertarUsuario(int dni, String nombre, String apellido, String usuario, String contrasena) {
+	public static void insertarUsuario(int dni, String nombre, String apellido, String usuario, String contrasena, String bd) {
 
 		logger.info("Insertando en la BD el usuario " + usuario);
 
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db");
+			Connection conn = DriverManager.getConnection(bd);
 
 			PreparedStatement stmt = conn.prepareStatement(
 					"INSERT INTO usuario (DNI, Nombre, Apellido, Usuario, Contraseña, IdLigaActual, Bote) VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -159,12 +159,12 @@ public class GestionZonaUsuario {
 		}
 	}
 
-	public static Usuario buscarUsuarioPorID(int IDUsuario) {
+	public static Usuario buscarUsuarioPorID(int IDUsuario, String bd) {
 		logger.info("Buscando " + IDUsuario + " en la base de datos");
 
 		Usuario u = null;
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE DNI=" + IDUsuario);
@@ -197,12 +197,12 @@ public class GestionZonaUsuario {
 	}
 
 	// Inserta los numeros del carton
-	public static void insertarNumerosDelCarton(int[][] miCarton, int IDCarton) {
+	public static void insertarNumerosDelCarton(int[][] miCarton, int IDCarton, String bd) {
 
 		logger.info("Insertando en la BD los numeros del carton " + IDCarton);
 
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db");
+			Connection conn = DriverManager.getConnection(bd);
 
 			for (int i = 0; i < miCarton.length; i++) {
 				for (int j = 0; j < miCarton[i].length; j++) {
@@ -230,12 +230,12 @@ public class GestionZonaUsuario {
 	}
 
 	// PARA GUARDAR EL CARTON EN LA BD EN LA TABLA carton
-	public static int cartonNuevo(int IDUsuario, int IDPartida) {
+	public static int cartonNuevo(int IDUsuario, int IDPartida, String bd) {
 		int IDCarton = 0;
 		logger.info("Insertando en la BD el carton nuevo");
 
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db");
+			Connection conn = DriverManager.getConnection(bd);
 
 			PreparedStatement stmt = conn
 					.prepareStatement("INSERT INTO carton (IDUsuario, IDPartida, Coste) VALUES (?,?,?)");
@@ -274,7 +274,7 @@ public class GestionZonaUsuario {
 
 	}
 
-	public static Partida buscarPartidaActiva() {
+	public static Partida buscarPartidaActiva(String bd) {
 
 		// VA A BUSCAR EN LA BD SI HAY ALGUNA PARTIDA ACTIVA --> activa=1
 		// SI HAY VARIAS ACTIVAS ENTRA EN ALGUNA RANDOM
@@ -283,7 +283,7 @@ public class GestionZonaUsuario {
 
 		Partida p = null;
 
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection conn = DriverManager.getConnection(bd)) {
 
 			Statement stmt = conn.createStatement();
 
@@ -318,9 +318,9 @@ public class GestionZonaUsuario {
 	}
 
 	// ACTUALIZAR TABLA CARTON COLUMNA BINGO
-	public static void actualizarBingoBD(int IDCarton) {
+	public static void actualizarBingoBD(int IDCarton, String bd) {
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			PreparedStatement actualizacion = con
 					.prepareStatement("UPDATE carton SET Bingo = 1 WHERE IDCarton = " + IDCarton);
@@ -336,9 +336,9 @@ public class GestionZonaUsuario {
 	}
 
 	// ACTUALIZAR TABLA CARTON COLUMNA BINGO
-	public static void actualizarCarteraBD(int IDUsuario, float cartera) {
+	public static void actualizarCarteraBD(int IDUsuario, float cartera, String bd) {
 
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			PreparedStatement stmt = con.prepareStatement("UPDATE usuario SET Bote=? WHERE DNI=?");
 			stmt.setFloat(1, cartera);
@@ -355,11 +355,11 @@ public class GestionZonaUsuario {
 	}
 	
 	//Extrae todos los numeros cantados a la partida
-	public static List<Integer> numerosPartida(int idPartida) {
+	public static List<Integer> numerosPartida(int idPartida, String bd) {
 		//HACER EL ACCESO A BD QUE RECOJA TODOS LOS NUMEROS Y AÑADIR AL MODELO
 		
 		List<Integer> todosLosNumeros = new ArrayList<>();
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection conn = DriverManager.getConnection(bd)) {
 			
 			logger.info("Buscando los numeros de la partida");
 			Statement stmt = conn.createStatement();
@@ -382,9 +382,9 @@ public class GestionZonaUsuario {
 	
 	}
 	
-	public static Integer comprobarSiGanador(int idPartida) {
+	public static Integer comprobarSiGanador(int idPartida, String bd) {
 		Integer ganador = null;
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection conn = DriverManager.getConnection(bd)) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM partida WHERE IDPartida=" + idPartida);
 			

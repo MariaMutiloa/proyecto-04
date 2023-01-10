@@ -21,10 +21,10 @@ import personas.Usuario;
 public class GestionLigasYEstadisticas {
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 
-	public static Integer[] getLigas() {
+	public static Integer[] getLigas(String bd) {
 		Set<Integer> ligas = new TreeSet<Integer>();
 		logger.info("Extrayendo las ligas actuales");
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
@@ -51,10 +51,10 @@ public class GestionLigasYEstadisticas {
 	}
 
 
-	public static List<Usuario> getUsuariosLiga(int selectedItem) {
+	public static List<Usuario> getUsuariosLiga(int selectedItem, String bd) {
 		logger.info("Buscando usuarios de la liga " + selectedItem);
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario where IDLigaActual = " + selectedItem);
 			// recorremos fila a fila
@@ -97,10 +97,10 @@ public class GestionLigasYEstadisticas {
 	
 	
 
-	public static List<Usuario> getAllUsuarios() {
+	public static List<Usuario> getAllUsuarios(String bd) {
 		logger.info("Extrayendo todos los usuarios");
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 			// recorremos fila a fila
@@ -141,13 +141,13 @@ public class GestionLigasYEstadisticas {
 		return listaUsuarios;
 	}
 
-	public static void actualizarLigas() {
+	public static void actualizarLigas(String bd) {
 		logger.info("Actualizando ligas");
 		String valor;
-		List<Usuario> listaUsuarios = getAllUsuarios();
-		int numLigas = getLigas().length;
+		List<Usuario> listaUsuarios = getAllUsuarios(bd);
+		int numLigas = getLigas(bd).length;
 		logger.info("Num usuarios: "+listaUsuarios.size());
-		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+		try (Connection con = DriverManager.getConnection(bd)) {
 			logger.info("Conexion establecida");
 			for (Integer contador = 1; contador < listaUsuarios.size(); contador++) {
 				logger.info("Entrando para usuario " +contador);
