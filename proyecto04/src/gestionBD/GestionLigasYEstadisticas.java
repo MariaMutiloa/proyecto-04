@@ -2,6 +2,7 @@ package gestionBD;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -138,5 +139,36 @@ public class GestionLigasYEstadisticas {
 
 		});
 		return listaUsuarios;
+	}
+
+	public static void actualizarLigas() {
+		logger.info("Actualizando ligas");
+		String valor;
+		List<Usuario> listaUsuarios = getAllUsuarios();
+		int numLigas = getLigas().length;
+		logger.info("Num usuarios: "+listaUsuarios.size());
+		try (Connection con = DriverManager.getConnection("jdbc:sqlite:DatosBingo.db")) {
+			logger.info("Conexion establecida");
+			for (Integer contador = 1; contador < listaUsuarios.size(); contador++) {
+				logger.info("Entrando para usuario " +contador);
+				String[] digits = (contador.toString()).split("(?<=.)");
+				System.out.println(digits);
+				if (digits.length == 1) {
+					valor = "0";
+
+				} else {
+					valor = digits[digits.length - 2];
+				}
+				logger.info("El valor es " + valor);
+				PreparedStatement actualizacion = con
+						.prepareStatement("UPDATE usuario SET IDLigaActual = " + valor + " WHERE Dni = " + listaUsuarios.get(contador-1).getDni());
+				actualizacion.executeUpdate();
+			}
+			logger.info("Usuarios actualizados con ligas");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error. No se ha podido conectar a la base de datos" + e.getMessage(),
+					"Error", JOptionPane.ERROR_MESSAGE);
+			logger.log(Level.SEVERE, "No se ha podido conectar a la base de datos");
+		}
 	}
 }
