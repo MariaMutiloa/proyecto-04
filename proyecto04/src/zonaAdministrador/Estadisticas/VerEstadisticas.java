@@ -48,7 +48,7 @@ public class VerEstadisticas extends JFrame {
 		textNumMaxRep.setBounds(222, 64, 130, 26);
 		contentPane.add(textNumMaxRep);
 
-		JLabel lblNewLabel = new JLabel("Nï¿½meros mas veces cantado:");
+		JLabel lblNewLabel = new JLabel("Números mas veces cantado:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(10, 69, 200, 16);
 		contentPane.add(lblNewLabel);
@@ -66,7 +66,7 @@ public class VerEstadisticas extends JFrame {
 		contentPane.add(lblNewLabel_2);
 
 		txtBoteMax = new JLabel();
-		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida(bd))+" â‚¬");
+		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida(bd)));
 		txtBoteMax.setBounds(222, 125, 130, 26);
 		contentPane.add(txtBoteMax);
 		
