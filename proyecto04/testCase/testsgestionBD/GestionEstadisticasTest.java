@@ -13,10 +13,18 @@ public class GestionEstadisticasTest {
 	private static String bdTest = "jdbc:sqlite:DatosBingoTest.db";
 	
 	@Test
-	public void numMasVecesCantadoTest() {
+	public void testNumMasVecesCantado() {
 		assertEquals(40, GestionEstadisticas.numMasVecesCantado(bdTest));
 		
 	}
+	
+	@Test
+	public void testBoteMaxPartida() {
+		assertEquals(1,2, GestionEstadisticas.boteMaxPartida(bdTest));
+		
+	}
+	
+	
 	
 
 }
