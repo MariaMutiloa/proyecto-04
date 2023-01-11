@@ -24,7 +24,11 @@ public class GestionEstadisticasTest {
 		
 	}
 	
-	
+	@Test
+	public void testUsuarioMayorCartera() {
+		assertEquals("anepradera con 12,00", GestionEstadisticas.usuarioMayorCartera(bdTest));
+		
+	}
 	
 
 }
