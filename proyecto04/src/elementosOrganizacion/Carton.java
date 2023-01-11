@@ -131,6 +131,11 @@ public class Carton {
 		this.IDCarton = iDCarton;
 	}
 	
+	public Usuario getPropietario() {
+		return propietario;
+	}
+	
+	
 	
 	//PARA SACAR DESDE PROPERTIES EL COSTE DEL CARTON
 	public static float costeCarton() {

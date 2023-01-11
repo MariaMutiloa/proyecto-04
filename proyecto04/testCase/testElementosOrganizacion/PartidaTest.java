@@ -16,8 +16,8 @@ public class PartidaTest {
 	public void testGetParticipantes() {
 		Partida partida = new Partida(true);
 		List<Carton> participantes = new ArrayList<Carton>();
-		participantes.add(new Carton(1,1,1));
-	    participantes.add(new Carton(2,2,2));
+		participantes.add(new Carton(1,1,1, true));
+	    participantes.add(new Carton(2,2,2, true));
 	    
 	    partida.setParticipantes(participantes);
 	    
@@ -45,7 +45,7 @@ public class PartidaTest {
 	@Test
 	public void testGetGanadorBingo() {
 		Partida partida = new Partida(true);
-		Carton carton = new Carton(1, 1, 1);
+		Carton carton = new Carton(1, 1, 1, true);
 		partida.setGanadorBingo(carton);
 		
 		assertEquals(carton, partida.getGanadorBingo());

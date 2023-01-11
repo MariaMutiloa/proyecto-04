@@ -128,7 +128,7 @@ public class GestionZonaUsuario {
 		return usado;
 	}
 
-	public static void insertarUsuario(int dni, String nombre, String apellido, String usuario, String contrasena, String bd) {
+	public static void insertarUsuario(int dni, String nombre, String apellido, String usuario, String contrasena, int ligaActual,  float boteActual, String bd) {
 
 		logger.info("Insertando en la BD el usuario " + usuario);
 
@@ -145,8 +145,8 @@ public class GestionZonaUsuario {
 			stmt.setString(3, apellido);
 			stmt.setString(4, usuario);
 			stmt.setString(5, contrasena);
-			stmt.setInt(6, 1);
-			stmt.setInt(7, 10);
+			stmt.setInt(6, ligaActual);
+			stmt.setFloat(7, boteActual);
 
 			// ejecutamos la sentencia preparado como un update, en este caso
 			stmt.executeUpdate();

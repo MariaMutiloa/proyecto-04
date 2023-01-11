@@ -113,7 +113,8 @@ public class CartonTest {
 	@Test
 	public void testBajarCartera() {
 		Usuario u = new Usuario(1, "Prueba", "Prueba", "prueba", "prueba", 1, 10);
-		GestionZonaUsuario.insertarUsuario(u.getDni(), u.getNombre(), u.getApellido(), u.getUsuario(), u.getContrasena(), "jdbc:sqlite:DatosBingoTest.db");
+		GestionZonaUsuario.insertarUsuario(u.getDni(), u.getNombre(), u.getApellido(), u.getUsuario(), u.getContrasena(), u.getIdLigaActual(), u.getBote() ,
+				"jdbc:sqlite:DatosBingoTest.db");
 		Carton.bajarCartera(u, "jdbc:sqlite:DatosBingoTest.db");
 		Usuario uPost = GestionZonaUsuario.getUsuario("prueba", "prueba", "jdbc:sqlite:DatosBingoTest.db");
 		assertEquals(8, uPost.getBote(), 0);

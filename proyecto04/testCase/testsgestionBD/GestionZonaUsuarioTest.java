@@ -40,7 +40,7 @@ public class GestionZonaUsuarioTest {
 	@Test
 	public void testBuscarUsuarioPorID() {
 		Usuario u = new Usuario(1, "prueba", "prueba", "prueba", "prueba", 1, 10);
-		GestionZonaUsuario.insertarUsuario(u.getDni(), u.getNombre(), u.getApellido(), u.getUsuario(), u.getContrasena(), bdTest);
+		GestionZonaUsuario.insertarUsuario(u.getDni(), u.getNombre(), u.getApellido(), u.getUsuario(), u.getContrasena(), u.getIdLigaActual(), u.getIdLigaActual(), bdTest);
 		Usuario uSacado = GestionZonaUsuario.buscarUsuarioPorID(1, bdTest);
 		assertTrue(u.equals(uSacado));
 		GestionUsuarios.eliminar(1, bdTest);

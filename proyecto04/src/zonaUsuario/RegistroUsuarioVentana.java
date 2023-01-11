@@ -165,7 +165,7 @@ public class RegistroUsuarioVentana extends JFrame {
 							String claveFinal = new String(clave);
 
 							GestionZonaUsuario.insertarUsuario(Integer.parseInt(txtDni.getText()), txtNombre.getText(),
-									txtApellido.getText(), txtUsuario.getText(), claveFinal, bd);
+									txtApellido.getText(), txtUsuario.getText(), claveFinal, 0, 10, bd);
 							txtDni.setText("");
 							txtNombre.setText("");
 							txtApellido.setText("");

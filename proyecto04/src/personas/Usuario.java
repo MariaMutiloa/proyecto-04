@@ -9,7 +9,7 @@ public class Usuario extends Persona {
 	public Usuario(int dni, String nombre, String apellido, String usuario, String contrasena, int idLigaActual,
 			int bote) {
 		super(dni, nombre, apellido, usuario, contrasena);
-		this.idLigaActual = 1;
+		this.idLigaActual = idLigaActual;
 		this.bote = bote;
 	}
 
