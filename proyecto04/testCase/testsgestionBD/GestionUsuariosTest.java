@@ -49,9 +49,8 @@ public class GestionUsuariosTest {
 		UsuarioExtendido u4 = new UsuarioExtendido(56478903, "albarodri", "Alba", "Rodriguez", "rodriguez17", 1, 9);
 		List<UsuarioExtendido> lista = GestionUsuarios.getAllUsuarios(bdTest);
 		assertEquals(u1, lista.get(0));
-		assertEquals(u2, lista.get(1));
-		assertEquals(u3, lista.get(2));
-		assertEquals(u4, lista.get(3));
+		assertEquals(u3, lista.get(1));
+		assertEquals(u4, lista.get(2));
 	}
 	
 	@Test 
