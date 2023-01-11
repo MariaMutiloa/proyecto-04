@@ -15,7 +15,11 @@ import javax.swing.border.EmptyBorder;
 import gestionBD.GestionEstadisticas;
 import zonaAdministrador.VentanaPrincipalAdmin;
 import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.SwingConstants;
 
 public class VerEstadisticas extends JFrame {
@@ -24,10 +28,7 @@ public class VerEstadisticas extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 	private JLabel textNumMaxRep;
-	private JLabel lblEstadisticas;
-	private JLabel lblNewLabel_2;
 	private JLabel txtBoteMax;
 	private JLabel txtUsuarioCartera;
 	
@@ -36,64 +37,67 @@ public class VerEstadisticas extends JFrame {
 	public VerEstadisticas(VentanaPrincipalAdmin parent) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		textNumMaxRep = new JLabel();
-		textNumMaxRep.setText(String.valueOf(GestionEstadisticas.numMasVecesCantado(bd)));
-		textNumMaxRep.setBounds(222, 64, 130, 26);
-		contentPane.add(textNumMaxRep);
-
-		JLabel lblNewLabel = new JLabel("Números mas veces cantado:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setBounds(10, 69, 200, 16);
-		contentPane.add(lblNewLabel);
-
-		lblEstadisticas = new JLabel("ESTADISTICAS");
+		
+		JPanel pNorte = new JPanel();
+		getContentPane().add(pNorte, BorderLayout.NORTH);
+		
+		JLabel lblEstadisticas = new JLabel("ESTADISTICAS");
 		lblEstadisticas.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEstadisticas.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblEstadisticas.setEnabled(false);
 		lblEstadisticas.setBounds(96, 22, 200, 16);
-		contentPane.add(lblEstadisticas);
+		pNorte.add(lblEstadisticas);
+		
+		JPanel pCentral = new JPanel();
+		getContentPane().add(pCentral, BorderLayout.CENTER);
+		GridLayout layoutGrid = new GridLayout(3,0);
+		pCentral.setLayout(layoutGrid);
+		
+		JPanel pNumMax =new JPanel();
+		pCentral.add(pNumMax);
 
-		lblNewLabel_2 = new JLabel("Bote mï¿½ximo de partida:");
+		JLabel lblNewLabel = new JLabel("Numero mas veces cantado:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setBounds(10, 69, 200, 16);
+		pNumMax.add(lblNewLabel, BorderLayout.WEST);
+		
+		textNumMaxRep = new JLabel();
+		textNumMaxRep.setText(String.valueOf(GestionEstadisticas.numMasVecesCantado(bd)));
+		textNumMaxRep.setBounds(222, 64, 130, 26);
+		pNumMax.add(textNumMaxRep, BorderLayout.EAST);
+
+		JPanel pBoteMax = new JPanel();
+		pCentral.add(pBoteMax);
+
+		JLabel lblNewLabel_2 = new JLabel("Bote maximo de partida:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_2.setBounds(10, 130, 200, 16);
-		contentPane.add(lblNewLabel_2);
+		pBoteMax.add(lblNewLabel_2, BorderLayout.WEST);
 
 		txtBoteMax = new JLabel();
-		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida(bd)));
+		txtBoteMax.setText(String.valueOf(GestionEstadisticas.boteMaxPartida(bd))+"€");
 		txtBoteMax.setBounds(222, 125, 130, 26);
-		contentPane.add(txtBoteMax);
+		pBoteMax.add(txtBoteMax, BorderLayout.EAST);
 		
-		
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(363,222,63,30);
-		contentPane.add(btnVolver);
-		btnVolver.addActionListener(new ActionListener() {
+		JPanel pCarteraUsuario = new JPanel();
+		pCentral.add(pCarteraUsuario);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				parent.setVisible(true);
-				VerEstadisticas.this.dispose();
-				
-			}
-			
-		});
-		
-		
 		JLabel lblNewLabel_2_1 = new JLabel("Usuario con mayor cartera:");
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_2_1.setBounds(10, 144, 200, 16);
-		contentPane.add(lblNewLabel_2_1);
+		pCarteraUsuario.add(lblNewLabel_2_1, BorderLayout.WEST);
 		
 		txtUsuarioCartera = new JLabel();
 		txtUsuarioCartera.setText(GestionEstadisticas.usuarioMayorCartera(bd));
 		txtUsuarioCartera.setBounds(222, 138, 204, 26);
-		contentPane.add(txtUsuarioCartera);
+		pCarteraUsuario.add(txtUsuarioCartera, BorderLayout.EAST);
+		
+		JPanel pSur = new JPanel();
+		getContentPane().add(pSur, BorderLayout.SOUTH);
+		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setBounds(363,222,63,30);
+		pSur.add(btnVolver);
 		btnVolver.addActionListener(new ActionListener() {
 
 			@Override
@@ -105,6 +109,9 @@ public class VerEstadisticas extends JFrame {
 			}
 			
 		});
+		
+		
+		
 	}
 	
 	

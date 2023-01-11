@@ -130,7 +130,7 @@ public class GestionEstadisticas {
 			DecimalFormat format = new DecimalFormat("#.00");
 			String carteraMaxFormat = format.format(carteraMax);
 			
-			return String.format("%s con %s", usuario, carteraMaxFormat);
+			return String.format("%s con %s€", usuario, carteraMaxFormat);
 		}
 		
 		
