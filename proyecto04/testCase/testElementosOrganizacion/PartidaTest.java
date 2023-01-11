@@ -14,7 +14,7 @@ public class PartidaTest {
 
 	@Test
 	public void testGetParticipantes() {
-		Partida partida = new Partida();
+		Partida partida = new Partida(true);
 		List<Carton> participantes = new ArrayList<Carton>();
 		participantes.add(new Carton(1,1,1));
 	    participantes.add(new Carton(2,2,2));
@@ -26,7 +26,7 @@ public class PartidaTest {
 	
 	@Test
 	public void testGetIDPartida() {
-	    Partida partida = new Partida();
+	    Partida partida = new Partida(true);
 	    int idEsperada = 123456;
 	    partida.setIDPartida(idEsperada);
 
@@ -35,7 +35,7 @@ public class PartidaTest {
 	
 	@Test
 	public void testGetBoteBingo() {
-	    Partida partida = new Partida();
+	    Partida partida = new Partida(true);
 	    float boteEsperado = 100.50f;
 	    partida.setBoteBingo(boteEsperado);
 
@@ -44,7 +44,7 @@ public class PartidaTest {
 	
 	@Test
 	public void testGetGanadorBingo() {
-		Partida partida = new Partida();
+		Partida partida = new Partida(true);
 		Carton carton = new Carton(1, 1, 1);
 		partida.setGanadorBingo(carton);
 		

@@ -16,7 +16,7 @@ public class CartonTest {
 
 	@Test
 	public void testGetIDCarton() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		assertEquals(12, c.getIDCarton());
 	}
 	
@@ -39,75 +39,75 @@ public class CartonTest {
 	    Carton.sacarNumero(carton);
 	    Carton.sacarNumero(carton);
 	    assertEquals(2, carton.size());
-	    //assertEquals(1, (new HashSet<>(carton)).size());
 	}
 	
 
 	@Test
 	public void testGetListaNumeros() {
-		Carton obj = new Carton(1,1,1);
+		Carton obj = new Carton(1,1,1, true);
 		List<Integer> listaNumeros = obj.getListaNumeros();
 		assertEquals(15, listaNumeros.size());
 	}
 	
 	@Test
 	public void testGetIDUsuario() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		assertEquals(13, c.getIDUsuario());
 	}
 	
 	@Test
 	public void testSetIDUsuario() {
-		Carton c = new Carton(12,13,1);
+		Carton c = new Carton(12,13,1, true);
 		c.setIDUsuario(14);
 		assertEquals(14, c.getIDUsuario());
 	}
 	
 	@Test
 	public void testGetCoste() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		assertEquals(2f, c.getCoste(), 0f);
 	}
 	
 	@Test
 	public void testSetCoste() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		c.setCoste(1);
 		assertEquals(1f, c.getCoste(), 0f);
 	}
 	
 	@Test
 	public void testGetIDPartida() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		assertEquals(1, c.getIDPartida());
 	}
 	
 	@Test
 	public void testSetIDPartida() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		c.setIDPartida(2);
 		assertEquals(2, c.getIDPartida());
 	}
 	
 	@Test
 	public void testGetBingo() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		assertEquals(0, c.getBingo());
 	}
 	
 	@Test
 	public void testSetBingo() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		c.setBingo(1);
 		assertEquals(1, c.getBingo());
 	}
 	
 	@Test
 	public void testSetIDCarton() {
-		Carton c = new Carton(12, 13, 1);
+		Carton c = new Carton(12, 13, 1, true);
 		c.setIDCarton(11);
 		assertEquals(11, c.getIDCarton());
 	}
+	
 	
 
 	@Test
