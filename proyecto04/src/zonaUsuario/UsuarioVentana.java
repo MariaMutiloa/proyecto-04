@@ -24,7 +24,7 @@ import gestionBD.ConexionBD;
 import gestionBD.GestionZonaUsuario;
 import login.LogInVentana;
 import personas.Usuario;
-import visualizacionGenericos.ModeloListaValoresCantados;
+
 import javax.swing.ListModel;
 import javax.swing.Timer;
 import java.awt.event.MouseAdapter;

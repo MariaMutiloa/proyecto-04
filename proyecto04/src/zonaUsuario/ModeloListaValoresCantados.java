@@ -1,4 +1,4 @@
-package visualizacionGenericos;
+package zonaUsuario;
 
 import java.util.Collection;
 
