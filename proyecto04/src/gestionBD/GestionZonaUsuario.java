@@ -17,7 +17,11 @@ import elementosOrganizacion.Partida;
 import personas.Administrador;
 import personas.Usuario;
 
-//Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del usuario
+/**
+ * 
+ * Contiene todos los metodos de acceso a base de datos que tengan que se puedan usar durante la partida por parte del usuario
+ *
+ */
 
 public class GestionZonaUsuario {
 
@@ -147,8 +151,9 @@ public class GestionZonaUsuario {
 			// ejecutamos la sentencia preparado como un update, en este caso
 			stmt.executeUpdate();
 			logger.info(usuario + " guardado en la base de datos.");
-			JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente");
-
+			if(bd.equals("jdbc:sqlite:DatosBingo.db")){
+				JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente");
+			}
 			stmt.close();
 			conn.close(); // es importante desconectar la conexión al terminar
 

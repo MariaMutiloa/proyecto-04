@@ -12,10 +12,16 @@ public class Partida {
 	private List<Carton> participantes;
 	
 	private static String bd = "jdbc:sqlite:DatosBingo.db";
+	private static String bdTest = "jdbc:sqlite:DatosBingoTest.db";
 	
 	public Partida() {
 		super();
 		this.IDPartida = GestionPartidas.nueva(bd);
+	}
+	
+	public Partida(boolean test) {
+		super();
+		this.IDPartida = GestionPartidas.nueva(bdTest);
 	}
 	
 	public Partida(int idPartida, int activa, int premioB, int idCartonB) {

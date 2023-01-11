@@ -41,7 +41,6 @@ public class UsuarioVentana extends JFrame {
 	private JPanel pCentral;
 	private JList<Integer> numeros;
 	private Usuario u;
-	private boolean interrumpir;
 	private Thread t;
 
 	private static JLabel unidades = new JLabel();
@@ -142,7 +141,6 @@ public class UsuarioVentana extends JFrame {
 							pCentral.setVisible(true);
 							logger.info("Empezamos a mirar los números sacados en la partida con un hilo");
 
-							interrumpir = false;
 							t = new Thread(new Runnable() {
 
 								@Override
@@ -176,7 +174,6 @@ public class UsuarioVentana extends JFrame {
 													UsuarioVentana nuevaUsuarioVentana = new UsuarioVentana(u);
 													nuevaUsuarioVentana.setVisible(true);
 													UsuarioVentana.this.dispose();
-													interrumpir = true; //?? PONER EN WHILE ?
 													Thread.currentThread().stop();
 													
 													

@@ -50,7 +50,7 @@ public class CartonVentana extends JFrame {
 		//GUARDO CARTON EN BD (carton)
 		int idCarton = GestionZonaUsuario.cartonNuevo(u.getDni(), p.getIDPartida(), bd);
 		
-		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida());	
+		Carton c = new Carton(idCarton, u.getDni(), p.getIDPartida(), false);	
 		
 		
 		//GUARDO CARTON EN BD (numerocarton)

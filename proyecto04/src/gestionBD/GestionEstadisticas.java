@@ -15,6 +15,13 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+
+/**
+ * 
+ * CONTIENE LOS METODOS DE BD NECESARIOS APRA LA EXTRACIÑÓN DE ESTADÍSTICAS
+ *
+ */
+
 public class GestionEstadisticas {
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 
@@ -60,6 +67,8 @@ public class GestionEstadisticas {
 		}
 		return numeroMax;
 	}
+	
+	
 	// BOTE MAX DE PARTIDA - PremioB en la tabla
 		public static float boteMaxPartida(String bd) {
 			logger.info("Buscando en la base de datos bote maximo de partida");
@@ -89,6 +98,7 @@ public class GestionEstadisticas {
 			return boteMax;
 		}
 
+		
 		// USUARIO CON MAYOR CARTERA
 		public static String usuarioMayorCartera(String bd) {
 			logger.info("Buscando en la base de datos usuario con mayor cartera.");
@@ -123,7 +133,9 @@ public class GestionEstadisticas {
 			return String.format("%s con %s â‚¬", usuario, carteraMaxFormat);
 		}
 		
-		public static ArrayList<Integer> anyadirNum(String bd) {// devuelve todos los numeros con repeticiones
+		
+		// devuelve todos los numeros cantados en todas las partidas con repeticiones
+		public static ArrayList<Integer> anyadirNum(String bd) {
 			logger.info("Añadiendo todos los numeros");
 			ArrayList<Integer> todosNumeros = new ArrayList<>();
 			try (Connection con = DriverManager.getConnection(bd)) {
@@ -142,7 +154,8 @@ public class GestionEstadisticas {
 			}
 			return todosNumeros;
 		}
-
+		
+		//Extrae el mayor bote de todos los usuarios
 		public static int getBoteMax(String bd) {
 			logger.info("Buscando usuarios en la base de datos");
 			int boteMax = 0;

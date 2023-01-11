@@ -18,9 +18,16 @@ import javax.swing.JOptionPane;
 
 import personas.Usuario;
 
+/**
+ * 
+ * INCLUYE TODOS LOS MÉTODOS QUE ACCEDEN A BD PARA LA GESTION DE LIGAS
+ *
+ */
+
 public class GestionLigasBD {
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 
+	//	Recoge todas las ligas existentes
 	public static Integer[] getLigas(String bd) {
 		Set<Integer> ligas = new TreeSet<Integer>();
 		logger.info("Extrayendo las ligas actuales");
@@ -50,7 +57,7 @@ public class GestionLigasBD {
 		return arrayLigas;
 	}
 
-
+	//Devuelve todos los usuarios que estn asignados a una liga
 	public static List<Usuario> getUsuariosLiga(int selectedItem, String bd) {
 		logger.info("Buscando usuarios de la liga " + selectedItem);
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
@@ -96,7 +103,7 @@ public class GestionLigasBD {
 	}
 	
 	
-
+	//Extrae todos los usuarios
 	public static List<Usuario> getAllUsuarios(String bd) {
 		logger.info("Extrayendo todos los usuarios");
 		List<Usuario> listaUsuarios = new ArrayList<Usuario>();
@@ -140,7 +147,8 @@ public class GestionLigasBD {
 		});
 		return listaUsuarios;
 	}
-
+	
+	//Dependiendo el numero de usuarios crea las ligas correspondientes (10 usuarios por liga) y asigna de manera orgenada las ligas según el bote
 	public static void actualizarLigas(String bd) {
 		logger.info("Actualizando ligas");
 		String valor;

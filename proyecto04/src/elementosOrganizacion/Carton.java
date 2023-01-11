@@ -27,14 +27,20 @@ public class Carton {
 	private static Logger logger = Logger.getLogger(Carton.class.getName());
 	
 	private static String bd = "jdbc:sqlite:DatosBingo.db";
+	private static String bdTest = "jdbc:sqlite:DatosBingoTest.db";
 
-	public Carton(int IDCarton, int IDUsuario, int IDPartida) {
+	public Carton(int IDCarton, int IDUsuario, int IDPartida, boolean test) {
 		this.IDCarton = IDCarton;
 		this.IDUsuario = IDUsuario;
 		this.coste = costeCarton();	//esta en properties coste=2
 		this.IDPartida = IDPartida;
 		this.bingo=0;		//por defecto es 0, cuando tenga bingo y de a un boton de bingo! este se va a poner a 1
-		this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario, bd);
+		if(test) {
+			this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario, bdTest);
+		}else {
+			this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario, bd);
+		}
+		
 	}
 	
 	
@@ -93,7 +99,8 @@ public class Carton {
 	}
 
 	public void setIDUsuario(int iDUsuario) {
-		IDUsuario = iDUsuario;
+		this.IDUsuario = iDUsuario;
+		this.propietario = GestionZonaUsuario.buscarUsuarioPorID(IDUsuario, bd);
 	}
 
 	public float getCoste() {
@@ -109,7 +116,7 @@ public class Carton {
 	}
 
 	public void setIDPartida(int iDPartida) {
-		IDPartida = iDPartida;
+		this.IDPartida = iDPartida;
 	}
 
 	public int getBingo() {
@@ -120,16 +127,8 @@ public class Carton {
 		this.bingo = bingo;
 	}
 
-	public Usuario getPropietario() {
-		return propietario;
-	}
-
-	public void setPropietario(Usuario propietario) {
-		this.propietario = propietario;
-	}
-
 	public void setIDCarton(int iDCarton) {
-		IDCarton = iDCarton;
+		this.IDCarton = iDCarton;
 	}
 	
 	

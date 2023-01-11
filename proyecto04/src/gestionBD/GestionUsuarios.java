@@ -18,11 +18,16 @@ import personas.Usuario;
 import personas.UsuarioExtendido;
 
 public class GestionUsuarios {
+	
+	/**
+	 * RECOGE TODOS LOS METODOS DE ACCESO A BD QUE TENGAN QUE VER CON LA GESTIÓN DE USUARIOS
+	 */
 
 	private static Logger logger = Logger.getLogger(GestionUsuarios.class.getName());
 
 	static List<Integer> IdCartonesGanadores = new ArrayList<>();
 
+	//PARTIDAS JUGADAS DE UN USARIO CONCRETO
 	public static int getPartidasJugadas(int dni, String bd) {
 		int resultado = 0;
 		try (Connection con = DriverManager.getConnection(bd)) {
@@ -52,7 +57,8 @@ public class GestionUsuarios {
 		}
 		return resultado;
 	}
-
+	
+	//Extrae todos los usuarios con datos extra
 	public static List<UsuarioExtendido> getAllUsuarios(String bd) {
 		logger.info("Extrayendo todos los usuarios");
 		List<UsuarioExtendido> listaUsuarios = new ArrayList<UsuarioExtendido>();
@@ -98,6 +104,7 @@ public class GestionUsuarios {
 		return listaUsuarios;
 	}
 
+	//Extrae los ganadores de todas las partidas
 	public static List<Integer> cartonesGanadores(List<Integer> idCartonesGanadores, String bd) {
 		logger.info("Extrayendo los Id de los cartones ganadores");
 		try (Connection con = DriverManager.getConnection(bd)) {
@@ -115,7 +122,8 @@ public class GestionUsuarios {
 		return idCartonesGanadores;
 
 	}
-
+	
+	//Cuenta las partidas ganadas por un usuario
 	public static int getPartidasGanadas(int dni, String bd) {
 		int resultado = 0;
 		int idUsuario = 0;
@@ -149,6 +157,7 @@ public class GestionUsuarios {
 		return resultado;
 	}
 
+	//Elimina un usuario
 	public static void eliminar(int dni, String bd) {
 		try (Connection con = DriverManager.getConnection(bd)) {
 			

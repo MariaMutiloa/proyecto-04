@@ -29,6 +29,10 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 
 public class LogInVentana extends JFrame {
+	
+	/**
+	 *  VENTANA INICIAL DEL JUEGO, PARA REGISTRAR A LOS USUARIOS Y DIRIGIRLOS A SU ZONA CORRESPONDIENTE
+	 */
 
 	/**
 	 * 
@@ -43,9 +47,7 @@ public class LogInVentana extends JFrame {
 	private JButton btnAceptar;
 	private JButton btnCrearUsuario;
 
-	/**
-	 * Launch the application.
-	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -65,6 +67,10 @@ public class LogInVentana extends JFrame {
 
 	
 	public LogInVentana() {
+		/**
+		 * La ventana esta compuesta por un panel norte, un panel principal y un panel inferior
+		 */
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		setSize( 566, 320 );
 		setTitle( "Juego BINGO!" );

@@ -23,6 +23,10 @@ import elementosOrganizacion.Partida;
 
 public class GestionPartidas {
 	
+	/**
+	 *  RECOGE TODOS LOS METODOS DE ACCESO A BD QUE TENGAN QUE VER CON LA GESTIÓN DE PARTIDAS
+	 */
+	
 	private static Logger logger = Logger.getLogger(GestionPartidas.class.getName());
 	
 	
@@ -64,7 +68,7 @@ public class GestionPartidas {
 		
 	}
 	
-	
+	//Actualiza una partida con un ganador y su respectivo bote
 	public static void actualizarDatos(int IDPartida, float bBingo, String bd) {
 	
 		try (Connection con = DriverManager.getConnection(bd)){
@@ -80,7 +84,7 @@ public class GestionPartidas {
 		
 	}
 
-	//Esto se tiene que cambiar
+	//Selecciona todos los cartones conectados a una partida
 	public static List<Carton> participantes(int IDPartida, String bd) {
 		List<Carton> list = new ArrayList<>();
 		try (Connection con = DriverManager.getConnection(bd)) {
@@ -92,7 +96,7 @@ public class GestionPartidas {
 
 			while (rs.next()) {
 				logger.info("Cartón encontrado");
-				Carton jugador = new Carton(rs.getInt(1),rs.getInt(2),rs.getInt(3));
+				Carton jugador = new Carton(rs.getInt(1),rs.getInt(2),rs.getInt(3), false);
 				list.add(jugador);
 			}
 
@@ -131,7 +135,7 @@ public class GestionPartidas {
 		return IDGanador;
 	}
 
-	//Añade el numero en la base de datos para que los usuarios puedan acceder a el
+	//Añade numero cantado en la base de datos para que los usuarios puedan acceder a el
 	public static void añadirNumero(int numero, int indexOf, int IDPartida, String bd) {
 		logger.info("Insertando en la BD el numero "+ numero);
 		
@@ -170,7 +174,7 @@ public class GestionPartidas {
 
 				while (rs.next()) {
 					logger.info("Cartón ganador encontrado");
-					ganador = new Carton(rs.getInt(1), rs.getInt(2), rs.getInt(3));
+					ganador = new Carton(rs.getInt(1), rs.getInt(2), rs.getInt(3), false);
 				}
 
 				rs.close();
