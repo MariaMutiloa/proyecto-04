@@ -140,7 +140,7 @@ public class GestionEstadisticas {
 			ArrayList<Integer> todosNumeros = new ArrayList<>();
 			try (Connection con = DriverManager.getConnection(bd)) {
 				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT Valor FROM Numero-Carton");
+				ResultSet rs = stmt.executeQuery("SELECT Valor FROM numerocarton");
 				// recorremos fila a fila
 				while (rs.next()) {
 					todosNumeros.add(rs.getInt("Valor"));

@@ -3,6 +3,7 @@ package testsgestionBD;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -28,6 +29,12 @@ public class GestionEstadisticasTest {
 	public void testUsuarioMayorCartera() {
 		assertEquals("anepradera con 12,00", GestionEstadisticas.usuarioMayorCartera(bdTest));
 		
+	}
+	
+	@Test
+	public void testanyadirNum() {
+		List<Integer> comprobar = GestionEstadisticas.anyadirNum(bdTest);
+		assertEquals(1110, comprobar.size());
 	}
 	
 
