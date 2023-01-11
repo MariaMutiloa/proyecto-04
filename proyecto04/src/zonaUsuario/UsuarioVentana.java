@@ -65,7 +65,8 @@ public class UsuarioVentana extends JFrame {
 		JLabel lblBienvenido = new JLabel("¡Bienvenidx " + u.getNombre() + "!");
 		pSuperior.add(lblBienvenido);
 
-		JLabel lblCartera = new JLabel("Cartera: " + Math.round(u.getBote() * 100d) + " €");
+		//JLabel lblCartera = new JLabel("Cartera: " + Math.round(u.getBote() * 100d) + " €");
+		JLabel lblCartera = new JLabel("Cartera: " + Math.round(u.getBote() * 100.0)/100.0 + " €");
 		pSuperior.add(lblCartera);
 
 		JButton btnSalir = new JButton("Salir");
