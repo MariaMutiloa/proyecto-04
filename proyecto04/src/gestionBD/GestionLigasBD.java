@@ -153,7 +153,6 @@ public class GestionLigasBD {
 		logger.info("Actualizando ligas");
 		String valor;
 		List<Usuario> listaUsuarios = getAllUsuarios(bd);
-		int numLigas = getLigas(bd).length;
 		logger.info("Num usuarios: "+listaUsuarios.size());
 		try (Connection con = DriverManager.getConnection(bd)) {
 			logger.info("Conexion establecida");

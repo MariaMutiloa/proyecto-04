@@ -1,11 +1,5 @@
 package gestionBD;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,10 +10,7 @@ import javax.swing.JOptionPane;
 public class ConexionBD {
 
 	private static Logger logger = Logger.getLogger(ConexionBD.class.getName());
-	private static String connexion;
-
 	public static void realizarConexion(String bd) {
-		connexion = bd;
 		// Carga del drive JDBC para SQLite
 		try {
 			Class.forName("org.sqlite.JDBC");
