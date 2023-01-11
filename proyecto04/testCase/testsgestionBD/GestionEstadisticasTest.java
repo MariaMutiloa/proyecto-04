@@ -37,5 +37,10 @@ public class GestionEstadisticasTest {
 		assertEquals(1110, comprobar.size());
 	}
 	
+	@Test
+	public void testGetBoteMax() {
+		assertEquals(12,00, GestionEstadisticas.getBoteMax(bdTest));
+	}
+	
 
 }
