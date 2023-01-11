@@ -164,10 +164,10 @@ public class GestionEstadisticas {
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 				// recorremos fila a fila
 				try {
+					boteMax=(rs.getFloat(5));
 					while (rs.next()) {
-						boteMax = rs.getFloat(5);
-						if (boteMax <= rs.getFloat(5)) {// si es menor que e anterior se le asigna el nuevo
-							boteMax = rs.getFloat(5);
+						if (boteMax <= rs.getFloat(7)) {// si es menor que e anterior se le asigna el nuevo
+							boteMax = rs.getFloat(7);
 						}
 					}
 				} catch (SQLException e) {
