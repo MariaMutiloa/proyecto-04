@@ -130,7 +130,7 @@ public class GestionEstadisticas {
 			DecimalFormat format = new DecimalFormat("#.00");
 			String carteraMaxFormat = format.format(carteraMax);
 			
-			return String.format("%s con %s €", usuario, carteraMaxFormat);
+			return String.format("%s con %s", usuario, carteraMaxFormat);
 		}
 		
 		
@@ -156,18 +156,18 @@ public class GestionEstadisticas {
 		}
 		
 		//Extrae el mayor bote de todos los usuarios
-		public static int getBoteMax(String bd) {
+		public static float getBoteMax(String bd) {
 			logger.info("Buscando usuarios en la base de datos");
-			int boteMax = 0;
+			float boteMax = 0;
 			try (Connection con = DriverManager.getConnection(bd)) {
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 				// recorremos fila a fila
 				try {
 					while (rs.next()) {
-						boteMax = rs.getInt(5);
-						if (boteMax <= rs.getInt(5)) {// si es menor que e anterior se le asigna el nuevo
-							boteMax = rs.getInt(5);
+						boteMax = rs.getFloat(5);
+						if (boteMax <= rs.getFloat(5)) {// si es menor que e anterior se le asigna el nuevo
+							boteMax = rs.getFloat(5);
 						}
 					}
 				} catch (SQLException e) {
