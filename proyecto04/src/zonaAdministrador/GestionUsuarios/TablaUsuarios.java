@@ -1,18 +1,18 @@
 package zonaAdministrador.GestionUsuarios;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-
-import personas.Usuario;
 import personas.UsuarioExtendido;
 
 
 public class TablaUsuarios extends AbstractTableModel {
 	
 	 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String[] cabecera = { "DNI", "Usuario", "Nombre", "Apelllido", "Bote", "Partidas Jugadas",  "Partidas Ganadas", "Liga Actual"};
 	private List<UsuarioExtendido> usuarios;
 

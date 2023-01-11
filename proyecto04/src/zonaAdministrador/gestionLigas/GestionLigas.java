@@ -17,6 +17,11 @@ import zonaAdministrador.VentanaPrincipalAdmin;
 
 public class GestionLigas extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static String bd = "jdbc:sqlite:DatosBingo.db";
 	
 	private JPanel contentPane;
